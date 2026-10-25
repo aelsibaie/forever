@@ -1,0 +1,119 @@
+{
+	"name": "Conservative known-source pre-raid",
+	"maxItemLevel": 65,
+	"maxQuality": 3,
+	"reviewedCraftedIds": [
+		8195, 8345, 10019, 10033, 12632, 12776, 12783, 12784, 12790, 12794, 12797, 12798, 13860, 15065, 18504, 18634, 18637, 18638, 18639, 19044, 19047, 19050,
+		220606, 249385, 249442, 249443, 249453, 249455, 249469
+	],
+	"dungeonZones": [
+		{
+			"id": 721,
+			"name": "Gnomeregan"
+		},
+		{
+			"id": 1176,
+			"name": "Zul'Farrak"
+		},
+		{
+			"id": 1337,
+			"name": "Uldaman"
+		},
+		{
+			"id": 1477,
+			"name": "The Temple of Atal'Hakkar"
+		},
+		{
+			"id": 1583,
+			"name": "Blackrock Spire"
+		},
+		{
+			"id": 1584,
+			"name": "Blackrock Depths"
+		},
+		{
+			"id": 2017,
+			"name": "Stratholme"
+		},
+		{
+			"id": 2057,
+			"name": "Scholomance"
+		},
+		{
+			"id": 2100,
+			"name": "Maraudon"
+		},
+		{
+			"id": 2557,
+			"name": "Dire Maul"
+		},
+		{
+			"id": 16544,
+			"name": "City of Dalaran"
+		},
+		{
+			"id": 16611,
+			"name": "Ruins of Lordaeron"
+		},
+		{
+			"id": 16732,
+			"name": "Excavation Site: Wetlands"
+		},
+		{
+			"id": 16919,
+			"name": "The Hall of Thanes"
+		}
+	],
+	"requiredItems": {
+		"druid/feralcat": {
+			"0": 8345
+		},
+		"paladin-retribution-holy-shock": {
+			"14": 9449
+		}
+	},
+	"notes": [
+		"Uncommon or rare, item level at most 65, with a recorded approved dungeon source or reviewed crafting source. A separately cited world-drop crossbow fills the ranged-weapon source-data gap.",
+		"No raid, reputation, PvP, vendor-only, unknown-source equipment, crafted epics or permanent enchants.",
+		"A common static role score selects gear; this is a controlled baseline, not an optimized pre-raid best-in-slot claim. Proc and set-bonus DPS are not scored.",
+		"Class, faction, profession, weapon specialization, hand configuration, unique and limit-category restrictions are respected.",
+		"Eligible rotation-enabling Wolfshead Helm and Manual Crowd Pummeler are preserved. Their lower item levels remain visible in the audit.",
+		"Race, talents, resolved rotation, consumables, buffs, encounter and seed are frozen from the reference experiment. Only equipment and swap equipment change.",
+		"All caster profiles share the reviewed Radiant Staff; their off-hand is empty. Other weapon families and hand layouts remain fixed to preserve weapon talents and rotation requirements.",
+		"Crafted trinkets and relics require the profile to hold the crafting profession, conservatively covering missing equip-skill flags. Slots without an approved legal option stay empty and are listed in the audit."
+	],
+	"research": [
+		{
+			"url": "https://worldofwarcraft.blizzard.com/en-us/news/24303313",
+			"title": "World of Warcraft: Forever Deep Dive Panel Recap",
+			"note": "Official announcement describes new profession recipes, including dungeon-boss blueprints. Used for scope; item values and source decisions use the local snapshot."
+		},
+		{
+			"path": "assets/database/db.json",
+			"note": "Item values, recorded source zones, class restrictions and crafting recipe identifiers."
+		},
+		{
+			"path": "ui/specs/warrior/dps/presets.ts",
+			"note": "Repository pre-raid sourcing notes distinguish crafted items requiring raid materials and unknown item sources."
+		},
+		{
+			"url": "https://questing.wiki/wow-forever/professions/enchanting/",
+			"title": "Enchanting recipes in WoW Forever",
+			"note": "Beta recipe material records; learning sources remain provisional. Item stats are read only from the repository snapshot."
+		},
+		{
+			"url": "https://questing.wiki/wow-forever/professions/blacksmithing/",
+			"title": "Blacksmithing recipes in WoW Forever",
+			"note": "Arcanite Reaper uses Arcanite Bars, Enchanted Leather and Dense Grinding Stones; recipe is reported from Blackrock Spire."
+		}
+	],
+	"reviewedSources": {
+		"13040": {
+			"worldDrop": true,
+			"url": "https://metaforge.app/wow-forever/database/weapons/heartseeking-crossbow",
+			"note": "Reported world drop from level 53-60 creatures; acquisition reviewed separately because the local item has no source row."
+		}
+	},
+	"craftingNotes": "Recipe allowlist excludes Bloodvine and Primal Batskin raid-material families, Alchemist Stone and unreviewed new tailoring/blacksmithing. Basic new Enchanting items use recorded craft sources and published beta recipe data; exact formula availability remains provisional. Reputation-learned tradeable recipes may be crafted by another player; direct reputation rewards are excluded.",
+	"casterWeaponId": 249453
+}

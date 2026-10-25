@@ -1,0 +1,41 @@
+{
+	"name": "Developer preset DPS baseline",
+	"durations": [60, 180, 300],
+	"iterations": 10000,
+	"seed": 20261024,
+	"fallbackGear": { "warlock/dps": "ui/specs/warlock/dps/gear_sets/preraid.gear.json" },
+	"target": { "level": 63, "armor": 3731, "mobType": "MobTypeMechanical" },
+	"executeProportion20": 0.2,
+	"executeProportion35": 0.35,
+	"raidBuffs": {
+		"arcaneBrilliance": true,
+		"prayerOfSpirit": true,
+		"prayerOfFortitude": true,
+		"giftOfTheWild": true,
+		"strengthOfEarthTotem": true,
+		"graceOfAirTotem": true,
+		"windfuryTotem": true,
+		"battleShout": "TristateEffectRegular",
+		"trueshotAura": true,
+		"leaderOfThePack": true,
+		"moonkinAura": true
+	},
+	"partyBuffs": { "manaSpringTotem": "TristateEffectImproved" },
+	"individualBuffs": {
+		"greaterBlessingOfKings": true,
+		"greaterBlessingOfMight": true,
+		"greaterBlessingOfWisdom": true,
+		"greaterBlessingOfSalvation": true
+	},
+	"debuffs": {
+		"curseOfElements": true,
+		"curseOfRecklessness": true,
+		"faerieFire": true,
+		"exposeArmor": true,
+		"sunderArmor": true,
+		"huntersMark": true,
+		"giftOfArthas": true,
+		"judgementOfWisdom": true,
+		"judgementOfTheCrusader": true
+	}
+}
