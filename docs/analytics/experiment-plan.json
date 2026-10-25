@@ -1,0 +1,166 @@
+{
+	"planVersion": 1,
+	"kind": "healing-and-raid-experiment-plan",
+	"status": "groundwork-only",
+	"checkedOn": "2026-10-25",
+	"snapshot": {
+		"analyticsCommit": "359c084c2696b76a906f9cdc9650fef57df80dec",
+		"upstreamCommitInAnalyticsBranch": "cc61e6b628871949c33997088ac98a5f7985c2d1",
+		"verification": "source-inspection-only"
+	},
+	"execution": {
+		"enabled": false,
+		"reason": "Healer readiness and encounter inputs require validation."
+	},
+	"healing": {
+		"level": 60,
+		"durationsSeconds": [60, 180, 300],
+		"optionalDurationsSeconds": [360],
+		"iterations": null,
+		"seed": null,
+		"profilePolicy": "Freeze each approved gear, talent and rotation profile across the duration comparison.",
+		"gearPolicy": {
+			"acceptedSources": ["upstream-maintainer-preset", "named-class-community-loadout"],
+			"comparableTiersOnly": true,
+			"automaticItemization": false,
+			"fallbackGear": null
+		},
+		"families": [
+			{
+				"id": "restoration-druid",
+				"spec": "SpecRestorationDruid"
+			},
+			{
+				"id": "restoration-shaman",
+				"spec": "SpecRestorationShaman"
+			},
+			{
+				"id": "holy-paladin",
+				"spec": "SpecHolyPaladin"
+			},
+			{
+				"id": "holy-priest",
+				"spec": "SpecHealerPriest"
+			},
+			{
+				"id": "discipline-priest",
+				"spec": "SpecHealerPriest"
+			}
+		],
+		"referenceVariants": [
+			{
+				"label": "Holy PoM",
+				"profile": null,
+				"status": "requires-original-build"
+			},
+			{
+				"label": "Holy Penance",
+				"profile": null,
+				"status": "requires-original-build"
+			},
+			{
+				"label": "Disc PI",
+				"profile": null,
+				"status": "requires-original-build"
+			}
+		],
+		"scenarios": [
+			{
+				"id": "throughput-ceiling",
+				"purpose": "Raw output with unlimited missing health",
+				"damageSchedule": null,
+				"reportsEffectiveHealing": false
+			},
+			{
+				"id": "tank-sustained",
+				"purpose": "One tank taking steady damage",
+				"damageSchedule": null,
+				"reportsEffectiveHealing": true
+			},
+			{
+				"id": "party-pulses",
+				"purpose": "Five players taking periodic damage",
+				"damageSchedule": null,
+				"reportsEffectiveHealing": true
+			},
+			{
+				"id": "raid-mixed",
+				"purpose": "Twenty players with tank damage and raid pulses",
+				"damageSchedule": null,
+				"reportsEffectiveHealing": true
+			},
+			{
+				"id": "burst-recovery",
+				"purpose": "Recovery from a defined damage spike",
+				"damageSchedule": null,
+				"reportsEffectiveHealing": true
+			}
+		],
+		"metrics": {
+			"rawHealingHps": "Sum of healing amounts before overheal divided by full encounter seconds.",
+			"effectiveHealingHps": "Attributed health actually restored divided by full encounter seconds.",
+			"overhealFraction": "One minus effective healing divided by raw healing; null when raw healing is zero.",
+			"appliedAbsorbHps": "Shield amounts applied divided by full encounter seconds, including unused capacity.",
+			"consumedAbsorbHps": "Attributed damage actually prevented by shields divided by full encounter seconds.",
+			"effectiveSupportHps": "Effective healing plus consumed absorbs divided by full encounter seconds.",
+			"engineHps": "Preserve the native value separately; this snapshot adds raw healing and applied shielding.",
+			"mana": ["gross-spent", "actual-returned", "ending-mana", "seconds-oom", "time-to-oom-observed-or-extrapolated"],
+			"survival": ["deaths", "time-below-health-threshold", "unhealed-damage", "burst-recovery-seconds"]
+		},
+		"readinessRequirements": [
+			"approved-gear-and-talents",
+			"implemented-required-spells-and-interactions",
+			"approved-default-or-community-rotation",
+			"validated-target-selection",
+			"validated-mana-and-cooldown-behavior",
+			"defined-health-and-damage-schedule-for-effective-healing",
+			"validated-healing-and-absorb-attribution-for-published-metrics"
+		]
+	},
+	"raidComposition": {
+		"raidSize": 20,
+		"partySize": 5,
+		"partyCount": 4,
+		"stages": ["buff-and-utility-coverage", "conditional-raid-dps", "healing-and-survival-constrained-search"],
+		"rolePolicy": {
+			"requiredTankCount": null,
+			"minimumHealers": null,
+			"maximumHealers": null
+		},
+		"playerAvailability": null,
+		"encounter": null,
+		"objective": "Maximize raid damage among rosters satisfying configured role, healing, survival and utility constraints.",
+		"buffInputs": [
+			"provider-player-and-required-build",
+			"spell-or-item-id-and-source",
+			"scope-and-recipient-eligibility",
+			"range-and-position-assumption",
+			"stacking-and-exclusion-rules",
+			"provider-resource-or-slot-capacity",
+			"cooldown-owner-recipient-and-schedule",
+			"evidence-and-implementation-status"
+		],
+		"rules": [
+			"Derive support from actual roster providers; do not copy the DPS baseline's external buff package.",
+			"Respect parties, talents, pets, auras, blessings, totem choices and external cooldown capacity.",
+			"Score complete roster simulations instead of summing individually full-buffed DPS.",
+			"Validate healing teams together before accepting fewer healers.",
+			"Report near-best feasible alternatives and uncertainty; a bounded search does not prove a global optimum."
+		]
+	},
+	"sourcePolicy": {
+		"categories": ["official-developer-publication", "simulator-source", "community-model", "observed-log", "user-reference-image"],
+		"sourceLibrary": "wowkb",
+		"discordCollection": "on-hold",
+		"referenceImage": "User-supplied healer comparison; original inputs and EHPS definition unknown; numbers are not imported."
+	},
+	"upstreamHealingWork": {
+		"status": "open-unmerged",
+		"exclusions": ["damage-intake-modeling", "overhealing-modeling"],
+		"checkedOn": "2026-10-25",
+		"includedInSnapshot": false,
+		"headCommit": "5e2b947c8bfc24d16f5e6b0e9b8f1a529d95d717",
+		"scope": "Shared healing results, Priest integration and synthetic 5/10/20-player targets",
+		"url": "https://github.com/wowsims/forever/pull/502"
+	}
+}

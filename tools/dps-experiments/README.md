@@ -43,7 +43,7 @@ node tools/dps-experiments/publish.mjs tmp/dps-experiments/RUN reports/dps/RUN
 
 Publication includes charts, reports, summaries, preset metadata, provenance and requests. Raw result distributions, debug logs and binaries remain local; `raw-data-location.json` records their location. The published report's raw-result links require that local archive. Use a new destination for every publication. Commit the report directory after the tooling commit so its provenance identifies the code that produced it.
 
-Healing and raid composition are future experiments. Holy Paladin and Restoration Druid/Shaman are gear planners. Priest has healing spell code and talent presets, with no default healing rotation. A raid search needs actual roster buffs, party assignment, encounter damage and survival constraints before choosing tank or healer counts.
+Healing and raid composition follow the [experiment groundwork](../../docs/analytics/healing-and-raid-composition.md) and its [machine-readable plan](../../docs/analytics/experiment-plan.json). They define metrics, scenarios, readiness checks and a staged twenty-player roster search. No healer benchmark or roster optimization runs from that plan.
 
 ## Run
 
