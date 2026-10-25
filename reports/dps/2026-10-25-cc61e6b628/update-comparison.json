@@ -1,5 +1,6 @@
 [
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-balance-moonkin",
     "duration": 60,
     "spec": "Balance Druid",
@@ -13,6 +14,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-balance-moonkin",
     "duration": 180,
     "spec": "Balance Druid",
@@ -26,6 +28,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-balance-moonkin",
     "duration": 300,
     "spec": "Balance Druid",
@@ -39,6 +42,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-bearweave-45s-fights",
     "duration": 60,
     "spec": "Feral Cat",
@@ -52,6 +56,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-bearweave-45s-fights",
     "duration": 180,
     "spec": "Feral Cat",
@@ -65,6 +70,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-bearweave-45s-fights",
     "duration": 300,
     "spec": "Feral Cat",
@@ -78,6 +84,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-hybrid",
     "duration": 60,
     "spec": "Feral Cat",
@@ -91,6 +98,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-hybrid",
     "duration": 180,
     "spec": "Feral Cat",
@@ -104,6 +112,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-hybrid",
     "duration": 300,
     "spec": "Feral Cat",
@@ -117,6 +126,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-cat-monocat",
     "duration": 60,
     "spec": "Feral Cat",
@@ -130,6 +140,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-cat-monocat",
     "duration": 180,
     "spec": "Feral Cat",
@@ -143,6 +154,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "druid-feralcat-cat-monocat",
     "duration": 300,
     "spec": "Feral Cat",
@@ -156,6 +168,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv-weave",
     "duration": 60,
     "spec": "Survival Hunter",
@@ -169,6 +182,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv-weave",
     "duration": 180,
     "spec": "Survival Hunter",
@@ -182,6 +196,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv-weave",
     "duration": 300,
     "spec": "Survival Hunter",
@@ -195,6 +210,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-mm-weave",
     "duration": 60,
     "spec": "Marksmanship Hunter",
@@ -208,6 +224,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-mm-weave",
     "duration": 180,
     "spec": "Marksmanship Hunter",
@@ -221,6 +238,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-mm-weave",
     "duration": 300,
     "spec": "Marksmanship Hunter",
@@ -234,6 +252,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-bm-weave",
     "duration": 60,
     "spec": "Beast Mastery Hunter",
@@ -247,6 +266,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-bm-weave",
     "duration": 180,
     "spec": "Beast Mastery Hunter",
@@ -260,6 +280,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-bm-weave",
     "duration": 300,
     "spec": "Beast Mastery Hunter",
@@ -273,6 +294,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-mm",
     "duration": 60,
     "spec": "Marksmanship Hunter",
@@ -286,6 +308,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-mm",
     "duration": 180,
     "spec": "Marksmanship Hunter",
@@ -299,6 +322,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-mm",
     "duration": 300,
     "spec": "Marksmanship Hunter",
@@ -312,6 +336,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-bm",
     "duration": 60,
     "spec": "Beast Mastery Hunter",
@@ -325,6 +350,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-bm",
     "duration": 180,
     "spec": "Beast Mastery Hunter",
@@ -338,6 +364,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-bm",
     "duration": 300,
     "spec": "Beast Mastery Hunter",
@@ -351,6 +378,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv",
     "duration": 60,
     "spec": "Survival Hunter",
@@ -364,6 +392,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv",
     "duration": 180,
     "spec": "Survival Hunter",
@@ -377,6 +406,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv",
     "duration": 300,
     "spec": "Survival Hunter",
@@ -390,6 +420,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv-melee",
     "duration": 60,
     "spec": "Survival Hunter",
@@ -403,6 +434,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv-melee",
     "duration": 180,
     "spec": "Survival Hunter",
@@ -416,6 +448,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-sv-melee",
     "duration": 300,
     "spec": "Survival Hunter",
@@ -429,6 +462,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-default",
     "duration": 60,
     "spec": "Survival Hunter",
@@ -442,6 +476,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-default",
     "duration": 180,
     "spec": "Survival Hunter",
@@ -455,6 +490,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer P1",
     "profileId": "hunter-dps-default",
     "duration": 300,
     "spec": "Survival Hunter",
@@ -468,240 +504,7 @@
     "presetPercent": 0.0
   },
   {
-    "profileId": "paladin-retribution-holy-shock",
-    "duration": 60,
-    "spec": "Holy Shock DPS Paladin",
-    "build": "Holy Shock",
-    "rankEligible": true,
-    "previousDps": 844.3184228613095,
-    "frozenDps": 852.3080269755202,
-    "currentDps": 852.3080269755202,
-    "enginePercent": 0.9462785482205582,
-    "engineDeltaCi95": 0.011163902594690077,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "paladin-retribution-holy-shock",
-    "duration": 180,
-    "spec": "Holy Shock DPS Paladin",
-    "build": "Holy Shock",
-    "rankEligible": true,
-    "previousDps": 815.684439184964,
-    "frozenDps": 823.3851624479797,
-    "currentDps": 823.3953363078045,
-    "enginePercent": 0.9440811780975444,
-    "engineDeltaCi95": 0.006315545231134986,
-    "presetPercent": 0.0012356136943836304
-  },
-  {
-    "profileId": "paladin-retribution-holy-shock",
-    "duration": 300,
-    "spec": "Holy Shock DPS Paladin",
-    "build": "Holy Shock",
-    "rankEligible": true,
-    "previousDps": 810.5218125187205,
-    "frozenDps": 818.2674945138384,
-    "currentDps": 818.2896759310786,
-    "enginePercent": 0.9556413998345059,
-    "engineDeltaCi95": 0.004810136584050827,
-    "presetPercent": 0.0027107782465840558
-  },
-  {
-    "profileId": "priest-dps-shadow-testing",
-    "duration": 60,
-    "spec": "Shadow Priest",
-    "build": "Shadow Testing",
-    "rankEligible": true,
-    "previousDps": 803.3347833346669,
-    "frozenDps": 803.3347833346669,
-    "currentDps": 803.3347833346669,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "priest-dps-shadow-testing",
-    "duration": 180,
-    "spec": "Shadow Priest",
-    "build": "Shadow Testing",
-    "rankEligible": true,
-    "previousDps": 798.3857760809675,
-    "frozenDps": 798.3857760809675,
-    "currentDps": 798.3857760809675,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "priest-dps-shadow-testing",
-    "duration": 300,
-    "spec": "Shadow Priest",
-    "build": "Shadow Testing",
-    "rankEligible": true,
-    "previousDps": 804.3670650628702,
-    "frozenDps": 804.3670650628702,
-    "currentDps": 804.3670650628702,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "priest-dps-smite-testing",
-    "duration": 60,
-    "spec": "Smite Priest",
-    "build": "Smite Testing",
-    "rankEligible": true,
-    "previousDps": 523.5709590573578,
-    "frozenDps": 523.5709590573578,
-    "currentDps": 523.5709590573578,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "priest-dps-smite-testing",
-    "duration": 180,
-    "spec": "Smite Priest",
-    "build": "Smite Testing",
-    "rankEligible": true,
-    "previousDps": 442.17720880451986,
-    "frozenDps": 442.17720880451986,
-    "currentDps": 442.17720880451986,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "priest-dps-smite-testing",
-    "duration": 300,
-    "spec": "Smite Priest",
-    "build": "Smite Testing",
-    "rankEligible": true,
-    "previousDps": 415.33349455337697,
-    "frozenDps": 415.33349455337697,
-    "currentDps": 415.33349455337697,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "priest-dps-default",
-    "duration": 60,
-    "spec": "Shadow Priest",
-    "build": "Default",
-    "rankEligible": true,
-    "previousDps": 795.1989818683661,
-    "frozenDps": 795.1989818683661,
-    "currentDps": 795.1989818683661,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "priest-dps-default",
-    "duration": 180,
-    "spec": "Shadow Priest",
-    "build": "Default",
-    "rankEligible": true,
-    "previousDps": 789.8313721756556,
-    "frozenDps": 789.8313721756556,
-    "currentDps": 789.8313721756556,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "priest-dps-default",
-    "duration": 300,
-    "spec": "Shadow Priest",
-    "build": "Default",
-    "rankEligible": true,
-    "previousDps": 794.9158421344758,
-    "frozenDps": 794.9158421344758,
-    "currentDps": 794.9158421344758,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "shaman-elemental-testing",
-    "duration": 60,
-    "spec": "Elemental Shaman",
-    "build": "Testing",
-    "rankEligible": true,
-    "previousDps": 623.5530599845405,
-    "frozenDps": 623.5530599845405,
-    "currentDps": 623.5530599845405,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "shaman-elemental-testing",
-    "duration": 180,
-    "spec": "Elemental Shaman",
-    "build": "Testing",
-    "rankEligible": true,
-    "previousDps": 602.5888429429156,
-    "frozenDps": 602.5888429429156,
-    "currentDps": 602.5888429429156,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "shaman-elemental-testing",
-    "duration": 300,
-    "spec": "Elemental Shaman",
-    "build": "Testing",
-    "rankEligible": true,
-    "previousDps": 585.0931100663726,
-    "frozenDps": 585.0931100663726,
-    "currentDps": 585.0931100663726,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "shaman-elemental-default",
-    "duration": 60,
-    "spec": "Elemental Shaman",
-    "build": "Default",
-    "rankEligible": true,
-    "previousDps": 593.681127047468,
-    "frozenDps": 593.681127047468,
-    "currentDps": 593.681127047468,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "shaman-elemental-default",
-    "duration": 180,
-    "spec": "Elemental Shaman",
-    "build": "Default",
-    "rankEligible": true,
-    "previousDps": 508.60055425159476,
-    "frozenDps": 508.60055425159476,
-    "currentDps": 508.60055425159476,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
-    "profileId": "shaman-elemental-default",
-    "duration": 300,
-    "spec": "Elemental Shaman",
-    "build": "Default",
-    "rankEligible": true,
-    "previousDps": 443.17237302857563,
-    "frozenDps": 443.17237302857563,
-    "currentDps": 443.17237302857563,
-    "enginePercent": 0.0,
-    "engineDeltaCi95": 0.0,
-    "presetPercent": 0.0
-  },
-  {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-demo-fire-brand",
     "duration": 60,
     "spec": "Demonology Warlock",
@@ -715,6 +518,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-demo-fire-brand",
     "duration": 180,
     "spec": "Demonology Warlock",
@@ -728,6 +532,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-demo-fire-brand",
     "duration": 300,
     "spec": "Demonology Warlock",
@@ -741,6 +546,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-demo-shadow-brand",
     "duration": 60,
     "spec": "Demonology Warlock",
@@ -754,6 +560,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-demo-shadow-brand",
     "duration": 180,
     "spec": "Demonology Warlock",
@@ -767,6 +574,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-demo-shadow-brand",
     "duration": 300,
     "spec": "Demonology Warlock",
@@ -780,6 +588,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-destro",
     "duration": 60,
     "spec": "Destruction Warlock",
@@ -793,6 +602,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-destro",
     "duration": 180,
     "spec": "Destruction Warlock",
@@ -806,6 +616,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-destro",
     "duration": 300,
     "spec": "Destruction Warlock",
@@ -819,6 +630,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-sm-ruin",
     "duration": 60,
     "spec": "Affliction Warlock",
@@ -832,6 +644,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-sm-ruin",
     "duration": 180,
     "spec": "Affliction Warlock",
@@ -845,6 +658,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-sm-ruin",
     "duration": 300,
     "spec": "Affliction Warlock",
@@ -858,6 +672,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-aff-wrack",
     "duration": 60,
     "spec": "Affliction Warlock",
@@ -871,6 +686,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-aff-wrack",
     "duration": 180,
     "spec": "Affliction Warlock",
@@ -884,6 +700,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-aff-wrack",
     "duration": 300,
     "spec": "Affliction Warlock",
@@ -897,6 +714,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-default",
     "duration": 60,
     "spec": "Demonology Warlock",
@@ -910,6 +728,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-default",
     "duration": 180,
     "spec": "Demonology Warlock",
@@ -923,6 +742,7 @@
     "presetPercent": 0.0
   },
   {
+    "gearTier": "Developer pre-raid",
     "profileId": "warlock-dps-default",
     "duration": 300,
     "spec": "Demonology Warlock",

@@ -37,6 +37,7 @@ if (fs.existsSync(out) && fs.readdirSync(out).length) throw new Error(`Output di
 const python = value('--python', process.env.PYTHON_BINARY ?? 'python');
 if (!args.includes('--prepared')) run(process.execPath, ['tools/dps-experiments/prepare.mjs']);
 run(process.execPath, ['--test', 'tools/dps-experiments/statistics.test.mjs', 'tools/dps-experiments/preset_audit.test.mjs']);
+run(python, ['-m', 'unittest', 'discover', '-s', 'tools/dps-experiments', '-p', '*_test.py']);
 run(process.execPath, ['tools/dps-experiments/run.mjs', '--out', path.join(out, 'developer-presets')]);
 run(python, ['tools/dps-experiments/report.py', path.join(out, 'developer-presets')]);
 run(process.execPath, ['tools/dps-experiments/verify_report.mjs', path.join(out, 'developer-presets')]);

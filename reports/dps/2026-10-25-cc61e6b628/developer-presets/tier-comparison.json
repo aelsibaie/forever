@@ -1,0 +1,872 @@
+[
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 1,
+    "profileId": "warrior-dps-fury-pre-bis",
+    "spec": "Fury Warrior",
+    "build": "Fury / Pre-BiS",
+    "meanDps": 904.569021032677,
+    "ci95HalfWidth": 1.7477601210379492
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 2,
+    "profileId": "druid-feralcat-bearweave-45s-fights",
+    "spec": "Feral Cat",
+    "build": "Bearweave (45s fights)",
+    "meanDps": 879.2904866834523,
+    "ci95HalfWidth": 0.7889833962870534
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 3,
+    "profileId": "druid-feralcat-cat-monocat",
+    "spec": "Feral Cat",
+    "build": "Cat / Monocat",
+    "meanDps": 876.0315453316581,
+    "ci95HalfWidth": 0.7443805318996912
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 4,
+    "profileId": "druid-feralcat-hybrid",
+    "spec": "Feral Cat",
+    "build": "Hybrid",
+    "meanDps": 862.2998597176884,
+    "ci95HalfWidth": 0.735160443300236
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 5,
+    "profileId": "warrior-dps-arms-pre-bis",
+    "spec": "Arms Warrior",
+    "build": "Arms / Pre-BiS",
+    "meanDps": 777.0067920425181,
+    "ci95HalfWidth": 1.7285643418152679
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 6,
+    "profileId": "warlock-dps-demo-fire-brand",
+    "spec": "Demonology Warlock",
+    "build": "Demo (Fire Brand)",
+    "meanDps": 758.4951721934298,
+    "ci95HalfWidth": 0.9339874982689299
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 7,
+    "profileId": "warlock-dps-demo-shadow-brand",
+    "spec": "Demonology Warlock",
+    "build": "Demo (Shadow Brand)",
+    "meanDps": 751.816489675744,
+    "ci95HalfWidth": 1.3071484646830436
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 8,
+    "profileId": "warlock-dps-default",
+    "spec": "Demonology Warlock",
+    "build": "Default",
+    "meanDps": 734.0185968013413,
+    "ci95HalfWidth": 0.8617450363504827
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 9,
+    "profileId": "druid-balance-moonkin",
+    "spec": "Balance Druid",
+    "build": "Moonkin",
+    "meanDps": 709.3347282335956,
+    "ci95HalfWidth": 1.138585291817123
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 10,
+    "profileId": "warlock-dps-destro",
+    "spec": "Destruction Warlock",
+    "build": "Destro",
+    "meanDps": 698.0088114524834,
+    "ci95HalfWidth": 0.9176027118105234
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 11,
+    "profileId": "warlock-dps-sm-ruin",
+    "spec": "Affliction Warlock",
+    "build": "SM/Ruin",
+    "meanDps": 667.682708260593,
+    "ci95HalfWidth": 1.1941221253521201
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 60,
+    "withinTierOrder": 12,
+    "profileId": "warlock-dps-aff-wrack",
+    "spec": "Affliction Warlock",
+    "build": "Aff (Wrack)",
+    "meanDps": 589.8785270786715,
+    "ci95HalfWidth": 0.8510537927770021
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 1,
+    "profileId": "warrior-dps-fury-pre-bis",
+    "spec": "Fury Warrior",
+    "build": "Fury / Pre-BiS",
+    "meanDps": 849.7411212117124,
+    "ci95HalfWidth": 0.9867333683634417
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 2,
+    "profileId": "druid-feralcat-cat-monocat",
+    "spec": "Feral Cat",
+    "build": "Cat / Monocat",
+    "meanDps": 805.5827354418026,
+    "ci95HalfWidth": 0.4291352643296987
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 3,
+    "profileId": "druid-feralcat-bearweave-45s-fights",
+    "spec": "Feral Cat",
+    "build": "Bearweave (45s fights)",
+    "meanDps": 805.3170577105107,
+    "ci95HalfWidth": 0.4340267674274271
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 4,
+    "profileId": "druid-feralcat-hybrid",
+    "spec": "Feral Cat",
+    "build": "Hybrid",
+    "meanDps": 794.1536111507801,
+    "ci95HalfWidth": 0.43077418876099954
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 5,
+    "profileId": "warlock-dps-demo-fire-brand",
+    "spec": "Demonology Warlock",
+    "build": "Demo (Fire Brand)",
+    "meanDps": 756.354601438788,
+    "ci95HalfWidth": 0.5717267789555825
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 6,
+    "profileId": "warrior-dps-arms-pre-bis",
+    "spec": "Arms Warrior",
+    "build": "Arms / Pre-BiS",
+    "meanDps": 753.6501125762516,
+    "ci95HalfWidth": 0.9822544801583705
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 7,
+    "profileId": "warlock-dps-demo-shadow-brand",
+    "spec": "Demonology Warlock",
+    "build": "Demo (Shadow Brand)",
+    "meanDps": 738.4094260254186,
+    "ci95HalfWidth": 0.7708324231876925
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 8,
+    "profileId": "warlock-dps-default",
+    "spec": "Demonology Warlock",
+    "build": "Default",
+    "meanDps": 706.8478045518985,
+    "ci95HalfWidth": 0.5319948335028188
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 9,
+    "profileId": "druid-balance-moonkin",
+    "spec": "Balance Druid",
+    "build": "Moonkin",
+    "meanDps": 703.7938019355158,
+    "ci95HalfWidth": 0.6405126062678321
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 10,
+    "profileId": "warlock-dps-destro",
+    "spec": "Destruction Warlock",
+    "build": "Destro",
+    "meanDps": 670.4764762332914,
+    "ci95HalfWidth": 0.5683939929635106
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 11,
+    "profileId": "warlock-dps-sm-ruin",
+    "spec": "Affliction Warlock",
+    "build": "SM/Ruin",
+    "meanDps": 657.2488338269585,
+    "ci95HalfWidth": 0.7374048175630362
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 180,
+    "withinTierOrder": 12,
+    "profileId": "warlock-dps-aff-wrack",
+    "spec": "Affliction Warlock",
+    "build": "Aff (Wrack)",
+    "meanDps": 534.1507251036381,
+    "ci95HalfWidth": 0.45455782811348777
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 1,
+    "profileId": "warrior-dps-fury-pre-bis",
+    "spec": "Fury Warrior",
+    "build": "Fury / Pre-BiS",
+    "meanDps": 848.0617595380373,
+    "ci95HalfWidth": 0.7672654363304409
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 2,
+    "profileId": "druid-feralcat-cat-monocat",
+    "spec": "Feral Cat",
+    "build": "Cat / Monocat",
+    "meanDps": 803.4004087362916,
+    "ci95HalfWidth": 0.3281417597635923
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 3,
+    "profileId": "druid-feralcat-bearweave-45s-fights",
+    "spec": "Feral Cat",
+    "build": "Bearweave (45s fights)",
+    "meanDps": 803.2452519996647,
+    "ci95HalfWidth": 0.32902740166617994
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 4,
+    "profileId": "druid-feralcat-hybrid",
+    "spec": "Feral Cat",
+    "build": "Hybrid",
+    "meanDps": 788.9754921573473,
+    "ci95HalfWidth": 0.31872634852368703
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 5,
+    "profileId": "warlock-dps-demo-fire-brand",
+    "spec": "Demonology Warlock",
+    "build": "Demo (Fire Brand)",
+    "meanDps": 748.5266931717382,
+    "ci95HalfWidth": 0.4507841153108694
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 6,
+    "profileId": "warrior-dps-arms-pre-bis",
+    "spec": "Arms Warrior",
+    "build": "Arms / Pre-BiS",
+    "meanDps": 746.7634638645483,
+    "ci95HalfWidth": 0.7612595893009925
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 7,
+    "profileId": "warlock-dps-demo-shadow-brand",
+    "spec": "Demonology Warlock",
+    "build": "Demo (Shadow Brand)",
+    "meanDps": 730.2615791845108,
+    "ci95HalfWidth": 0.5868300341798598
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 8,
+    "profileId": "druid-balance-moonkin",
+    "spec": "Balance Druid",
+    "build": "Moonkin",
+    "meanDps": 706.1101707415994,
+    "ci95HalfWidth": 0.5075355360813928
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 9,
+    "profileId": "warlock-dps-default",
+    "spec": "Demonology Warlock",
+    "build": "Default",
+    "meanDps": 701.6772861284744,
+    "ci95HalfWidth": 0.4159423089021443
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 10,
+    "profileId": "warlock-dps-destro",
+    "spec": "Destruction Warlock",
+    "build": "Destro",
+    "meanDps": 668.8933943569295,
+    "ci95HalfWidth": 0.4493174529149757
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 11,
+    "profileId": "warlock-dps-sm-ruin",
+    "spec": "Affliction Warlock",
+    "build": "SM/Ruin",
+    "meanDps": 653.2464697465292,
+    "ci95HalfWidth": 0.5805634440527939
+  },
+  {
+    "gearTier": "Developer pre-raid",
+    "duration": 300,
+    "withinTierOrder": 12,
+    "profileId": "warlock-dps-aff-wrack",
+    "spec": "Affliction Warlock",
+    "build": "Aff (Wrack)",
+    "meanDps": 530.469579507274,
+    "ci95HalfWidth": 0.35092833134272333
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 1,
+    "profileId": "hunter-dps-default",
+    "spec": "Survival Hunter",
+    "build": "Default",
+    "meanDps": 1065.9388567137198,
+    "ci95HalfWidth": 1.2016397254080344
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 2,
+    "profileId": "hunter-dps-sv-weave",
+    "spec": "Survival Hunter",
+    "build": "SV Weave",
+    "meanDps": 1063.8746849580493,
+    "ci95HalfWidth": 1.1938462399407497
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 3,
+    "profileId": "hunter-dps-mm-weave",
+    "spec": "Marksmanship Hunter",
+    "build": "MM Weave",
+    "meanDps": 1015.3898311945123,
+    "ci95HalfWidth": 1.101407664942251
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 4,
+    "profileId": "hunter-dps-bm-weave",
+    "spec": "Beast Mastery Hunter",
+    "build": "BM Weave",
+    "meanDps": 1014.3400902369673,
+    "ci95HalfWidth": 0.7995995230634935
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 5,
+    "profileId": "mage-dps-arcane-fire",
+    "spec": "Arcane Mage",
+    "build": "Arcane Fire",
+    "meanDps": 879.3700298408742,
+    "ci95HalfWidth": 1.5951109183830154
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 6,
+    "profileId": "mage-dps-fire",
+    "spec": "Fire Mage",
+    "build": "Fire",
+    "meanDps": 855.1704729360337,
+    "ci95HalfWidth": 1.6269248098591786
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 7,
+    "profileId": "hunter-dps-bm",
+    "spec": "Beast Mastery Hunter",
+    "build": "BM",
+    "meanDps": 854.4777522218282,
+    "ci95HalfWidth": 0.7003655723995799
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 8,
+    "profileId": "hunter-dps-sv-melee",
+    "spec": "Survival Hunter",
+    "build": "SV Melee",
+    "meanDps": 827.4359994062296,
+    "ci95HalfWidth": 0.9121605317263317
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 9,
+    "profileId": "rogue-dps-combat-ss",
+    "spec": "Combat Rogue",
+    "build": "Combat SS",
+    "meanDps": 809.3904933393371,
+    "ci95HalfWidth": 1.1574012928334032
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 10,
+    "profileId": "rogue-dps-combat-bs",
+    "spec": "Combat Rogue",
+    "build": "Combat BS",
+    "meanDps": 806.9203741514414,
+    "ci95HalfWidth": 1.0222762236296643
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 11,
+    "profileId": "mage-dps-arcane-frost",
+    "spec": "Arcane Mage",
+    "build": "Arcane Frost",
+    "meanDps": 803.2917345370012,
+    "ci95HalfWidth": 1.4509671116981036
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 12,
+    "profileId": "mage-dps-ffb",
+    "spec": "Fire / Frost Mage",
+    "build": "FFB",
+    "meanDps": 797.7494642073448,
+    "ci95HalfWidth": 1.880548759815718
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 13,
+    "profileId": "hunter-dps-mm",
+    "spec": "Marksmanship Hunter",
+    "build": "MM",
+    "meanDps": 762.043353946962,
+    "ci95HalfWidth": 0.9212110481513329
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 14,
+    "profileId": "rogue-dps-subtlety-hemo",
+    "spec": "Subtlety Rogue",
+    "build": "Subtlety Hemo",
+    "meanDps": 752.3994286848033,
+    "ci95HalfWidth": 1.0347166404088979
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 15,
+    "profileId": "rogue-dps-subtlety-bs",
+    "spec": "Subtlety Rogue",
+    "build": "Subtlety BS",
+    "meanDps": 725.9755222592954,
+    "ci95HalfWidth": 0.9548747105976687
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 16,
+    "profileId": "hunter-dps-sv",
+    "spec": "Survival Hunter",
+    "build": "SV",
+    "meanDps": 682.0685959634192,
+    "ci95HalfWidth": 0.7517993825448486
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 60,
+    "withinTierOrder": 17,
+    "profileId": "mage-dps-frost",
+    "spec": "Frost Mage",
+    "build": "Frost",
+    "meanDps": 637.2582821142834,
+    "ci95HalfWidth": 1.145087586600795
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 1,
+    "profileId": "hunter-dps-default",
+    "spec": "Survival Hunter",
+    "build": "Default",
+    "meanDps": 1039.467923952193,
+    "ci95HalfWidth": 0.699591192942599
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 2,
+    "profileId": "hunter-dps-sv-weave",
+    "spec": "Survival Hunter",
+    "build": "SV Weave",
+    "meanDps": 1039.4114855412506,
+    "ci95HalfWidth": 0.7092331256126144
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 3,
+    "profileId": "hunter-dps-mm-weave",
+    "spec": "Marksmanship Hunter",
+    "build": "MM Weave",
+    "meanDps": 978.7525713599414,
+    "ci95HalfWidth": 0.6286224534085284
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 4,
+    "profileId": "hunter-dps-bm-weave",
+    "spec": "Beast Mastery Hunter",
+    "build": "BM Weave",
+    "meanDps": 971.8652695989706,
+    "ci95HalfWidth": 0.4646465411008561
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 5,
+    "profileId": "mage-dps-fire",
+    "spec": "Fire Mage",
+    "build": "Fire",
+    "meanDps": 826.8240764007573,
+    "ci95HalfWidth": 1.0077889588944478
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 6,
+    "profileId": "hunter-dps-bm",
+    "spec": "Beast Mastery Hunter",
+    "build": "BM",
+    "meanDps": 816.4904956491531,
+    "ci95HalfWidth": 0.3968234119128041
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 7,
+    "profileId": "mage-dps-ffb",
+    "spec": "Fire / Frost Mage",
+    "build": "FFB",
+    "meanDps": 779.1434038973623,
+    "ci95HalfWidth": 1.1235534067758177
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 8,
+    "profileId": "hunter-dps-sv-melee",
+    "spec": "Survival Hunter",
+    "build": "SV Melee",
+    "meanDps": 777.747421847637,
+    "ci95HalfWidth": 0.5120365086700105
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 9,
+    "profileId": "mage-dps-arcane-fire",
+    "spec": "Arcane Mage",
+    "build": "Arcane Fire",
+    "meanDps": 762.332917098381,
+    "ci95HalfWidth": 0.8650297601411674
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 10,
+    "profileId": "hunter-dps-mm",
+    "spec": "Marksmanship Hunter",
+    "build": "MM",
+    "meanDps": 732.6096280529933,
+    "ci95HalfWidth": 0.5029211653198956
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 11,
+    "profileId": "rogue-dps-combat-ss",
+    "spec": "Combat Rogue",
+    "build": "Combat SS",
+    "meanDps": 705.9030597285101,
+    "ci95HalfWidth": 0.6269486695552853
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 12,
+    "profileId": "rogue-dps-combat-bs",
+    "spec": "Combat Rogue",
+    "build": "Combat BS",
+    "meanDps": 702.5534690849267,
+    "ci95HalfWidth": 0.5599676766074159
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 13,
+    "profileId": "mage-dps-arcane-frost",
+    "spec": "Arcane Mage",
+    "build": "Arcane Frost",
+    "meanDps": 697.9997340205899,
+    "ci95HalfWidth": 0.7935568082810941
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 14,
+    "profileId": "rogue-dps-subtlety-hemo",
+    "spec": "Subtlety Rogue",
+    "build": "Subtlety Hemo",
+    "meanDps": 672.2783750608186,
+    "ci95HalfWidth": 0.5787144278672275
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 15,
+    "profileId": "rogue-dps-subtlety-bs",
+    "spec": "Subtlety Rogue",
+    "build": "Subtlety BS",
+    "meanDps": 651.7055853741543,
+    "ci95HalfWidth": 0.5494570285295155
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 16,
+    "profileId": "hunter-dps-sv",
+    "spec": "Survival Hunter",
+    "build": "SV",
+    "meanDps": 646.9834770681051,
+    "ci95HalfWidth": 0.42846636849099345
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 180,
+    "withinTierOrder": 17,
+    "profileId": "mage-dps-frost",
+    "spec": "Frost Mage",
+    "build": "Frost",
+    "meanDps": 616.8463978231952,
+    "ci95HalfWidth": 0.6379793007433614
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 1,
+    "profileId": "hunter-dps-sv-weave",
+    "spec": "Survival Hunter",
+    "build": "SV Weave",
+    "meanDps": 1038.9380591067259,
+    "ci95HalfWidth": 0.5560355144107121
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 2,
+    "profileId": "hunter-dps-default",
+    "spec": "Survival Hunter",
+    "build": "Default",
+    "meanDps": 1037.6251007903381,
+    "ci95HalfWidth": 0.5535358208587912
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 3,
+    "profileId": "hunter-dps-mm-weave",
+    "spec": "Marksmanship Hunter",
+    "build": "MM Weave",
+    "meanDps": 981.5711934895921,
+    "ci95HalfWidth": 0.4910676797643385
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 4,
+    "profileId": "hunter-dps-bm-weave",
+    "spec": "Beast Mastery Hunter",
+    "build": "BM Weave",
+    "meanDps": 950.4603118251782,
+    "ci95HalfWidth": 0.3948069868321938
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 5,
+    "profileId": "mage-dps-fire",
+    "spec": "Fire Mage",
+    "build": "Fire",
+    "meanDps": 820.1094805070742,
+    "ci95HalfWidth": 0.8270842548090483
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 6,
+    "profileId": "hunter-dps-bm",
+    "spec": "Beast Mastery Hunter",
+    "build": "BM",
+    "meanDps": 809.4051684319666,
+    "ci95HalfWidth": 0.3083553274296939
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 7,
+    "profileId": "hunter-dps-sv-melee",
+    "spec": "Survival Hunter",
+    "build": "SV Melee",
+    "meanDps": 769.8387842405168,
+    "ci95HalfWidth": 0.39804558580371086
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 8,
+    "profileId": "mage-dps-arcane-fire",
+    "spec": "Arcane Mage",
+    "build": "Arcane Fire",
+    "meanDps": 765.0473208805274,
+    "ci95HalfWidth": 0.7355058934385005
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 9,
+    "profileId": "hunter-dps-mm",
+    "spec": "Marksmanship Hunter",
+    "build": "MM",
+    "meanDps": 736.1813873976807,
+    "ci95HalfWidth": 0.4080758441095277
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 10,
+    "profileId": "mage-dps-ffb",
+    "spec": "Fire / Frost Mage",
+    "build": "FFB",
+    "meanDps": 696.1311840618524,
+    "ci95HalfWidth": 0.8746656180056395
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 11,
+    "profileId": "mage-dps-arcane-frost",
+    "spec": "Arcane Mage",
+    "build": "Arcane Frost",
+    "meanDps": 692.8422157031799,
+    "ci95HalfWidth": 0.6202122262588469
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 12,
+    "profileId": "rogue-dps-combat-ss",
+    "spec": "Combat Rogue",
+    "build": "Combat SS",
+    "meanDps": 688.041685144895,
+    "ci95HalfWidth": 0.487728358701378
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 13,
+    "profileId": "rogue-dps-combat-bs",
+    "spec": "Combat Rogue",
+    "build": "Combat BS",
+    "meanDps": 683.645429241015,
+    "ci95HalfWidth": 0.4264834262284408
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 14,
+    "profileId": "rogue-dps-subtlety-hemo",
+    "spec": "Subtlety Rogue",
+    "build": "Subtlety Hemo",
+    "meanDps": 660.469201946484,
+    "ci95HalfWidth": 0.44195175183968016
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 15,
+    "profileId": "hunter-dps-sv",
+    "spec": "Survival Hunter",
+    "build": "SV",
+    "meanDps": 642.8712445250077,
+    "ci95HalfWidth": 0.3303458603807728
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 16,
+    "profileId": "rogue-dps-subtlety-bs",
+    "spec": "Subtlety Rogue",
+    "build": "Subtlety BS",
+    "meanDps": 639.3556925176737,
+    "ci95HalfWidth": 0.41955691029980785
+  },
+  {
+    "gearTier": "Developer P1",
+    "duration": 300,
+    "withinTierOrder": 17,
+    "profileId": "mage-dps-frost",
+    "spec": "Frost Mage",
+    "build": "Frost",
+    "meanDps": 615.8481788464937,
+    "ci95HalfWidth": 0.4973515430186465
+  }
+]

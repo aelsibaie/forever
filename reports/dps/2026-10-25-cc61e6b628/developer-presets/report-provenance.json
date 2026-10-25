@@ -1,16 +1,58 @@
 {
-  "generatedAt": "2026-10-25T12:58:09.314792-04:00",
+  "generatedAt": "2026-10-25T14:10:44.114856-04:00",
   "matplotlib": "3.10.7",
   "numpy": "2.5.4",
   "python": "3.12.14",
-  "scriptSha256": "4a64065153d849a4b00782240b66b01f709b5fe3dadb2e5409d5d6f1dcac0c4d",
+  "scriptSha256": "f8aa55a384912b3907a160712bc601043e2b4ab1870904dd7f23866ac3777dd9",
+  "tierGroupsSha256": "90941b5c20a5547642445c0507d0b9cb8b501ccd155c8e56b553d330d3965824",
+  "comparisonGroups": {
+    "Developer pre-raid": [
+      "warrior-dps-fury-pre-bis",
+      "druid-feralcat-cat-monocat",
+      "druid-feralcat-bearweave-45s-fights",
+      "druid-feralcat-hybrid",
+      "warlock-dps-demo-fire-brand",
+      "warrior-dps-arms-pre-bis",
+      "warlock-dps-demo-shadow-brand",
+      "warlock-dps-default",
+      "druid-balance-moonkin",
+      "warlock-dps-destro",
+      "warlock-dps-sm-ruin",
+      "warlock-dps-aff-wrack"
+    ],
+    "Developer P1": [
+      "hunter-dps-default",
+      "hunter-dps-sv-weave",
+      "hunter-dps-mm-weave",
+      "hunter-dps-bm-weave",
+      "mage-dps-fire",
+      "hunter-dps-bm",
+      "mage-dps-ffb",
+      "hunter-dps-sv-melee",
+      "mage-dps-arcane-fire",
+      "hunter-dps-mm",
+      "rogue-dps-combat-ss",
+      "rogue-dps-combat-bs",
+      "mage-dps-arcane-frost",
+      "rogue-dps-subtlety-hemo",
+      "rogue-dps-subtlety-bs",
+      "hunter-dps-sv",
+      "mage-dps-frost"
+    ]
+  },
   "artifacts": {
-    "report.html": "c9c55e5a94cb63deb5e6c64dbc9952c686cd4de1e9492be90a6edce050ecc803",
-    "charts\\all-builds.png": "6fbc6f4cb8cb27cc06108713b70f2d9cb451c8a84455032e6bc330cec17585e0",
-    "charts\\all-builds.svg": "a77c20e24b84b00403b1464ecc456bd6bb506c9f836c0dd5d6120d4189994967",
-    "charts\\duration-response.png": "2cd31aa78812b3f9c207d440056d1fd30cfc144f311e49f38d69fe4ee0d9abaf",
-    "charts\\duration-response.svg": "c7c810ee33c652c53b05d07e416324d6421e4b1d316782447ec23fea24868103",
-    "charts\\overview.png": "f3b9a9358c011c1dd96c995df31ac1e5cded1482afef96710eddd81e1d27535b",
-    "charts\\overview.svg": "e0120e1a9399e2fa911b9012e2a0f7beeca27297828961c5d20ea9f29bc3376c"
+    "report.html": "22f06993842f79cae7b5ed38141cf6b416f621f8a9020edac8e013043f8f137a",
+    "tier-comparison.csv": "7dd3b95e2c35b99ed7b4fb95df18c5462c019ab3f5fec13d4e34b035d43ebc12",
+    "tier-comparison.json": "97b12173ec8a288721c452d14e4c68a1fe75de0ec5eeb17351effbcd50882208",
+    "charts\\all-builds.png": "5fce27f7069157313e22672db0e8b0f081ef2b7046912460381e682966ecd7df",
+    "charts\\all-builds.svg": "5ce1ffd54028a699591645c707e14ee231a04de17086aca8b484ad2260f3bb5b",
+    "charts\\duration-response.png": "ca49858cd2897509245e22164380eb7f4f2a1b8fa368ae6f303cdb1ea88cc63b",
+    "charts\\duration-response.svg": "4ab646a541e780c9af300e73753db21e1359075efb082ddcc6b951738814e26c",
+    "charts\\overview.png": "b497070079fab9850ecd5103b2b6348cee29f367b15d9fad59433a55bad05446",
+    "charts\\overview.svg": "f0aa850ede35add624a9d31ff0434f8e9582164474178591d36569eb2e035611",
+    "charts\\tier-developer-p1.png": "d0e22c1e78ce985cb4856a117cdfeef263ceed289e77e1d57157dac551af9720",
+    "charts\\tier-developer-p1.svg": "2440c4bc3f69a77a225e2a283dd115b0e2a26e37bddccd37115247b583009949",
+    "charts\\tier-developer-pre-raid.png": "39ad28c18258a817a679f2055a8cf1e2387e439b9b5c40070a6746d1ac3d1925",
+    "charts\\tier-developer-pre-raid.svg": "7713f3039a62238cb6d9de1f66b9adf94b67558f02b6b8e78ad429cc9a384942"
   }
 }

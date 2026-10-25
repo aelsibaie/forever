@@ -25,6 +25,8 @@ for (const name of ['developer-presets', 'frozen-inputs']) {
 		'charts',
 		'summary.json',
 		'summary.csv',
+		'tier-comparison.csv',
+		'tier-comparison.json',
 		'profiles.json',
 		'preset-audit.json',
 		'provenance.json',

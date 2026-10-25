@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-10-25T16:59:41.540Z",
+  "verifiedAt": "2026-10-25T18:13:45.658Z",
   "publishedRequestHashesVerified": 192,
   "allPublishedChartAndReportHashesVerified": true,
   "simulatorTests": "passed",
@@ -15,7 +15,16 @@
   "storybook": "passed",
   "productionFrontendWorkersAndWasm": "passed",
   "nodeAnalyticsTests": 10,
-  "pythonAnalyticsTests": 2,
+  "pythonAnalyticsTests": 5,
   "reportDomChecks": "passed",
-  "visualChecks": "Main DPS, pre-raid, duration response and update-comparison PNG layouts inspected. Short pre-raid chart header spacing corrected and rechecked."
+  "visualChecks": "Independent overview sections, individual P1 chart and tier-separated duration chart inspected.",
+  "tierCounts": {
+    "Developer pre-raid": 12,
+    "Developer P1": 17
+  },
+  "unverifiedTierProfiles": 9,
+  "comparativeExportRows": 87,
+  "historicalComparativeExportRows": 54,
+  "tierIsolation": "Passed: every table row remains in the selected tier; no combined selector; ordering resets by tier and duration.",
+  "simulationRerun": false
 }
