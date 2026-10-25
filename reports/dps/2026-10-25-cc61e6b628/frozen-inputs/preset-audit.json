@@ -1,0 +1,453 @@
+{
+  "policy": "Use developer equipment, enchants, swaps, professions and rotations. No item scoring or gear optimization. Pre-raid means the developer labels the set pre-raid or Pre-BiS; source caveats and unequal budgets remain.",
+  "profiles": [
+    {
+      "id": "druid-balance-moonkin",
+      "specLabel": "Balance Druid",
+      "gearName": "Pre-BiS",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/druid/balance/gear_sets/prebis.gear.json",
+          "sha256": "db27294eed519f2f4f3ca1f3ee0929002d603baaa122a5403b554433b857a210"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "druid-feralcat-bearweave-45s-fights",
+      "specLabel": "Feral Cat",
+      "gearName": "Pre-raid",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json",
+          "sha256": "57eb44f1ebda5a9d33176b94b0d82d6510e0e427dc567d9a80bfab302c5605b4"
+        }
+      ],
+      "gearTooltip": "Pre-raid leather with The Unstoppable Force, Wolfshead Helm and full enchants.",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "Default feral gear and the preset bleed assumption are retained."
+      ]
+    },
+    {
+      "id": "druid-feralcat-hybrid",
+      "specLabel": "Feral Cat",
+      "gearName": "Pre-raid",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json",
+          "sha256": "57eb44f1ebda5a9d33176b94b0d82d6510e0e427dc567d9a80bfab302c5605b4"
+        }
+      ],
+      "gearTooltip": "Pre-raid leather with The Unstoppable Force, Wolfshead Helm and full enchants.",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "Default feral gear and the preset bleed assumption are retained."
+      ]
+    },
+    {
+      "id": "druid-feralcat-cat-monocat",
+      "specLabel": "Feral Cat",
+      "gearName": "Pre-raid",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json",
+          "sha256": "57eb44f1ebda5a9d33176b94b0d82d6510e0e427dc567d9a80bfab302c5605b4"
+        }
+      ],
+      "gearTooltip": "Pre-raid leather with The Unstoppable Force, Wolfshead Helm and full enchants.",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "Default feral gear and the preset bleed assumption are retained."
+      ]
+    },
+    {
+      "id": "hunter-dps-sv-weave",
+      "specLabel": "Survival Hunter",
+      "gearName": "P1",
+      "gearTier": "Developer P1",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/hunter/dps/gear_sets/p1.gear.json",
+          "sha256": "c719984d465d7e3cb8b12dde17b83583d1dfbc6a345191a9565e37338c2c05ac"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "hunter-dps-mm-weave",
+      "specLabel": "Marksmanship Hunter",
+      "gearName": "P1",
+      "gearTier": "Developer P1",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/hunter/dps/gear_sets/p1.gear.json",
+          "sha256": "c719984d465d7e3cb8b12dde17b83583d1dfbc6a345191a9565e37338c2c05ac"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "hunter-dps-bm-weave",
+      "specLabel": "Beast Mastery Hunter",
+      "gearName": "P1",
+      "gearTier": "Developer P1",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/hunter/dps/gear_sets/p1.gear.json",
+          "sha256": "c719984d465d7e3cb8b12dde17b83583d1dfbc6a345191a9565e37338c2c05ac"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "hunter-dps-mm",
+      "specLabel": "Marksmanship Hunter",
+      "gearName": "P1",
+      "gearTier": "Developer P1",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/hunter/dps/gear_sets/p1.gear.json",
+          "sha256": "c719984d465d7e3cb8b12dde17b83583d1dfbc6a345191a9565e37338c2c05ac"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "hunter-dps-bm",
+      "specLabel": "Beast Mastery Hunter",
+      "gearName": "P1",
+      "gearTier": "Developer P1",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/hunter/dps/gear_sets/p1.gear.json",
+          "sha256": "c719984d465d7e3cb8b12dde17b83583d1dfbc6a345191a9565e37338c2c05ac"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "hunter-dps-sv",
+      "specLabel": "Survival Hunter",
+      "gearName": "P1",
+      "gearTier": "Developer P1",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/hunter/dps/gear_sets/p1.gear.json",
+          "sha256": "c719984d465d7e3cb8b12dde17b83583d1dfbc6a345191a9565e37338c2c05ac"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "hunter-dps-sv-melee",
+      "specLabel": "Survival Hunter",
+      "gearName": "P1 Dual Wield",
+      "gearTier": "Developer P1",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/hunter/dps/gear_sets/p1_melee.gear.json",
+          "sha256": "59130ab5cf392926274d0cf195379ac314e48e3484ef5c4a2e836b9d255302e3"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "hunter-dps-default",
+      "specLabel": "Survival Hunter",
+      "gearName": "P1",
+      "gearTier": "Developer P1",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/hunter/dps/gear_sets/p1.gear.json",
+          "sha256": "c719984d465d7e3cb8b12dde17b83583d1dfbc6a345191a9565e37338c2c05ac"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "paladin-retribution-holy-shock",
+      "specLabel": "Holy Shock DPS Paladin",
+      "gearName": "Holy Shock",
+      "gearTier": "Pre-raid placeholder",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/paladin/retribution/gear_sets/holy_shock.gear.json",
+          "sha256": "ef7b112db40b1966d5d845ceb633675b960ba15f880ab6d8096b28ea4ee194de"
+        }
+      ],
+      "gearTooltip": "Level 60 blues from dungeons, quests, reputations and crafting. A placeholder until the Phase 1 gear is known.",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "priest-dps-shadow-testing",
+      "specLabel": "Shadow Priest",
+      "gearName": "Shadow Testing",
+      "gearTier": "Developer testing",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/priest/dps/builds/testing.build.json",
+          "sha256": "8088f25aebac7a2379daa38c8663cecc9b8ef0408b14322932833ee816693e75"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "priest-dps-smite-testing",
+      "specLabel": "Smite Priest",
+      "gearName": "Smite Testing",
+      "gearTier": "Developer testing",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/priest/dps/builds/smite_testing.build.json",
+          "sha256": "c961fe9eab555c94e8a3ec6b87bc89787643f7598e334e3f865476d86bc9115b"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "priest-dps-default",
+      "specLabel": "Shadow Priest",
+      "gearName": "Shadow Testing",
+      "gearTier": "Developer testing",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/priest/dps/builds/testing.build.json",
+          "sha256": "8088f25aebac7a2379daa38c8663cecc9b8ef0408b14322932833ee816693e75"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "shaman-elemental-testing",
+      "specLabel": "Elemental Shaman",
+      "gearName": "Testing",
+      "gearTier": "Developer testing",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/shaman/elemental/builds/testing.build.json",
+          "sha256": "abfd9ca54a4c37e866d9dc1f7616679cf5b7500f5b166189f5c390299bd4acba"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "shaman-elemental-default",
+      "specLabel": "Elemental Shaman",
+      "gearName": "Testing",
+      "gearTier": "Developer testing",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/shaman/elemental/builds/testing.build.json",
+          "sha256": "abfd9ca54a4c37e866d9dc1f7616679cf5b7500f5b166189f5c390299bd4acba"
+        }
+      ],
+      "gearTooltip": "<p>Preset gear lists are intended as rough approximations of BIS, and will often not be the absolute highest-DPS setup for you. Your optimal gear setup will depend on many factors; that's why we have a sim!</p><p>Items may also be omitted from the presets if they are highly contested and clearly better utilized on other classes, to encourage equitable gearing for the raid as a whole.</p>",
+      "documentedPreRaid": false,
+      "rankEligible": true,
+      "warnings": []
+    },
+    {
+      "id": "warlock-dps-demo-fire-brand",
+      "specLabel": "Demonology Warlock",
+      "gearName": "Pre-raid (baseline fallback)",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/warlock/dps/gear_sets/preraid.gear.json",
+          "sha256": "c214c6f34eb369a1590d41a69bbb77fc0fb2f92cdf965f89cfa2b59208a75ba0"
+        }
+      ],
+      "gearTooltip": "",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "The preset has no equipment. The baseline uses ui/specs/warlock/dps/gear_sets/preraid.gear.json."
+      ]
+    },
+    {
+      "id": "warlock-dps-demo-shadow-brand",
+      "specLabel": "Demonology Warlock",
+      "gearName": "Pre-raid (baseline fallback)",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/warlock/dps/gear_sets/preraid.gear.json",
+          "sha256": "c214c6f34eb369a1590d41a69bbb77fc0fb2f92cdf965f89cfa2b59208a75ba0"
+        }
+      ],
+      "gearTooltip": "",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "The preset has no equipment. The baseline uses ui/specs/warlock/dps/gear_sets/preraid.gear.json."
+      ]
+    },
+    {
+      "id": "warlock-dps-destro",
+      "specLabel": "Destruction Warlock",
+      "gearName": "Pre-raid (baseline fallback)",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/warlock/dps/gear_sets/preraid.gear.json",
+          "sha256": "c214c6f34eb369a1590d41a69bbb77fc0fb2f92cdf965f89cfa2b59208a75ba0"
+        }
+      ],
+      "gearTooltip": "",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "The preset has no equipment. The baseline uses ui/specs/warlock/dps/gear_sets/preraid.gear.json."
+      ]
+    },
+    {
+      "id": "warlock-dps-sm-ruin",
+      "specLabel": "Affliction Warlock",
+      "gearName": "Pre-raid (baseline fallback)",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/warlock/dps/gear_sets/preraid.gear.json",
+          "sha256": "c214c6f34eb369a1590d41a69bbb77fc0fb2f92cdf965f89cfa2b59208a75ba0"
+        }
+      ],
+      "gearTooltip": "",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "The preset has no equipment. The baseline uses ui/specs/warlock/dps/gear_sets/preraid.gear.json."
+      ]
+    },
+    {
+      "id": "warlock-dps-aff-wrack",
+      "specLabel": "Affliction Warlock",
+      "gearName": "Pre-raid (baseline fallback)",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/warlock/dps/gear_sets/preraid.gear.json",
+          "sha256": "c214c6f34eb369a1590d41a69bbb77fc0fb2f92cdf965f89cfa2b59208a75ba0"
+        }
+      ],
+      "gearTooltip": "",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "The preset has no equipment. The baseline uses ui/specs/warlock/dps/gear_sets/preraid.gear.json."
+      ]
+    },
+    {
+      "id": "warlock-dps-default",
+      "specLabel": "Demonology Warlock",
+      "gearName": "Pre-raid (baseline fallback)",
+      "gearTier": "Developer pre-raid",
+      "gearSelection": "Saved reference equipment",
+      "gearSources": [
+        {
+          "path": "ui/specs/warlock/dps/gear_sets/preraid.gear.json",
+          "sha256": "c214c6f34eb369a1590d41a69bbb77fc0fb2f92cdf965f89cfa2b59208a75ba0"
+        }
+      ],
+      "gearTooltip": "",
+      "documentedPreRaid": true,
+      "rankEligible": true,
+      "warnings": [
+        "The preset has no equipment. The baseline uses ui/specs/warlock/dps/gear_sets/preraid.gear.json."
+      ]
+    }
+  ],
+  "futureRoles": [
+    {
+      "spec": "Holy Paladin",
+      "status": "Gear planner; no default healing rotation"
+    },
+    {
+      "spec": "Restoration Druid",
+      "status": "Gear planner; no default healing rotation"
+    },
+    {
+      "spec": "Restoration Shaman",
+      "status": "Gear planner; no default healing rotation"
+    },
+    {
+      "spec": "Discipline / Holy Priest",
+      "status": "Healing spells and talents exist; no default healing rotation"
+    },
+    {
+      "spec": "Protection Warrior / Protection Paladin / Feral Bear",
+      "status": "Tank role; outside this DPS experiment"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "verifiedAt": "2026-10-25T16:59:41.540Z",
+  "publishedRequestHashesVerified": 192,
+  "allPublishedChartAndReportHashesVerified": true,
+  "simulatorTests": "passed",
+  "databaseAndBuffGeneratorTests": "passed",
+  "goVet": "passed",
+  "uiTestFiles": 429,
+  "uiTests": 4131,
+  "typeCheck": "passed",
+  "jsAndCssLint": "passed",
+  "format": "passed",
+  "locales": "passed",
+  "skillPaths": "passed",
+  "storybook": "passed",
+  "productionFrontendWorkersAndWasm": "passed",
+  "nodeAnalyticsTests": 10,
+  "pythonAnalyticsTests": 2,
+  "reportDomChecks": "passed",
+  "visualChecks": "Main DPS, pre-raid, duration response and update-comparison PNG layouts inspected. Short pre-raid chart header spacing corrected and rechecked."
+}

@@ -37,6 +37,7 @@
 		"assets/**",
 		"**/test-fixtures/*.json",
 		".vscode/extensions/*/out/**",
-		"skills-lock.json"
+		"skills-lock.json",
+		"reports/dps/**"
 	]
 }

@@ -1,0 +1,167 @@
+[
+  {
+    "id": "mage-dps-arcane-frost",
+    "name": "Arcane Frost",
+    "missingItems": [
+      22068
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "mage-dps-arcane-fire",
+    "name": "Arcane Fire",
+    "missingItems": [
+      22068
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "mage-dps-ffb",
+    "name": "FFB",
+    "missingItems": [
+      22068
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "mage-dps-fire",
+    "name": "Fire",
+    "missingItems": [
+      22068
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "mage-dps-frost",
+    "name": "Frost",
+    "missingItems": [
+      22068
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "paladin-retribution-twist-of-light",
+    "name": "Twist of Light",
+    "missingItems": [
+      22093,
+      22089,
+      22088,
+      22090,
+      22086,
+      22087
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "rogue-dps-asn-muti",
+    "name": "Asn Muti",
+    "missingItems": [
+      22005,
+      22009,
+      22004,
+      22006,
+      22007,
+      22003
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "rogue-dps-combat-muti",
+    "name": "Combat Muti",
+    "missingItems": [
+      22005,
+      22009,
+      22004,
+      22006,
+      22007,
+      22003
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "rogue-dps-combat-ss",
+    "name": "Combat SS",
+    "missingItems": [
+      22005,
+      22009,
+      22004,
+      22006,
+      22007,
+      22003
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "rogue-dps-combat-bs",
+    "name": "Combat BS",
+    "missingItems": [
+      22005,
+      22009,
+      22004,
+      22006,
+      22007,
+      22003
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "rogue-dps-subtlety-hemo",
+    "name": "Subtlety Hemo",
+    "missingItems": [
+      22005,
+      22009,
+      22004,
+      22006,
+      22007,
+      22003
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "rogue-dps-subtlety-bs",
+    "name": "Subtlety BS",
+    "missingItems": [
+      22005,
+      22009,
+      22004,
+      22006,
+      22007,
+      22003
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "shaman-enhancement-testing",
+    "name": "Testing",
+    "missingItems": [
+      22096
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "shaman-enhancement-default",
+    "name": "Default",
+    "missingItems": [
+      22096
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "warrior-dps-fury-pre-bis",
+    "name": "Fury / Pre-BiS",
+    "missingItems": [
+      21998,
+      21995
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  },
+  {
+    "id": "warrior-dps-arms-pre-bis",
+    "name": "Arms / Pre-BiS",
+    "missingItems": [
+      21998,
+      21995
+    ],
+    "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+  }
+]

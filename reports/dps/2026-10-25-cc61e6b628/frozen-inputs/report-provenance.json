@@ -1,0 +1,16 @@
+{
+  "generatedAt": "2026-10-25T12:58:12.330349-04:00",
+  "matplotlib": "3.10.7",
+  "numpy": "2.5.4",
+  "python": "3.12.14",
+  "scriptSha256": "4a64065153d849a4b00782240b66b01f709b5fe3dadb2e5409d5d6f1dcac0c4d",
+  "artifacts": {
+    "report.html": "ddcd2e6fa487a47a777cfab2379afb2934f198bac2bcfdc49434c894e0518d2c",
+    "charts\\all-builds.png": "698ea32fa6fa8be0e7b59f62f17368b0789061b7f764552e282ba852933b0170",
+    "charts\\all-builds.svg": "95c54535dd64022e23005491dff817cedef4373b82d4969c03bcfb30b54b13cb",
+    "charts\\duration-response.png": "419379c7e3935e17538a2e1b47de32080b5c8e96d1a0a9996ea2188dc19a05b8",
+    "charts\\duration-response.svg": "89bf4833a9a76b0cd681fbfa8d240ce62de747497ed5ea3b40783c44606ed468",
+    "charts\\overview.png": "0ad9e732184e5675b670404288197faa3c7094096c5cdfff439269b5af65d29a",
+    "charts\\overview.svg": "7c5ebef0b275e64e32153423e8cc49d080bee86501e590500836d2deda1525e8"
+  }
+}

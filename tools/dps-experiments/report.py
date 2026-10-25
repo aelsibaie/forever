@@ -75,7 +75,7 @@ def main():
     def ladder(items, filename, heading, subheading, tall=False):
         height = max(8.8, len(items) * (0.36 if tall else 0.48) + 3.0)
         fig, axes = plt.subplots(1, len(durations), figsize=(17.4, height), sharex=True, sharey=True, squeeze=False)
-        fig.subplots_adjust(left=0.31 if tall else 0.29, right=0.96, top=0.86 if tall else 0.83, bottom=0.11 if tall else 0.15, wspace=0.13)
+        fig.subplots_adjust(left=0.31 if tall else 0.29, right=0.96, top=0.80 if height < 11 else 0.86, bottom=0.11 if tall else 0.15, wspace=0.13)
         maximum = max(lookup[p["id"], d]["meanDps"] + lookup[p["id"], d]["ci95HalfWidth"] for p in items for d in durations) * 1.16
         labels = [f"{p.get('specLabel', SPECS[p['specPath']])} / {p['name']}" for p in items]
         for ax, duration in zip(axes[0], durations):
@@ -115,7 +115,7 @@ def main():
         limit = max(5, math.ceil(np.abs(data).max() / 5) * 5)
         cmap = LinearSegmentedColormap.from_list("duration", ["#D97581", "#17253A", "#7CDDC5"])
         im = ax.imshow(data, aspect="auto", cmap=cmap, norm=TwoSlopeNorm(vmin=-limit, vcenter=0, vmax=limit))
-        ax.set_yticks(range(len(response)), [f"{SPECS[p['specPath']]} / {p['name']}" for p in response], size=9)
+        ax.set_yticks(range(len(response)), [f"{p.get('specLabel', SPECS[p['specPath']])} / {p['name']}" for p in response], size=9)
         ax.set_xticks(range(len(comparison_durations)), [f"{d}s vs 60s" for d in comparison_durations], size=12)
         ax.tick_params(length=0, pad=10)
         for i in range(len(response)):
