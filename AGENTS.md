@@ -3,6 +3,33 @@
 WoWSims Forever: a Go simulator (`sim/`) with a React frontend (`ui/`), built on data extracted from the game
 files (`tools/database`, `sim/core/spelldata`).
 
+## Local theorycraft research
+
+For gear, talent, rotation, class/spec comparison and raid-composition questions,
+consult this simulator and the local source library at
+`C:\Users\aelsi\Documents\GitHub\wowkb`. Read that project's `AGENTS.md`; its
+`README.md`, `data/library/INDEX.md` and `wowkb.py search` are the research entry
+points. Its Python interpreter is `.venv\Scripts\python.exe` in that repository.
+Use source IDs and paragraph or timestamp citations for developer statements,
+design intentions and reporting. Keep those distinct from simulation findings and
+community claims, and explain discrepancies between publications and the model.
+If the library is unavailable, state that limitation.
+
+The DPS comparison tools live in `tools/dps-experiments/` on `codex/analytics`,
+currently checked out at
+`C:\Users\aelsi\.codex\worktrees\wow-analytics\wowsims-forever`. Confirm the active
+worktree with `git worktree list` before using its tools or saved reports. For
+numerical comparisons, identify the simulator commit and relevant working-tree
+changes, game build, exact inputs, gear policy, encounter, buffs, rotation and
+iterations/seed. Report uncertainty and unsupported mechanics. Check healing,
+survival, roster buffs and party constraints before using DPS experiments to draw
+conclusions about raid composition.
+
+Keep the repositories and their histories separate. Source archives stay in
+`wowkb`; simulation tooling and results follow this repository's rules. The
+library's Discord collection is on hold; this cross-reference authorizes no live
+Discord access or collection.
+
 **Rule: tests and stories never add code to the sim or the UI.** No export, prop, parameter, branch, flag or
 hook goes into `sim/` or `ui/` only so a unit test or a Storybook story can reach or cover something. A test
 or story works through the code's real surface, and a fixture or stub it needs lives with the tests. The
