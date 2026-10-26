@@ -25,7 +25,7 @@ export const ArcaneFrostTalents = PresetUtils.makePresetTalents('Arcane Frost', 
 export const ArcaneFireTalents = PresetUtils.makePresetTalents('Arcane Fire', SavedTalents.create({ talentsString: '0502205003100311531-230510301001-003' }));
 export const FFBTalents = PresetUtils.makePresetTalents('FFB', SavedTalents.create({ talentsString: '-2355000013011503-2035010311013002' }));
 export const FireTalents = PresetUtils.makePresetTalents('Fire', SavedTalents.create({ talentsString: '05022050001001-23550000130135031-003' }));
-export const FrostTalents = PresetUtils.makePresetTalents('Frost', SavedTalents.create({ talentsString: '05022050011003--053500030100331251' }));
+export const FrostTalents = PresetUtils.makePresetTalents('Frost', SavedTalents.create({ talentsString: '05022050011003--053500021100331251' }));
 
 /* export const ArcaneMageSimpleRotation = Mage_Rotation.create({
 	conserveStart: 20,
@@ -128,7 +128,7 @@ export const FireBuild = PresetUtils.makePresetBuild('Fire', {
 export const FrostSettings: PresetSettings = {
 	name: 'Frost',
 	playerOptions: {
-		distanceFromTarget: 10,
+		distanceFromTarget: 30,
 	},
 };
 

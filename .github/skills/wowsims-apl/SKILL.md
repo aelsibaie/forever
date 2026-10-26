@@ -106,6 +106,12 @@ with `core.SinglePlayerRaidProto` and the rotation from the suite's loader (`cor
 - **`Aura Num Stacks` with reaction time returns the previous stacks for a full reaction time after any change**, the
   player's own spend included, so a stack-gated line can re-cast right after its own cast; add an `Aura Is Active`
   check without reaction time (`APLValueAuraNumStacks`).
+- **A prepull Do At is read once, when the rotation is built** (`newAPLRotation` in `sim/core/apl.go`), at the start
+  distance and before any prepull buff, so a `Spell Travel Time` there is the travel from the start distance, even
+  when an earlier prepull action moves the character. The hardcast itself rounds to the millisecond (`sim/core/cast.go`)
+  and `Spell Cast Time` does not, so a Do At built from it can be up to half a millisecond off the cast end. A cast
+  that comes that early is queued for the cast end (`QueueSpell` in `sim/core/spell_queueing.go`), so an action timed
+  at a cast end still goes after the cast lands.
 
 ## Traps
 

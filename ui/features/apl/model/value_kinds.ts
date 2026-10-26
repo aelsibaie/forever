@@ -718,7 +718,6 @@ export const valueKinds: { [f in ValidAPLValueKind]: ValueKindModel<APLValueImpl
 		submenu: ['spell'],
 		shortDescription: i18n.t('rotation_tab.apl.values.gcd_hasted_duration.tooltip'),
 		newValue: APLValueSpellGCDHastedDuration.create,
-		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [actionIdFieldConfig('spellId', 'castable_spells', '')],
 	}),
 	spellFullCooldown: inputBuilder({
@@ -867,7 +866,6 @@ export const valueKinds: { [f in ValidAPLValueKind]: ValueKindModel<APLValueImpl
 		shortDescription: i18n.t('rotation_tab.apl.values.aura_duration.tooltip'),
 		fullDescription: i18n.t('rotation_tab.apl.values.aura_duration.full_description'),
 		newValue: APLValueAuraDuration.create,
-		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
 		fields: [unitFieldConfig('sourceUnit', 'aura_sources'), actionIdFieldConfig('auraId', 'auras', 'sourceUnit')],
 	}),
 
@@ -1057,7 +1055,7 @@ export const valueKinds: { [f in ValidAPLValueKind]: ValueKindModel<APLValueImpl
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_percent_increase.tooltip'),
 		newValue: APLValueDotPercentIncrease.create,
-		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
+		includeIf: (_player: Player<any>, _isPrepull: boolean) => false, // Disabled for now, with the DoT increase values in sim/core/apl_values_dot.go.
 		fields: [unitFieldConfig('targetUnit', 'targets'), actionIdFieldConfig('spellId', 'expected_dot_spells', ''), makeUseDotBaseValueCheckbox()],
 	}),
 	dotTickRatePercentIncrease: inputBuilder({
@@ -1065,7 +1063,7 @@ export const valueKinds: { [f in ValidAPLValueKind]: ValueKindModel<APLValueImpl
 		submenu: ['dot'],
 		shortDescription: i18n.t('rotation_tab.apl.values.dot_tick_rate_percent_increase.tooltip'),
 		newValue: APLValueDotPercentIncrease.create,
-		includeIf: (_: Player<any>, isPrepull: boolean) => !isPrepull,
+		includeIf: (_player: Player<any>, _isPrepull: boolean) => false, // Disabled for now, with the DoT increase values in sim/core/apl_values_dot.go.
 		fields: [unitFieldConfig('targetUnit', 'targets'), actionIdFieldConfig('spellId', 'expected_dot_spells', ''), makeUseDotBaseValueCheckbox()],
 	}),
 	sequenceIsComplete: inputBuilder({

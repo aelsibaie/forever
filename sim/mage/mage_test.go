@@ -49,7 +49,9 @@ func fireSuite() core.CharacterSuiteConfig {
 }
 
 func frostSuite() core.CharacterSuiteConfig {
-	return mageSuite(FrostTalents, "frost")
+	config := mageSuite(FrostTalents, "frost")
+	config.StartingDistance = 30
+	return config
 }
 
 func mageSuite(talents string, apl string) core.CharacterSuiteConfig {
@@ -91,7 +93,7 @@ func mageSuite(talents string, apl string) core.CharacterSuiteConfig {
 var ArcaneTalents = "0552205003100311531-03-0533"
 var FFBTalents = "-2355000013011503-2035010311013002"
 var FireTalents = "05022050001001-23550000130135031-003"
-var FrostTalents = "05022050011003--053500030100331251"
+var FrostTalents = "05022050011003--053500021100331251"
 
 var DefaultConsumables = &proto.ConsumesSpec{
 	FlaskId: 13512, // Flask of Supreme Power

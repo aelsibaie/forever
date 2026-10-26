@@ -94,10 +94,19 @@
 						},
 						"disclaimer": {
 							"type": "string"
+						},
+						"sims": {
+							"type": "string"
+						},
+						"addon": {
+							"type": "string"
+						},
+						"patreon": {
+							"type": "string"
 						}
 					},
 					"additionalProperties": false,
-					"required": ["copyright", "disclaimer"]
+					"required": ["copyright", "disclaimer", "sims", "addon", "patreon"]
 				}
 			},
 			"additionalProperties": false,
@@ -1103,10 +1112,13 @@
 						},
 						"copied": {
 							"type": "string"
+						},
+						"manual_copy": {
+							"type": "string"
 						}
 					},
 					"additionalProperties": false,
-					"required": ["default_text", "copied"]
+					"required": ["default_text", "copied", "manual_copy"]
 				},
 				"list_picker": {
 					"type": "object",
@@ -1118,6 +1130,9 @@
 							"type": "string"
 						},
 						"copy_to_new": {
+							"type": "string"
+						},
+						"copy_to_clipboard": {
 							"type": "string"
 						},
 						"move_drag_drop": {
@@ -1147,6 +1162,7 @@
 						"new_item",
 						"delete_item",
 						"copy_to_new",
+						"copy_to_clipboard",
 						"move_drag_drop",
 						"item_actions",
 						"warnings",
@@ -1378,6 +1394,9 @@
 						"moving": {
 							"type": "string"
 						},
+						"moving_from_spell": {
+							"type": "string"
+						},
 						"prepull": {
 							"type": "string"
 						},
@@ -1404,6 +1423,7 @@
 						"shoot",
 						"refund",
 						"moving",
+						"moving_from_spell",
 						"prepull",
 						"encounter_start",
 						"minor_run_speed",
@@ -1482,6 +1502,12 @@
 							"type": "string"
 						},
 						"damage": {
+							"type": "string"
+						},
+						"attuned": {
+							"type": "string"
+						},
+						"charged": {
 							"type": "string"
 						},
 						"wasted": {
@@ -1578,6 +1604,8 @@
 						"crit",
 						"agi",
 						"damage",
+						"attuned",
+						"charged",
 						"wasted",
 						"raid",
 						"queue",
@@ -2979,6 +3007,17 @@
 							"additionalProperties": false,
 							"required": ["label", "tooltip"]
 						},
+						"innervate_assignment": {
+							"type": "object",
+							"properties": {
+								"label": { "type": "string" },
+								"tooltip": { "type": "string" },
+								"self": { "type": "string" },
+								"other": { "type": "string" }
+							},
+							"additionalProperties": false,
+							"required": ["label", "tooltip", "self", "other"]
+						},
 						"show_1h_weapons": {
 							"type": "object",
 							"properties": {
@@ -3269,6 +3308,7 @@
 						"assume_bleed_active",
 						"prepull_clearcasting",
 						"cannot_shred_target",
+						"innervate_assignment",
 						"show_1h_weapons",
 						"show_2h_weapons",
 						"show_all_enchants",
@@ -4790,10 +4830,52 @@
 							"additionalProperties": false,
 							"required": ["attributes", "header", "name", "newGroupName", "tooltips"]
 						},
+						"clipboard": {
+							"type": "object",
+							"properties": {
+								"copied": {
+									"type": "string"
+								},
+								"empty": {
+									"type": "string"
+								},
+								"paste_dialog": {
+									"type": "object",
+									"properties": {
+										"label": {
+											"type": "string"
+										},
+										"description": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false,
+									"required": ["label", "description"]
+								},
+								"places": {
+									"type": "object",
+									"properties": {
+										"action": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false,
+									"required": ["action"]
+								},
+								"wrong_kind": {
+									"type": "string"
+								}
+							},
+							"additionalProperties": false,
+							"required": ["copied", "empty", "paste_dialog", "places", "wrong_kind"]
+						},
 						"floatingActionBar": {
 							"type": "object",
 							"properties": {
 								"new": {
+									"type": "string"
+								},
+								"paste": {
 									"type": "string"
 								},
 								"reset": {
@@ -4801,7 +4883,7 @@
 								}
 							},
 							"additionalProperties": false,
-							"required": ["new", "reset"]
+							"required": ["new", "paste", "reset"]
 						},
 						"nameModal": {
 							"type": "object",
@@ -7690,6 +7772,9 @@
 								},
 								"groups": {
 									"type": "string"
+								},
+								"stances": {
+									"type": "string"
 								}
 							},
 							"additionalProperties": false,
@@ -7734,7 +7819,8 @@
 								"external_cooldowns",
 								"external_debuffs",
 								"variables",
-								"groups"
+								"groups",
+								"stances"
 							]
 						},
 						"item_swap_sets": {
@@ -7968,6 +8054,7 @@
 					"additionalProperties": false,
 					"required": [
 						"actionGroups",
+						"clipboard",
 						"floatingActionBar",
 						"nameModal",
 						"prePullActions",
@@ -8512,6 +8599,12 @@
 							"type": "string"
 						},
 						"group_ranks": {
+							"type": "string"
+						},
+						"show_apm_breakdown": {
+							"type": "string"
+						},
+						"pets": {
 							"type": "string"
 						},
 						"damage": {
@@ -9461,6 +9554,8 @@
 						"all_targets",
 						"target_number",
 						"group_ranks",
+						"show_apm_breakdown",
+						"pets",
 						"damage",
 						"timeline",
 						"logs",
@@ -10972,6 +11067,19 @@
 									"additionalProperties": false,
 									"required": ["label", "tooltip"]
 								},
+								"apm": {
+									"type": "object",
+									"properties": {
+										"label": {
+											"type": "string"
+										},
+										"tooltip": {
+											"type": "string"
+										}
+									},
+									"additionalProperties": false,
+									"required": ["label", "tooltip"]
+								},
 								"dtps": {
 									"type": "object",
 									"properties": {
@@ -11078,7 +11186,7 @@
 								}
 							},
 							"additionalProperties": false,
-							"required": ["dps", "hps", "tps", "dtps", "tmi", "cod", "dur", "tto", "oom"]
+							"required": ["dps", "hps", "tps", "apm", "dtps", "tmi", "cod", "dur", "tto", "oom"]
 						},
 						"stop": {
 							"type": "string"
