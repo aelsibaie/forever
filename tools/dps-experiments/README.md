@@ -4,6 +4,8 @@ Runs the repository's DPS presets through the native simulator and saves the ful
 
 ## Setup
 
+Use `workflow.mjs --audit` for the [all-spec assessment and wider engine diagnostics](../../docs/analytics/preset-assessment.md). Developer gear remains the reference; labeled alternatives may test other sourced gear or narrow changes. The same guide covers GitHub Pages publication with complete raw downloads.
+
 Install the repository's Go and npm dependencies, then generate the Go protos, TypeScript protos and constants:
 
 ```sh

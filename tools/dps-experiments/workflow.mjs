@@ -11,7 +11,7 @@ if (args.includes('--help')) {
 	);
 	process.exit(0);
 }
-const flags = new Set(['--prepared']),
+const flags = new Set(['--prepared', '--audit']),
 	values = new Set(['--python', '--out', '--model', '--reference', '--gunba-source', '--reuse-racials']);
 const options = {};
 for (let i = 0; i < args.length; i++) {
@@ -139,6 +139,25 @@ if (options['gunba-source']) {
 	py('shadow-report', ['tools/dps-experiments/shadow_report.py', matched]);
 	node('shadow-verification', ['tools/dps-experiments/verify_shadow.mjs', matched]);
 }
+if (options.audit) {
+	node('preset-assessment', [
+		'tools/dps-experiments/assess.mjs',
+		'--primary-run',
+		racials,
+		'--out',
+		path.join(out, 'assessment'),
+		'--python',
+		python,
+		...(options['gunba-source']
+			? [
+					'--gunba-source',
+					path.resolve(root, options['gunba-source']),
+					'--gunba-engine',
+					path.join(out, 'shadow-comparison/engine', process.platform === 'win32' ? 'gunba.exe' : 'gunba'),
+				]
+			: []),
+	]);
+}
 state.completedAt = new Date().toISOString();
 state.state = 'passed';
 save();
@@ -148,6 +167,7 @@ const links = [
 ];
 if (options['gunba-source']) links.push(['shadow-comparison/report.html', 'Matched Shadow engine comparison']);
 if (options.reference) links.push(['update-report.html', 'Frozen-input update impact']);
+if (options.audit) links.push(['assessment/report.html', 'All-spec audit and expanded engine diagnostics']);
 fs.writeFileSync(
 	path.join(out, 'report.html'),
 	'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WoWSims analytics</title><style>body{background:#0b1220;color:#edf3fc;font:18px/1.7 system-ui;max-width:1000px;margin:50px auto;padding:25px}a{color:#80caff}code{overflow-wrap:anywhere}</style><h1>WoWSims Forever analytics</h1><p>Developer equipment preserved. Model <code>' +

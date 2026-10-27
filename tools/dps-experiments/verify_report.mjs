@@ -7,7 +7,8 @@ import { verifyDetails } from './verify_details.mjs';
 
 if (!process.argv[2]) throw new Error('Usage: node tools/dps-experiments/verify_report.mjs run-directory');
 const directory = path.resolve(process.argv[2]);
-if (fs.existsSync(path.join(directory, 'profile-index.json'))) verifyDetails(directory);
+if (fs.existsSync(path.join(directory, 'profile-index.json')))
+	verifyDetails(directory, { allowedRoot: process.argv.includes('--site-root') ? process.argv[process.argv.indexOf('--site-root') + 1] : directory });
 const html = fs.readFileSync(path.join(directory, 'report.html'), 'utf8');
 const catalog = JSON.parse(fs.readFileSync(path.join(directory, 'profiles.json'), 'utf8'));
 const provenance = JSON.parse(fs.readFileSync(path.join(directory, 'provenance.json'), 'utf8'));

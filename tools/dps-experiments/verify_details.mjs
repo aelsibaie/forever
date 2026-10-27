@@ -4,8 +4,9 @@ import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
 import { loadProfiles } from './export.mjs';
 
-export function verifyDetails(directory) {
+export function verifyDetails(directory, { allowedRoot = directory } = {}) {
 	const root = path.resolve(directory);
+	const boundary = path.resolve(allowedRoot);
 	const index = JSON.parse(fs.readFileSync(path.join(root, 'profile-index.json'), 'utf8'));
 	assert(index.length > 0, 'Missing build inspection pages.');
 	assert.equal(new Set(index.map(x => x.href)).size, index.length, 'Duplicate build page.');
@@ -18,7 +19,7 @@ export function verifyDetails(directory) {
 		for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
 			if (/^https?:|^#/.test(match[1])) continue;
 			const target = path.resolve(path.dirname(file), match[1]);
-			assert(target.startsWith(root + path.sep), 'Build page escapes its archive.');
+			assert(target.startsWith(boundary + path.sep), 'Build page escapes its archive.');
 			assert(fs.existsSync(target), 'Missing build artifact: ' + match[1]);
 			links++;
 		}

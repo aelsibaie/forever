@@ -73,7 +73,7 @@ export function translateStats(values, indexes) {
 	return out;
 }
 
-function translateEquipment(resolved, indexes) {
+export function translateEquipment(resolved, indexes) {
 	const items = resolved.map(x => ({
 		id: x.spec.id,
 		name: x.name,
