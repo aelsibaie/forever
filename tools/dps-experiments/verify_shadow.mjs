@@ -10,6 +10,7 @@ const provenance = read('provenance.json'),
 	completion = read('completion.json');
 assert.equal(completion.fingerprint, provenance.fingerprint);
 assert(completion.normalizedRotationEquivalent && completion.primaryEngineUnchanged);
+assert.notEqual(provenance.settings.seed, provenance.settings.gunbaSeed, 'Cross-engine uncertainty requires different engine seeds.');
 const rows = read('results.json').rows;
 assert.equal(rows.length, provenance.settings.durations.length * 8);
 assert.equal(new Set(rows.map(r => r.key)).size, rows.length);
@@ -21,6 +22,9 @@ for (const row of rows) {
 		assert.equal(hash(fs.readFileSync(path.join(root, folder, row.key + '.json'))), row[field]);
 	const result = read('results/' + row.key + '.json'),
 		metrics = summarizeResult(result, provenance.settings.iterations);
+	const expectedSeed = String(row.engine.startsWith('gunba') ? provenance.settings.gunbaSeed : provenance.settings.seed);
+	assert.equal(read('requests/' + row.key + '.json').simOptions.randomSeed, expectedSeed);
+	assert.equal(row.seed, expectedSeed);
 	assert.equal(metrics.meanDps, row.meanDps);
 	if (row.engine === 'wowsims') {
 		const control = read('results/' + row.key.replace(/^wowsims--/, 'control--') + '.json');

@@ -7,12 +7,12 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const args = process.argv.slice(2);
 if (args.includes('--help')) {
 	console.log(
-		'Usage: node tools/dps-experiments/workflow.mjs [--prepared] [--python executable] [--out directory] [--model upstream|notes-2026-10-27] [--reference saved-developer-run] [--gunba-source directory]\nRuns racial and tiered developer DPS reports with the same native engine. Optional Gunba comparison uses the pinned adapter. Source updates and Git commits are separate. Outputs are immutable.',
+		'Usage: node tools/dps-experiments/workflow.mjs [--prepared] [--python executable] [--out directory] [--model upstream|notes-2026-10-27] [--reference saved-developer-run] [--reuse-racials saved-racial-run] [--gunba-source directory]\nRuns racial and tiered developer DPS reports with the same native engine. Optional Gunba comparison uses the pinned adapter. Source updates and Git commits are separate. Outputs are immutable.',
 	);
 	process.exit(0);
 }
 const flags = new Set(['--prepared']),
-	values = new Set(['--python', '--out', '--model', '--reference', '--gunba-source']);
+	values = new Set(['--python', '--out', '--model', '--reference', '--gunba-source', '--reuse-racials']);
 const options = {};
 for (let i = 0; i < args.length; i++) {
 	if (flags.has(args[i])) options[args[i].slice(2)] = true;
@@ -76,7 +76,19 @@ node('analytics-tests', [
 py('report-tests', ['-m', 'unittest', 'discover', '-s', 'tools/dps-experiments', '-p', '*_test.py']);
 const racials = path.join(out, 'racials'),
 	baseline = path.join(out, 'developer-presets');
-node('racials', ['tools/dps-experiments/racials.mjs', '--prepared', '--faction', 'both', '--model', state.model, '--python', python, '--out', racials]);
+node('racials', [
+	'tools/dps-experiments/racials.mjs',
+	'--prepared',
+	'--faction',
+	'both',
+	'--model',
+	state.model,
+	'--python',
+	python,
+	'--out',
+	racials,
+	...(options['reuse-racials'] ? ['--reuse', path.resolve(root, options['reuse-racials'])] : []),
+]);
 node('racial-exports', ['tools/dps-experiments/verify_details.mjs', racials, '--schema']);
 node('developer-baseline', [
 	'tools/dps-experiments/run.mjs',

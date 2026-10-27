@@ -70,6 +70,9 @@ const settings = {
 	iterations,
 	durations,
 	seed: 2026102707,
+	gunbaSeed: 2026102708,
+	analyticsCommit: run('git', ['rev-parse', 'HEAD']).trim(),
+	nodeVersion: process.version,
 	primaryEngine: old.engine.sha256,
 	primarySource: old.snapshot.upstreamSourceCommit,
 	gunbaRevision: revision,
@@ -83,7 +86,7 @@ const resumableKeys = new Set();
 if (args.includes('--resume')) {
 	previous = read(path.join(out, 'provenance.json'));
 	assert.equal(previous.fingerprint, fingerprint, 'Comparison settings or tools changed.');
-	for (const row of read(path.join(out, 'results.json')).rows) {
+	for (const row of fs.existsSync(path.join(out, 'results.json')) ? read(path.join(out, 'results.json')).rows : []) {
 		assert.equal(hash(fs.readFileSync(path.join(out, 'requests', row.key + '.json'))), row.requestSha256, 'Saved request changed: ' + row.key);
 		assert.equal(hash(fs.readFileSync(path.join(out, 'results', row.key + '.json'))), row.resultSha256, 'Saved result changed: ' + row.key);
 		resumableKeys.add(row.key);
@@ -92,7 +95,8 @@ if (args.includes('--resume')) {
 write('provenance.json', {
 	fingerprint,
 	settings,
-	startedAt: new Date().toISOString(),
+	startedAt: previous?.startedAt ?? new Date().toISOString(),
+	...(previous ? { resumedAt: new Date().toISOString(), binaryHashes: previous.binaryHashes } : {}),
 	gearPolicy: 'Unchanged WoWSims developer equipment IDs. Rolled suffix stats are resolved by WoWSims and embedded in the Gunba request.',
 	assumptions: [
 		'No synthetic gear selection or forced Tier 1.',
@@ -102,7 +106,7 @@ write('provenance.json', {
 		'Gunba uses the WoWSims flat Revelation chance with exponent zero, an explicit provisional model.',
 		'Gunba enters Shadowform at -60 seconds to replenish its prepull cost.',
 		'Salvation is absent from Gunba support; this comparison has no threat-limited rotation.',
-		'Per-engine paired racial errors are valid; cross-engine DPS errors are independent.',
+		'Each engine uses its own seed. Races share seeds within an engine for paired comparisons; absolute engine differences use independent streams.',
 	],
 });
 write('primary-provenance.json', old);
@@ -151,6 +155,7 @@ for (const duration of durations)
 		const revelation = resolved.flatMap(x => x.enchantEffects ?? []).find(x => x.buff_id === 1248806)?.Effect?.Proc?.ProcRate?.ProcChance;
 		assert(Number.isFinite(revelation) && revelation > 0, 'Unknown Revelation proc model.');
 		const translated = translateRequest(original, { allocation: profile.talentAllocation, resolved, source, revelationChance: revelation });
+		translated.simOptions.randomSeed = String(settings.gunbaSeed);
 		const normalized = structuredClone(original);
 		normalized.raid.parties[0].players[0].rotation = expandRotation(normalized.raid.parties[0].players[0].rotation);
 		const ourStatsFile = path.join(out, 'stats', 'calibration-primary.json');
@@ -231,7 +236,16 @@ for (const duration of durations)
 			}
 			const raw = read(outfile),
 				summary = summarizeResult(raw, iterations);
-			rows.push({ engine, race, duration, key, ...summary, requestSha256: hash(fs.readFileSync(infile)), resultSha256: hash(fs.readFileSync(outfile)) });
+			rows.push({
+				engine,
+				race,
+				duration,
+				key,
+				seed: q.simOptions.randomSeed,
+				...summary,
+				requestSha256: hash(fs.readFileSync(infile)),
+				resultSha256: hash(fs.readFileSync(outfile)),
+			});
 			if (engine !== 'control') {
 				const statsFile = path.join(out, 'stats', key + '.json');
 				if (engine.startsWith('gunba')) run(gunba, ['stats', infile, statsFile], source);
