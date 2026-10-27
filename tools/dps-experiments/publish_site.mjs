@@ -120,7 +120,10 @@ export function buildSite({ run, out, id, rawBase, assessment }) {
 				: fs.existsSync(path.join(source, 'results.json'))
 					? read(path.join(source, 'results.json')).rows
 					: [];
-		for (const row of recorded ?? [])
+		const indexed = fs.existsSync(path.join(source, 'cell-index.json'))
+			? Object.entries(read(path.join(source, 'cell-index.json'))).map(([key, value]) => ({ key, ...value }))
+			: [];
+		for (const row of [...(recorded ?? []), ...indexed])
 			for (const [folder, key] of [
 				['requests', 'requestSha256'],
 				['results', 'resultSha256'],

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { gunzipSync } from 'node:zlib';
+import { hash } from './racial_helpers.mjs';
 import { buildSite, verifySite } from './publish_site.mjs';
 
 test('public reports preserve native inputs and metrics while separating raw distributions', () => {
@@ -28,6 +29,10 @@ test('public reports preserve native inputs and metrics while separating raw dis
 				path.join(dir, 'provenance.json'),
 				JSON.stringify({ settings: { primarySource: 'source', analyticsCommit: 'tooling' }, path: 'C:\\Users\\Example\\private' }),
 			);
+			fs.writeFileSync(
+				path.join(dir, 'cell-index.json'),
+				JSON.stringify({ case: { requestSha256: hash(input), resultSha256: hash(fs.readFileSync(path.join(dir, 'results/case.json'))) } }),
+			);
 		}
 		const result = buildSite({ run, out, id: 'test-snapshot', rawBase: 'https://example.org/download' });
 		assert(result.htmlLinks > 0);
@@ -42,6 +47,11 @@ test('public reports preserve native inputs and metrics while separating raw dis
 		assert(!fs.readFileSync(path.join(published, 'provenance.json'), 'utf8').includes('Example'));
 		fs.appendFileSync(path.join(published, 'requests/case.json'), 'changed');
 		assert.throws(() => verifySite(path.join(out, 'site')), /Changed public artifact/);
+		fs.appendFileSync(path.join(run, 'racials/results/case.json'), 'changed');
+		assert.throws(
+			() => buildSite({ run, out: path.join(fixture, 'changed-source'), id: 'test-snapshot', rawBase: 'https://example.org/download' }),
+			/Source archive changed/,
+		);
 	} finally {
 		assert(path.resolve(fixture).startsWith(path.resolve(os.tmpdir()) + path.sep) && path.basename(fixture).startsWith('wow-publication-'));
 		fs.rmSync(fixture, { recursive: true, force: true });
