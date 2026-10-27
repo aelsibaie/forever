@@ -1,0 +1,13 @@
+{
+	"factions": {
+		"alliance": ["RaceHuman", "RaceDwarf", "RaceNightElf", "RaceGnome", "RaceHighOrderSkyborne"],
+		"horde": ["RaceOrc", "RaceTroll", "RaceUndead", "RaceTauren", "RaceWindshaperSkyborne"]
+	},
+	"counterparts": [
+		{ "alliance": 271928, "horde": 272083 },
+		{ "alliance": 271948, "horde": 272099 },
+		{ "alliance": 271955, "horde": 272105 },
+		{ "alliance": 20047, "horde": 20163 }
+	],
+	"notesSource": "https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-october-26/2360696/8"
+}

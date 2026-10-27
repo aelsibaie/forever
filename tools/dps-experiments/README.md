@@ -97,3 +97,54 @@ node --test tools/dps-experiments/statistics.test.mjs tools/dps-experiments/pre_
 The comparison generator rejects any non-gear request difference and computes the confidence interval of each within-build DPS difference from matching iteration seeds. `gear-audit.json` records every item replacement and its source decision. `gear-comparison.csv` and `gear-comparison.json` contain the before/after DPS, paired difference error and descriptive ranks.
 
 This is a conservative acquisition policy with a common static role score. It is not optimized pre-raid BiS or an equal-stat character experiment. Proc values and set bonuses are not optimized. Permanent enchants are removed, crafting formula availability can be provisional, and unsupported legal relic slots remain empty. The residual ranking includes gear fit, talents, rotations, consumables, professions and simulator limitations; it does not isolate an intrinsic class-strength percentage.
+
+## Racial comparisons for both factions
+
+Run the complete race experiment from the repository root:
+
+```sh
+node tools/dps-experiments/racials.mjs --faction both
+```
+
+This builds the current simulator, exports current developer presets, checks faction gear counterparts and racial activation, runs 60/180/300-second comparisons, confirms close results with an independent seed, tests Beast/Elemental targets, verifies the results and renders the offline report. The default is 5,000 iterations per primary cell and 20,000 per confirmation cell. `--faction alliance` or `--faction horde` selects one faction. `--python executable`, `PYTHON_BINARY`, `GO_BINARY` and the cache/runtime variables described above apply here too.
+
+After upstream fixes, use a new output directory:
+
+```sh
+node tools/dps-experiments/racials.mjs --update --faction both
+```
+
+`--update` requires a clean `codex/analytics` branch. It fetches and merges `origin/master`, installs npm dependencies if the lockfile changed, and regenerates protocols and constants. Merge conflicts stop the command. Existing result directories are preserved. Each report records the analytics commit, upstream source commit, working-tree status, source and tool hashes, game builds, hotfixes, engine hash, settings and exact requests. On Windows, keep protoc and protoc-gen-go on PATH as described in Setup. `--prepared` skips generation when the current checkout is already prepared.
+
+The default model is **upstream**. To reproduce the explicit October 27 racial scenario:
+
+```sh
+node tools/dps-experiments/racials.mjs --faction both --model notes-2026-10-27 --out tmp/racial-experiments/notes-2026-10-27
+```
+
+That named adapter uses Blood Fury's 120-second cooldown, 15-second Berserking and Touch of the Grave's 15-second internal cooldown from the [official clarification](https://us.forums.blizzard.com/en/wow/t/wow-forever-beta-development-notes-%E2%80%93-updated-october-26/2360696/8). It leaves values already adopted upstream alone and stops on unrecognized source changes. It never edits `sim/`. Its overlay and per-adjustment status are saved in the archive. Future comparisons should normally use the upstream model; retaining a dated adapter is an explicit experimental choice.
+
+An interrupted run can resume with the same settings, checkout and output path:
+
+```sh
+node tools/dps-experiments/racials.mjs --faction both --model notes-2026-10-27 --out tmp/racial-experiments/notes-2026-10-27 --resume
+```
+
+Resume validates source, tool, Git-state, request, result and engine fingerprints before accepting saved cells. Changed sources require a new output. `--reuse previous-run` can reuse an older archive only when the native engine binary and exact request hash match, with the stored result hash verified. A changed engine is simulated again. Neither option silently mixes results from different engines. Completed archives can be checked later without the original database:
+
+```sh
+node tools/dps-experiments/verify_racials.mjs tmp/racial-experiments/notes-2026-10-27
+node --test tools/dps-experiments/racial_helpers.test.mjs
+```
+
+### What the racial experiment preserves and checks
+
+- Equipment, enchants, swap sets, talents, professions, consumables and original priority entries come from developer presets. The existing Warlock fallback remains explicit. No gear optimization or item scoring is performed.
+- Class/race eligibility comes from the current exported simulator capabilities. The faction assignment and reviewed counterpart IDs live in `racial-policy.json`. Unknown races, unavailable items, unreviewed faction substitutions, combat-property mismatches and potentially active set changes stop the run. Faction counterparts also require per-iteration native equivalence controls. Their original and substituted inputs remain saved.
+- An unused offensive on-use racial is checked across every duration. Its absence creates a separate case that prepends only its spell-is-known guarded cast, identically for every race in that preset. All original APL entries remain. Adding Autocast Other Cooldowns would also activate unrelated cooldowns, so this check adds only the missing racial action. Unaffected races must reproduce every original DPS iteration. The report shows both cases and marks the adjusted comparison. If the racial still never casts, the ranking stays withheld.
+- This activation check does not optimize cooldown timing or add mana tools. Read Leyline usage is recorded; a mana-limited cell that leaves it unused gets a specific caveat. Existing active racial timing and mana behavior remain the developer APL's choices.
+- Testing, Placeholder, specialized rotations, unresolved aura/condition warnings, recorded mana waits and racial adjustments have separate qualitative tags. The mana screen is mean recorded OOM time above 5% of fight length. A separate close-result marker uses a 0.2% reporting threshold and paired sampling intervals. Neither marker establishes in-game accuracy.
+- Exact-input aliases are hidden, with their mapping retained. Unsupported exported profiles remain listed. Single-race cases show eligibility only. Percentages compare races within a preset and faction; unequal gear tiers do not support cross-class rankings.
+- The native `stats` tool calls the public `ComputeStats` API to preserve APL validations. It adds no sim/UI hooks. Independent NumPy calculations check DPS means and covariance-based paired uncertainty. The verifier checks hashes, faction legality, race-only comparison inputs, minimal APL changes, control equivalence and local report links.
+
+Each archive contains `report.html`, faction overview PNG/SVG charts, class charts, `race-comparison.csv`, untouched developer results, adjusted results, confirmations, target-type sensitivity, validations, equivalence controls, an equipment audit, provenance and artifact hashes. Full requests, distributions and native binaries remain under ignored `tmp/`. Keep the entire directory for replay and verification. `--help` lists the sampling, duration, profile and scenario options for smaller diagnostic runs.

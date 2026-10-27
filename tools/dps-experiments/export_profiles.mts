@@ -2,10 +2,11 @@ import { applyBuild } from '@features/settings/model/apply_build';
 import { applyDefaultRotation } from '@features/settings/model/apply_defaults';
 import { Player as PlayerProto, RaidSimRequest } from '@generated/proto/api';
 import { APLRotation_Type } from '@generated/proto/apl';
-import { EquipmentSpec, Profession, Race } from '@generated/proto/common';
+import { Class, EquipmentSpec, Profession, Race } from '@generated/proto/common';
 import { LaunchStatus } from '@sim/constants/other';
 import { Player, registerSpecConfig } from '@sim/player/player';
 import { PlayerSpecs } from '@sim/player/specs';
+import { CLASS_RACES } from '@sim/player/classes/capabilities_auto_gen';
 import type { PresetBuild } from '@sim/presets/types';
 import { Database } from '@sim/proto/database';
 import { Raid } from '@sim/raid/raid';
@@ -154,7 +155,10 @@ export async function exportProfiles(root: string, fallbackGear: Record<string, 
 			player.dispose();
 		}
 	}
-	return { schemaVersion: 1, profiles, specPaths };
+	const racesByClass = Object.fromEntries(
+		Object.entries(CLASS_RACES).map(([id, races]) => [Class[Number(id)].replace(/^Class/, ''), races.map(race => Race[race])]),
+	);
+	return { schemaVersion: 1, profiles, specPaths, racesByClass };
 }
 
 export const validateRequest = (request: unknown) => RaidSimRequest.toJson(RaidSimRequest.fromJson(request as any));
