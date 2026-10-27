@@ -1,9 +1,10 @@
 import { applyBuild } from '@features/settings/model/apply_build';
 import { applyDefaultRotation } from '@features/settings/model/apply_defaults';
 import { Player as PlayerProto, RaidSimRequest } from '@generated/proto/api';
+import { IndividualSimSettings } from '@generated/proto/ui';
 import { APLRotation_Type } from '@generated/proto/apl';
 import { Class, EquipmentSpec, Profession, Race } from '@generated/proto/common';
-import { LaunchStatus } from '@sim/constants/other';
+import { CURRENT_API_VERSION, LaunchStatus } from '@sim/constants/other';
 import { Player, registerSpecConfig } from '@sim/player/player';
 import { PlayerSpecs } from '@sim/player/specs';
 import { CLASS_RACES } from '@sim/player/classes/capabilities_auto_gen';
@@ -145,6 +146,9 @@ export async function exportProfiles(root: string, fallbackGear: Record<string, 
 				devOnlyGear: gear?.devOnly ?? false,
 				race: Race[player.getRace()],
 				professions: [Profession[player.getProfession1()], Profession[player.getProfession2()]],
+				talentAllocation: Object.entries(parsedTalents)
+					.filter(([, points]) => Number(points) > 0)
+					.map(([field, points]) => ({ field, points: Number(points), name: field.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase()) })),
 				talentPoints: player.getTalentTreePoints(),
 				rotationType: APLRotation_Type[player.getRotationType()],
 				warnings,
@@ -158,9 +162,10 @@ export async function exportProfiles(root: string, fallbackGear: Record<string, 
 	const racesByClass = Object.fromEntries(
 		Object.entries(CLASS_RACES).map(([id, races]) => [Class[Number(id)].replace(/^Class/, ''), races.map(race => Race[race])]),
 	);
-	return { schemaVersion: 1, profiles, specPaths, racesByClass };
+	return { schemaVersion: 1, apiVersion: CURRENT_API_VERSION, profiles, specPaths, racesByClass };
 }
 
 export const validateRequest = (request: unknown) => RaidSimRequest.toJson(RaidSimRequest.fromJson(request as any));
+export const validateWebsite = (settings: unknown) => IndividualSimSettings.toJson(IndividualSimSettings.fromJson(settings as any));
 import fs from 'node:fs';
 import path from 'node:path';

@@ -8,7 +8,7 @@ const args = process.argv.slice(2);
 const value = (flag, fallback) => (args.includes(flag) ? args[args.indexOf(flag) + 1] : fallback);
 if (args.includes('--help')) {
 	console.log(
-		'Usage: node tools/dps-experiments/refresh.mjs [--update] [--prepared] [--reference saved-run] [--out directory] [--python executable]\nRequires installed npm/Go/Python dependencies and protoc-gen-go on PATH. --update merges origin/master into the clean analytics branch. --prepared skips source generation. Existing outputs are never overwritten.',
+		'Usage: node tools/dps-experiments/refresh.mjs [--prepared] [--reference saved-run] [--out directory] [--python executable]\nDeveloper baseline only. Use workflow.mjs for baseline plus both racial matrices. Update sources separately and run the repository gates before committing. --prepared skips source generation. Existing outputs are never overwritten.',
 	);
 	process.exit(0);
 }
@@ -24,10 +24,9 @@ const run = (command, argv) => {
 };
 const git = (...argv) => execFileSync('git', argv, { cwd: root, encoding: 'utf8' }).trim();
 if (args.includes('--update')) {
-	if (git('branch', '--show-current') !== 'codex/analytics') throw new Error('--update requires codex/analytics.');
-	if (git('status', '--porcelain')) throw new Error('Commit or preserve working-tree changes before updating.');
-	run('git', ['fetch', 'origin']);
-	run('git', ['merge', '--no-edit', 'origin/master']);
+	throw new Error(
+		'--update is retired. Merge upstream separately without committing, run the repository gates, then commit and run workflow.mjs. See README.',
+	);
 }
 const out = path.resolve(
 	root,

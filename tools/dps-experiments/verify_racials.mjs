@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { hash, racialActions } from './racial_helpers.mjs';
 import { changedPaths } from './preset_audit.mjs';
+import { verifyDetails } from './verify_details.mjs';
 
 export function verifyRacialRun(directory, { checkArtifacts = true } = {}) {
 	const out = path.resolve(directory),
@@ -81,6 +82,7 @@ export function verifyRacialRun(directory, { checkArtifacts = true } = {}) {
 		}
 	}
 	const html = fs.readFileSync(path.join(out, 'report.html'), 'utf8');
+	const details = p.toolFiles?.['tools/dps-experiments/report_details.py'] || fs.existsSync(path.join(out, 'profile-index.json')) ? verifyDetails(out) : null;
 	let links = 0;
 	for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g))
 		if (!/^https?:|^#/.test(match[1])) {
@@ -95,6 +97,7 @@ export function verifyRacialRun(directory, { checkArtifacts = true } = {}) {
 	}
 	return {
 		passed: true,
+		profilePages: details,
 		cells: cells.length,
 		controls: controls.length,
 		raceOnlyInputs: true,

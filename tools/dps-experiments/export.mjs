@@ -38,6 +38,7 @@ export async function loadProfiles(root, config = JSON.parse(fs.readFileSync(pat
 		},
 		resolve: { alias },
 		define: { 'process.env.NODE_ENV': '"production"' },
+		optimizeDeps: { noDiscovery: true },
 		plugins: [
 			{
 				name: 'experiment-locales',
@@ -61,7 +62,11 @@ export async function loadProfiles(root, config = JSON.parse(fs.readFileSync(pat
 			const gear = await server.ssrLoadModule('/tools/dps-experiments/pre_raid_profiles.mts');
 			return { ...(await gear.standardizeProfiles(root, config)), validateRequest: module.validateRequest };
 		}
-		return { ...(await module.exportProfiles(root, config.fallbackGear ?? {})), validateRequest: module.validateRequest };
+		return {
+			...(await module.exportProfiles(root, config.fallbackGear ?? {})),
+			validateRequest: module.validateRequest,
+			validateWebsite: module.validateWebsite,
+		};
 	} finally {
 		await server.close();
 		await GlobalRegistrator.unregister();

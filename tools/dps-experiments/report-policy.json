@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"mechanics": [
+		{
+			"id": "support-roster",
+			"title": "External support",
+			"status": "Scenario assumption",
+			"reason": "The shared support package is an abstract experiment configuration. A legal raid roster supplying every buff has not been validated.",
+			"source": "tools/dps-experiments/baseline.json"
+		},
+		{
+			"id": "cooldown-execution",
+			"title": "Cooldown execution",
+			"status": "Developer APL behavior",
+			"reason": "The report records actual activation and uptime. Supplied timing is preserved and is not an optimized racial schedule or a measurement of player execution.",
+			"source": "tools/dps-experiments/racial_helpers.mjs"
+		},
+		{
+			"id": "revelation-rate",
+			"title": "Revelation proc law",
+			"status": "Provisional mechanic",
+			"enchantId": 8217,
+			"reason": "This enchant uses an estimated proc rate. Its interaction with critical chance needs game evidence. Exact inputs and the recorded engine preserve the assumption.",
+			"source": "sim/common/forever/enchants.go"
+		}
+	]
+}

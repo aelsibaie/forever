@@ -22,10 +22,16 @@ The protocol and constants generator also works without Make:
 
 ```sh
 node tools/dps-experiments/prepare.mjs
-node tools/dps-experiments/refresh.mjs --update --reference /absolute/path/to/previous/developer-presets
+node tools/dps-experiments/workflow.mjs --prepared
 ```
 
-`--update` requires a clean `codex/analytics` branch, fetches upstream and merges `origin/master`. Resolve a merge conflict before rerunning. Install changed npm dependencies if the lockfile changes. The refresh generates protocol sources and constants, runs the analytics tests, builds a native simulator, runs the full developer matrix and renders the report. `--reference` adds the saved-input matrix and an update comparison. `--prepared` skips generation. `--python executable`, `PYTHON_BINARY`, `GO_BINARY` and the usual `GOCACHE`, `GOMODCACHE`, `PYTHONPATH` and `MPLCONFIGDIR` variables support local runtimes.
+The workflow runs both factions' racial matrices and the developer DPS baseline at 60, 180 and 300 seconds, using the same native engine. It verifies archives, independently checks statistics, renders charts and validates every website JSON export through the real UI schema. Each stage has a log and status in `workflow.json`; the top-level `report.html` links the outputs. `--reference /absolute/path/to/previous/developer-presets` also replays frozen inputs and measures update effects. `--gunba-source tmp/engine-comparisons/gunba` adds the matched Shadow comparison described below. Results stay under a new timestamped `tmp/analytics-runs/` directory unless `--out` supplies a new destination.
+
+`--prepared` skips protocol and constants generation. Omit it after an upstream update that changes those inputs. `--python executable`, `PYTHON_BINARY`, `GO_BINARY` and the usual `GOCACHE`, `GOMODCACHE`, `PYTHONPATH` and `MPLCONFIGDIR` variables support local runtimes. Use a Python environment with `requirements.txt` installed; the Windows Store alias is not a Python interpreter.
+
+For a persistent local Python setup, create `tmp/analytics-python` with `python -m venv tmp/analytics-python` and install `requirements.txt` through that environment's Python. The workflow detects it automatically after an explicit `--python` or `PYTHON_BINARY` override. It checks imports before starting simulations. On Windows its executable is `tmp/analytics-python/Scripts/python.exe`; on Unix it is `tmp/analytics-python/bin/python`.
+
+Source updates are a separate step. On a clean `codex/analytics`, fetch `origin`, merge with `git merge --no-commit --no-ff origin/master`, resolve conflicts and install changed dependencies. Regenerate the build inputs, run the full [repository gates](../../.github/skills/wowsims-testing/SKILL.md#the-gates), then commit the merge and run `workflow.mjs`. A fast-forward is also safe when Git needs no merge commit. Neither analytics runner creates Git commits. The old `refresh.mjs --update` option now stops with these instructions, so it cannot create a merge commit before validation. `refresh.mjs` remains available for the developer baseline alone.
 
 On Windows, put Go, protoc-gen-go and protoc on PATH. When protoc is absent, the npm wrapper installs it. A local protoc installation should include its sibling `include/` folder. The Python environment needs the packages in `requirements.txt`.
 
@@ -80,6 +86,33 @@ node --test tools/dps-experiments/statistics.test.mjs
 - Includes pet damage in player DPS once. Ability breakdowns count damage to encounter targets; consumable damage to the player is excluded.
 
 `provenance.json` includes Git commit, branch, working tree status, source content hashes, game builds and hotfix levels, exact settings, binary hash and build metadata, CPU, runtimes and timestamps. `report-provenance.json` records the plotting environment, report script hash and artifact hashes. The runner verifies that the recorded tracked sources remain unchanged during execution.
+
+### Inspecting and sharing a result
+
+Every build has a page under `profiles/` with developer item IDs, rolled suffixes, enchants, named talent allocations, enabled and disabled rotation entries, final pre-combat stats, damage and mana accounting, and exact support settings. The page links native requests and raw outputs. Website JSON exports carry player, encounter, support, iterations and seed through `IndividualSimSettings`; the verifier checks that schema round-tripping preserves those fields. The website may use a different engine or RNG. Reproduce recorded numbers with the archived native engine and input.
+
+Racial pages show primary results and the independent leading-pair confirmation together, matched by faction, build and duration. A close result retains three decimal places and its interval; no rounded zero is presented as equality. The 0.2% marker is a reporting convention, not an in-game significance threshold. Sampling intervals and confidence in the preset/mechanics are separate. `report-policy.json` lists the current mechanics caveats; its snapshot, spell/item names and stat enums are frozen into `report-inputs.json`. The Revelation enchant's flat proc chance remains a provisional engine assumption. Full abstract support is not proof of a legal twenty-player roster.
+
+### Matched Shadow comparison with Gunba
+
+WoWSims remains the primary engine. The adapter compares Human and Dwarf Shadow Priests at 60/180/300 seconds using the WoWSims developer gear, enchants, named talents and effective priority list. It does not import Gunba's hypothetical gear or force Tier 1 bonuses. Finsemble has a separate model; this experiment compares the two Go engines only.
+
+```sh
+node tools/dps-experiments/setup_gunba.mjs
+node tools/dps-experiments/shadow_compare.mjs --primary-run /absolute/path/to/racial-run --gunba-source tmp/engine-comparisons/gunba --out tmp/engine-comparisons/shadow-matched
+python tools/dps-experiments/shadow_report.py tmp/engine-comparisons/shadow-matched
+node tools/dps-experiments/verify_shadow.mjs tmp/engine-comparisons/shadow-matched
+```
+
+Setup clones Gunba into ignored `tmp/` at reviewed commit `92120c303d5ef4c4d4840df19818a65f8acb40b3`, generates its Go protos and leaves both repositories' tracked simulator code alone. Existing mismatched checkouts stop for review. The comparison defaults to 20,000 iterations per race and duration. `--iterations` supports a small pilot. A different Gunba revision requires an adapter review and a new pin; it is never silently fetched into a result.
+
+The main TypeScript project excludes ignored `tmp/` outputs. Without that exclusion its repository-wide include also compiles the foreign checkout and reports duplicate worker globals and missing foreign dependencies.
+
+The engines use different schemas. Talent positions follow each fork's declaration order, not protobuf wire numbers or a copied talent string. WoWSims resolves actual suffix and enchant stats; the adapter embeds those definitions in Gunba's request database. Generic ratings are translated once because Gunba projects shared ratings to physical and spell stats. The driver builds without Gunba's embedded item database so it cannot replace the supplied item definitions. Missing core spell warnings stop the comparison; the existing guarded cross-race actions remain recorded. Gunba's stats API must explicitly receive the Forever ruleset, just like its simulation API.
+
+The translated case retains engine differences in base attributes and support. A separately labeled resource-stat control matches Stamina, Intellect, Spirit, Health, Mana and MP5 without changing equipment or talents. Final total/Shadow spell damage, crit and Shadow hit are asserted equal. Buff/consumable representation differences and every non-gear adjustment are saved in `provenance.json` and `stat-calibration.json`. Revelation uses the primary engine's flat chance, explicitly marked provisional. Shadowform is applied early enough for Gunba's prepull mana cost to regenerate. No rotation optimization is performed.
+
+Normalized-rotation WoWSims controls must reproduce every original damage iteration. Both forks' requests, outputs, stats, engine binaries and hashes remain in the comparison archive. Within-engine race intervals use paired samples. Cross-engine results use independent samples even when numeric seeds match. `--resume` requires unchanged source, generated Gunba protos, tools, sampling settings, binaries and stored request/result hashes. A changed setup requires a fresh directory.
 
 ## Archived custom gear experiment
 

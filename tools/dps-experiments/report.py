@@ -9,6 +9,7 @@ import json
 import math
 import platform
 from pathlib import Path
+from report_details import render_details
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -72,7 +73,7 @@ def main():
 
     def finish(fig, filename):
         fig.text(0.055, 0.032, footer, color=MUTED, size=7.5)
-        fig.text(0.055, 0.015, "Supplied presets use different gear, races and consumables. All DPS sims are Alpha. Error bars: pointwise 95% Monte Carlo CI.", color=MUTED, size=8)
+        fig.text(0.055, 0.015, "Developer gear tiers only. Preset and mechanics caveats are on the inspection pages. Error bars: pointwise 95% Monte Carlo CI.", color=MUTED, size=8)
         fig.savefig(charts / f"{filename}.png", dpi=180)
         fig.savefig(charts / f"{filename}.svg")
         plt.close(fig)
@@ -207,8 +208,11 @@ def main():
     replacements = {"__META__": f'<span class="chip">Source <b>{commit[:12]}</b></span><span class="chip">Game build <b>{build}</b></span><span class="chip"><b>{stamp:%b %d, %Y}</b> · {stamp:%H:%M %Z}</span>', "__STATS__": ''.join(f'<div class="stat"><strong>{value}</strong><span>{label}</span></div>' for value, label in [(len(profiles), 'unique profiles, including diagnostics'), (len(rows), 'completed duration / profile cells'), (f'{total_iterations:,}', 'simulated fights in the matrix'), ('60 / 180 / 300s', 'fixed encounter durations')]), "__OVERVIEW__": svg('overview'), "__ALL__": tier_charts, "__RESPONSE__": svg('duration-response') if (charts / 'duration-response.svg').exists() else '', "__NOTES__": notes, "__ISSUES__": issues, "__CONFIG__": html.escape(json.dumps(manifest['config'], indent=2)), "__SOURCE__": source, "__EXECUTION__": execution, "__HOTFIXES__": html.escape(json.dumps(manifest['hotfixes'], indent=2)), "__DATA__": payload}
     for key, value in replacements.items():
         html_report = html_report.replace(key, value)
+    details = render_details(directory, repository, manifest, catalog, rows)
+    html_report = html_report.replace('</main>', details + '</main>')
     (directory / 'report.html').write_text(html_report, encoding='utf-8')
-    generated = {"generatedAt": datetime.now().astimezone().isoformat(), "matplotlib": matplotlib.__version__, "numpy": np.__version__, "python": platform.python_version(), "scriptSha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "tierGroupsSha256": hashlib.sha256(Path(__file__).with_name("tier_groups.py").read_bytes()).hexdigest(), "comparisonGroups": {tier: [p["id"] for p in items] for tier, items in groups}, "artifacts": {str(p.relative_to(directory)): hashlib.sha256(p.read_bytes()).hexdigest() for p in [directory / 'report.html', directory / 'tier-comparison.csv', directory / 'tier-comparison.json', *sorted(charts.glob('*'))]}}
+    artifacts = [directory / 'report.html', directory / 'tier-comparison.csv', directory / 'tier-comparison.json', directory / 'report-inputs.json', directory / 'profile-index.json', *sorted(charts.glob('*')), *sorted((directory / 'profiles').glob('*')), *sorted((directory / 'stats').glob('*'))]
+    generated = {"generatedAt": datetime.now().astimezone().isoformat(), "matplotlib": matplotlib.__version__, "numpy": np.__version__, "python": platform.python_version(), "scriptSha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "tierGroupsSha256": hashlib.sha256(Path(__file__).with_name("tier_groups.py").read_bytes()).hexdigest(), "comparisonGroups": {tier: [p["id"] for p in items] for tier, items in groups}, "artifacts": {str(p.relative_to(directory)): hashlib.sha256(p.read_bytes()).hexdigest() for p in artifacts}}
     (directory / 'report-provenance.json').write_text(json.dumps(generated, indent=2), encoding='utf-8')
     print(f"Rendered {len(list(charts.glob('*.png')))} charts and {directory / 'report.html'}")
 

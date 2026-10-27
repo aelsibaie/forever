@@ -235,6 +235,7 @@ for (const faction of factions) {
 	}
 }
 save('profiles.json', {
+	apiVersion: loaded.apiVersion,
 	profiles: catalog,
 	aliases,
 	excluded: loaded.profiles.filter(profile => !profile.rankEligible).map(({ player, ...rest }) => rest),
@@ -580,6 +581,7 @@ const artifacts = walk(out)
 		file =>
 			file.startsWith(path.join(out, 'charts') + path.sep) ||
 			file.startsWith(path.join(out, 'stats') + path.sep) ||
+			file.startsWith(path.join(out, 'profiles') + path.sep) ||
 			(file.startsWith(path.join(out, 'engine') + path.sep) && /\.(json|go)$/.test(file)) ||
 			path.dirname(file) === out,
 	)

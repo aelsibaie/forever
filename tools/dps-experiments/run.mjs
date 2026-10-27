@@ -13,7 +13,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const args = process.argv.slice(2);
 if (args.includes('--help')) {
 	console.log(
-		'Usage: node tools/dps-experiments/run.mjs [--out directory] [--config file] [--iterations count] [--seed integer] [--profiles id,id] [--durations 60,180,300] [--sim binary] [--frozen saved-run]\n\nBuilds the native simulator with with_db, exports UI DPS presets, and saves requests, results, summaries, debug logs, and provenance. The output directory must be empty. --sim reuses a binary and records its build metadata. --frozen uses saved requests on the current simulator.',
+		'Usage: node tools/dps-experiments/run.mjs [--out directory] [--config file] [--iterations count] [--seed integer] [--profiles id,id] [--durations 60,180,300] [--sim binary] [--engine-provenance file] [--frozen saved-run]\n\nBuilds the native simulator with with_db, exports UI DPS presets, and saves requests, results, summaries, debug logs, and provenance. The output directory must be empty. --sim reuses a binary and records its build metadata. --engine-provenance checks that binary and its source hashes and carries its named model into the report. --frozen uses saved requests on the current simulator.',
 	);
 	process.exit(0);
 }
@@ -23,7 +23,7 @@ const option = (name, fallback) => {
 	if (!args[i + 1] || args[i + 1].startsWith('--')) throw new Error(`--${name} requires a value`);
 	return args[i + 1];
 };
-const allowed = new Set(['--out', '--config', '--iterations', '--seed', '--sim', '--profiles', '--durations', '--frozen']);
+const allowed = new Set(['--out', '--config', '--iterations', '--seed', '--sim', '--engine-provenance', '--profiles', '--durations', '--frozen']);
 for (let i = 0; i < args.length; i += 2) if (!allowed.has(args[i])) throw new Error(`Unknown option ${args[i]}`);
 const configPath = path.resolve(option('config', path.join(root, 'tools/dps-experiments/baseline.json')));
 const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
@@ -45,7 +45,7 @@ if (
 const startedAt = new Date().toISOString();
 const out = path.resolve(option('out', path.join(root, 'tmp/dps-experiments', startedAt.replace(/[:.]/g, '-'))));
 if (fs.existsSync(out) && fs.readdirSync(out).length) throw new Error(`Output directory must be empty: ${out}`);
-for (const name of ['requests', 'results', 'logs', 'debug', 'engine']) fs.mkdirSync(path.join(out, name), { recursive: true });
+for (const name of ['requests', 'results', 'logs', 'debug', 'engine', 'stats']) fs.mkdirSync(path.join(out, name), { recursive: true });
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const fileHash = file => hash(fs.readFileSync(file));
 const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
@@ -83,6 +83,8 @@ if (!args.includes('--sim')) {
 	fs.writeFileSync(path.join(out, 'logs/build.log'), `${built.stdout ?? ''}${built.stderr ?? ''}`);
 	if (built.status !== 0) throw new Error(`Build failed; see ${path.join(out, 'logs/build.log')}`);
 }
+const statsDriver = path.join(out, 'engine', process.platform === 'win32' ? 'stats.exe' : 'stats');
+execFileSync(go, ['build', '-tags=with_db', '-buildvcs=false', '-o', statsDriver, './tools/dps-experiments/stats'], { cwd: root, encoding: 'utf8' });
 const provenance = {
 	schemaVersion: 1,
 	name: config.name,
@@ -113,6 +115,7 @@ const provenance = {
 	engine: {
 		path: native,
 		sha256: fileHash(native),
+		statsSha256: fileHash(statsDriver),
 		reused: args.includes('--sim'),
 		buildInfo: execFileSync(go, ['version', '-m', native], { encoding: 'utf8' }),
 	},
@@ -134,6 +137,15 @@ const provenance = {
 	},
 };
 const saveJson = (name, data) => fs.writeFileSync(path.join(out, name), JSON.stringify(data, null, 2));
+if (args.includes('--engine-provenance')) {
+	if (!args.includes('--sim')) throw new Error('--engine-provenance requires --sim.');
+	const recorded = JSON.parse(fs.readFileSync(path.resolve(option('engine-provenance')), 'utf8'));
+	if (recorded.engine.sha256 !== provenance.engine.sha256) throw new Error('Supplied engine differs from its provenance.');
+	for (const [file, expected] of Object.entries(recorded.sourceFiles))
+		if (fileHash(path.join(root, file)) !== expected) throw new Error('Supplied engine source differs: ' + file);
+	provenance.model = recorded.model;
+	provenance.engineSourceProvenance = path.resolve(option('engine-provenance'));
+}
 saveJson('provenance.json', provenance);
 const loaded = await loadProfiles(root, config);
 if (config.frozenRun) {
@@ -263,7 +275,7 @@ profiles = profiles.filter(profile => {
 	signatures.set(signature, profile.id);
 	return true;
 });
-saveJson('profiles.json', { schemaVersion: 1, profiles, duplicateProfiles, specPaths: loaded.specPaths });
+saveJson('profiles.json', { schemaVersion: 1, apiVersion: loaded.apiVersion, profiles, duplicateProfiles, specPaths: loaded.specPaths });
 saveJson('provenance.json', provenance);
 console.log(`${profiles.length} profiles x ${config.durations.join('/')} seconds x ${config.iterations.toLocaleString()} iterations`);
 for (const profile of profiles) {
@@ -286,6 +298,12 @@ for (const profile of profiles) {
 			const infile = path.join(out, 'requests', `${key}.json`);
 			const outfile = path.join(out, 'results', `${key}.json`);
 			fs.writeFileSync(infile, JSON.stringify(request));
+			if (duration === config.durations[0]) {
+				execFileSync(statsDriver, [infile, path.join(out, 'stats', `${profile.id}--${profile.race}--${duration}s.json`)], {
+					cwd: root,
+					encoding: 'utf8',
+				});
+			}
 			const begin = performance.now();
 			const run = spawnSync(native, ['sim', '--infile', infile, '--outfile', outfile], { cwd: root, encoding: 'utf8', timeout: 600000 });
 			fs.writeFileSync(path.join(out, 'logs', `${key}.log`), `${run.stdout ?? ''}${run.stderr ?? ''}`);

@@ -6,6 +6,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, Patch
 from matplotlib.ticker import FuncFormatter, MaxNLocator
+from report_details import render_details
 
 R=Path(sys.argv[1]).resolve()
 read=lambda name:json.loads((R/name).read_text(encoding='utf-8-sig'))
@@ -20,7 +21,7 @@ PROFILES={(p['faction'],p['id']):p for p in CAT['profiles']}
 CONF={(p['faction'],p['profileId']):p for p in A['confidence']}
 GROUP={(g['faction'],g['profileId'],g['duration']):g for g in A['primary']}
 DURATIONS=A['settings']['durations']
-META=f"WoWSims {P['snapshot']['commit'][:10]} | model {P['model']['name']} | {A['settings']['iterations']:,} iterations/cell | seed {A['settings']['seed']}"
+META=f"Engine {P['snapshot']['upstreamSourceCommit'][:10]} | analytics {P['snapshot']['commit'][:10]} | {', '.join(sorted(set(P['gameBuilds'].values())))} | {A['settings']['iterations']:,} iterations/cell | seed {A['settings']['seed']} | {P['model']['name']}"
 plt.rcParams.update({'font.family':'DejaVu Sans','figure.facecolor':BG,'axes.facecolor':BG,'axes.edgecolor':GRID,'axes.labelcolor':MUTED,'xtick.color':MUTED,'ytick.color':TEXT,'text.color':TEXT,'savefig.facecolor':BG,'font.size':10})
 
 arrays={}
@@ -103,7 +104,12 @@ def pick(g):
  if g['rankingWithheld']:return '<b class="muted">Ranking withheld</b>'
  if g['onlyChoice']:return '<b>'+RACES[g['winner']]+' only</b><small>No faction alternative</small>'
  text=RACES[g['winner']]+(' ≈ '+RACES[g['rows'][1]['race']] if g['practicalTie'] else '')
- return '<b style="color:'+('#b5bdca' if g['practicalTie'] else COLORS[g['winner']])+'">'+text+'</b><small>+'+f"{g['leadOverSecond']['percent']:.2f}% vs next · ±{g['leadOverSecond']['ci95HalfWidthPercent']:.2f} pp"+'</small>'
+ result='<b style="color:'+('#b5bdca' if g['practicalTie'] else COLORS[g['winner']])+'">'+text+'</b><small>Primary mean: '+f"{g['rows'][0]['meanDps']:.2f} DPS · +{g['leadOverSecond']['percent']:.3f}% vs next · ±{g['leadOverSecond']['ci95HalfWidthPercent']:.3f} pp"+'</small>'
+ confirmation=next((c for c in A['confirmations'] if (c['faction'],c['profileId'],c['duration'])==(g['faction'],g['profileId'],g['duration'])),None)
+ if confirmation:
+  result+='<small>Pair confirmation: '+RACES[confirmation['winner']]+f" +{confirmation['leadOverSecond']['percent']:.3f}% ±{confirmation['leadOverSecond']['ci95HalfWidthPercent']:.3f} pp · {confirmation['rows'][0]['iterations']:,}/race"+'</small>'
+ return result
+inspection=render_details(R,Path(__file__).resolve().parents[2],P,CAT,CELLS,A['primary'],A['confirmations'])
 sections=[]
 for faction in factions:
  rows=[]
@@ -111,7 +117,7 @@ for faction in factions:
   ids=[p['id'] for p in CAT['profiles'] if p['faction']==faction and p['className']==cls]
   if not ids:continue
   rows.append('<tr class="group"><th colspan="'+str(len(DURATIONS)+2)+'" style="color:'+CC[cls]+'">'+cls+'</th></tr>')
-  for pid in ids:rows.append('<tr><td>'+e(PROFILES[faction,pid]['name'])+'<small>'+e(PROFILES[faction,pid]['specLabel'])+' · '+e(PROFILES[faction,pid]['gearTier'])+'</small></td>'+''.join('<td>'+pick(GROUP[faction,pid,t])+'</td>' for t in DURATIONS)+'<td>'+badges(faction,pid)+'</td></tr>')
+  for pid in ids:rows.append('<tr><td><a href="profiles/'+faction+'--'+pid+'.html">'+e(PROFILES[faction,pid]['name'])+'</a><small>'+e(PROFILES[faction,pid]['specLabel'])+' · '+e(PROFILES[faction,pid]['gearTier'])+'</small></td>'+''.join('<td>'+pick(GROUP[faction,pid,t])+'</td>' for t in DURATIONS)+'<td>'+badges(faction,pid)+'</td></tr>')
  table='<div class="scroll"><table class="picks"><thead><tr><th>Developer preset</th>'+''.join('<th>'+str(t)+' seconds</th>' for t in DURATIONS)+'<th>Preset caveats</th></tr></thead><tbody>'+''.join(rows)+'</tbody></table></div>'
  sections.append('<section id="'+faction+'"><h2>'+faction.title()+'</h2><p>Each row compares legal races with identical equipment, talents and effective rotation. A close result names the two leading primary races. Exact-input aliases are hidden.</p><a href="charts/'+faction+'-overview.png"><img src="charts/'+faction+'-overview.png" alt="'+faction+' racial leaders by fight length"></a>'+table+'</section>')
  adjusted=[]
@@ -151,6 +157,6 @@ for text in [
 methods+='</ul><h3>Coverage limitations</h3><ul>'+excluded+'</ul><p>Source: <a href="'+e(CAT['policy']['notesSource'],quote=True)+'">Blizzard racial clarification</a>. Recommendations here are simulation findings.</p></section>'
 downloads='<section><h2>Downloads and verification</h2><p>'+ ' · '.join('<a href="'+name+'">'+title+'</a>' for name,title in [('race-comparison.csv','Primary CSV'),('analysis.json','Analysis'),('profiles.json','Presets and exact support'),('adjustments.json','APL adjustments'),('rotation-validations.json','APL validations'),('provenance.json','Provenance'),('cells.json','All cell summaries'),('controls.json','Equivalence controls'),('numerical-review.json','Independent numerical review'),('completion.json','Completion'),('artifact-hashes.json','Artifact hashes')])+'</p><p>'+ ' · '.join('<a href="charts/'+f+'-overview.png">'+f.title()+' poster</a> · <a href="charts/'+f+'-overview.svg">SVG</a>' for f in factions)+'</p></section>'
 style='''*{box-sizing:border-box}body{margin:0;background:#0b1220;color:#edf3fc;font:16px/1.65 system-ui,sans-serif}main{max-width:1280px;margin:auto;padding:48px 30px}h1{font-size:44px;line-height:1.15;letter-spacing:-1px}h2{font-size:26px;margin-top:0}.eyebrow{font-size:12px;color:#92a7c7;letter-spacing:2px}.lead{font-size:20px;color:#c2cee1}.notice{padding:22px;background:#302719;border:1px solid #765e32;border-radius:14px;color:#f4dfb5;margin:26px 0}nav{display:flex;gap:22px}.facts{display:flex;flex-wrap:wrap;gap:28px;margin:28px 0}.facts span{border-left:2px solid #546e96;padding-left:15px;color:#b6c5dc}.facts b{display:block;color:#edf3fc;font-size:23px}section{padding:28px;background:#121d30;border:1px solid #25344b;border-radius:16px;margin:28px 0}a{color:#80caff}img{max-width:100%;display:block;margin:25px auto;border-radius:14px}code{font-size:12px;color:#c6b3f3;overflow-wrap:anywhere}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px;white-space:nowrap}th,td{text-align:right;padding:10px 12px;border-bottom:1px solid #2a3b55}th:first-child,td:first-child{text-align:left}th{color:#a9bedc}.picks td{text-align:left}.group th{text-align:left;font-size:16px;padding-top:26px}small{display:block;font-size:11px;color:#a1afc5}.badge{display:inline-block;font-size:10px;color:#d4c3a0;background:#292b31;border:1px solid #565147;border-radius:5px;padding:1px 6px;margin:2px 4px 2px 0}.muted{color:#a1afc5}.caveatlist{font-size:13px}summary{cursor:pointer;color:#9ed9f3;padding:12px 0}li{color:#b8c7dc;margin-bottom:12px}@media(max-width:750px){main{padding:24px 14px}h1{font-size:32px}section{padding:18px}.facts{gap:15px}}'''
-(R/'report.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Racial DPS comparison | '+P['snapshot']['commit'][:10]+'</title><style>'+style+'</style></head><body><main>'+intro+legend+''.join(sections)+methods+downloads+'</main></body></html>',encoding='utf-8')
+(R/'report.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Racial DPS comparison | '+P['snapshot']['commit'][:10]+'</title><style>'+style+'</style></head><body><main>'+intro+legend+''.join(sections)+inspection+methods+downloads+'</main></body></html>',encoding='utf-8')
 (R/'plot-environment.json').write_text(json.dumps({'python':platform.python_version(),'numpy':np.__version__,'matplotlib':matplotlib.__version__},indent=2))
 print('Rendered '+', '.join(factions)+' reports; independent numerical checks passed.')
