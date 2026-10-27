@@ -1,0 +1,1 @@
+{"auditedGroupedCells":1995,"failures":[],"maximumMeanErrorDps":9.890754881780595e-12,"maximumPairedCiErrorPercentagePoints":1.7399276464047375e-15,"method":"Independent NumPy mean, variance and covariance calculation. Sampling checks do not validate mechanics."}

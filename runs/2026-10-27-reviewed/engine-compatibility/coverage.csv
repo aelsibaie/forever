@@ -1,0 +1,77 @@
+id,name,className,faction,races,status,reason
+druid-balance-moonkin,Moonkin,Druid,horde,[],Blocked,"panic: proto: (line 1:8334): unknown field ""spellIsCasting""  main.main()"
+druid-feralcat-bearweave-45s-fights,Bearweave (45s fights),Druid,horde,[],Blocked,Unsupported equipped stat: DodgeRating
+druid-feralcat-hybrid,Hybrid,Druid,horde,[],Blocked,Unsupported equipped stat: DodgeRating
+druid-feralcat-cat-monocat,Cat / Monocat,Druid,horde,[],Blocked,Unsupported equipped stat: DodgeRating
+hunter-dps-sv-weave,SV Weave,Hunter,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-mm-weave,MM Weave,Hunter,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-bm-weave,BM Weave,Hunter,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-mm,MM,Hunter,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-bm,BM,Hunter,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-sv,SV,Hunter,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-sv-melee,SV Melee,Hunter,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-default,Default,Hunter,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+mage-dps-arcane-frost,Arcane Frost,Mage,horde,[],Blocked,"panic: proto: (line 1:8109): unknown field ""includeReactionTime""  main.main()"
+mage-dps-arcane-fire,Arcane Fire,Mage,horde,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-ffb,FFB,Mage,horde,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-fire,Fire,Mage,horde,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-frost,Frost,Mage,horde,[],Blocked,"panic: proto: (line 1:6881): unknown field ""spellGcdHastedDuration""  main.main()"
+paladin-retribution-twist-of-light,Twist of Light,Paladin,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+paladin-retribution-holy-shock,Holy Shock,Paladin,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+priest-dps-shadow-testing,Shadow Testing,Priest,horde,"[""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+priest-dps-smite-testing,Smite Testing,Priest,horde,[],Blocked,"panic: proto: (line 1:7196): unknown field ""includeReactionTime""  main.main()"
+priest-dps-default,Default,Priest,horde,"[""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+rogue-dps-combat-ss,Combat SS,Rogue,horde,[],Blocked,Unsupported equipped stat: PhysicalDamage
+rogue-dps-combat-bs,Combat BS,Rogue,horde,[],Blocked,Unsupported equipped stat: PhysicalDamage
+rogue-dps-subtlety-hemo,Subtlety Hemo,Rogue,horde,[],Blocked,Unsupported equipped stat: PhysicalDamage
+rogue-dps-subtlety-bs,Subtlety BS,Rogue,horde,[],Blocked,Unsupported equipped stat: PhysicalDamage
+shaman-elemental-testing,Testing,Shaman,horde,[],Blocked,Gunba lacks allocated talent: trialByFire
+shaman-elemental-default,Default,Shaman,horde,[],Blocked,Gunba lacks allocated talent: trialByFire
+shaman-enhancement-testing,Testing,Shaman,horde,[],Blocked,Gunba lacks allocated talent: trialByFire
+shaman-enhancement-default,Default,Shaman,horde,[],Blocked,Gunba lacks allocated talent: trialByFire
+warlock-dps-demo-fire-brand,Demo (Fire Brand),Warlock,horde,[],Blocked,"panic: proto: (line 1:6879): unknown field ""petAttack""  main.main()"
+warlock-dps-demo-shadow-brand,Demo (Shadow Brand),Warlock,horde,[],Blocked,"panic: proto: (line 1:6881): unknown field ""petAttack""  main.main()"
+warlock-dps-destro,Destro,Warlock,horde,[],Blocked,"panic: proto: (line 1:6870): unknown field ""petAttack""  main.main()"
+warlock-dps-sm-ruin,SM/Ruin,Warlock,horde,[],Blocked,"panic: proto: (line 1:6669): unknown field ""warlockAssignedCurseIsActive""  main.main()"
+warlock-dps-aff-wrack,Aff (Wrack),Warlock,horde,[],Blocked,"panic: proto: (line 1:7379): unknown field ""warlockAssignedCurseIsActive""  main.main()"
+warlock-dps-default,Default,Warlock,horde,[],Blocked,"panic: proto: (line 1:6872): unknown field ""petAttack""  main.main()"
+warrior-dps-fury-pre-bis,Fury / Pre-BiS,Warrior,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+warrior-dps-arms-pre-bis,Arms / Pre-BiS,Warrior,horde,[],Blocked,Unsupported equipped stat: ExpertiseRating
+druid-balance-moonkin,Moonkin,Druid,alliance,[],Blocked,"panic: proto: (line 1:8336): unknown field ""spellIsCasting""  main.main()"
+druid-feralcat-bearweave-45s-fights,Bearweave (45s fights),Druid,alliance,[],Blocked,Unsupported equipped stat: DodgeRating
+druid-feralcat-hybrid,Hybrid,Druid,alliance,[],Blocked,Unsupported equipped stat: DodgeRating
+druid-feralcat-cat-monocat,Cat / Monocat,Druid,alliance,[],Blocked,Unsupported equipped stat: DodgeRating
+hunter-dps-sv-weave,SV Weave,Hunter,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-mm-weave,MM Weave,Hunter,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-bm-weave,BM Weave,Hunter,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-mm,MM,Hunter,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-bm,BM,Hunter,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-sv,SV,Hunter,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-sv-melee,SV Melee,Hunter,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+hunter-dps-default,Default,Hunter,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+mage-dps-arcane-frost,Arcane Frost,Mage,alliance,[],Blocked,"panic: proto: (line 1:8111): unknown field ""includeReactionTime""  main.main()"
+mage-dps-arcane-fire,Arcane Fire,Mage,alliance,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-ffb,FFB,Mage,alliance,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-fire,Fire,Mage,alliance,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-frost,Frost,Mage,alliance,[],Blocked,"panic: proto: (line 1:6883): unknown field ""spellGcdHastedDuration""  main.main()"
+paladin-retribution-twist-of-light,Twist of Light,Paladin,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+paladin-retribution-holy-shock,Holy Shock,Paladin,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+priest-dps-shadow-testing,Shadow Testing,Priest,alliance,"[""RaceHuman"", ""RaceDwarf"", ""RaceNightElf"", ""RaceGnome""]",Diagnostic completed,
+priest-dps-smite-testing,Smite Testing,Priest,alliance,[],Blocked,"panic: proto: (line 1:7196): unknown field ""includeReactionTime""  main.main()"
+priest-dps-default,Default,Priest,alliance,"[""RaceHuman"", ""RaceDwarf"", ""RaceNightElf"", ""RaceGnome""]",Diagnostic completed,
+rogue-dps-combat-ss,Combat SS,Rogue,alliance,[],Blocked,Unsupported equipped stat: PhysicalDamage
+rogue-dps-combat-bs,Combat BS,Rogue,alliance,[],Blocked,Unsupported equipped stat: PhysicalDamage
+rogue-dps-subtlety-hemo,Subtlety Hemo,Rogue,alliance,[],Blocked,Unsupported equipped stat: PhysicalDamage
+rogue-dps-subtlety-bs,Subtlety BS,Rogue,alliance,[],Blocked,Unsupported equipped stat: PhysicalDamage
+shaman-elemental-testing,Testing,Shaman,alliance,[],Blocked,Gunba lacks allocated talent: trialByFire
+shaman-elemental-default,Default,Shaman,alliance,[],Blocked,Gunba lacks allocated talent: trialByFire
+shaman-enhancement-testing,Testing,Shaman,alliance,[],Blocked,Gunba lacks allocated talent: trialByFire
+shaman-enhancement-default,Default,Shaman,alliance,[],Blocked,Gunba lacks allocated talent: trialByFire
+warlock-dps-demo-fire-brand,Demo (Fire Brand),Warlock,alliance,[],Blocked,"panic: proto: (line 1:6882): unknown field ""petAttack""  main.main()"
+warlock-dps-demo-shadow-brand,Demo (Shadow Brand),Warlock,alliance,[],Blocked,"panic: proto: (line 1:6884): unknown field ""petAttack""  main.main()"
+warlock-dps-destro,Destro,Warlock,alliance,[],Blocked,"panic: proto: (line 1:6873): unknown field ""petAttack""  main.main()"
+warlock-dps-sm-ruin,SM/Ruin,Warlock,alliance,[],Blocked,"panic: proto: (line 1:6672): unknown field ""warlockAssignedCurseIsActive""  main.main()"
+warlock-dps-aff-wrack,Aff (Wrack),Warlock,alliance,[],Blocked,"panic: proto: (line 1:7382): unknown field ""warlockAssignedCurseIsActive""  main.main()"
+warlock-dps-default,Default,Warlock,alliance,[],Blocked,"panic: proto: (line 1:6875): unknown field ""petAttack""  main.main()"
+warrior-dps-fury-pre-bis,Fury / Pre-BiS,Warrior,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating
+warrior-dps-arms-pre-bis,Arms / Pre-BiS,Warrior,alliance,[],Blocked,Unsupported equipped stat: ExpertiseRating

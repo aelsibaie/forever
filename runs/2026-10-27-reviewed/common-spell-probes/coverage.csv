@@ -1,0 +1,77 @@
+id,name,className,faction,races,status,reason
+druid-balance-moonkin,Moonkin,Druid,horde,"[""RaceTauren""]",Partially completed,"panic: proto: (line 1:72): invalid value for enum field race: ""RaceWindshaperSkyborne""  main.main()"
+druid-feralcat-bearweave-45s-fights,Bearweave (45s fights),Druid,horde,[],Blocked,No reviewed common-spell probe for druid/feralcat
+druid-feralcat-hybrid,Hybrid,Druid,horde,[],Blocked,No reviewed common-spell probe for druid/feralcat
+druid-feralcat-cat-monocat,Cat / Monocat,Druid,horde,[],Blocked,No reviewed common-spell probe for druid/feralcat
+hunter-dps-sv-weave,SV Weave,Hunter,horde,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-mm-weave,MM Weave,Hunter,horde,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-bm-weave,BM Weave,Hunter,horde,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-mm,MM,Hunter,horde,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-bm,BM,Hunter,horde,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-sv,SV,Hunter,horde,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-sv-melee,SV Melee,Hunter,horde,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-default,Default,Hunter,horde,[],Blocked,No reviewed common-spell probe for hunter/dps
+mage-dps-arcane-frost,Arcane Frost,Mage,horde,"[""RaceOrc"", ""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+mage-dps-arcane-fire,Arcane Fire,Mage,horde,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-ffb,FFB,Mage,horde,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-fire,Fire,Mage,horde,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-frost,Frost,Mage,horde,"[""RaceOrc"", ""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+paladin-retribution-twist-of-light,Twist of Light,Paladin,horde,[],Blocked,No reviewed common-spell probe for paladin/retribution
+paladin-retribution-holy-shock,Holy Shock,Paladin,horde,[],Blocked,No reviewed common-spell probe for paladin/retribution
+priest-dps-shadow-testing,Shadow Testing,Priest,horde,[],Blocked,No reviewed common-spell probe for priest/dps
+priest-dps-smite-testing,Smite Testing,Priest,horde,[],Blocked,No reviewed common-spell probe for priest/dps
+priest-dps-default,Default,Priest,horde,[],Blocked,No reviewed common-spell probe for priest/dps
+rogue-dps-combat-ss,Combat SS,Rogue,horde,[],Blocked,No reviewed common-spell probe for rogue/dps
+rogue-dps-combat-bs,Combat BS,Rogue,horde,[],Blocked,No reviewed common-spell probe for rogue/dps
+rogue-dps-subtlety-hemo,Subtlety Hemo,Rogue,horde,[],Blocked,No reviewed common-spell probe for rogue/dps
+rogue-dps-subtlety-bs,Subtlety BS,Rogue,horde,[],Blocked,No reviewed common-spell probe for rogue/dps
+shaman-elemental-testing,Testing,Shaman,horde,[],Blocked,No reviewed common-spell probe for shaman/elemental
+shaman-elemental-default,Default,Shaman,horde,[],Blocked,No reviewed common-spell probe for shaman/elemental
+shaman-enhancement-testing,Testing,Shaman,horde,[],Blocked,No reviewed common-spell probe for shaman/enhancement
+shaman-enhancement-default,Default,Shaman,horde,[],Blocked,No reviewed common-spell probe for shaman/enhancement
+warlock-dps-demo-fire-brand,Demo (Fire Brand),Warlock,horde,"[""RaceOrc"", ""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+warlock-dps-demo-shadow-brand,Demo (Shadow Brand),Warlock,horde,"[""RaceOrc"", ""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+warlock-dps-destro,Destro,Warlock,horde,"[""RaceOrc"", ""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+warlock-dps-sm-ruin,SM/Ruin,Warlock,horde,"[""RaceOrc"", ""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+warlock-dps-aff-wrack,Aff (Wrack),Warlock,horde,"[""RaceOrc"", ""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+warlock-dps-default,Default,Warlock,horde,"[""RaceOrc"", ""RaceTroll"", ""RaceUndead""]",Diagnostic completed,
+warrior-dps-fury-pre-bis,Fury / Pre-BiS,Warrior,horde,[],Blocked,No reviewed common-spell probe for warrior/dps
+warrior-dps-arms-pre-bis,Arms / Pre-BiS,Warrior,horde,[],Blocked,No reviewed common-spell probe for warrior/dps
+druid-balance-moonkin,Moonkin,Druid,alliance,"[""RaceNightElf""]",Partially completed,"panic: proto: (line 1:72): invalid value for enum field race: ""RaceHighOrderSkyborne""  main.main()"
+druid-feralcat-bearweave-45s-fights,Bearweave (45s fights),Druid,alliance,[],Blocked,No reviewed common-spell probe for druid/feralcat
+druid-feralcat-hybrid,Hybrid,Druid,alliance,[],Blocked,No reviewed common-spell probe for druid/feralcat
+druid-feralcat-cat-monocat,Cat / Monocat,Druid,alliance,[],Blocked,No reviewed common-spell probe for druid/feralcat
+hunter-dps-sv-weave,SV Weave,Hunter,alliance,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-mm-weave,MM Weave,Hunter,alliance,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-bm-weave,BM Weave,Hunter,alliance,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-mm,MM,Hunter,alliance,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-bm,BM,Hunter,alliance,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-sv,SV,Hunter,alliance,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-sv-melee,SV Melee,Hunter,alliance,[],Blocked,No reviewed common-spell probe for hunter/dps
+hunter-dps-default,Default,Hunter,alliance,[],Blocked,No reviewed common-spell probe for hunter/dps
+mage-dps-arcane-frost,Arcane Frost,Mage,alliance,"[""RaceHuman"", ""RaceGnome""]",Partially completed,"panic: proto: (line 1:72): invalid value for enum field race: ""RaceHighOrderSkyborne""  main.main()"
+mage-dps-arcane-fire,Arcane Fire,Mage,alliance,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-ffb,FFB,Mage,alliance,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-fire,Fire,Mage,alliance,[],Blocked,Gunba lacks allocated talent: heatingUp
+mage-dps-frost,Frost,Mage,alliance,"[""RaceHuman"", ""RaceGnome""]",Partially completed,"panic: proto: (line 1:65): invalid value for enum field race: ""RaceHighOrderSkyborne""  main.main()"
+paladin-retribution-twist-of-light,Twist of Light,Paladin,alliance,[],Blocked,No reviewed common-spell probe for paladin/retribution
+paladin-retribution-holy-shock,Holy Shock,Paladin,alliance,[],Blocked,No reviewed common-spell probe for paladin/retribution
+priest-dps-shadow-testing,Shadow Testing,Priest,alliance,[],Blocked,No reviewed common-spell probe for priest/dps
+priest-dps-smite-testing,Smite Testing,Priest,alliance,[],Blocked,No reviewed common-spell probe for priest/dps
+priest-dps-default,Default,Priest,alliance,[],Blocked,No reviewed common-spell probe for priest/dps
+rogue-dps-combat-ss,Combat SS,Rogue,alliance,[],Blocked,No reviewed common-spell probe for rogue/dps
+rogue-dps-combat-bs,Combat BS,Rogue,alliance,[],Blocked,No reviewed common-spell probe for rogue/dps
+rogue-dps-subtlety-hemo,Subtlety Hemo,Rogue,alliance,[],Blocked,No reviewed common-spell probe for rogue/dps
+rogue-dps-subtlety-bs,Subtlety BS,Rogue,alliance,[],Blocked,No reviewed common-spell probe for rogue/dps
+shaman-elemental-testing,Testing,Shaman,alliance,[],Blocked,No reviewed common-spell probe for shaman/elemental
+shaman-elemental-default,Default,Shaman,alliance,[],Blocked,No reviewed common-spell probe for shaman/elemental
+shaman-enhancement-testing,Testing,Shaman,alliance,[],Blocked,No reviewed common-spell probe for shaman/enhancement
+shaman-enhancement-default,Default,Shaman,alliance,[],Blocked,No reviewed common-spell probe for shaman/enhancement
+warlock-dps-demo-fire-brand,Demo (Fire Brand),Warlock,alliance,"[""RaceHuman"", ""RaceGnome""]",Diagnostic completed,
+warlock-dps-demo-shadow-brand,Demo (Shadow Brand),Warlock,alliance,"[""RaceHuman"", ""RaceGnome""]",Diagnostic completed,
+warlock-dps-destro,Destro,Warlock,alliance,"[""RaceHuman"", ""RaceGnome""]",Diagnostic completed,
+warlock-dps-sm-ruin,SM/Ruin,Warlock,alliance,"[""RaceHuman"", ""RaceGnome""]",Diagnostic completed,
+warlock-dps-aff-wrack,Aff (Wrack),Warlock,alliance,"[""RaceHuman"", ""RaceGnome""]",Diagnostic completed,
+warlock-dps-default,Default,Warlock,alliance,"[""RaceHuman"", ""RaceGnome""]",Diagnostic completed,
+warrior-dps-fury-pre-bis,Fury / Pre-BiS,Warrior,alliance,[],Blocked,No reviewed common-spell probe for warrior/dps
+warrior-dps-arms-pre-bis,Arms / Pre-BiS,Warrior,alliance,[],Blocked,No reviewed common-spell probe for warrior/dps
