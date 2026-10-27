@@ -297,6 +297,8 @@ export function buildSite({ run, out, id, rawBase, assessment }) {
 	fs.writeFileSync(path.join(snapshot, 'report.html'), document('WoWSims Forever analytics', body));
 	fs.writeFileSync(path.join(snapshot, 'origins.json'), JSON.stringify(origins));
 	fs.writeFileSync(path.join(site, '.nojekyll'), '');
+	// Artifact checksums describe stored bytes, so Git text normalization stays off.
+	fs.writeFileSync(path.join(site, '.gitattributes'), '* -text\n');
 	fs.writeFileSync(
 		path.join(site, 'index.html'),
 		document(

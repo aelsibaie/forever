@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { hash } from './racial_helpers.mjs';
 import { verifySite } from './publish_site.mjs';
 
@@ -66,8 +67,30 @@ if (!fs.existsSync(deployment)) {
 }
 assert.equal(run('git', ['remote', 'get-url', 'origin'], deployment), 'https://github.com/' + repo + '.git');
 assert.equal(run('git', ['branch', '--show-current'], deployment), branch);
+run('git', ['config', 'core.autocrlf', 'false'], deployment);
 fs.cpSync(site, deployment, { recursive: true });
 run('git', ['add', '.'], deployment);
+run('git', ['add', '--renormalize', '.'], deployment);
+const staged = new Map(
+	run('git', ['ls-files', '--stage', '-z'], deployment)
+		.split('\0')
+		.filter(Boolean)
+		.map(line => {
+			const [metadata, file] = line.split('\t');
+			return [file, metadata.split(' ')[1]];
+		}),
+);
+const manifest = JSON.parse(fs.readFileSync(path.join(site, 'publication-manifest.json'), 'utf8'));
+for (const file of [...Object.keys(manifest.files), 'publication-manifest.json']) {
+	const bytes = fs.readFileSync(path.join(site, file)),
+		expected = staged.get(file);
+	assert(expected, 'Published artifact is missing from the Git index: ' + file);
+	const stored = createHash(expected.length === 64 ? 'sha256' : 'sha1')
+		.update('blob ' + bytes.length + '\0')
+		.update(bytes)
+		.digest('hex');
+	assert.equal(stored, expected, 'Git altered published artifact bytes: ' + file);
+}
 if (run('git', ['status', '--porcelain'], deployment)) run('git', ['commit', '-m', '[Analytics] Publish ' + tag], deployment);
 run('git', ['push', 'origin', branch], deployment);
 const config = path.join(bundle, 'pages-config.json');

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { gunzipSync } from 'node:zlib';
+import { execFileSync } from 'node:child_process';
 import { hash } from './racial_helpers.mjs';
 import { buildSite, verifySite } from './publish_site.mjs';
 
@@ -14,7 +15,7 @@ test('public reports preserve native inputs and metrics while separating raw dis
 			out = path.join(fixture, 'output');
 		fs.mkdirSync(run);
 		fs.writeFileSync(path.join(run, 'workflow.json'), JSON.stringify({ state: 'passed', commit: 'analytics', model: 'upstream' }));
-		const input = Buffer.from('{"player":{"name":"Developer preset"}}\n');
+		const input = Buffer.from('{"player":{"name":"Developer preset"}}\r\n');
 		for (const name of ['racials', 'developer-presets', 'shadow-comparison']) {
 			const dir = path.join(run, name);
 			fs.mkdirSync(path.join(dir, 'requests'), { recursive: true });
@@ -38,6 +39,10 @@ test('public reports preserve native inputs and metrics while separating raw dis
 		assert(result.htmlLinks > 0);
 		const published = path.join(out, 'site/runs/test-snapshot/racials');
 		assert.deepEqual(fs.readFileSync(path.join(published, 'requests/case.json')), input);
+		const site = path.join(out, 'site');
+		execFileSync('git', ['init', '--initial-branch', 'codex/report-site'], { cwd: site, stdio: 'pipe' });
+		execFileSync('git', ['-c', 'core.autocrlf=true', 'add', '.'], { cwd: site, stdio: 'pipe' });
+		assert.deepEqual(execFileSync('git', ['show', ':runs/test-snapshot/racials/requests/case.json'], { cwd: site }), input);
 		const summary = JSON.parse(gunzipSync(fs.readFileSync(path.join(published, 'results/case.summary.json.gz'))).toString());
 		assert.equal(summary.metrics.avg, 123);
 		assert.equal(summary.metrics.crits, 4);
