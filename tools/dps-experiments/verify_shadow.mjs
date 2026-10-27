@@ -11,6 +11,7 @@ const provenance = read('provenance.json'),
 assert.equal(completion.fingerprint, provenance.fingerprint);
 assert(completion.normalizedRotationEquivalent && completion.primaryEngineUnchanged);
 assert.notEqual(provenance.settings.seed, provenance.settings.gunbaSeed, 'Cross-engine uncertainty requires different engine seeds.');
+assert(Math.abs(provenance.settings.seed - provenance.settings.gunbaSeed) >= provenance.settings.iterations, 'Engine iteration seed ranges overlap.');
 const rows = read('results.json').rows;
 assert.equal(rows.length, provenance.settings.durations.length * 8);
 assert.equal(new Set(rows.map(r => r.key)).size, rows.length);

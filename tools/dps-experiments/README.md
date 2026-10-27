@@ -116,6 +116,8 @@ The translated case retains engine differences in base attributes and support. A
 
 Normalized-rotation WoWSims controls must reproduce every original damage iteration. Both forks' requests, outputs, stats, engine binaries and hashes remain in the comparison archive. Within-engine race intervals use paired samples. The engines use different seeds for independent absolute-DPS errors; both seeds are recorded and verified against every request. The report exposes casts and critical ticks as well as damage, since matching sheet stats does not establish identical per-spell behavior. `--resume` requires unchanged source, generated Gunba protos, tools, sampling settings, binaries and stored request/result hashes. A changed setup requires a fresh directory.
 
+Both engines initialize iteration `i` from `RandomSeed + i` (`sim/core/sim.go` in each fork). Adjacent base seeds therefore overlap almost entirely for a long run. The comparison uses base seeds one billion apart and rejects overlapping iteration ranges; merely checking that the two base seeds differ is insufficient.
+
 ## Archived custom gear experiment
 
 The custom gear experiment is kept for reproduction. It is not the default gear policy.

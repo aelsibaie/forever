@@ -70,7 +70,8 @@ const settings = {
 	iterations,
 	durations,
 	seed: 2026102707,
-	gunbaSeed: 2026102708,
+	// Both forks seed iteration i from RandomSeed + i, so the engine ranges must be disjoint.
+	gunbaSeed: 3026102707,
 	analyticsCommit: run('git', ['rev-parse', 'HEAD']).trim(),
 	nodeVersion: process.version,
 	primaryEngine: old.engine.sha256,
@@ -81,6 +82,7 @@ const settings = {
 	toolHashes,
 };
 const fingerprint = hash(signature(settings));
+assert(Math.abs(settings.gunbaSeed - settings.seed) >= iterations, 'Engine iteration seed ranges overlap.');
 let previous;
 const resumableKeys = new Set();
 if (args.includes('--resume')) {
