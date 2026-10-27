@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { eligibleRaces, factionPlayer, notesOverlay, racialActions, compareSamples } from './racial_helpers.mjs';
+import { eligibleRaces, factionPlayer, notesOverlay, racialActions, compareSamples, rotationCaveats } from './racial_helpers.mjs';
 
 const policy = { factions: { alliance: ['RaceHuman', 'RaceDwarf'], horde: ['RaceOrc'] }, counterparts: [{ alliance: 1, horde: 2 }] };
 const database = {
@@ -59,4 +59,12 @@ test('the notes adapter accepts adopted changes and refuses source drift', () =>
 	assert.ok(patched.status.every(row => row.action === 'overlay'));
 	assert.ok(notesOverlay(patched.text).status.every(row => row.action === 'already-upstream'));
 	assert.throws(() => notesOverlay(original.replace('time.Second * 25', 'time.Second * 20')), /cannot locate/);
+});
+
+test('shared aura guards are recorded without becoming preset defects', () => {
+	const policy = { reviewedRotationCaveats: [{ profileId: 'reviewed', spellId: 123, label: 'Rotation caveat', reason: 'Missing branch' }] };
+	assert.deepEqual(rotationCaveats('ordinary', [{ logLevel: 'Warning', validation: 'No aura found for: {SpellID: 1270842}' }], policy), []);
+	assert.equal(rotationCaveats('reviewed', [{ logLevel: 'Warning', validation: 'No aura found for: {SpellID: 123}' }], policy).length, 1);
+	assert.deepEqual(rotationCaveats('reviewed', [], policy), []);
+	assert.equal(rotationCaveats('ordinary', [{ logLevel: 'Warning', validation: 'Condition could not be resolved' }], policy)[0].code, 'condition');
 });

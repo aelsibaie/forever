@@ -126,3 +126,13 @@ export function notesOverlay(source) {
 	}
 	return { text, status };
 }
+
+export function rotationCaveats(profileId, messages, policy) {
+	const warnings = messages.filter(message => message.logLevel === 'Warning').map(message => message.validation);
+	const markers = (policy.reviewedRotationCaveats ?? [])
+		.filter(caveat => caveat.profileId === profileId && warnings.some(text => text.includes('No aura found') && text.includes(String(caveat.spellId))))
+		.map(caveat => ({ code: 'rotation', label: caveat.label, reason: caveat.reason }));
+	if (warnings.some(text => text.includes('Condition could not be resolved')))
+		markers.push({ code: 'condition', label: 'Unresolved condition', reason: 'An APL condition is unresolved. See the exact validation dump.' });
+	return markers;
+}

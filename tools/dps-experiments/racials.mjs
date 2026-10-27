@@ -17,6 +17,7 @@ import {
 	racialMetrics,
 	compareSamples,
 	notesOverlay,
+	rotationCaveats,
 } from './racial_helpers.mjs';
 import { verifyRacialRun } from './verify_racials.mjs';
 
@@ -24,11 +25,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const args = process.argv.slice(2);
 if (args.includes('--help')) {
 	console.log(
-		'Usage: node tools/dps-experiments/racials.mjs [--faction both|alliance|horde] [--model upstream|notes-2026-10-27] [--out directory] [--resume] [--reuse previous-run] [--update] [--prepared] [--python executable] [--iterations 5000] [--confirmation-iterations 20000] [--seed 2026102707] [--durations 60,180,300] [--profiles id,id] [--sensitivity types|none]\n\nExports developer presets, builds the current engine, checks racial activation and faction counterparts, runs paired race comparisons and renders offline reports. --update merges origin/master into clean codex/analytics. --resume requires the same source snapshot and settings. --reuse verifies exact engine/request/result hashes. The default model is upstream.',
+		'Usage: node tools/dps-experiments/racials.mjs [--faction both|alliance|horde] [--model upstream|notes-2026-10-27] [--out directory] [--resume] [--reuse previous-run] [--prepared] [--python executable] [--iterations 5000] [--confirmation-iterations 20000] [--seed 2026102707] [--durations 60,180,300] [--profiles id,id] [--sensitivity types|none]\n\nExports developer presets, builds the current engine, checks racial activation and faction counterparts, runs paired race comparisons and renders offline reports. --resume requires the same source snapshot and settings. --reuse verifies exact engine/request/result hashes. The default model is upstream.',
 	);
 	process.exit(0);
 }
-const boolean = new Set(['--resume', '--update', '--prepared']);
+const boolean = new Set(['--resume', '--prepared']);
 const valued = new Set([
 	'--faction',
 	'--model',
@@ -57,19 +58,6 @@ const run = (command, argv, log) => {
 const git = (...argv) => execFileSync('git', argv, { cwd: root, encoding: 'utf8' }).trim();
 const read = file => JSON.parse(fs.readFileSync(file, 'utf8').replace(/^\uFEFF/, ''));
 const fileHash = file => hash(fs.readFileSync(file));
-if (options.update) {
-	if (options.resume) throw new Error('--update and --resume cannot be combined. Use a new output after an update.');
-	if (git('branch', '--show-current') !== 'codex/analytics' || git('status', '--porcelain'))
-		throw new Error('--update requires a clean codex/analytics branch.');
-	const lock = fileHash(path.join(root, 'package-lock.json'));
-	console.log('Fetching and merging origin/master...');
-	run('git', ['fetch', 'origin']);
-	run('git', ['merge', '--no-edit', 'origin/master']);
-	if (lock !== fileHash(path.join(root, 'package-lock.json'))) {
-		console.log('Installing updated npm dependencies...');
-		run(process.platform === 'win32' ? 'cmd.exe' : 'npm', process.platform === 'win32' ? ['/d', '/c', 'npm', 'ci'] : ['ci']);
-	}
-}
 if (!options.prepared) {
 	console.log('Generating protocol sources and constants...');
 	console.log(run(process.execPath, ['tools/dps-experiments/prepare.mjs']));
@@ -503,12 +491,8 @@ const confidence = catalog.map(profile => {
 			label: '45s preset',
 			reason: 'Developer rotation is named for 45-second fights; these tests include other durations.',
 		});
-	const warnings = validations
-		.filter(v => v.profileId === profile.id && v.faction === profile.faction)
-		.flatMap(v => v.messages)
-		.filter(v => /No aura found|Condition could not be resolved/i.test(v.validation));
-	if (warnings.length)
-		markers.push({ code: 'apl', label: 'APL warning', reason: 'An unresolved aura or condition is reported. See the exact validation dump.' });
+	const messages = validations.filter(v => v.profileId === profile.id && v.faction === profile.faction).flatMap(v => v.messages);
+	markers.push(...rotationCaveats(profile.id, messages, policy));
 	const adjustment = adjusted.get(profile.faction + '--' + profile.id);
 	if (adjustment)
 		markers.push({
