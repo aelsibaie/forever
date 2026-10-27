@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "2026-10-27-reviewed",
-  "createdAt": "2026-10-27T23:31:23.657Z",
+  "createdAt": "2026-10-27T23:43:26.962Z",
   "sourceAnalyticsCommit": "14e5ca6ca41b4f9253d2d54b41bb380380261be8",
   "comparisonAnalyticsCommit": "69f8e026a05e4e3fd570a7de2ace93b3f6541bfd",
   "rawDownloads": [
@@ -37,6 +37,7 @@
     }
   ],
   "files": {
+    ".gitattributes": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "index.html": "269b86a26e3a46015ff68d8403c767c52ed67e48d9273a2f74886a4721ba4bb7",
     "latest/index.html": "6a09f601a9122939b59067633c60c865ce9f6033cca369c33c963352f86fce03",
