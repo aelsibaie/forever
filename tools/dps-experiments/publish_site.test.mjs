@@ -6,7 +6,7 @@ import path from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { execFileSync } from 'node:child_process';
 import { hash } from './racial_helpers.mjs';
-import { buildSite, verifySite } from './publish_site.mjs';
+import { buildSite, verifySite, compactPublishedStats } from './publish_site.mjs';
 
 test('public reports preserve native inputs and metrics while separating raw distributions', () => {
 	const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-publication-'));
@@ -68,11 +68,13 @@ test('a standalone verified race study publishes its linked build artifacts', ()
 	try {
 		const source = path.join(fixture, 'source'),
 			out = path.join(fixture, 'output');
-		for (const folder of ['builds', 'requests', 'results', 'exports']) fs.mkdirSync(path.join(source, folder), { recursive: true });
+		for (const folder of ['builds', 'requests', 'results', 'exports', 'stats']) fs.mkdirSync(path.join(source, folder), { recursive: true });
 		const input = '{"player":{"race":"RaceDwarf"}}\r\n';
 		fs.writeFileSync(path.join(source, 'requests/case.json'), input);
 		fs.writeFileSync(path.join(source, 'requests/unlinked.json'), '{"large":"kept in the complete raw archive"}');
 		fs.writeFileSync(path.join(source, 'exports/case.website.json'), input);
+		const stats = { raidStats: { players: [{ finalStats: { stats: [12, 0, 3.5] }, metadata: { spells: [{ id: 42 }] } }] } };
+		fs.writeFileSync(path.join(source, 'stats/case.json'), JSON.stringify(stats));
 		fs.writeFileSync(path.join(source, 'results/case.json'), JSON.stringify({ metrics: { avg: 42, allValues: [40, 44] } }));
 		fs.mkdirSync(path.join(source, 'hunter-pet-controls/results'), { recursive: true });
 		fs.mkdirSync(path.join(source, 'hunter-pet-controls/requests'));
@@ -81,7 +83,7 @@ test('a standalone verified race study publishes its linked build artifacts', ()
 		fs.writeFileSync(path.join(source, 'report.html'), '<main><a href="builds/case.html">Build</a><a href="verification.json">Checks</a></main>');
 		fs.writeFileSync(
 			path.join(source, 'builds/case.html'),
-			'<main><a href="../requests/case.json">Input</a><a href="../results/case.json">Result</a><a href="../exports/case.website.json">Website</a><a href="../hunter-pet-controls/results/pet.json">Pet result</a><a href="../hunter-pet-controls/requests/pet.json">Pet input</a></main>',
+			'<main><a href="../requests/case.json">Input</a><a href="../results/case.json">Result</a><a href="../stats/case.json">Stats</a><a href="../exports/case.website.json">Website</a><a href="../hunter-pet-controls/results/pet.json">Pet result</a><a href="../hunter-pet-controls/requests/pet.json">Pet input</a></main>',
 		);
 		fs.writeFileSync(
 			path.join(source, 'provenance.json'),
@@ -103,6 +105,15 @@ test('a standalone verified race study publishes its linked build artifacts', ()
 		assert.equal(petSummary.metrics.allValues, undefined);
 		assert(!fs.existsSync(path.join(published, 'requests/unlinked.json')));
 		assert.equal(JSON.parse(fs.readFileSync(path.join(out, 'raw-archives.json')))[0].complete, true);
+		const statSummary = JSON.parse(fs.readFileSync(path.join(published, 'stats/case.json')));
+		assert.deepEqual(statSummary.raidStats.players[0].finalStats, stats.raidStats.players[0].finalStats);
+		assert.equal(statSummary.raidStats.players[0].metadata, undefined);
+		const completeStats = gunzipSync(fs.readFileSync(path.join(published, 'stats', statSummary.publication.completeStatsGzip)));
+		assert.deepEqual(JSON.parse(completeStats), stats);
+		assert.equal(hash(completeStats), statSummary.publication.completePortableSha256);
+		const before = fs.readFileSync(path.join(out, 'site/publication-manifest.json'));
+		compactPublishedStats(path.join(out, 'site'));
+		assert.deepEqual(fs.readFileSync(path.join(out, 'site/publication-manifest.json')), before);
 		assert(verifySite(path.join(out, 'site')).htmlLinks > 0);
 	} finally {
 		assert(path.resolve(fixture).startsWith(path.resolve(os.tmpdir()) + path.sep) && path.basename(fixture).startsWith('wow-publication-'));

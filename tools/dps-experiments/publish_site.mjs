@@ -60,6 +60,54 @@ export function verifySite(directory) {
 	return { files: Object.keys(manifest.files).length, htmlLinks: links, bytes: files(site).reduce((sum, file) => sum + fs.statSync(file).size, 0) };
 }
 
+export function compactPublishedStats(directory) {
+	const site = path.resolve(directory);
+	verifySite(site);
+	const manifest = read(path.join(site, 'publication-manifest.json'));
+	const origins = new Map();
+	const withoutMetadata = value =>
+		Array.isArray(value)
+			? value.map(withoutMetadata)
+			: value && typeof value === 'object'
+				? Object.fromEntries(
+						Object.entries(value)
+							.filter(([key]) => key !== 'metadata')
+							.map(([key, item]) => [key, withoutMetadata(item)]),
+					)
+				: value;
+	for (const file of Object.keys(manifest.files).filter(file => file.includes('/stats/') && file.endsWith('.json'))) {
+		const target = path.join(site, file),
+			bytes = fs.readFileSync(target),
+			data = JSON.parse(bytes);
+		if (data.publication?.completeStatsGzip) continue;
+		const compressed = file.replace(/\.json$/, '.full.json.gz'),
+			packed = gzipSync(bytes);
+		fs.writeFileSync(path.join(site, compressed), packed);
+		const summary = withoutMetadata(data);
+		summary.publication = {
+			representation: 'Pre-combat stats; spell and aura metadata remains in the complete portable gzip output and raw archive.',
+			completeStatsGzip: path.posix.basename(compressed),
+			completePortableSha256: hash(bytes),
+		};
+		fs.writeFileSync(target, JSON.stringify(summary));
+		manifest.files[file] = hash(fs.readFileSync(target));
+		manifest.files[compressed] = hash(packed);
+		const originFile = path.posix.join(...file.split('/').slice(0, 2), 'origins.json');
+		if (!origins.has(originFile)) origins.set(originFile, read(path.join(site, originFile)));
+		const records = origins.get(originFile),
+			original = records[file];
+		assert(original, 'Published stats have no source receipt: ' + file);
+		records[file] = { ...original, publishedSha256: manifest.files[file], representation: 'Pre-combat stats summary' };
+		records[compressed] = { ...original, publishedSha256: manifest.files[compressed], representation: 'Complete portable stats and metadata (gzip)' };
+	}
+	for (const [file, records] of origins) {
+		fs.writeFileSync(path.join(site, file), JSON.stringify(records));
+		manifest.files[file] = hash(fs.readFileSync(path.join(site, file)));
+	}
+	fs.writeFileSync(path.join(site, 'publication-manifest.json'), JSON.stringify(manifest, null, 2));
+	return verifySite(site);
+}
+
 export function buildSite({ run, out, id, rawBase, assessment, robustness }) {
 	assert(/^[a-z0-9][a-z0-9-]+$/.test(id), 'Use a portable snapshot ID.');
 	assert(!fs.existsSync(out), 'Publication output already exists.');
@@ -391,7 +439,7 @@ export function buildSite({ run, out, id, rawBase, assessment, robustness }) {
 			2,
 		),
 	);
-	return verifySite(site);
+	return compactPublishedStats(site);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -401,6 +449,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
 		console.log(
 			'node tools/dps-experiments/publish_site.mjs (--run archive | --robustness verified-study) --out new-directory --id snapshot-id --raw-base release-download-url [--make-raw] [--python executable]\nUse --verify site-directory to verify an existing publication.',
 		);
+		process.exit(0);
+	}
+	if (args.includes('--compact-stats')) {
+		console.log(JSON.stringify(compactPublishedStats(path.resolve(option('--compact-stats')))));
 		process.exit(0);
 	}
 	if (args.includes('--verify')) {

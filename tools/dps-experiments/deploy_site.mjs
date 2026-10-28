@@ -80,6 +80,8 @@ const staged = new Map(
 			return [file, metadata.split(' ')[1]];
 		}),
 );
+const siteBytes = [...staged.keys()].reduce((sum, file) => sum + fs.statSync(path.join(deployment, file)).size, 0);
+assert(siteBytes < 1_000_000_000, 'The combined site exceeds its 1 GB publication budget. Reduce artifacts or archive an older snapshot before publishing.');
 const manifest = JSON.parse(fs.readFileSync(path.join(site, 'publication-manifest.json'), 'utf8'));
 for (const file of [...Object.keys(manifest.files), 'publication-manifest.json']) {
 	const bytes = fs.readFileSync(path.join(site, file)),
