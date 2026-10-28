@@ -1,0 +1,8 @@
+{
+  "kind": "verified-race-robustness",
+  "state": "passed",
+  "commit": "a1519e7d44e2925ec4d781a3042f556c53371178",
+  "model": "notes-2026-10-27",
+  "sourceCommit": "5a407cfbb7924f8e03ce732437b6d61ac1ded8bb",
+  "verificationSha256": "914bb99950663b0afabaf523f207ec7e884df938c084d51d7f9c35805be6564b"
+}

@@ -1,0 +1,1111 @@
+{
+  "apiVersion": 2,
+  "settings": {
+    "iterations": 1000,
+    "phase": 1,
+    "fixedRngSeed": "3026102801",
+    "showDamageMetrics": true,
+    "showExperimental": true,
+    "faction": "Alliance"
+  },
+  "raidBuffs": {
+    "arcaneBrilliance": true,
+    "prayerOfSpirit": true,
+    "giftOfTheWild": true,
+    "prayerOfFortitude": true,
+    "strengthOfEarthTotem": true,
+    "graceOfAirTotem": true,
+    "windfuryTotem": true,
+    "battleShout": "TristateEffectRegular",
+    "trueshotAura": true,
+    "leaderOfThePack": true,
+    "moonkinAura": true
+  },
+  "debuffs": {
+    "huntersMark": true,
+    "judgementOfTheCrusader": true,
+    "judgementOfWisdom": true,
+    "curseOfElements": true,
+    "curseOfRecklessness": true,
+    "faerieFire": true,
+    "exposeArmor": true,
+    "sunderArmor": true,
+    "giftOfArthas": true
+  },
+  "partyBuffs": {
+    "manaSpringTotem": "TristateEffectImproved"
+  },
+  "player": {
+    "apiVersion": 2,
+    "name": "warlock-dps-demo-fire-brand",
+    "race": "RaceGnome",
+    "class": "ClassWarlock",
+    "equipment": {
+      "items": [
+        {
+          "id": 10041,
+          "enchant": 2544
+        },
+        {
+          "id": 15856,
+          "enchant": 8218
+        },
+        {
+          "id": 19050
+        },
+        {
+          "id": 272411
+        },
+        {
+          "id": 14153,
+          "enchant": 8492
+        },
+        {
+          "id": 254123,
+          "enchant": 7665
+        },
+        {
+          "id": 14146,
+          "enchant": 8492
+        },
+        {
+          "id": 18405
+        },
+        {
+          "id": 14144,
+          "enchant": 2544
+        },
+        {
+          "id": 275606,
+          "enchant": 8492
+        },
+        {
+          "id": 272407
+        },
+        {
+          "id": 272406
+        },
+        {
+          "id": 272438
+        },
+        {
+          "id": 249469
+        },
+        {
+          "id": 22383
+        },
+        {
+          "id": 11904,
+          "enchant": 7659
+        },
+        {
+          "id": 249385
+        }
+      ]
+    },
+    "consumables": {
+      "flaskId": 13512,
+      "foodId": 13931,
+      "conjuredId": 12662,
+      "mhImbueId": 20750,
+      "potions": [
+        118,
+        858,
+        929,
+        1072,
+        1710,
+        2455,
+        2456,
+        3087,
+        3384,
+        3385,
+        3827,
+        3928,
+        6048,
+        6049,
+        6050,
+        6051,
+        6052,
+        6149,
+        9036,
+        9144,
+        13443,
+        13444,
+        13446,
+        13456,
+        13457,
+        13458,
+        13459,
+        13460,
+        13461,
+        14894,
+        17348,
+        17349,
+        17351,
+        17352,
+        18253,
+        18839,
+        18841,
+        250932,
+        250933,
+        250934,
+        250935,
+        250936,
+        250937,
+        250951,
+        250953,
+        250954,
+        255663,
+        268881,
+        268882,
+        268883,
+        274935,
+        282011,
+        282013
+      ],
+      "conjuredItems": [
+        1703,
+        5509,
+        5510,
+        5511,
+        5512,
+        9421,
+        11951,
+        11952,
+        12662,
+        15723,
+        17747
+      ],
+      "extraIds": [
+        18269,
+        10309
+      ],
+      "elixirIds": [
+        250341,
+        250335,
+        13454,
+        250337,
+        250347
+      ],
+      "mhWeaponImbueId": 13701,
+      "resourcePotId": 13444
+    },
+    "bonusStats": {
+      "apiVersion": 2,
+      "stats": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pseudoStats": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "itemSwap": {
+      "items": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "prepullBonusStats": {
+        "apiVersion": 2,
+        "stats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "pseudoStats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "buffs": {
+      "greaterBlessingOfKings": true,
+      "greaterBlessingOfMight": true,
+      "greaterBlessingOfWisdom": true,
+      "greaterBlessingOfSalvation": true
+    },
+    "warlock": {
+      "options": {
+        "classOptions": {
+          "summon": "Imp",
+          "armor": "DemonArmor",
+          "sacrificedDemon": "Succubus",
+          "soulShards": 32
+        }
+      }
+    },
+    "talentsString": "011-0305003201220301351-0050055003",
+    "profession1": "Engineering",
+    "profession2": "Tailoring",
+    "cooldowns": {},
+    "rotation": {
+      "type": "TypeAPL",
+      "prepullActions": [
+        {
+          "action": {
+            "castSpell": {
+              "spellId": {
+                "spellId": 17924
+              }
+            }
+          },
+          "doAtValue": {
+            "math": {
+              "op": "OpMul",
+              "lhs": {
+                "math": {
+                  "op": "OpAdd",
+                  "lhs": {
+                    "spellCastTime": {
+                      "spellId": {
+                        "spellId": 17924
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "spellTravelTime": {
+                      "spellId": {
+                        "spellId": 17924
+                      }
+                    }
+                  }
+                }
+              },
+              "rhs": {
+                "const": {
+                  "val": "-0.9"
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "petAttack": {}
+          },
+          "doAtValue": {
+            "const": {
+              "val": "-1s"
+            }
+          }
+        },
+        {
+          "action": {
+            "castSpell": {
+              "spellId": {
+                "spellId": 25309
+              }
+            }
+          },
+          "doAtValue": {
+            "const": {
+              "val": "-0.3s"
+            }
+          }
+        }
+      ],
+      "priorityList": [
+        {
+          "action": {
+            "autocastOtherCooldowns": {}
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "not": {
+                "val": {
+                  "warlockAssignedCurseIsActive": {}
+                }
+              }
+            },
+            "castWarlockAssignedCurse": {}
+          }
+        },
+        {
+          "hide": true,
+          "action": {
+            "condition": {
+              "or": {
+                "vals": [
+                  {
+                    "and": {
+                      "vals": [
+                        {
+                          "auraIsActive": {
+                            "sourceUnit": {
+                              "type": "CurrentTarget"
+                            },
+                            "auraId": {
+                              "spellId": 603
+                            },
+                            "includeReactionTime": true
+                          }
+                        },
+                        {
+                          "cmp": {
+                            "op": "OpLe",
+                            "lhs": {
+                              "auraRemainingTime": {
+                                "sourceUnit": {
+                                  "type": "CurrentTarget"
+                                },
+                                "auraId": {
+                                  "spellId": 603
+                                }
+                              }
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "2s"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "and": {
+                      "vals": [
+                        {
+                          "auraIsInactive": {
+                            "sourceUnit": {
+                              "type": "CurrentTarget"
+                            },
+                            "auraId": {
+                              "spellId": 603
+                            },
+                            "includeReactionTime": true
+                          }
+                        },
+                        {
+                          "not": {
+                            "val": {
+                              "spellIsReady": {
+                                "spellId": {
+                                  "spellId": 603
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "cmp": {
+                            "op": "OpGt",
+                            "lhs": {
+                              "remainingTime": {}
+                            },
+                            "rhs": {
+                              "math": {
+                                "op": "OpAdd",
+                                "lhs": {
+                                  "spellTimeToReady": {
+                                    "spellId": {
+                                      "spellId": 603
+                                    }
+                                  }
+                                },
+                                "rhs": {
+                                  "auraDuration": {
+                                    "sourceUnit": {
+                                      "type": "CurrentTarget"
+                                    },
+                                    "auraId": {
+                                      "spellId": 603
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "cmp": {
+                      "op": "OpLe",
+                      "lhs": {
+                        "remainingTime": {}
+                      },
+                      "rhs": {
+                        "variableRef": {
+                          "name": "Doom tick"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "groupReference": {
+              "groupName": "Cooldowns"
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "cmp": {
+                "op": "OpGe",
+                "lhs": {
+                  "remainingTime": {}
+                },
+                "rhs": {
+                  "variableRef": {
+                    "name": "Doom tick"
+                  }
+                }
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 603
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "or": {
+                      "vals": [
+                        {
+                          "not": {
+                            "val": {
+                              "auraIsActive": {
+                                "sourceUnit": {
+                                  "type": "CurrentTarget"
+                                },
+                                "auraId": {
+                                  "spellId": 1293696
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "cmp": {
+                            "op": "OpLt",
+                            "lhs": {
+                              "auraRemainingTime": {
+                                "sourceUnit": {
+                                  "type": "CurrentTarget"
+                                },
+                                "auraId": {
+                                  "spellId": 1293696
+                                }
+                              }
+                            },
+                            "rhs": {
+                              "const": {
+                                "val": "2.5s"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "val": {
+                        "spellIsCasting": {
+                          "spellId": {
+                            "spellId": 17923
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 17923
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "cmp": {
+                "op": "OpGt",
+                "lhs": {
+                  "spellExpectedDpet": {
+                    "spellId": {
+                      "spellId": 25309
+                    }
+                  }
+                },
+                "rhs": {
+                  "variableRef": {
+                    "name": "DPET Non DoT"
+                  }
+                }
+              }
+            },
+            "strictMultidot": {
+              "spellId": {
+                "spellId": 25309
+              },
+              "maxDots": 10,
+              "maxOverlap": {
+                "spellCastTime": {
+                  "spellId": {
+                    "spellId": 25309
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "not": {
+                      "val": {
+                        "dotIsActive": {
+                          "spellId": {
+                            "spellId": 603
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "or": {
+                      "vals": [
+                        {
+                          "cmp": {
+                            "op": "OpLt",
+                            "lhs": {
+                              "remainingTime": {}
+                            },
+                            "rhs": {
+                              "variableRef": {
+                                "name": "Doom tick"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "not": {
+                            "val": {
+                              "spellIsReady": {
+                                "spellId": {
+                                  "spellId": 603
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "and": {
+                      "vals": [
+                        {
+                          "cmp": {
+                            "op": "OpGt",
+                            "lhs": {
+                              "spellExpectedDpet": {
+                                "spellId": {
+                                  "spellId": 11713
+                                }
+                              }
+                            },
+                            "rhs": {
+                              "variableRef": {
+                                "name": "DPET Non DoT"
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            "strictMultidot": {
+              "spellId": {
+                "spellId": 11713
+              },
+              "maxDots": 10,
+              "maxOverlap": {
+                "spellCastTime": {
+                  "spellId": {
+                    "spellId": 11713
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "cmp": {
+                "op": "OpGt",
+                "lhs": {
+                  "spellExpectedDpet": {
+                    "spellId": {
+                      "spellId": 25311
+                    }
+                  }
+                },
+                "rhs": {
+                  "variableRef": {
+                    "name": "DPET Non DoT"
+                  }
+                }
+              }
+            },
+            "strictMultidot": {
+              "spellId": {
+                "spellId": 25311
+              },
+              "maxDots": 10,
+              "maxOverlap": {
+                "spellCastTime": {
+                  "spellId": {
+                    "spellId": 25311
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 440873
+                      },
+                      "includeReactionTime": true
+                    }
+                  },
+                  {
+                    "cmp": {
+                      "op": "OpGt",
+                      "lhs": {
+                        "remainingTime": {}
+                      },
+                      "rhs": {
+                        "math": {
+                          "op": "OpAdd",
+                          "lhs": {
+                            "spellCastTime": {
+                              "spellId": {
+                                "spellId": 17924
+                              }
+                            }
+                          },
+                          "rhs": {
+                            "spellTravelTime": {
+                              "spellId": {
+                                "spellId": 17924
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 17924
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "cmp": {
+                      "op": "OpLt",
+                      "lhs": {
+                        "remainingTime": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "5s"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "cmp": {
+                      "op": "OpGt",
+                      "lhs": {
+                        "spellExpectedDpet": {
+                          "spellId": {
+                            "spellId": 17926
+                          }
+                        }
+                      },
+                      "rhs": {
+                        "spellExpectedDpet": {
+                          "spellId": {
+                            "spellId": 17923
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 17926
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "cmp": {
+                      "op": "OpLt",
+                      "lhs": {
+                        "currentManaPercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "30%"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "cmp": {
+                      "op": "OpGt",
+                      "lhs": {
+                        "remainingTime": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "60s"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 11689
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "castSpell": {
+              "spellId": {
+                "spellId": 17923
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "castSpell": {
+              "spellId": {
+                "spellId": 11689
+              }
+            }
+          }
+        }
+      ],
+      "valueVariables": [
+        {
+          "name": "Doom tick",
+          "value": {
+            "const": {
+              "val": "60s"
+            }
+          }
+        },
+        {
+          "name": "DPET Non DoT",
+          "value": {
+            "max": {
+              "vals": [
+                {
+                  "spellExpectedDpet": {
+                    "spellId": {
+                      "spellId": 17924
+                    }
+                  }
+                },
+                {
+                  "spellExpectedDpet": {
+                    "spellId": {
+                      "spellId": 25307
+                    }
+                  }
+                },
+                {
+                  "spellExpectedDpet": {
+                    "spellId": {
+                      "spellId": 17923
+                    }
+                  }
+                },
+                {
+                  "spellExpectedDpet": {
+                    "spellId": {
+                      "spellId": 17926
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "reactionTimeMs": 100,
+    "distanceFromTarget": 20,
+    "healingModel": {}
+  },
+  "encounter": {
+    "duration": 180,
+    "executeProportion20": 0.2,
+    "executeProportion35": 0.35,
+    "targets": [
+      {
+        "name": "neutral target",
+        "level": 63,
+        "mobType": "MobTypeMechanical",
+        "stats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3731
+        ],
+        "tankIndex": -1
+      }
+    ]
+  }
+}

@@ -1,0 +1,726 @@
+{
+  "apiVersion": 2,
+  "settings": {
+    "iterations": 1000,
+    "phase": 1,
+    "fixedRngSeed": "3026102801",
+    "showDamageMetrics": true,
+    "showExperimental": true,
+    "faction": "Alliance"
+  },
+  "raidBuffs": {
+    "arcaneBrilliance": true,
+    "prayerOfSpirit": true,
+    "giftOfTheWild": true,
+    "prayerOfFortitude": true,
+    "strengthOfEarthTotem": true,
+    "graceOfAirTotem": true,
+    "windfuryTotem": true,
+    "battleShout": "TristateEffectRegular",
+    "trueshotAura": true,
+    "leaderOfThePack": true,
+    "moonkinAura": true
+  },
+  "debuffs": {
+    "huntersMark": true,
+    "judgementOfTheCrusader": true,
+    "judgementOfWisdom": true,
+    "curseOfElements": true,
+    "curseOfRecklessness": true,
+    "faerieFire": true,
+    "exposeArmor": true,
+    "sunderArmor": true,
+    "giftOfArthas": true
+  },
+  "partyBuffs": {
+    "manaSpringTotem": "TristateEffectImproved"
+  },
+  "player": {
+    "apiVersion": 2,
+    "name": "priest-dps-smite-testing",
+    "race": "RaceHuman",
+    "class": "ClassPriest",
+    "equipment": {
+      "items": [
+        {
+          "id": 16686,
+          "enchant": 2544
+        },
+        {
+          "id": 15856,
+          "enchant": 8218
+        },
+        {
+          "id": 19050
+        },
+        {
+          "id": 272411
+        },
+        {
+          "id": 16688,
+          "enchant": 8492
+        },
+        {
+          "id": 16683,
+          "enchant": 7665
+        },
+        {
+          "id": 16684,
+          "enchant": 7646
+        },
+        {
+          "id": 18405
+        },
+        {
+          "id": 16687,
+          "enchant": 2544
+        },
+        {
+          "id": 16682,
+          "enchant": 8492
+        },
+        {
+          "id": 13001
+        },
+        {
+          "id": 13001
+        },
+        {
+          "id": 272438
+        },
+        {
+          "id": 10659
+        },
+        {
+          "id": 2243
+        },
+        {
+          "id": 11904,
+          "enchant": 7660
+        },
+        {
+          "id": 249385
+        }
+      ]
+    },
+    "consumables": {
+      "flaskId": 13512,
+      "foodId": 13931,
+      "conjuredId": 12662,
+      "mhImbueId": 20749,
+      "potions": [
+        1072,
+        2455,
+        2456,
+        3087,
+        3385,
+        3827,
+        6048,
+        6049,
+        6050,
+        6051,
+        6052,
+        6149,
+        9144,
+        13443,
+        13444,
+        13456,
+        13457,
+        13458,
+        13459,
+        13460,
+        13461,
+        14894,
+        17351,
+        17352,
+        18253,
+        18841,
+        250932,
+        250933,
+        250934,
+        250935,
+        250936,
+        250937,
+        250951,
+        250953,
+        250954,
+        255663,
+        274935,
+        282013
+      ],
+      "conjuredItems": [
+        11952,
+        12662,
+        15723,
+        17747
+      ],
+      "elixirIds": [
+        9264,
+        13454,
+        250328,
+        250337,
+        250338,
+        250341,
+        21546
+      ],
+      "resourcePotId": 13444,
+      "offensivePotId": 250937
+    },
+    "bonusStats": {
+      "apiVersion": 2,
+      "stats": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pseudoStats": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "itemSwap": {
+      "items": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "prepullBonusStats": {
+        "apiVersion": 2,
+        "stats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "pseudoStats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "buffs": {
+      "greaterBlessingOfKings": true,
+      "greaterBlessingOfMight": true,
+      "greaterBlessingOfWisdom": true,
+      "greaterBlessingOfSalvation": true
+    },
+    "dpsPriest": {
+      "options": {
+        "classOptions": {
+          "armor": "InnerFire",
+          "preShadowform": true
+        }
+      }
+    },
+    "talentsString": "525235031030001001-30515100002-3",
+    "profession1": "Enchanting",
+    "profession2": "Tailoring",
+    "cooldowns": {},
+    "rotation": {
+      "type": "TypeAPL",
+      "prepullActions": [
+        {
+          "action": {
+            "castSpell": {
+              "spellId": {
+                "spellId": 10060
+              }
+            }
+          },
+          "doAtValue": {
+            "const": {
+              "val": "-1s"
+            }
+          }
+        }
+      ],
+      "priorityList": [
+        {
+          "action": {
+            "condition": {
+              "cmp": {
+                "op": "OpLe",
+                "lhs": {
+                  "currentManaPercent": {}
+                },
+                "rhs": {
+                  "const": {
+                    "val": "10%"
+                  }
+                }
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 5019
+              },
+              "target": {
+                "type": "Target"
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "not": {
+                      "val": {
+                        "dotIsActive": {
+                          "spellId": {
+                            "spellId": 15265,
+                            "rank": 5
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "cmp": {
+                      "op": "OpLe",
+                      "lhs": {
+                        "currentManaPercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "20%"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 15265,
+                "rank": 5
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "not": {
+                      "val": {
+                        "dotIsActive": {
+                          "spellId": {
+                            "spellId": 15261,
+                            "rank": 8
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "cmp": {
+                      "op": "OpGe",
+                      "lhs": {
+                        "currentManaPercent": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "20%"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 15261,
+                "rank": 8
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "and": {
+                "vals": [
+                  {
+                    "auraIsActive": {
+                      "auraId": {
+                        "spellId": 1284536
+                      },
+                      "includeReactionTime": true
+                    }
+                  },
+                  {
+                    "cmp": {
+                      "op": "OpGe",
+                      "lhs": {
+                        "numberTargets": {}
+                      },
+                      "rhs": {
+                        "const": {
+                          "val": "3"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 27801,
+                "rank": 6
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "not": {
+                "val": {
+                  "dotIsActive": {
+                    "targetUnit": {
+                      "type": "Target"
+                    },
+                    "spellId": {
+                      "spellId": 10894
+                    }
+                  }
+                }
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 10894
+              }
+            }
+          }
+        },
+        {
+          "hide": true,
+          "action": {
+            "condition": {
+              "spellCanCast": {
+                "spellId": {
+                  "spellId": 19280,
+                  "rank": 6
+                }
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 19280,
+                "rank": 6
+              }
+            }
+          }
+        },
+        {
+          "hide": true,
+          "action": {
+            "condition": {
+              "spellCanCast": {
+                "spellId": {
+                  "spellId": 1309636
+                }
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 1309636
+              },
+              "target": {
+                "type": "Target"
+              }
+            }
+          }
+        },
+        {
+          "hide": true,
+          "action": {
+            "condition": {
+              "spellCanCast": {
+                "spellId": {
+                  "spellId": 10947
+                }
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 10947
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "spellCanCast": {
+                "spellId": {
+                  "spellId": 1316995,
+                  "rank": 4
+                }
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 1316995,
+                "rank": 4
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "condition": {
+              "cmp": {
+                "op": "OpLe",
+                "lhs": {
+                  "currentManaPercent": {}
+                },
+                "rhs": {
+                  "const": {
+                    "val": "20%"
+                  }
+                }
+              }
+            },
+            "castSpell": {
+              "spellId": {
+                "spellId": 1004,
+                "rank": 5
+              }
+            }
+          }
+        },
+        {
+          "action": {
+            "castSpell": {
+              "spellId": {
+                "spellId": 10934
+              }
+            }
+          }
+        }
+      ]
+    },
+    "reactionTimeMs": 100,
+    "channelClipDelayMs": 100,
+    "distanceFromTarget": 20,
+    "healingModel": {}
+  },
+  "encounter": {
+    "duration": 180,
+    "executeProportion20": 0.2,
+    "executeProportion35": 0.35,
+    "targets": [
+      {
+        "name": "neutral target",
+        "level": 63,
+        "mobType": "MobTypeMechanical",
+        "stats": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3731
+        ],
+        "tankIndex": -1
+      }
+    ]
+  }
+}
