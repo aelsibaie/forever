@@ -10,7 +10,7 @@ export function staticCondition(value, { spells, auras, targetAuras, variables }
 	if (value.spellIsKnown) return value.spellIsKnown.spellId.spellId ? spells.has(value.spellIsKnown.spellId.spellId) : null;
 	if (value.auraIsKnown)
 		return value.auraIsKnown.auraId.spellId
-			? (value.auraIsKnown.sourceUnit?.type === 'CurrentTarget' ? targetAuras : auras).has(value.auraIsKnown.auraId.spellId)
+			? (['Target', 'CurrentTarget'].includes(value.auraIsKnown.sourceUnit?.type) ? targetAuras : auras).has(value.auraIsKnown.auraId.spellId)
 			: null;
 	if (value.not) {
 		const v = staticCondition(value.not.val, { spells, auras, targetAuras, variables }, trail);

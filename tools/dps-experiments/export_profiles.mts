@@ -37,6 +37,14 @@ const slug = (value: string) =>
 		.replace(/[^a-z0-9]+/g, '-')
 		.replace(/^-|-$/g, '');
 
+const containsMutilate = (value: unknown): boolean => {
+	if (!value || typeof value !== 'object') return false;
+	const node = value as Record<string, any>;
+	if (node.hide || node.condition?.const?.val === 'false') return false;
+	if (node.castSpell?.spellId?.spellId === 1241584) return true;
+	return Object.values(node).some(containsMutilate);
+};
+
 export async function exportProfiles(root: string, fallbackGear: Record<string, string> = {}) {
 	const db = await Database.get();
 	const profiles: any[] = [];
@@ -128,7 +136,8 @@ export async function exportProfiles(root: string, fallbackGear: Record<string, 
 				specPath === 'rogue/dps' &&
 				'mutilate' in parsedTalents &&
 				parsedTalents.mutilate &&
-				knownIssues.some(issue => /mutilate.*(?:no|not).*apl/i.test(issue))
+				knownIssues.some(issue => /mutilate.*(?:no|not).*apl/i.test(issue)) &&
+				!containsMutilate(proto.rotation)
 			)
 				warnings.push('The supplied Rogue rotation has no Mutilate action. This profile is retained for coverage and excluded from rankings.');
 			const gear = build.gear ?? def.presets.gear.find(preset => JSON.stringify(preset.gear) === JSON.stringify(expectedEquipment));

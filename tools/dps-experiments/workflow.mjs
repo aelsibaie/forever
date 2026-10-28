@@ -7,12 +7,12 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const args = process.argv.slice(2);
 if (args.includes('--help')) {
 	console.log(
-		'Usage: node tools/dps-experiments/workflow.mjs [--prepared] [--python executable] [--out directory] [--model upstream|notes-2026-10-27] [--reference saved-developer-run] [--reuse-racials saved-racial-run] [--gunba-source directory]\nRuns racial and tiered developer DPS reports with the same native engine. Optional Gunba comparison uses the pinned adapter. Source updates and Git commits are separate. Outputs are immutable.',
+		'Usage: node tools/dps-experiments/workflow.mjs [--prepared] [--audit] [--robustness] [--gear-catalog file] [--refresh-gear --source-archive directory] [--python executable] [--out directory] [--model upstream|notes-2026-10-27] [--reference saved-developer-run] [--reuse-racials saved-racial-run] [--gunba-source directory]\nRuns racial and tiered developer DPS reports with the same native engine. --robustness adds shared equipment pools, hit controls and independent race recommendations. Optional Gunba comparison uses the pinned adapter. Source updates and Git commits are separate. Outputs are immutable.',
 	);
 	process.exit(0);
 }
-const flags = new Set(['--prepared', '--audit']),
-	values = new Set(['--python', '--out', '--model', '--reference', '--gunba-source', '--reuse-racials']);
+const flags = new Set(['--prepared', '--audit', '--robustness', '--refresh-gear']),
+	values = new Set(['--python', '--out', '--model', '--reference', '--gunba-source', '--reuse-racials', '--gear-catalog', '--source-archive']);
 const options = {};
 for (let i = 0; i < args.length; i++) {
 	if (flags.has(args[i])) options[args[i].slice(2)] = true;
@@ -20,6 +20,10 @@ for (let i = 0; i < args.length; i++) {
 	else throw new Error('Unknown or incomplete option: ' + args[i]);
 }
 const git = (...argv) => execFileSync('git', argv, { cwd: root, encoding: 'utf8' }).trim();
+if (options['refresh-gear'] && (!options.robustness || !options['source-archive']))
+	throw new Error('--refresh-gear requires --robustness and --source-archive.');
+if (options.robustness && !options['refresh-gear'] && !fs.existsSync(path.resolve(root, options['gear-catalog'] ?? 'docs/analytics/race-gear-catalog.json')))
+	throw new Error('A validated gear catalogue is required before starting the study.');
 if (git('branch', '--show-current') !== 'codex/analytics') throw new Error('Run analytics on codex/analytics.');
 const localPython = path.join(
 	root,
@@ -158,6 +162,39 @@ if (options.audit) {
 			: []),
 	]);
 }
+if (options.robustness) {
+	const gearCatalog = path.resolve(root, options['gear-catalog'] ?? 'docs/analytics/race-gear-catalog.json');
+	if (options['refresh-gear']) {
+		if (!options['source-archive']) throw new Error('--refresh-gear requires --source-archive in the local source library.');
+		node('gear-source-refresh', [
+			'tools/dps-experiments/gear_catalog.mjs',
+			'--archive',
+			path.resolve(options['source-archive']),
+			'--out',
+			gearCatalog,
+			'--compact',
+		]);
+	}
+	if (!fs.existsSync(gearCatalog)) throw new Error('A validated gear catalogue is required. Refresh it with gear_catalog.mjs first.');
+	const robust = path.join(out, 'race-robustness');
+	node('race-robustness', [
+		'tools/dps-experiments/robustness.mjs',
+		'--source-racials',
+		racials,
+		'--gear-catalog',
+		gearCatalog,
+		'--out',
+		robust,
+		...(options['gunba-source'] ? ['--gunba-source', path.resolve(options['gunba-source'])] : []),
+	]);
+	node('race-gear-legality', ['tools/dps-experiments/gear_legality.mjs', robust]);
+	node('race-exports', ['tools/dps-experiments/robust_exports.mjs', robust]);
+	node('priest-racial-controls', ['tools/dps-experiments/class_racial_probe.mjs', robust, path.join(robust, 'class-racial-controls')]);
+	node('hunter-pet-controls', ['tools/dps-experiments/hunter_pet_probe.mjs', robust, path.join(robust, 'hunter-pet-controls')]);
+	py('race-robustness-verification', ['tools/dps-experiments/verify_robustness.py', robust]);
+	py('race-robustness-report', ['tools/dps-experiments/robust_report.py', robust]);
+	node('race-report-controls', ['tools/dps-experiments/verify_robust_report.mjs', robust]);
+}
 state.completedAt = new Date().toISOString();
 state.state = 'passed';
 save();
@@ -168,9 +205,14 @@ const links = [
 if (options['gunba-source']) links.push(['shadow-comparison/report.html', 'Matched Shadow engine comparison']);
 if (options.reference) links.push(['update-report.html', 'Frozen-input update impact']);
 if (options.audit) links.push(['assessment/report.html', 'All-spec audit and expanded engine diagnostics']);
+if (options.robustness) links.unshift(['race-robustness/report.html', 'Race recommendations across gear sets and conditions']);
 fs.writeFileSync(
 	path.join(out, 'report.html'),
-	'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WoWSims analytics</title><style>body{background:#0b1220;color:#edf3fc;font:18px/1.7 system-ui;max-width:1000px;margin:50px auto;padding:25px}a{color:#80caff}code{overflow-wrap:anywhere}</style><h1>WoWSims Forever analytics</h1><p>Developer equipment preserved. Model <code>' +
+	'<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WoWSims analytics</title><style>body{background:#0b1220;color:#edf3fc;font:18px/1.7 system-ui;max-width:1000px;margin:50px auto;padding:25px}a{color:#80caff}code{overflow-wrap:anywhere}</style><h1>WoWSims Forever analytics</h1><p>' +
+		(options.robustness
+			? 'Developer equipment is a reference; race recommendations also test validated source-listed alternatives. '
+			: 'Developer equipment preserved. ') +
+		'Model <code>' +
 		state.model +
 		'</code>; analytics <code>' +
 		state.commit +

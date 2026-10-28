@@ -62,3 +62,50 @@ test('public reports preserve native inputs and metrics while separating raw dis
 		fs.rmSync(fixture, { recursive: true, force: true });
 	}
 });
+
+test('a standalone verified race study publishes its linked build artifacts', () => {
+	const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-publication-'));
+	try {
+		const source = path.join(fixture, 'source'),
+			out = path.join(fixture, 'output');
+		for (const folder of ['builds', 'requests', 'results', 'exports']) fs.mkdirSync(path.join(source, folder), { recursive: true });
+		const input = '{"player":{"race":"RaceDwarf"}}\r\n';
+		fs.writeFileSync(path.join(source, 'requests/case.json'), input);
+		fs.writeFileSync(path.join(source, 'requests/unlinked.json'), '{"large":"kept in the complete raw archive"}');
+		fs.writeFileSync(path.join(source, 'exports/case.website.json'), input);
+		fs.writeFileSync(path.join(source, 'results/case.json'), JSON.stringify({ metrics: { avg: 42, allValues: [40, 44] } }));
+		fs.mkdirSync(path.join(source, 'hunter-pet-controls/results'), { recursive: true });
+		fs.mkdirSync(path.join(source, 'hunter-pet-controls/requests'));
+		fs.writeFileSync(path.join(source, 'hunter-pet-controls/requests/pet.json'), input);
+		fs.writeFileSync(path.join(source, 'hunter-pet-controls/results/pet.json'), JSON.stringify({ metrics: { avg: 50, allValues: [48, 52] } }));
+		fs.writeFileSync(path.join(source, 'report.html'), '<main><a href="builds/case.html">Build</a><a href="verification.json">Checks</a></main>');
+		fs.writeFileSync(
+			path.join(source, 'builds/case.html'),
+			'<main><a href="../requests/case.json">Input</a><a href="../results/case.json">Result</a><a href="../exports/case.website.json">Website</a><a href="../hunter-pet-controls/results/pet.json">Pet result</a><a href="../hunter-pet-controls/requests/pet.json">Pet input</a></main>',
+		);
+		fs.writeFileSync(
+			path.join(source, 'provenance.json'),
+			JSON.stringify({ analyticsCommit: 'tooling', sourceCommit: 'engine', model: { name: 'upstream' } }),
+		);
+		fs.writeFileSync(
+			path.join(source, 'verification.json'),
+			JSON.stringify({ passed: true, inputHashes: { 'provenance.json': hash(fs.readFileSync(path.join(source, 'provenance.json'))) } }),
+		);
+		buildSite({ robustness: source, out, id: 'race-study', rawBase: 'https://example.org/release' });
+		const published = path.join(out, 'site/runs/race-study/race-robustness');
+		assert.equal(fs.readFileSync(path.join(published, 'requests/case.json'), 'utf8'), input);
+		assert.equal(fs.readFileSync(path.join(published, 'exports/case.website.json'), 'utf8'), input);
+		assert(fs.existsSync(path.join(published, 'results/case.html')));
+		assert(fs.existsSync(path.join(published, 'hunter-pet-controls/results/pet.html')));
+		assert.equal(fs.readFileSync(path.join(published, 'hunter-pet-controls/requests/pet.json'), 'utf8'), input);
+		const petSummary = JSON.parse(gunzipSync(fs.readFileSync(path.join(published, 'hunter-pet-controls/results/pet.summary.json.gz'))));
+		assert.equal(petSummary.metrics.avg, 50);
+		assert.equal(petSummary.metrics.allValues, undefined);
+		assert(!fs.existsSync(path.join(published, 'requests/unlinked.json')));
+		assert.equal(JSON.parse(fs.readFileSync(path.join(out, 'raw-archives.json')))[0].complete, true);
+		assert(verifySite(path.join(out, 'site')).htmlLinks > 0);
+	} finally {
+		assert(path.resolve(fixture).startsWith(path.resolve(os.tmpdir()) + path.sep) && path.basename(fixture).startsWith('wow-publication-'));
+		fs.rmSync(fixture, { recursive: true, force: true });
+	}
+});

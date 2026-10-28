@@ -60,18 +60,41 @@ export function verifySite(directory) {
 	return { files: Object.keys(manifest.files).length, htmlLinks: links, bytes: files(site).reduce((sum, file) => sum + fs.statSync(file).size, 0) };
 }
 
-export function buildSite({ run, out, id, rawBase, assessment }) {
+export function buildSite({ run, out, id, rawBase, assessment, robustness }) {
 	assert(/^[a-z0-9][a-z0-9-]+$/.test(id), 'Use a portable snapshot ID.');
 	assert(!fs.existsSync(out), 'Publication output already exists.');
-	const receipt = read(path.join(run, 'workflow.json'));
+	const standalone = !!robustness && !run;
+	const robustnessRoot = robustness ?? (run && path.join(run, 'race-robustness'));
+	let receipt;
+	if (standalone) {
+		const verified = read(path.join(robustnessRoot, 'verification.json'));
+		assert(verified.passed && verified.inputHashes, 'Publish an independently verified robustness study.');
+		for (const [file, expected] of Object.entries(verified.inputHashes))
+			assert.equal(hash(fs.readFileSync(path.join(robustnessRoot, file))), expected, 'Verified study input changed: ' + file);
+		const p = read(path.join(robustnessRoot, 'provenance.json'));
+		receipt = {
+			kind: 'verified-race-robustness',
+			state: 'passed',
+			commit: p.analyticsCommit,
+			model: p.model.name,
+			sourceCommit: p.sourceCommit,
+			verificationSha256: hash(fs.readFileSync(path.join(robustnessRoot, 'verification.json'))),
+		};
+	} else receipt = read(path.join(run, 'workflow.json'));
 	assert.equal(receipt.state, 'passed', 'Publish a completed workflow.');
 	const corrected = receipt.correction?.comparison?.split('/')[0] ?? 'shadow-comparison';
-	const sections = [
-		['racials', 'Races: Horde and Alliance'],
-		['developer-presets', 'DPS by gear tier'],
-		[corrected, 'Matched Shadow engine comparison'],
-	].filter(([name]) => fs.existsSync(path.join(run, name, 'report.html')));
-	const assessmentRoot = assessment ?? path.join(run, 'assessment');
+	const sections = (
+		standalone
+			? []
+			: [
+					['racials', 'Races: Horde and Alliance'],
+					['developer-presets', 'DPS by gear tier'],
+					[corrected, 'Matched Shadow engine comparison'],
+				]
+	).filter(([name]) => fs.existsSync(path.join(run, name, 'report.html')));
+	if (robustnessRoot && fs.existsSync(path.join(robustnessRoot, 'report.html')))
+		sections.unshift(['race-robustness', 'Race choices across gear and conditions']);
+	const assessmentRoot = assessment ?? path.join(run ?? robustnessRoot, 'assessment');
 	for (const [name, title] of [
 		['spec-audit', 'All-spec audit and gear sensitivities'],
 		['engine-compatibility', 'Developer-rotation engine compatibility'],
@@ -110,7 +133,10 @@ export function buildSite({ run, out, id, rawBase, assessment }) {
 		'stat-calibration.json',
 	]);
 	for (const [name, title] of sections) {
-		const source = path.join(['spec-audit', 'engine-compatibility', 'common-spell-probes'].includes(name) ? assessmentRoot : run, name),
+		const source =
+				name === 'race-robustness'
+					? robustnessRoot
+					: path.join(['spec-audit', 'engine-compatibility', 'common-spell-probes'].includes(name) ? assessmentRoot : run, name),
 			destination = path.join(snapshot, name);
 		fs.mkdirSync(destination, { recursive: true });
 		const recorded = fs.existsSync(path.join(source, 'cells.json'))
@@ -141,12 +167,29 @@ export function buildSite({ run, out, id, rawBase, assessment }) {
 					assert.equal(hash(fs.readFileSync(file)), expected, 'Source report changed: ' + relative);
 				}
 			}
-		const rawUrl = rawBase + '/' + id + '-' + name + '-raw.zip';
-		downloads.push({ name, title, url: rawUrl, source });
+		const assetUrl = rawBase + '/' + id + '-' + name + '-raw.zip';
+		const rawUrl = name === 'race-robustness' ? rawBase.replace('/releases/download/', '/releases/tag/') : assetUrl;
+		downloads.push({ name, title, url: assetUrl, reportUrl: rawUrl, source, complete: name === 'race-robustness' });
+		const selected = name === 'race-robustness' ? new Set() : null;
+		if (selected) {
+			for (const file of files(source).filter(
+				file => file === path.join(source, 'report.html') || (path.relative(source, file).startsWith('builds' + path.sep) && file.endsWith('.html')),
+			)) {
+				selected.add(path.resolve(file));
+				for (const match of fs.readFileSync(file, 'utf8').matchAll(/(?:href|src)="([^"]+)"/g)) {
+					if (/^(?:https?:|mailto:|data:|#)/.test(match[1])) continue;
+					const target = path.resolve(path.dirname(file), decodeURI(match[1].split('#')[0].split('?')[0]));
+					assert(target.startsWith(path.resolve(source) + path.sep), 'Study link escapes its archive.');
+					selected.add(target);
+				}
+			}
+		}
 		for (const file of files(source)) {
 			const relative = path.relative(source, file).replaceAll('\\', '/'),
 				first = relative.split('/')[0];
+			if (selected && !selected.has(path.resolve(file))) continue;
 			if (
+				!selected &&
 				!['profiles', 'charts', 'requests', 'results', 'stats', 'debug'].includes(first) &&
 				!publicFiles.has(relative) &&
 				!(first === relative && /\.(?:json|csv|png|svg)$/.test(relative))
@@ -157,8 +200,9 @@ export function buildSite({ run, out, id, rawBase, assessment }) {
 			const target = path.join(destination, relative);
 			fs.mkdirSync(path.dirname(target), { recursive: true });
 			let bytes = fs.readFileSync(file);
-			const untouched = first === 'requests' || relative.endsWith('.website.json');
-			if (['results', 'debug'].includes(first) && relative.endsWith('.json')) {
+			const dataFolder = relative.split('/').at(-2);
+			const untouched = dataFolder === 'requests' || relative.endsWith('.website.json');
+			if (['results', 'debug'].includes(dataFolder) && relative.endsWith('.json')) {
 				const data = read(file),
 					summary = publicJson(data, { summary: true }),
 					originalSha256 = hash(bytes),
@@ -234,7 +278,7 @@ export function buildSite({ run, out, id, rawBase, assessment }) {
 				continue;
 			}
 			if (relative.endsWith('.json') && !untouched) {
-				const summary = ['results', 'debug'].includes(first),
+				const summary = ['results', 'debug'].includes(dataFolder),
 					data = publicJson(read(file), { summary });
 				if (summary)
 					data.publication = {
@@ -266,33 +310,47 @@ export function buildSite({ run, out, id, rawBase, assessment }) {
 					.replaceAll('>Full output</a>', '>Result summary</a>')
 					.replaceAll('>Raw result</a>', '>Result summary</a>')
 					.replaceAll('>Debug result</a>', '>Debug summary</a>')
-					.replace(/(href="(?:\.\.\/)*(?:results|debug)\/[^"\n]+)\.json"/g, '$1.html"');
-				html = html.includes('<body>') ? html.replace('<body>', '<body>' + banner) : html.replace('<main>', banner + '<main>');
+					.replace(/(href="[^":\n]*\b(?:results|debug)\/[^"\n]+)\.json"/g, '$1.html"');
+				html = html.includes('<body>')
+					? html.replace('<body>', '<body>' + banner)
+					: html.includes('<main>')
+						? html.replace('<main>', banner + '<main>')
+						: html.replace('</style>', '</style>' + banner);
 				bytes = Buffer.from(html);
 			}
 			fs.writeFileSync(target, bytes);
 			origins[path.relative(site, target).replaceAll('\\', '/')] = {
 				originalSha256: hash(fs.readFileSync(file)),
 				publishedSha256: hash(bytes),
-				representation: untouched ? 'Exact input' : first === 'results' || first === 'debug' ? 'Result summary' : 'Portable report artifact',
+				representation: untouched ? 'Exact input' : ['results', 'debug'].includes(dataFolder) ? 'Result summary' : 'Portable report artifact',
 			};
 		}
 	}
 	fs.writeFileSync(path.join(snapshot, 'workflow.json'), JSON.stringify(publicJson(receipt), null, 2));
-	const latest = read(path.join(run, corrected, 'provenance.json'));
+	const latest = read(standalone ? path.join(robustnessRoot, 'provenance.json') : path.join(run, corrected, 'provenance.json'));
+	const sourceCommit = standalone ? latest.sourceCommit : latest.settings.primarySource;
+	const analyticsCommit = standalone ? latest.analyticsCommit : latest.settings.analyticsCommit;
 	const body =
 		'<small>INDEPENDENT WOWSIMS FOREVER ANALYTICS</small><h1>Races, builds and fight length</h1><p>WoWSims is the primary simulator. Baselines preserve developer gear; sensitivity experiments identify each explicit change.</p><p>60 / 180 / 300 seconds · Horde and Alliance · Snapshot <code>' +
 		escape(id) +
 		'</code></p><div class="cards">' +
 		sections.map(([name, title]) => '<a href="' + name + '/report.html">' + escape(title) + '</a>').join('') +
-		'</div><section><h2>What these comparisons mean</h2><p>Races are compared within the same build and gear. Cross-spec rankings are separated by documented gear tier. Testing presets and unsupported mechanics have explicit caveats. Sampling intervals do not measure model uncertainty.</p><p>Main model: <code>' +
+		'</div><section><h2>What these comparisons mean</h2><p>' +
+		(standalone
+			? 'Fixed-set comparisons hold equipment constant. Selected-gear comparisons let each race choose from the same declared catalogue, then confirm its selection with independent samples. The report keeps developer and published pre-raid pools separate.'
+			: 'Races are compared within the same build and gear. Cross-spec rankings are separated by documented gear tier.') +
+		' Testing presets and unsupported mechanics have explicit caveats. Sampling intervals do not measure model uncertainty.</p><p>Main model: <code>' +
 		escape(receipt.model) +
 		'</code>. Engine source <code>' +
-		escape(latest.settings.primarySource) +
-		'</code>; matched comparison tooling <code>' +
-		escape(latest.settings.analyticsCommit) +
-		'</code>.</p><p><a href="workflow.json">Portable workflow receipt</a> · <a href="origins.json">Source and public artifact checksums</a> · <a href="https://github.com/aelsibaie/forever/tree/codex/analytics/tools/dps-experiments">Methods and rerun tools</a></p></section><section><h2>Complete raw outputs</h2><p>The site includes readable result summaries, exact native inputs, website imports and charts. These ZIPs retain the complete original result JSON and debug files. Engine binaries remain in the local experiment archive; pinned source and model details are recorded.</p><ul>' +
-		downloads.map(d => '<li><a href="' + d.url + '">' + escape(d.title) + ' raw archive</a></li>').join('') +
+		escape(sourceCommit) +
+		(standalone ? '</code>; analytics checkout at run start <code>' : '</code>; matched comparison tooling <code>') +
+		escape(analyticsCommit) +
+		'</code>.</p><p><a href="workflow.json">Portable workflow receipt</a> · <a href="origins.json">Source and public artifact checksums</a> · <a href="https://github.com/aelsibaie/forever/tree/codex/analytics/tools/dps-experiments">Methods and rerun tools</a></p></section><section><h2>Complete raw outputs</h2><p>The site includes readable result summaries, exact native inputs, website imports and charts. These ZIPs retain the original result JSON and debug files. The robustness archive also includes the original inputs, stats, metadata and tooling. Engine binaries remain in the local experiment archive; pinned source and model details are recorded.</p><ul>' +
+		downloads
+			.map(
+				d => '<li><a href="' + d.reportUrl + '">' + escape(d.title) + (d.complete ? ' raw archive parts (download all)' : ' raw archive') + '</a></li>',
+			)
+			.join('') +
 		'</ul></section>';
 	fs.writeFileSync(path.join(snapshot, 'report.html'), document('WoWSims Forever analytics', body));
 	fs.writeFileSync(path.join(snapshot, 'origins.json'), JSON.stringify(origins));
@@ -320,15 +378,15 @@ export function buildSite({ run, out, id, rawBase, assessment }) {
 		id,
 		createdAt: new Date().toISOString(),
 		sourceAnalyticsCommit: receipt.commit,
-		comparisonAnalyticsCommit: latest.settings.analyticsCommit,
-		rawDownloads: downloads.map(({ source, ...item }) => item),
+		comparisonAnalyticsCommit: analyticsCommit,
+		rawDownloads: downloads.map(({ source, ...item }) => ({ ...item, url: item.reportUrl })),
 		files: Object.fromEntries(files(site).map(file => [path.relative(site, file).replaceAll('\\', '/'), hash(fs.readFileSync(file))])),
 	};
 	fs.writeFileSync(path.join(site, 'publication-manifest.json'), JSON.stringify(manifest, null, 2));
 	fs.writeFileSync(
 		path.join(out, 'raw-archives.json'),
 		JSON.stringify(
-			downloads.map(d => ({ source: d.source, output: path.join(out, 'downloads', id + '-' + d.name + '-raw.zip'), url: d.url })),
+			downloads.map(d => ({ source: d.source, output: path.join(out, 'downloads', id + '-' + d.name + '-raw.zip'), url: d.url, complete: d.complete })),
 			null,
 			2,
 		),
@@ -341,7 +399,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
 		option = (key, fallback) => (args.includes(key) ? args[args.indexOf(key) + 1] : fallback);
 	if (args.includes('--help')) {
 		console.log(
-			'node tools/dps-experiments/publish_site.mjs --run archive --out new-directory --id snapshot-id --raw-base release-download-url [--make-raw] [--python executable]\nUse --verify site-directory to verify an existing publication.',
+			'node tools/dps-experiments/publish_site.mjs (--run archive | --robustness verified-study) --out new-directory --id snapshot-id --raw-base release-download-url [--make-raw] [--python executable]\nUse --verify site-directory to verify an existing publication.',
 		);
 		process.exit(0);
 	}
@@ -349,10 +407,12 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
 		console.log(JSON.stringify(verifySite(path.resolve(option('--verify')))));
 		process.exit(0);
 	}
-	for (const key of ['--run', '--out', '--id', '--raw-base']) assert(option(key), 'Missing ' + key);
+	for (const key of ['--out', '--id', '--raw-base']) assert(option(key), 'Missing ' + key);
+	assert(option('--run') || option('--robustness'), 'Supply --run or --robustness.');
 	const out = path.resolve(option('--out'));
 	const result = buildSite({
-		run: path.resolve(option('--run')),
+		run: option('--run') ? path.resolve(option('--run')) : undefined,
+		robustness: option('--robustness') ? path.resolve(option('--robustness')) : undefined,
 		out,
 		id: option('--id'),
 		rawBase: option('--raw-base'),
