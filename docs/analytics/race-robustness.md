@@ -56,7 +56,7 @@ Sampling precision and confidence in game mechanics remain separate. Provisional
 
 ## Refresh and run
 
-The workflow checks native metadata and catalogue freshness before its DPS stages. A complete robustness run stops if any declared build/faction mapping has no compatible published candidate. The [Shadow reconciliation](shadow-reconciliation.md) records the current live-data cleanup and the limits of the available source lists. Refreshing upstream never makes an old catalogue valid automatically.
+The workflow checks native metadata and catalogue freshness before its DPS stages. By default, a complete robustness run stops if any declared build/faction mapping has no compatible published candidate. `--allow-partial-published` runs all builds against the validated available catalogue; missing published pools remain visible coverage gaps and receive no recommendation. It does not relax native input, equipment or freshness checks. The [Shadow reconciliation](shadow-reconciliation.md) records the current live-data cleanup and the limits of the available source lists. Refreshing upstream never makes an old catalogue valid automatically.
 
 After updating and validating upstream on `codex/analytics`, refresh public equipment sources when needed:
 
@@ -69,6 +69,8 @@ Run the full analytics workflow, including the robustness study:
 ```sh
 node tools/dps-experiments/workflow.mjs --prepared --robustness --gear-catalog docs/analytics/race-gear-catalog.json
 ```
+
+When source lists remain incomplete, add `--allow-partial-published` to the command above. Add `--audit --gunba-source tmp/engine-comparisons/gunba` to include the pinned engine assessment.
 
 Omit `--prepared` after changes to protocol or generated inputs. The normal model is upstream; `--model notes-2026-10-27` is an explicit dated scenario. Source updates, repository gates and Git commits remain separate from simulation execution. No runner creates a merge commit.
 

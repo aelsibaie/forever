@@ -68,6 +68,7 @@ for (const profile of loaded.profiles)
 			continue;
 		}
 		const spec = catalog?.policy.profiles[profile.id];
+		if (catalog && !spec) errors.push({ profile: profile.id, faction, error: 'No reviewed equipment-source mapping.' });
 		const gearOptions = {
 			database: equipmentDatabase,
 			capabilities,
@@ -98,6 +99,8 @@ for (const profile of loaded.profiles)
 				alternatives.push({ source, sha256: hash(bytes), valid: false, reason: error.message });
 			}
 		}
+		if (catalog && !developer.valid && !alternatives.some(s => s.valid))
+			errors.push({ profile: profile.id, faction, error: 'No legal developer reference; supply a reviewed developer alternative.' });
 		equipmentCoverage.push({
 			profile: profile.id,
 			className: profile.className,

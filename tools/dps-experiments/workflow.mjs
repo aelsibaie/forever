@@ -7,11 +7,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const args = process.argv.slice(2);
 if (args.includes('--help')) {
 	console.log(
-		'Usage: node tools/dps-experiments/workflow.mjs [--prepared] [--audit] [--robustness] [--gear-catalog file] [--refresh-gear --source-archive directory] [--python executable] [--out directory] [--model upstream|notes-2026-10-27] [--reference saved-developer-run] [--reuse-racials saved-racial-run] [--gunba-source directory]\nRuns racial and tiered developer DPS reports with the same native engine. --robustness adds shared equipment pools, hit controls and independent race recommendations. Optional Gunba comparison uses the pinned adapter. Source updates and Git commits are separate. Outputs are immutable.',
+		'Usage: node tools/dps-experiments/workflow.mjs [--prepared] [--audit] [--robustness] [--allow-partial-published] [--gear-catalog file] [--refresh-gear --source-archive directory] [--python executable] [--out directory] [--model upstream|notes-2026-10-27] [--reference saved-developer-run] [--reuse-racials saved-racial-run] [--gunba-source directory]\nRuns racial and tiered developer DPS reports with the same native engine. --robustness adds shared equipment pools, hit controls and independent race recommendations. Optional Gunba comparison uses the pinned adapter. Source updates and Git commits are separate. Outputs are immutable.',
 	);
 	process.exit(0);
 }
-const flags = new Set(['--prepared', '--audit', '--robustness', '--refresh-gear']),
+const flags = new Set(['--prepared', '--audit', '--robustness', '--refresh-gear', '--allow-partial-published']),
 	values = new Set(['--python', '--out', '--model', '--reference', '--gunba-source', '--reuse-racials', '--gear-catalog', '--source-archive']);
 const options = {};
 for (let i = 0; i < args.length; i++) {
@@ -20,6 +20,7 @@ for (let i = 0; i < args.length; i++) {
 	else throw new Error('Unknown or incomplete option: ' + args[i]);
 }
 const git = (...argv) => execFileSync('git', argv, { cwd: root, encoding: 'utf8' }).trim();
+if (options['allow-partial-published'] && !options.robustness) throw new Error('--allow-partial-published requires --robustness.');
 if (options['refresh-gear'] && (!options.robustness || !options['source-archive']))
 	throw new Error('--refresh-gear requires --robustness and --source-archive.');
 if (options.robustness && !options['refresh-gear'] && !fs.existsSync(path.resolve(root, options['gear-catalog'] ?? 'docs/analytics/race-gear-catalog.json')))
@@ -44,6 +45,11 @@ const state = {
 	commit: git('rev-parse', 'HEAD'),
 	trackedState: git('status', '--porcelain'),
 	model: options.model ?? 'upstream',
+	equipmentCoveragePolicy: options.robustness
+		? options['allow-partial-published']
+			? 'Available validated sets; published coverage gaps remain explicit.'
+			: 'Complete published coverage required.'
+		: 'Developer references only.',
 	stages: [],
 };
 const save = () => fs.writeFileSync(path.join(out, 'workflow.json'), JSON.stringify(state, null, 2));
@@ -89,7 +95,7 @@ node('rerun-readiness', [
 	'tools/dps-experiments/readiness.mjs',
 	'--out',
 	path.join(out, 'readiness'),
-	...(options.robustness ? ['--gear-catalog', gearCatalog, '--require-full-published'] : []),
+	...(options.robustness ? ['--gear-catalog', gearCatalog, ...(options['allow-partial-published'] ? [] : ['--require-full-published'])] : []),
 ]);
 node('analytics-tests', [
 	'--test',

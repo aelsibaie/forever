@@ -4,7 +4,7 @@ Runs the repository's DPS presets through the native simulator and saves the ful
 
 ## Setup
 
-The [Shadow hit reconciliation](../../docs/analytics/shadow-reconciliation.md) records the controlled Human/Dwarf comparison and its implementation limits. `readiness.mjs --out NEW --gear-catalog docs/analytics/race-gear-catalog.json` checks current developer exports, every legal race and catalogue freshness without DPS sampling. `workflow.mjs --robustness` requires complete published-pool coverage before starting the matrix; developer-only runs remain available when source lists are incomplete.
+The [Shadow hit reconciliation](../../docs/analytics/shadow-reconciliation.md) records the controlled Human/Dwarf comparison and its implementation limits. `readiness.mjs --out NEW --gear-catalog docs/analytics/race-gear-catalog.json` checks current developer exports, every legal race and catalogue freshness without DPS sampling. `workflow.mjs --robustness` requires complete published-pool coverage before starting the matrix; developer-only runs remain available when source lists are incomplete. Use `--robustness --allow-partial-published` to run every build with the validated gear currently available; unavailable published pools stay explicit coverage gaps. Native schema, equipment and source-freshness checks still apply.
 
 For race choice across multiple equipment sets and hit levels, use the [race robustness study](../../docs/analytics/race-robustness.md). `workflow.mjs --robustness` adds the shared equipment pools, runtime coverage checks, separate hit controls and independent confirmations. It keeps developer and published pre-raid pools separate and reports practical loss bounds rather than a single preset's winner.
 
@@ -89,7 +89,7 @@ node --test tools/dps-experiments/statistics.test.mjs
 - Rejects an unequipped profile unless `fallbackGear` in the experiment config names a gear file. The Warlock presets carry no equipment, so the baseline explicitly supplies the repository's Warlock pre-raid set and records that substitution on each profile.
 - Uses one level 63 mechanical target with 3731 armor, fixed durations, execute proportions of 20% and 35%, no tank and no incoming damage. Player movement required by a preset remains enabled.
 - Saves per-iteration DPS and validates it against the reported mean. Intervals are pointwise approximate 95% Monte Carlo confidence intervals using the sample standard deviation. They do not measure model error, correct for multiple comparisons or establish that close rankings differ.
-- Keeps unsupported Rogue Mutilate presets as diagnostics and excludes them from rankings. Their supplied rotations contain no Mutilate action. The runner does not invent a rotation for them.
+- Checks Mutilate in the serialized native rotation. The current presets cast Mutilate; a future missing action remains a diagnostic exclusion. The runner does not invent a rotation.
 - Records one debug iteration at the longest duration. Rejected cast attempts remain available for inspection and do not automatically establish a mechanics defect.
 - Includes pet damage in player DPS once. Ability breakdowns count damage to encounter targets; consumable damage to the player is excluded.
 
