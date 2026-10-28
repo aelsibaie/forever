@@ -18,6 +18,8 @@ const profiles = read(path.join(source, 'profiles.json')).profiles.filter(
 	p => p.className === 'Hunter' && [undefined, 'PetNone'].includes(p.player.hunter.options.classOptions.petType),
 );
 const cells = read(path.join(source, 'cells.json')).filter(row => row.phase === 'validation' && row.support === 'full' && row.referencePolicy === 'developer');
+const coverageGaps = [],
+	missingPools = new Set();
 const inputs = [],
 	jobs = [],
 	samples = new Map(),
@@ -31,9 +33,21 @@ for (const profile of profiles)
 			for (const pool of ['developer', 'published-pre-raid']) {
 				const sets = new Set(
 					profile.sets
-						.filter(gear => (pool === 'developer' ? gear.id === 'developer' : [gear, ...gear.aliases].some(g => g.tier === 'Published pre-raid')))
+						.filter(gear =>
+							pool === 'developer'
+								? gear.id === (profile.referenceSetId ?? 'developer')
+								: [gear, ...gear.aliases].some(g => g.tier === 'Published pre-raid'),
+						)
 						.map(g => g.id),
 				);
+				if (!sets.size) {
+					const key = [profile.faction, profile.id, pool].join('--');
+					if (!missingPools.has(key)) {
+						missingPools.add(key);
+						coverageGaps.push({ profileId: profile.id, faction: profile.faction, pool, reason: 'No validated equipment in this pool.' });
+					}
+					continue;
+				}
 				const selected = cells
 					.filter(
 						row =>
@@ -121,7 +135,8 @@ const result = {
 	engineSha256: provenance.engineSha256,
 	iterations,
 	seed,
-	scope: 'Intentional Lone Wolf petless builds versus the developer Raptor settings, changing only petType. Original talents and racial policy retained. Developer anchor and independently retested per-race validation-selected published gear; 60/180/300 seconds, full support, neutral target and original developer references. This is a sensitivity check, not a pet or talent optimizer.',
+	scope: 'Intentional Lone Wolf petless builds versus the developer Raptor settings, changing only petType. Original talents and racial policy retained. Developer anchor and independently retested per-race validation-selected published gear; 60/180/300 seconds, full support, neutral target and original developer references. Unavailable equipment pools are recorded as coverage gaps. This is a sensitivity check, not a pet or talent optimizer.',
+	coverageGaps,
 	rows,
 	contrasts,
 	groups,

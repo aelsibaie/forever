@@ -68,12 +68,15 @@ def verify(run):
                     for gear in profile['sets']:
                         expected_groups.add(('fixed-set', profile['faction'], profile['id'], gear['id'], duration, support, reference, 'neutral', 0))
                     for pool in ['published-pre-raid', 'developer-reference']:
+                        available = any(a.get('tier') == 'Published pre-raid' if pool == 'published-pre-raid' else a.get('origin') == 'WoWSims developer' for g in profile['sets'] for a in [g, *g['aliases']])
+                        if not available:
+                            continue
                         expected_groups.add(('pool:' + pool, profile['faction'], profile['id'], None, duration, support, reference, 'neutral', 0))
                 for offset in [-4, -2, 0, 2, 4]:
-                    expected_groups.add(('hit-control', profile['faction'], profile['id'], 'developer', duration, 'full', reference, 'neutral', offset))
+                    expected_groups.add(('hit-control', profile['faction'], profile['id'], profile.get('referenceSetId', 'developer'), duration, 'full', reference, 'neutral', offset))
         for reference in settings['referencePolicies']:
             for target in ['beast', 'elemental']:
-                expected_groups.add(('creature-control', profile['faction'], profile['id'], 'developer', 180, 'full', reference, target, 0))
+                expected_groups.add(('creature-control', profile['faction'], profile['id'], profile.get('referenceSetId', 'developer'), 180, 'full', reference, target, 0))
     actual_groups = {(g['mode'], g['faction'], g['profileId'], g['setId'], g['duration'], g['support'], g['referencePolicy'], g['target'], g['hitOffset']) for g in analysis['groups']}
     assert len(actual_groups) == len(analysis['groups']), 'Duplicate condition groups'
     assert actual_groups == expected_groups, f'Condition coverage mismatch: {len(expected_groups - actual_groups)} missing, {len(actual_groups - expected_groups)} unexpected'
@@ -233,7 +236,16 @@ def verify(run):
     pets = read(run / 'hunter-pet-controls/analysis.json')
     assert pets['engineSha256'] == provenance['engineSha256'], 'Pet controls use another engine'
     no_pet_profiles = [p for p in catalog['profiles'] if p['className'] == 'Hunter' and p['player']['hunter']['options']['classOptions'].get('petType') in [None, 'PetNone']]
-    expected_pets = {(p['faction'], p['id'], race, duration, pool, variant) for p in no_pet_profiles for race in p['races'] for duration in settings['durations'] for pool in ['developer', 'published-pre-raid'] for variant in ['petless', 'raptor']}
+    expected_pets, expected_pet_gaps = set(), set()
+    for p in no_pet_profiles:
+        for pool in ['developer', 'published-pre-raid']:
+            available = any(g['id'] == p.get('referenceSetId', 'developer') if pool == 'developer' else any(a.get('tier') == 'Published pre-raid' for a in [g, *g['aliases']]) for g in p['sets'])
+            if not available:
+                expected_pet_gaps.add((p['faction'], p['id'], pool))
+                continue
+            expected_pets.update((p['faction'], p['id'], race, duration, pool, variant) for race in p['races'] for duration in settings['durations'] for variant in ['petless', 'raptor'])
+    actual_pet_gaps = {(g['faction'], g['profileId'], g['pool']) for g in pets.get('coverageGaps', [])}
+    assert actual_pet_gaps == expected_pet_gaps and len(pets.get('coverageGaps', [])) == len(expected_pet_gaps), 'Pet equipment gaps differ from the catalogue'
     assert {(r['faction'], r['profileId'], r['race'], r['duration'], r['pool'], r['variant']) for r in pets['rows']} == expected_pets and len(pets['rows']) == len(expected_pets), 'Pet controls omit a condition'
     pet_samples = {}
     for row in pets['rows']:
@@ -261,7 +273,7 @@ def verify(run):
     assert all(a[1] < b[0] for a, b in zip(ranges, ranges[1:])), 'Stage seed ranges overlap'
     receipt = {'passed': True, 'cells': len(cells), 'raceComparisons': len(analysis['groups']), 'factionBuilds': len(profile_map), 'checks': ['engine and all input/result/stats hashes', 'independent NumPy means and sample deviations', 'independent NormalDist and NumPy paired intervals', 'complete legal race membership', 'real gear and unchanged talents', 'no injected stats in realistic cases', 'positive Mutilate usage', 'Dwarf hit bonus on identical sets', 'synthetic hit units against zero-offset controls', 'disjoint stage seed ranges', 'no training samples used as final recommendations']}
     receipt['checks'].extend(['archived execution tool hashes', 'website export hashes and every race/build APL control', 'factorial Hunter ranged-input controls', 'complete Priest racial controls and independently recomputed intervals'])
-    receipt['checks'].append('complete Hunter pet controls, unchanged other inputs and independently recomputed intervals')
+    receipt['checks'].append('complete Hunter pet controls for available pools, explicit gear gaps, unchanged other inputs and independently recomputed intervals')
     receipt['inputHashes'] = {name: digest(run / name) for name in ['analysis.json', 'cells.json', 'provenance.json', 'profiles.json', 'coverage.json', 'gear-legality.json', 'methodology.json', 'mechanics-coverage.json', 'driver-verification.json', 'rotation-resolution-effects.json', 'execution-revisions.json', 'exports/verification.json', 'hunter-ranged-controls/analysis.json', 'class-racial-controls/analysis.json', 'hunter-pet-controls/analysis.json']}
     (run / 'verification.json').write_text(json.dumps(receipt, indent=2), encoding='utf-8')
     print(json.dumps(receipt))

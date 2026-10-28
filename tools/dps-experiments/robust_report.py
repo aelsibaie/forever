@@ -49,6 +49,8 @@ def profile_title(profile):
 
 def confidence_notes(profile, groups, mechanics, resolution):
     notes = []
+    if not any(a.get('tier') == 'Published pre-raid' for g in profile['sets'] for a in [g, *g['aliases']]):
+        notes.append('No validated published pre-raid equipment pool')
     if any(g.get('diagnosticOnly') for g in profile['sets']):
         notes.append('Conflicting unique-equipped developer items excluded from recommendations')
     entry = next(p for p in mechanics['profiles'] if p['profileId'] == profile['id'] and p['faction'] == profile['faction'])

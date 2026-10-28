@@ -11,6 +11,13 @@ def group(gap, error):
 
 
 class RecommendationBoundsTest(unittest.TestCase):
+    def test_an_empty_equipment_pool_makes_no_recommendation(self):
+        result = assess([], ['a', 'b'])
+        self.assertEqual(result['safe'], [])
+        self.assertIsNone(result['preferred'])
+        self.assertEqual(result['losses'], [])
+        self.assertEqual(result['conditions'], 0)
+
     def test_noisy_highest_mean_does_not_certify_the_race(self):
         result = assess([group(-.05, .4)], ['a', 'b'])
         self.assertEqual(result['safe'], [])
