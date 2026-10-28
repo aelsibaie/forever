@@ -142,8 +142,10 @@ export function prepareRobustPlayer(original, { race, className, gear, timing = 
 			},
 		};
 		// A named cooldown stays out of automatic cooldown selection, even when its line is pruned.
-		if (timing !== 'developer') player.rotation.priorityList.unshift({ action: { condition, castSpell: { spellId: { spellId: racial } } } });
-		else {
+		if (timing !== 'developer') {
+			player.rotation.priorityList.unshift({ action: { condition, castSpell: { spellId: { spellId: racial } } } });
+			changes.push('Offensive racial tested with the ' + timing + ' timing policy.');
+		} else {
 			let explicit = false,
 				automatic = false;
 			walkObjects(player.rotation, node => {
@@ -156,7 +158,7 @@ export function prepareRobustPlayer(original, { race, className, gear, timing = 
 			}
 		}
 	}
-	if (mana === 'leyline65-guarded' && race === 'RaceHighOrderSkyborne') {
+	if (mana === 'leyline65-guarded' && race === 'RaceHighOrderSkyborne' && !['Rogue', 'Warrior'].includes(className)) {
 		const threshold = { cmp: { op: 'OpLe', lhs: { currentManaPercent: {} }, rhs: { const: { val: '65%' } } } };
 		walkObjects(player.rotation, node => {
 			if (node.castSpell?.spellId?.spellId === 1259705)
@@ -311,4 +313,11 @@ export function rankRaceSamples(rows, samples, tolerance = 0.2) {
 		candidates: comparisons.filter(c => c.percent + c.halfWidthPercent >= -tolerance).map(c => c.race),
 		comparisons,
 	};
+}
+
+export function referenceEquipmentSet(sets) {
+	const valid = sets.filter(g => !g.diagnosticOnly);
+	const chosen = valid.find(g => g.id === 'developer') ?? valid.find(g => [g, ...(g.aliases ?? [])].some(a => a.origin === 'WoWSims developer'));
+	if (!chosen) throw new Error('No legal developer reference equipment. Supply a reviewed developer alternative.');
+	return chosen.id;
 }

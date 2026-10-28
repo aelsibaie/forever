@@ -69,7 +69,8 @@ export function compatiblePublishedList(original, options) {
 	const list = structuredClone(original),
 		substitutions = [],
 		items = new Map(options.database.items.map(i => [i.id, i]));
-	const used = new Set();
+	const used = new Set(),
+		categories = new Set();
 	for (const record of list.slots) {
 		if (['ammo', 'quiver', 'pouch'].includes(record.slot)) continue;
 		const slot = slots.indexOf(record.slot === 'relic' ? 'ranged' : record.slot);
@@ -77,7 +78,8 @@ export function compatiblePublishedList(original, options) {
 		const candidates = [record.item, ...(record.alternatives ?? [])];
 		const chosen = candidates.findIndex(candidate => {
 			const native = items.get(candidate.id);
-			if (!itemFits(native, slot, options) || (native.unique && used.has(native.id))) return false;
+			if (!itemFits(native, slot, options) || (native.unique && used.has(native.id)) || (native.limitCategory && categories.has(native.limitCategory)))
+				return false;
 			if (slot === 14 && native.handType === 4 && list.slots.some(s => s.slot === 'offhand')) return false;
 			return !options.daggerPair || ![14, 15].includes(slot) || native.weaponType === 2;
 		});
@@ -93,6 +95,8 @@ export function compatiblePublishedList(original, options) {
 			});
 		record.item = candidates[chosen];
 		used.add(record.item.id);
+		const category = items.get(record.item.id).limitCategory;
+		if (category) categories.add(category);
 	}
 	return { list, substitutions };
 }
@@ -186,7 +190,8 @@ export function validateEquipment(equipment, { database, className, faction, dag
 	const items = new Map(database.items.map(item => [item.id, item]));
 	const enchants = database.enchants;
 	if (equipment.items.length !== 17) throw new Error('Equipment needs all 17 slot positions, including empty slots.');
-	const seen = new Set();
+	const seen = new Set(),
+		categories = new Map();
 	const audit = [];
 	for (const [slot, entry] of equipment.items.entries()) {
 		if (!entry.id) continue;
@@ -198,6 +203,9 @@ export function validateEquipment(equipment, { database, className, faction, dag
 		if (!itemFits(item, slot, { className, faction, capabilities })) throw new Error(`Item ${entry.id} is not compatible with ${className}.`);
 		if (item.unique && seen.has(entry.id)) throw new Error(`Unique item ${entry.id} is equipped twice.`);
 		seen.add(entry.id);
+		if (item.limitCategory && categories.has(item.limitCategory))
+			throw new Error(`Items ${categories.get(item.limitCategory)} and ${entry.id} share unique-equipped category ${item.limitCategory}.`);
+		if (item.limitCategory) categories.set(item.limitCategory, entry.id);
 		// One effect id can have separate picker records for several equipment slots.
 		const enchant = entry.enchant ? enchants.find(e => e.effectId === entry.enchant && [e.type, ...(e.extraTypes ?? [])].includes(item.type)) : null;
 		if (entry.enchant && !enchant) throw new Error(`Enchant ${entry.enchant} is absent from WoWSims.`);

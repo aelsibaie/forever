@@ -7,7 +7,7 @@ import { hash, signature, factionPlayer, eligibleRaces, racialMetrics, offensive
 import { summarizeResult, resolvedRequestKey } from './statistics.mjs';
 import { equipmentCapabilities, validateEquipment, externalLoadoutFromList } from './gear_catalog.mjs';
 import { statIndexes } from './shadow_translation.mjs';
-import { makeRobustRequest, prepareRobustPlayer, rankRaceSamples, walkObjects, resolveUnavailableReferences } from './robust_logic.mjs';
+import { makeRobustRequest, prepareRobustPlayer, rankRaceSamples, walkObjects, resolveUnavailableReferences, referenceEquipmentSet } from './robust_logic.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const args = process.argv.slice(2),
@@ -368,6 +368,7 @@ for (const faction of ['horde', 'alliance']) {
 				});
 			}
 		if (!p.sets.length) throw new Error(`No valid sets for ${p.id} ${faction}`);
+		p.referenceSetId = referenceEquipmentSet(p.sets);
 		profiles.push(p);
 	}
 }
@@ -628,7 +629,7 @@ runCells(preflight, 'preflight');
 const proof = [];
 for (const specPath of [...new Set(profiles.map(p => p.specPath))]) {
 	const p = profiles.find(p => p.specPath === specPath),
-		row = preflight.find(r => r.profileId === p.id && r.faction === p.faction && r.setId === 'developer');
+		row = preflight.find(r => r.profileId === p.id && r.faction === p.faction && r.setId === p.referenceSetId);
 	const requestFile = path.join(out, 'requests', row.key + '.json'),
 		resultFile = path.join(out, 'logs', 'cli-' + p.id + '.json');
 	execFileSync(
@@ -733,7 +734,7 @@ for (const p of profiles)
 							{
 								profileId: p.id,
 								faction: p.faction,
-								setId: 'developer',
+								setId: p.referenceSetId,
 								race,
 								duration,
 								support: 'full',
@@ -757,7 +758,7 @@ for (const p of profiles)
 						{
 							profileId: p.id,
 							faction: p.faction,
-							setId: 'developer',
+							setId: p.referenceSetId,
 							race,
 							duration: 180,
 							support: 'full',

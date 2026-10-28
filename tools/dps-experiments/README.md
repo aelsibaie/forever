@@ -187,3 +187,16 @@ node --test tools/dps-experiments/racial_helpers.test.mjs
 - The native `stats` tool calls the public `ComputeStats` API to preserve APL validations. It adds no sim/UI hooks. Independent NumPy calculations check DPS means and covariance-based paired uncertainty. The verifier checks hashes, faction legality, race-only comparison inputs, minimal APL changes, control equivalence and local report links.
 
 Each archive contains `report.html`, faction overview PNG/SVG charts, class charts, `race-comparison.csv`, untouched developer results, adjusted results, confirmations, target-type sensitivity, validations, equivalence controls, an equipment audit, provenance and artifact hashes. Full requests, distributions and native binaries remain under ignored `tmp/`. Keep the entire directory for replay and verification. `--help` lists the sampling, duration, profile and scenario options for smaller diagnostic runs.
+
+## Mechanics and equipment readiness
+
+Before a new race study, run the bounded all-build checks in [the mechanics audit](../../docs/analytics/mechanics-audit.md). They save native validations, channels, owner/pet stat responses, explicit racial policies, synthetic hit/crit controls and the legality and source coverage of every developer build. The summary contains no race winners.
+
+```sh
+node tools/dps-experiments/readiness.mjs --out tmp/readiness/NEW --gear-catalog docs/analytics/race-gear-catalog.json
+node tools/dps-experiments/mechanics_audit.mjs --source-readiness tmp/readiness/NEW --out tmp/mechanics/NEW --iterations 128 --seed 7026102801
+node tools/dps-experiments/mechanics_report.mjs tmp/mechanics/NEW tmp/mechanics-review/NEW
+node tools/dps-experiments/channel_probes.mjs tmp/mechanics/NEW tmp/channel-probes/NEW
+```
+
+Refresh the catalogue whenever its native database or source mappings change. Unique-equipped conflicts fail equipment validation. A legal developer alternative can serve as the named reference when a default is rejected; an unsourced replacement cannot. The mana-racial policy adds no mana check to energy or rage users. Keep native timing evidence distinct from in-game logs and cross-engine agreement.

@@ -117,6 +117,8 @@ export async function exportProfiles(root: string, fallbackGear: Record<string, 
 			const id = slug(`${specPath}-${build.group ?? ''}-${build.name}`);
 			player.setName(id);
 			const proto = player.toProto(true, true);
+			// APL inspection uses JSON field names instead of protobuf oneof wrappers.
+			const serializedPlayer = PlayerProto.toJson(proto);
 			const signature = JSON.stringify(PlayerProto.toJson({ ...proto, name: '' }));
 			if (seen.has(signature)) {
 				player.dispose();
@@ -137,7 +139,7 @@ export async function exportProfiles(root: string, fallbackGear: Record<string, 
 				'mutilate' in parsedTalents &&
 				parsedTalents.mutilate &&
 				knownIssues.some(issue => /mutilate.*(?:no|not).*apl/i.test(issue)) &&
-				!containsMutilate(proto.rotation)
+				!containsMutilate((serializedPlayer as any).rotation)
 			)
 				warnings.push('The supplied Rogue rotation has no Mutilate action. This profile is retained for coverage and excluded from rankings.');
 			const gear = build.gear ?? def.presets.gear.find(preset => JSON.stringify(preset.gear) === JSON.stringify(expectedEquipment));
@@ -163,7 +165,7 @@ export async function exportProfiles(root: string, fallbackGear: Record<string, 
 				warnings,
 				knownIssues,
 				rankEligible: !warnings.some(warning => warning.includes('excluded from rankings')) && brokenTalents.length === 0,
-				player: PlayerProto.toJson(proto),
+				player: serializedPlayer,
 			});
 			player.dispose();
 		}

@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"collectedAt": "2026-10-28T15:52:59.919Z",
+	"collectedAt": "2026-10-28T16:50:51.961Z",
 	"policy": {
 		"source": "https://wowforeverbislist.com/",
 		"options": ["00000", "10000"],
@@ -45,7 +45,14 @@
 			"warlock-dps-aff-wrack": "warlock/affliction",
 			"warlock-dps-sm-ruin": "warlock/sm-ruin",
 			"warrior-dps-fury-pre-bis": "warrior/fury",
-			"warrior-dps-arms-pre-bis": "warrior/arms"
+			"warrior-dps-arms-pre-bis": "warrior/arms",
+			"mage-dps-arcane-arcane-frost": "mage/arcane",
+			"mage-dps-arcane-arcane-fire": "mage/arcane-fire",
+			"mage-dps-ffb-ffb": "mage/frostfire",
+			"mage-dps-fire-fire": "mage/fire",
+			"mage-dps-frost-frost": "mage/frost",
+			"rogue-dps-default": "rogue/combat",
+			"warrior-dps-default": "warrior/fury"
 		},
 		"additionalDeveloperSets": {
 			"druid-balance-moonkin": ["ui/specs/druid/balance/gear_sets/prebis.gear.json", "ui/specs/druid/balance/gear_sets/p1.gear.json"],

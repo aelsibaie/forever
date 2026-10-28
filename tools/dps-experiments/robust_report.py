@@ -273,12 +273,12 @@ def render(run):
             stem = p['faction'] + '--' + p['id']
             rows.append(f'<tr data-faction="{p["faction"]}" data-pool="{pool}" data-basis="{basis}" data-support="{support}" data-search="{e(profile_title(p).lower())}"><th title="{e("; ".join(p["confidenceNotes"]))}"><a href="builds/{stem}.html" style="color:{CLASS_COLORS[p["className"]]}">{e(profile_title(p))}</a><small>{e(confidence)}</small></th>{"".join(cells)}</tr>')
         fixed = detail_chart(charts, p, groups)
-        anchor = next(g for g in groups if g['mode'] == 'fixed-set' and g['profileId'] == p['id'] and g['faction'] == p['faction'] and g['setId'] == 'developer' and g['duration'] == 180 and g['support'] == 'full' and g['referencePolicy'] == 'developer')['rows'][0]
+        anchor = next(g for g in groups if g['mode'] == 'fixed-set' and g['profileId'] == p['id'] and g['faction'] == p['faction'] and g['setId'] == p.get('referenceSetId', 'developer') and g['duration'] == 180 and g['support'] == 'full' and g['referencePolicy'] == 'developer')['rows'][0]
         native_player = read(run / 'results' / (anchor['key'] + '.json'))['raidMetrics']['parties'][0]['players'][0]
         guardians = native_player.get('pets', [])
         pet_dps = sum(pet['dps']['avg'] for pet in guardians)
         pet_note = ('Pets / guardians: ' + ', '.join(pet['name'] for pet in guardians) + f' · {pet_dps:.1f} DPS ({100 * pet_dps / anchor["meanDps"]:.1f}% of total).' if guardians else 'No pet or guardian appears in the reference combat metrics.')
-        pet_note += ' Reference: ' + RACE_NAMES[anchor['race']] + ', developer equipment, 180 seconds and full support. Pet choices remain those of the developer build.'
+        pet_note += ' Reference: ' + RACE_NAMES[anchor['race']] + ', ' + next(g['tier'] for g in p['sets'] if g['id'] == anchor['setId']) + ', 180 seconds and full support. Pet choices remain those of the developer build.'
         gear_map = {s['id']: s for s in p['sets']}
         gear_html = []
         for gear in p['sets']:

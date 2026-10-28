@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { loadProfiles } from './export.mjs';
 import { eligibleRaces, factionPlayer } from './racial_helpers.mjs';
+import { equipmentCapabilities, validateEquipment } from './gear_catalog.mjs';
+import { auditProfiles } from './preset_audit.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const args = process.argv.slice(2),
 	opts = {};
@@ -35,7 +37,23 @@ const databaseFile = path.join(root, 'assets/database/db.json'),
 	databaseSha256 = hash(fs.readFileSync(databaseFile));
 const catalog = opts['gear-catalog'] ? read(path.resolve(opts['gear-catalog'])) : null;
 if (catalog)
+	assert.deepEqual(
+		catalog.policy,
+		read(path.join(root, 'tools/dps-experiments/gear-catalog-policy.json')),
+		'Gear-source mappings changed; refresh the catalogue.',
+	);
+if (catalog)
 	assert.equal(catalog.databaseSha256, databaseSha256, 'The equipment catalogue is stale. Refresh it against the current native database before running.');
+const equipmentDatabase = {
+	...database,
+	items: [...database.items, ...read(path.join(root, 'assets/database/leftover_db.json')).items],
+	enchants: [...database.enchants, ...read(path.join(root, 'assets/database/leftover_db.json')).enchants],
+};
+const capabilities = equipmentCapabilities(root);
+const profileAudit = auditProfiles(loaded.profiles, root, config);
+fs.writeFileSync(path.join(out, 'profiles.json'), JSON.stringify(loaded, null, 2));
+fs.writeFileSync(path.join(out, 'preset-audit.json'), JSON.stringify(profileAudit, null, 2));
+const equipmentCoverage = [];
 const rows = [],
 	errors = [],
 	missingPublished = [];
@@ -49,10 +67,58 @@ for (const profile of loaded.profiles)
 			errors.push({ profile: profile.id, faction, error: error.message });
 			continue;
 		}
-		if (catalog) {
-			const spec = catalog.policy.profiles[profile.id];
-			if (!catalog.sets.some(s => s.spec === spec && s.faction === faction)) missingPublished.push({ profile: profile.id, faction, spec });
+		const spec = catalog?.policy.profiles[profile.id];
+		const gearOptions = {
+			database: equipmentDatabase,
+			capabilities,
+			className: profile.className,
+			faction,
+			daggerPair: /-(asn|combat)-muti$/.test(profile.id),
+		};
+		const check = equipment => {
+			try {
+				const padded = structuredClone(equipment);
+				while (padded.items.length < 17) padded.items.push({});
+				validateEquipment(padded, gearOptions);
+				return { valid: true };
+			} catch (error) {
+				return { valid: false, reason: error.message };
+			}
+		};
+		const developer = check(player.equipment);
+		const published = catalog?.sets.filter(s => s.spec === spec && s.faction === faction).map(s => ({ id: s.id, ...check(s.equipment) })) ?? [];
+		const alternatives = [];
+		for (const source of catalog?.policy.additionalDeveloperSets?.[profile.id] ?? []) {
+			const bytes = fs.readFileSync(path.join(root, source));
+			try {
+				const equipment = JSON.parse(bytes);
+				const converted = factionPlayer({ ...profile.player, equipment }, faction, equipmentDatabase, policy);
+				alternatives.push({ source, sha256: hash(bytes), ...check(converted.player.equipment) });
+			} catch (error) {
+				alternatives.push({ source, sha256: hash(bytes), valid: false, reason: error.message });
+			}
 		}
+		equipmentCoverage.push({
+			profile: profile.id,
+			className: profile.className,
+			specLabel: profile.specLabel,
+			faction,
+			legalRaces: races,
+			gearName: profile.gearName,
+			gearTier: profile.gearTier,
+			developer,
+			spec: spec ?? null,
+			published,
+			additionalDeveloper: alternatives,
+			sourceRejections: catalog?.rejected.filter(s => s.spec === spec && s.faction === faction) ?? [],
+		});
+		if (catalog && !published.some(s => s.valid))
+			missingPublished.push({
+				profile: profile.id,
+				faction,
+				spec: spec ?? null,
+				reason: spec ? 'No compatible published equipment.' : 'Source mapping missing.',
+			});
 		for (const race of races) {
 			const p = structuredClone(player);
 			p.race = race;
@@ -92,12 +158,14 @@ const report = {
 	profiles: loaded.profiles.length,
 	nativeMetadataCases: rows.length,
 	readyForDeveloperRun: errors.length === 0,
+	readyForLegalDeveloperBaseline: errors.length === 0 && equipmentCoverage.every(r => r.developer.valid),
+	equipmentCoverage,
 	readyForCompletePublishedPool: !!catalog && errors.length === 0 && missingPublished.length === 0,
 	missingPublished,
 	errors,
 	rows,
-	scope: 'Schema, faction gear and native metadata checks only. No DPS iterations or ranking estimates are generated. Runtime rotation validation and independent samples remain part of the full study.',
+	scope: 'Schema, faction gear, equipment legality and native metadata coverage. Invalid developer equipment remains diagnostic and is listed. No DPS iterations or ranking estimates; runtime rotation validation and independent samples remain required.',
 };
 fs.writeFileSync(path.join(out, 'readiness.json'), JSON.stringify(report, null, 2));
-console.log(JSON.stringify({ ...report, rows: undefined, workingTree: undefined }, null, 2));
+console.log(JSON.stringify({ ...report, rows: undefined, equipmentCoverage: undefined, workingTree: undefined }, null, 2));
 if (errors.length || (opts.requireFullPublished && !report.readyForCompletePublishedPool)) process.exitCode = 1;

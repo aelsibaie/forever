@@ -1,6 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normalQuantile, sampleComparison, rankRaceSamples, resolveUnavailableReferences, prepareRobustPlayer } from './robust_logic.mjs';
+import {
+	normalQuantile,
+	sampleComparison,
+	rankRaceSamples,
+	resolveUnavailableReferences,
+	prepareRobustPlayer,
+	referenceEquipmentSet,
+} from './robust_logic.mjs';
 import { validateEquipment, compatiblePublishedList } from './gear_catalog.mjs';
 
 test('paired race intervals retain exact proportional changes and widen for unpaired noise', () => {
@@ -187,4 +194,54 @@ test('source ammunition changes preserve the Hunter pet and the original input',
 		() => prepareRobustPlayer(player, { race: 'RaceOrc', className: 'Hunter', gear: { ...gear, nativeHunterOptions: { petType: 'PetNone' } } }),
 		/other Hunter options/,
 	);
+});
+
+test('a unique-equipped category rejects different items and selects a published alternative', () => {
+	const equipment = { items: Array.from({ length: 17 }, () => ({})) };
+	equipment.items[10] = { id: 10 };
+	equipment.items[11] = { id: 11 };
+	equipment.items[14] = { id: 12 };
+	const database = {
+		items: [
+			{ id: 10, type: 11, limitCategory: 4 },
+			{ id: 11, type: 11, limitCategory: 4 },
+			{ id: 13, type: 11 },
+			{ id: 12, type: 13, weaponType: 9, handType: 2 },
+		],
+		enchants: [],
+	};
+	const options = { database, className: 'Warrior', faction: 'alliance' };
+	assert.throws(() => validateEquipment(equipment, options), /unique-equipped category/);
+	const list = {
+		slots: [
+			{ slot: 'finger1', item: { id: 10 } },
+			{ slot: 'finger2', item: { id: 11 }, alternatives: [{ id: 13 }] },
+		],
+	};
+	const result = compatiblePublishedList(list, options);
+	assert.equal(result.list.slots[1].item.id, 13);
+	assert.equal(result.substitutions[0].to, 13);
+	assert.equal(list.slots[1].item.id, 11);
+});
+
+test('a mana racial policy adds no mana condition or cast for energy and rage users', () => {
+	for (const className of ['Rogue', 'Warrior']) {
+		const original = { rotation: { priorityList: [] }, equipment: { items: [] } };
+		const prepared = prepareRobustPlayer(original, {
+			className,
+			race: 'RaceHighOrderSkyborne',
+			gear: { equipment: original.equipment },
+			mana: 'leyline65-guarded',
+		});
+		assert.deepEqual(prepared.player.rotation, original.rotation);
+		assert(!prepared.changes.some(x => x.includes('Read Leyline')));
+	}
+});
+
+test('reference controls use a legal developer set and refuse an unsourced replacement', () => {
+	const excluded = { id: 'developer', origin: 'WoWSims developer', diagnosticOnly: true };
+	const alternative = { id: 'developer-p1', origin: 'WoWSims developer' };
+	assert.equal(referenceEquipmentSet([excluded, alternative]), alternative.id);
+	assert.throws(() => referenceEquipmentSet([excluded, { id: 'published', origin: 'Community' }]), /No legal developer reference/);
+	assert.equal(referenceEquipmentSet([alternative, { id: 'developer', origin: 'WoWSims developer' }]), 'developer');
 });
