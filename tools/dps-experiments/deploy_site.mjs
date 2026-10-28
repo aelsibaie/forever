@@ -62,11 +62,13 @@ if (!fs.existsSync(deployment)) {
 	run('git', ['remote', 'add', 'origin', 'https://github.com/' + repo + '.git'], deployment);
 	if (run('git', ['ls-remote', '--heads', 'origin', branch], deployment)) {
 		run('git', ['fetch', '--depth=1', 'origin', branch], deployment);
-		run('git', ['checkout', '-B', branch, 'FETCH_HEAD'], deployment);
+		run('git', ['-c', 'core.longpaths=true', 'checkout', '-B', branch, 'FETCH_HEAD'], deployment);
 	}
 }
 assert.equal(run('git', ['remote', 'get-url', 'origin'], deployment), 'https://github.com/' + repo + '.git');
 assert.equal(run('git', ['branch', '--show-current'], deployment), branch);
+// Report filenames can exceed Win32's normal path length inside a nested artifact directory.
+run('git', ['config', 'core.longpaths', 'true'], deployment);
 run('git', ['config', 'core.autocrlf', 'false'], deployment);
 fs.cpSync(site, deployment, { recursive: true });
 run('git', ['add', '.'], deployment);
