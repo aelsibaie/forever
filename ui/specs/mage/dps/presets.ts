@@ -68,6 +68,7 @@ export const DefaultRaidBuffs = RaidBuffs.create({
 export const DefaultPartyBuffs = PartyBuffs.create({
 	manaSpringTotem: 2,
 	manaTideTotems: 1,
+	darkInspiration: 1,
 });
 
 export const DefaultIndividualBuffs = IndividualBuffs.create({
@@ -94,6 +95,7 @@ export const DefaultSettings: PresetSettings = {
 };
 
 export const ArcaneFrostBuild = PresetUtils.makePresetBuild('Arcane Frost', {
+	group: 'Arcane',
 	gear: P1ArcaneGear,
 	talents: ArcaneFrostTalents,
 	//rotationType: APLRotationType.TypeAuto,
@@ -102,6 +104,7 @@ export const ArcaneFrostBuild = PresetUtils.makePresetBuild('Arcane Frost', {
 });
 
 export const ArcaneFireBuild = PresetUtils.makePresetBuild('Arcane Fire', {
+	group: 'Arcane',
 	gear: P1ArcaneGear,
 	talents: ArcaneFireTalents,
 	//rotationType: APLRotationType.TypeAuto,
@@ -110,6 +113,7 @@ export const ArcaneFireBuild = PresetUtils.makePresetBuild('Arcane Fire', {
 });
 
 export const FFBBuild = PresetUtils.makePresetBuild('FFB', {
+	group: 'FFB',
 	gear: P1ArcaneGear,
 	talents: FFBTalents,
 	//rotationType: APLRotationType.TypeAuto,
@@ -118,6 +122,7 @@ export const FFBBuild = PresetUtils.makePresetBuild('FFB', {
 });
 
 export const FireBuild = PresetUtils.makePresetBuild('Fire', {
+	group: 'Fire',
 	gear: P1ArcaneGear,
 	talents: FireTalents,
 	//rotationType: APLRotationType.TypeAuto,
@@ -133,6 +138,7 @@ export const FrostSettings: PresetSettings = {
 };
 
 export const FrostBuild = PresetUtils.makePresetBuild('Frost', {
+	group: 'Frost',
 	gear: P1ArcaneGear,
 	talents: FrostTalents,
 	//rotationType: APLRotationType.TypeAuto,

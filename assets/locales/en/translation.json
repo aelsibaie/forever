@@ -271,12 +271,7 @@
 			"off_hand_crit_rating": "Off Hand Crit Rating",
 			"ranged_hit_rating": "Ranged Hit Rating",
 			"ranged_crit_rating": "Ranged Crit Rating",
-			"melee_crit_suppression": "Melee Crit Suppression",
 			"ranged_crit_suppression": "Ranged Crit Suppression",
-			"main_hand_miss": "Main Hand Miss",
-			"main_hand_dodge": "Main Hand Dodge",
-			"main_hand_parry": "Main Hand Parry",
-			"main_hand_glance": "Main Hand Glance",
 			"healing_power": "Healing Power",
 			"spell_damage": "Spell Damage",
 			"arcane_damage": "Arcane Spell Damage",
@@ -1841,7 +1836,7 @@
 				"is_expertise_capped": {
 					"label": "Is Expertise Capped",
 					"tooltip": "<b>True</b> if the current target can neither dodge nor parry the spell, otherwise <b>False</b>.",
-					"full_description": "<p>Parry counts only when you are in front of the target. Spells and ranged attacks cannot be dodged or parried and always return <b>True</b>.</p><p>The check reads only the spell's defense type, so it still counts dodge and parry for specials that never roll them, such as Backstab, Ambush and Overpower.</p>"
+					"full_description": "<p>Parry counts only when you are in front of the target. Spells and ranged attacks cannot be dodged or parried and always return <b>True</b>.</p><p>Specials that cannot be dodged, parried or blocked, such as Ambush, Garrote, Overpower and the seal judgements, also return <b>True</b>.</p>"
 				},
 				"is_ready": {
 					"label": "Is Ready",
@@ -2333,7 +2328,7 @@
 				},
 				"pull_range": {
 					"label": "Pull range (yd)",
-					"tooltip": "Where you stand when the pull starts. From there you walk to your spot (12 yd at range, melee range in melee), stopping for each Auto Shot you can fire on the way."
+					"tooltip": "Where you stand when the pull starts. From there you walk to your spot (12 yd at range, 13.2 yd when weaving, melee range in melee), stopping for each Auto Shot you can fire on the way."
 				},
 				"time_to_weave": {
 					"label": "Time to weave (ms)",
@@ -3357,6 +3352,7 @@
 				"suppression": "Suppression:",
 				"to_hit_cap": "To Hit Cap:",
 				"to_exp_cap": "To Exp Cap:",
+				"block": "Block:",
 				"spec_offsets": "Spec Offsets:",
 				"final_crit_cap": "Final Crit Cap:",
 				"can_raise_by": "Can Raise By:"

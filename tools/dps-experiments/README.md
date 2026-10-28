@@ -4,6 +4,8 @@ Runs the repository's DPS presets through the native simulator and saves the ful
 
 ## Setup
 
+The [Shadow hit reconciliation](../../docs/analytics/shadow-reconciliation.md) records the controlled Human/Dwarf comparison and its implementation limits. `readiness.mjs --out NEW --gear-catalog docs/analytics/race-gear-catalog.json` checks current developer exports, every legal race and catalogue freshness without DPS sampling. `workflow.mjs --robustness` requires complete published-pool coverage before starting the matrix; developer-only runs remain available when source lists are incomplete.
+
 For race choice across multiple equipment sets and hit levels, use the [race robustness study](../../docs/analytics/race-robustness.md). `workflow.mjs --robustness` adds the shared equipment pools, runtime coverage checks, separate hit controls and independent confirmations. It keeps developer and published pre-raid pools separate and reports practical loss bounds rather than a single preset's winner.
 
 Use `workflow.mjs --audit` for the [all-spec assessment and wider engine diagnostics](../../docs/analytics/preset-assessment.md). Developer gear remains the reference; labeled alternatives may test other sourced gear or narrow changes. The same guide covers GitHub Pages publication with complete raw downloads.

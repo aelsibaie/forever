@@ -56,6 +56,8 @@ Sampling precision and confidence in game mechanics remain separate. Provisional
 
 ## Refresh and run
 
+The workflow checks native metadata and catalogue freshness before its DPS stages. A complete robustness run stops if any declared build/faction mapping has no compatible published candidate. The [Shadow reconciliation](shadow-reconciliation.md) records the current live-data cleanup and the limits of the available source lists. Refreshing upstream never makes an old catalogue valid automatically.
+
 After updating and validating upstream on `codex/analytics`, refresh public equipment sources when needed:
 
 ```sh

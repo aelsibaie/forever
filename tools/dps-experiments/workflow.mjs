@@ -70,6 +70,27 @@ const node = (name, argv) => stage(name, process.execPath, argv),
 	py = (name, argv) => stage(name, python, argv);
 py('python-environment', ['-c', 'import sys, numpy, matplotlib; print(sys.version); print("numpy", numpy.__version__, "matplotlib", matplotlib.__version__)']);
 if (!options.prepared) node('prepare', ['tools/dps-experiments/prepare.mjs']);
+const gearCatalog = path.resolve(root, options['gear-catalog'] ?? 'docs/analytics/race-gear-catalog.json');
+if (options.robustness) {
+	if (options['refresh-gear']) {
+		if (!options['source-archive']) throw new Error('--refresh-gear requires --source-archive in the local source library.');
+		node('gear-source-refresh', [
+			'tools/dps-experiments/gear_catalog.mjs',
+			'--archive',
+			path.resolve(options['source-archive']),
+			'--out',
+			gearCatalog,
+			'--compact',
+		]);
+	}
+	if (!fs.existsSync(gearCatalog)) throw new Error('A validated gear catalogue is required. Refresh it with gear_catalog.mjs first.');
+}
+node('rerun-readiness', [
+	'tools/dps-experiments/readiness.mjs',
+	'--out',
+	path.join(out, 'readiness'),
+	...(options.robustness ? ['--gear-catalog', gearCatalog, '--require-full-published'] : []),
+]);
 node('analytics-tests', [
 	'--test',
 	...fs
@@ -163,19 +184,6 @@ if (options.audit) {
 	]);
 }
 if (options.robustness) {
-	const gearCatalog = path.resolve(root, options['gear-catalog'] ?? 'docs/analytics/race-gear-catalog.json');
-	if (options['refresh-gear']) {
-		if (!options['source-archive']) throw new Error('--refresh-gear requires --source-archive in the local source library.');
-		node('gear-source-refresh', [
-			'tools/dps-experiments/gear_catalog.mjs',
-			'--archive',
-			path.resolve(options['source-archive']),
-			'--out',
-			gearCatalog,
-			'--compact',
-		]);
-	}
-	if (!fs.existsSync(gearCatalog)) throw new Error('A validated gear catalogue is required. Refresh it with gear_catalog.mjs first.');
 	const robust = path.join(out, 'race-robustness');
 	node('race-robustness', [
 		'tools/dps-experiments/robustness.mjs',
