@@ -24,6 +24,8 @@ for (const r of recommendations) {
 			g.profileId === r.profileId &&
 			g.duration === r.duration &&
 			!g.diagnosticOnly &&
+			g.referencePolicy === 'developer' &&
+			!g.rotationExcluded &&
 			(r.supportScope === 'both' || g.support === r.supportScope) &&
 			(r.basis === 'selected-gear' ? g.mode === 'pool:' + r.pool : g.mode === 'fixed-set' && eligibleSets.has(g.setId)),
 	);

@@ -13,3 +13,9 @@ Each line is the rule the code follows, where it lives, and the pull request tha
   special-attack soft cap without the dual-wield penalty, the table follows the spell's `DefenseType` (proc mask for
   none), auto shots roll the ranged table, and the 1e-9 tolerance stays in the APL values.**
   `sim/core/apl_values_spell.go`, PR #608.
+
+- **Each racial synchronization path names only that race's cooldown, and a class cooldown keeps a usable fallback
+  after the racial has been spent.** A positive `Spell Is Known` check for both Blood Fury and Elune's Light makes
+  the route impossible. Unavailable-reference pruning can conceal it; compare actual cooldown casts under native
+  and explicit-reference handling. `ui/specs/rogue/dps/apls/default.apl.json`,
+  `tools/dps-experiments/rotation_audit.py`.

@@ -205,6 +205,7 @@ if (options.robustness) {
 	node('race-exports', ['tools/dps-experiments/robust_exports.mjs', robust]);
 	node('priest-racial-controls', ['tools/dps-experiments/class_racial_probe.mjs', robust, path.join(robust, 'class-racial-controls')]);
 	node('hunter-pet-controls', ['tools/dps-experiments/hunter_pet_probe.mjs', robust, path.join(robust, 'hunter-pet-controls')]);
+	py('race-rotation-audit', ['tools/dps-experiments/rotation_audit.py', robust]);
 	py('race-robustness-verification', ['tools/dps-experiments/verify_robustness.py', robust]);
 	py('race-robustness-report', ['tools/dps-experiments/robust_report.py', robust]);
 	node('race-report-controls', ['tools/dps-experiments/verify_robust_report.mjs', robust]);

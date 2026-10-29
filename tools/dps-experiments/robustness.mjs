@@ -7,12 +7,20 @@ import { hash, signature, factionPlayer, eligibleRaces, racialMetrics, offensive
 import { summarizeResult, resolvedRequestKey } from './statistics.mjs';
 import { equipmentCapabilities, validateEquipment, externalLoadoutFromList } from './gear_catalog.mjs';
 import { statIndexes } from './shadow_translation.mjs';
-import { makeRobustRequest, prepareRobustPlayer, rankRaceSamples, walkObjects, resolveUnavailableReferences, referenceEquipmentSet } from './robust_logic.mjs';
+import {
+	makeRobustRequest,
+	prepareRobustPlayer,
+	rankRaceSamples,
+	walkObjects,
+	resolveUnavailableReferences,
+	referenceEquipmentSet,
+	rotationInputPath,
+} from './robust_logic.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const args = process.argv.slice(2),
 	opts = {};
-const flags = new Set(['resume', 'preflight-only']);
+const flags = new Set(['resume', 'preflight-only', 'allow-rotation-inputs']);
 const valued = new Set([
 	'source-racials',
 	'gear-catalog',
@@ -65,13 +73,21 @@ if (
 const prior = read(path.join(source, 'provenance.json'));
 const referenceCli = path.join(source, 'engine', process.platform === 'win32' ? 'wowsim.exe' : 'wowsim');
 if (fileHash(referenceCli) !== prior.engine.sha256) throw new Error('The reference CLI binary hash does not match its archive.');
-for (const [file, expected] of Object.entries(prior.sourceFiles))
-	if (!file.startsWith('tools/dps-experiments/') && fileHash(path.join(root, file)) !== expected)
+const inputSourceChanges = [];
+for (const [file, expected] of Object.entries(prior.sourceFiles)) {
+	if (file.startsWith('tools/dps-experiments/')) continue;
+	const actual = fileHash(path.join(root, file));
+	if (actual === expected) continue;
+	if (!opts['allow-rotation-inputs'] || !opts['profiles-file'] || !rotationInputPath(file))
 		throw new Error(`The source archive does not match this checkout: ${file}`);
+	inputSourceChanges.push({ file, archivedSha256: expected, currentSha256: actual });
+}
 const gearCatalog = read(path.resolve(opts['gear-catalog']));
 const identity = signature({
 	settings,
 	nativeSource: prior.snapshot.sourceSha256,
+	inputSourceChanges,
+	profilesSha256: opts['profiles-file'] ? fileHash(path.resolve(opts['profiles-file'])) : null,
 	model: prior.model,
 	gearCatalog: fileHash(path.resolve(opts['gear-catalog'])),
 	gunbaSource: opts['gunba-source'] ? execFileSync('git', ['rev-parse', 'HEAD'], { cwd: path.resolve(opts['gunba-source']), encoding: 'utf8' }).trim() : null,
@@ -98,6 +114,8 @@ const provenance = {
 	sourceRun: source,
 	sourceCommit: prior.snapshot.upstreamSourceCommit,
 	analyticsCommit: git('rev-parse', 'HEAD'),
+	inputSourceChanges,
+	profilesSha256: opts['profiles-file'] ? fileHash(path.resolve(opts['profiles-file'])) : null,
 	status: git('status', '--short'),
 	model: prior.model,
 	gameBuilds: prior.gameBuilds,
@@ -719,10 +737,11 @@ runCells(screen, 'screen');
 const selectedPolicies = best(screen, row => condition(row) + '--' + row.race);
 const validation = selectedPolicies.map(row => addCell(row, 'validation', settings.validationIterations, settings.validationSeed));
 runCells(validation, 'validation');
-execFileSync(process.execPath, [path.join(root, 'tools/dps-experiments/hunter_ranged_probe.mjs'), out, path.join(out, 'hunter-ranged-controls')], {
-	cwd: root,
-	stdio: 'inherit',
-});
+if (profiles.some(p => p.id === 'hunter-dps-sv-melee'))
+	execFileSync(process.execPath, [path.join(root, 'tools/dps-experiments/hunter_ranged_probe.mjs'), out, path.join(out, 'hunter-ranged-controls')], {
+		cwd: root,
+		stdio: 'inherit',
+	});
 const diagnostics = [];
 for (const p of profiles)
 	for (const duration of settings.durations)

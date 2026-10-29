@@ -32,6 +32,8 @@ for (const scope of scopes) {
 			g.faction === p.faction &&
 			g.duration === scope.duration &&
 			!g.diagnosticOnly &&
+			g.referencePolicy === 'developer' &&
+			!g.rotationExcluded &&
 			(scope.supportScope === 'both' || g.support === scope.supportScope) &&
 			(scope.basis === 'selected-gear' ? g.mode === 'pool:' + scope.pool : g.mode === 'fixed-set' && sets.has(g.setId)),
 	);

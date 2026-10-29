@@ -1,5 +1,14 @@
 import { offensiveRacial, signature } from './racial_helpers.mjs';
 
+export function rotationInputPath(file) {
+	return (
+		/^ui\/specs\/.+\/(?:apls\/[^/]+\.apl\.json|builds\/[^/]+\.build\.json)$/.test(file) ||
+		/^sim\/.+\.results$/.test(file) ||
+		/^\.github\/skills\/.+\.(?:md|sh)$/.test(file) ||
+		file === 'skills-lock.json'
+	);
+}
+
 export function walkObjects(value, callback) {
 	if (!value || typeof value !== 'object') return;
 	callback(value);

@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 import sys
 from robust_report import (GAP_EXPLANATION, GAP_INTRO, assessment_groups, gap_cell,
-                           assess, overview, page, profile_title, summarize_gaps)
+                           assess, overview, page, profile_title, summarize_gaps, rotation_suitable)
 
 
 def load(root, name):
@@ -20,6 +20,9 @@ def load(root, name):
 
 
 def refresh(root):
+    audit = load(root, 'rotation-audit.json')
+    if audit['primaryBlockedGroups']:
+        raise ValueError('Resolve the primary rotation audit findings before refreshing a published overview.')
     profiles = load(root, 'profiles.json')['profiles']
     groups = load(root, 'analysis.json')['groups']
     recommendations = load(root, 'recommendations.json')['recommendations']
@@ -45,7 +48,7 @@ def refresh(root):
             head = body[:body.index('</th>') + len('</th>')]
             cells = []
             for target in ['beast', 'elemental']:
-                subset = [g for g in groups if g['mode'] == 'creature-control' and g['faction'] == profile['faction'] and g['profileId'] == profile['id'] and g['target'] == target and not g.get('diagnosticOnly')]
+                subset = [g for g in groups if g['mode'] == 'creature-control' and g['faction'] == profile['faction'] and g['profileId'] == profile['id'] and g['target'] == target and rotation_suitable(g)]
                 cells.append(gap_cell(summarize_gaps(subset, profile['races']), assess(subset, profile['races'])))
             creature_count += 1
             return '<tr' + attributes + '>' + head + ''.join(cells) + '</tr>'
