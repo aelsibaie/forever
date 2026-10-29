@@ -1,4 +1,5 @@
 import csv
+import gzip
 import hashlib
 import html
 import json
@@ -10,6 +11,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
+from race_gap_summary import gap_range, summarize_gaps
 
 
 RACE_NAMES = {'RaceOrc': 'Orc', 'RaceTroll': 'Troll', 'RaceUndead': 'Undead', 'RaceTauren': 'Tauren', 'RaceWindshaperSkyborne': 'Skyborne', 'RaceHighOrderSkyborne': 'Skyborne', 'RaceHuman': 'Human', 'RaceDwarf': 'Dwarf', 'RaceNightElf': 'Night Elf', 'RaceGnome': 'Gnome'}
@@ -150,32 +152,77 @@ def pet_detail(profile, pets):
     return '<details><summary>Lone Wolf pet sensitivity</summary><p>Petless versus Raptor, changing only petType. Original talents and racial policy remain fixed. Developer anchor and validation-selected published gear; 1,000 independent iterations, full support and original developer references. This is a sensitivity check, without pet-family or talent optimization. Gaps compare races within that same pet choice, equipment pool and duration.</p><div class="scroll"><table><thead><tr><th>Seconds</th><th>Pool</th><th>Pet choice</th><th>Race</th><th>DPS</th><th>Gap and interval</th><th>Replay</th></tr></thead><tbody>' + ''.join(rows) + '</tbody></table></div></details>'
 
 
-def overview(directory, faction, profiles, groups, pool, provenance):
+GAP_INTRO = 'The overview shows sampled DPS differences between races. Each gap compares races in the same build and setup. Ranges span the selected equipment, support and rotation treatments. Confidence details are available separately.'
+GAP_EXPLANATION = 'Runner-up gap is the DPS difference between first and second in each setup. Full spread is the difference between first and last. Both are percentages of that setup’s highest mean DPS. “Leaders vary” means different setups have different sampled leaders. Tiny differences can be simulation noise.'
+
+
+def gap_heading(summary):
+    if not summary['conditions']:
+        return 'Coverage gap', None
+    if len(summary['races']) == 1:
+        return RACE_NAMES[summary['races'][0]['race']] + ' only', None
+    if len(summary['leaders']) == 1:
+        name = RACE_NAMES[summary['leaders'][0]]
+        return name + ' leads', RACE_COLORS[name]
+    return ('Leaders vary' if summary['leaderChanges'] else 'Sampled tie'), None
+
+
+def gap_cell(summary, confidence):
+    title, color = gap_heading(summary)
+    if not summary['conditions']:
+        return '<td><b>Coverage gap</b><small>No validated equipment in this pool.</small></td>'
+    if len(summary['races']) == 1:
+        return '<td><b>' + e(title) + '</b><small>No other legal race in this faction.</small></td>'
+    leaders = ' / '.join(RACE_NAMES[race] for race in summary['leaders'])
+    alternatives = ''.join('<li><span>' + e(RACE_NAMES[row['race']]) + '</span><b>' + e(gap_range(row['gapPercent'])) + '</b></li>' for row in sorted(summary['races'], key=lambda row: (row['gapPercent']['max'], row['gapPercent']['min'], row['race'])))
+    confidence_title, confidence_text, _ = cell_text(confidence)
+    leader_note = '<small>' + e(leaders) + '</small>' if len(summary['leaders']) > 1 else ''
+    return ('<td class="gap-cell"><b class="gap-leader" style="color:' + (color or INK) + '">' + e(title) + '</b>' + leader_note
+            + '<span class="gap-metric">Runner-up gap <strong>' + e(gap_range(summary['runnerUpGapPercent'])) + '</strong></span>'
+            + '<span class="gap-metric">Full racial spread <strong>' + e(gap_range(summary['fullSpreadPercent'])) + '</strong></span>'
+            + '<details class="race-gaps"><summary>Every race: % behind best</summary><ul>' + alternatives + '</ul></details>'
+            + '<details class="gap-confidence"><summary>Confidence</summary><small>' + e(confidence_title + ' · ' + confidence_text) + '. This describes the suggested race’s possible shortfall, not the racial DPS spread. '
+            + str(summary['conditions']) + ' matching setups.</small></details></td>')
+
+
+def overview(directory, faction, profiles, groups, pool, provenance, stem=None, extensions=('png', 'svg')):
     data = [p for p in profiles if p['faction'] == faction]
-    height = 2.8 + len(data) * .42
-    fig, ax = plt.subplots(figsize=(13.5, height))
+    height = 3.0 + len(data) * .60
+    fig, ax = plt.subplots(figsize=(14, height))
     fig.patch.set_facecolor(BG); ax.set_facecolor(BG)
-    ax.set_xlim(-.02, 3.03); ax.set_ylim(len(data) - .45, -1.2); ax.axis('off')
-    fig.subplots_adjust(left=.35, right=.97, top=1 - 1.7 / height, bottom=.8 / height)
-    fig.text(.055, 1 - .45 / height, 'WoWSims Forever / RACE ROBUSTNESS', color=MUTED, fontsize=11, weight='bold')
-    fig.text(.055, 1 - .98 / height, faction.title() + ': choices across equipment and support', fontsize=23, weight='bold')
-    fig.text(.055, 1 - 1.39 / height, f'Every accepted published pre-raid set · {provenance["settings"]["validationIterations"]:,} independent iterations per set · neutral target', color=MUTED, fontsize=10)
+    ax.set_xlim(-.02, 3.03); ax.set_ylim(len(data) - .4, -1.2); ax.axis('off')
+    fig.subplots_adjust(left=.35, right=.97, top=1 - 1.8 / height, bottom=.8 / height)
+    label = 'developer references' if pool == 'developer-reference' else 'published pre-raid'
+    fig.text(.04, 1 - .45 / height, 'WoWSims Forever / RACIAL DPS GAPS', color=MUTED, fontsize=11, weight='bold')
+    fig.text(.04, 1 - .98 / height, faction.title() + ': ' + label, fontsize=23, weight='bold')
+    fig.text(.04, 1 - 1.4 / height, 'Mean DPS gaps within matching setups · ranges across gear, full/self support and both reference treatments', color=MUTED, fontsize=9)
     for j, duration in enumerate([60, 180, 300]):
-        ax.text(j + .5, -.83, f'{duration} seconds', color=MUTED, ha='center', va='center', fontsize=12)
-    for i, p in enumerate(data):
-        ax.text(-.07, i, profile_title(p) + (' †' if p.get('confidenceNotes') else ''), color=CLASS_COLORS[p['className']], ha='right', va='center', fontsize=8.4)
+        ax.text(j + .5, -.85, f'{duration} seconds', color=MUTED, ha='center', va='center', fontsize=12)
+    for i, profile in enumerate(data):
+        ax.text(-.07, i, profile_title(profile) + (' †' if profile.get('confidenceNotes') else ''), color=CLASS_COLORS[profile['className']], ha='right', va='center', fontsize=8.2)
         for j, duration in enumerate([60, 180, 300]):
-            matched = assessment_groups(p, groups, pool, duration)
-            result = assess(matched, p['races']); title, subtitle, color = cell_text(result)
-            if len(p['races']) == 1:
-                title = RACE_NAMES[p['races'][0]] + ' only'; subtitle = 'No faction alternative'
-            ax.add_patch(plt.Rectangle((j + .025, i - .37), .95, .74, facecolor=PANEL, edgecolor=color or '#526076', linewidth=.8))
-            ax.text(j + .5, i - .085, title, color=color or MUTED, ha='center', va='center', fontsize=9.1, weight='bold')
-            ax.text(j + .5, i + .16, subtitle, color=MUTED, ha='center', va='center', fontsize=6.8)
-    fig.text(.055, .39 / height, f'Source {provenance["sourceCommit"][:10]} · {provenance["model"]["name"]} · 60/180/300s · full/self support · developer/explicit references', fontsize=8, color=MUTED)
-    fig.text(.055, .16 / height, '† Model or equipment-coverage caveat; see report. Loss is the largest upper interval bound across shown conditions. Gear search uses a finite catalogue.', fontsize=8, color=MUTED)
-    for extension in ['png', 'svg']:
-        fig.savefig(directory / f'{faction}-overview.{extension}', dpi=155)
+            matched = assessment_groups(profile, groups, pool, duration)
+            summary = summarize_gaps(matched, profile['races'])
+            title, color = gap_heading(summary)
+            if summary['conditions'] and len(profile['races']) > 1:
+                if len(summary['leaders']) == 2:
+                    title += ': ' + ' / '.join(RACE_NAMES[r] for r in summary['leaders'])
+                elif len(summary['leaders']) > 2:
+                    title += f' ({len(summary["leaders"])} races)'
+                lines = ['Next: ' + gap_range(summary['runnerUpGapPercent']), 'Full spread: ' + gap_range(summary['fullSpreadPercent'])]
+            else:
+                lines = ['No faction alternative' if summary['conditions'] else 'No validated gear pool']
+            if len(title) > 35:
+                title = title.replace(': ', ':\n', 1)
+            ax.add_patch(plt.Rectangle((j + .025, i - .41), .95, .82, facecolor=PANEL, edgecolor=color or '#526076', linewidth=.8))
+            ax.text(j + .5, i - .2, title, color=color or INK, ha='center', va='center', fontsize=8.1, weight='bold')
+            ax.text(j + .5, i + .08, lines[0], color=INK, ha='center', va='center', fontsize=7.7)
+            if len(lines) > 1:
+                ax.text(j + .5, i + .28, lines[1], color=INK, ha='center', va='center', fontsize=7.7)
+    fig.text(.04, .44 / height, 'Next = first-to-second DPS gap; full spread = first-to-last. Percentages use each setup’s highest mean DPS. Small gaps may be noise.', fontsize=8, color=MUTED)
+    fig.text(.04, .17 / height, f'WoWSims {provenance["sourceCommit"][:10]} | build {next(iter(provenance["gameBuilds"].values()))} | validation seed {provenance["settings"]["validationSeed"]} | † model/gear caveat | confidence details in report', fontsize=8, color=MUTED)
+    for extension in extensions:
+        fig.savefig(directory / f'{stem or faction + "-overview"}.{extension}', dpi=155)
     plt.close(fig)
 
 
@@ -252,7 +299,7 @@ def render(run):
                 title, subtitle = 'Excluded reference', 'Unique-equipped item conflict'
             if len(p['races']) == 1:
                 title, subtitle = RACE_NAMES[p['races'][0]] + ' only', 'No faction alternative'
-            target_cells.append(f'<td><b style="color:{color or MUTED}">{e(title)}</b><small>{e(subtitle)}</small></td>')
+            target_cells.append(gap_cell(summarize_gaps(matched, p['races']), result))
             for group in matched:
                 for row in sorted(group['rows'], key=lambda r: -r['meanDps']):
                     c = next(c for c in group['comparisons'] if c['race'] == row['race'])
@@ -263,9 +310,7 @@ def render(run):
             for duration in [60, 180, 300]:
                 subset = assessment_groups(p, groups, pool, duration, basis, support)
                 result = assess(subset, p['races']); summaries.append({'faction': p['faction'], 'profileId': p['id'], 'pool': pool, 'basis': basis, 'supportScope': support, 'duration': duration, 'confidenceNotes': p['confidenceNotes'], **result})
-                title, subtitle, color = cell_text(result)
-                if len(p['races']) == 1: title, subtitle = RACE_NAMES[p['races'][0]] + ' only', 'No faction alternative'
-                cells.append(f'<td><b style="color:{color or MUTED}">{e(title)}</b><small>{e(subtitle)}</small></td>')
+                cells.append(gap_cell(summarize_gaps(subset, p['races']), result))
             missing = sum(bool(s.get('substitutions')) for s in p['sets'])
             valid_sets = sum(not g.get('diagnosticOnly') for g in p['sets'])
             confidence = f'{valid_sets} valid sets; {missing} use published replacements'
@@ -326,12 +371,12 @@ def render(run):
     hit_changed = len(set((r['faction'], r['profileId']) for r in hit_reversals))
     reversal_examples = ''.join(f'<li>{e(r["faction"].title())} · {e(r["profileId"])}: {e(RACE_NAMES[r["first"]["race"]])} leads in <code>{e(r["first"]["condition"])}</code>; {e(RACE_NAMES[r["second"]["race"]])} leads in <code>{e(r["second"]["condition"])}</code>.</li>' for r in list({(r['faction'], r['profileId']): r for r in gear_reversals}.values())[:8])
     body = f'''<div class="eyebrow">WoWSims Forever / Race robustness study</div><h1>Race recommendations across equipment and conditions</h1>
-<p class="intro">{coverage['uniqueBuilds']} named DPS builds, both factions and every legal race. The default view spans every accepted actual equipment set. The selected-gear view separately confirms each race after choosing equipment from the same available pool. A race receives the consistent label only when its largest upper loss bound stays within 0.2% across the selected view's gear, support and rotation-reference treatments.</p>
+<p class="intro">{coverage['uniqueBuilds']} named DPS builds, both factions and every legal race. {GAP_INTRO}</p>
 <div class="cards"><div><b>{coverage['validEquipmentSets']:,}</b><small>valid faction/build equipment sets</small></div><div><b>{coverage['raceBuilds']:,}</b><small>legal race/build combinations</small></div><div><b>{coverage['cells']:,}</b><small>saved simulation cells</small></div><div><b>{provenance['settings']['confirmationIterations']:,}–{provenance['settings']['precisionIterations']:,}</b><small>iterations per final confirmation</small></div></div>
-<div class="notice"><b>Read the loss bound, not just the race name.</b> “Setup dependent” shows the race with the smallest worst-case upper loss bound in this finite catalogue; it has no universal lead. Scenario counts measure coverage and are not probabilities that a race is best. Statistical intervals cover simulator sampling; game rules and incomplete effects need separate evidence.</div>
-<p><b>Hunter pet choice can change the practical recommendation.</b> The primary table retains each named developer build's pet choice. The separate <a href="#pet-choices">Lone Wolf / Raptor comparison</a> tests that assumption on selected pre-raid equipment; some pet configurations change both DPS and race ordering.</p>
+<div class="notice"><b>Read the DPS gaps.</b> {GAP_EXPLANATION}</div>
+<details class="overview-context"><summary>Gear, pets and sensitivity checks</summary><p><b>Hunter pet choice can change the practical recommendation.</b> The primary table retains each named developer build's pet choice. The separate <a href="#pet-choices">Lone Wolf / Raptor comparison</a> tests that assumption on selected pre-raid equipment; some pet configurations change both DPS and race ordering.</p>
 <p>The equipment audit keeps {len(coverage['diagnosticOnlySets'])} faction/build reference sets as diagnostics because their items conflict under the native UI's unique-equipped category rule. Recommendations use valid equipment, with new independent confirmations where a selection changed. <a href="gear-legality.json">Equipment audit</a>.</p>
-<p>At 180 seconds with full support and original developer references, <b>{gear_changed}</b> faction/build entries show a clear reversal between actual equipment sets, and <b>{hit_changed}</b> show one in the separate synthetic hit controls. Both directions must retain more than a 0.2% lead after their interval margins. These are conservative examples; close changes remain unresolved. <a href="findings.json">Exact conditions and margins</a>.</p><details><summary>Examples of equipment-sensitive choices</summary><ul>{reversal_examples or '<li>No reversal meets this strict rule at the available precision.</li>'}</ul></details>
+<p>At 180 seconds with full support and original developer references, <b>{gear_changed}</b> faction/build entries show a clear reversal between actual equipment sets, and <b>{hit_changed}</b> show one in the separate synthetic hit controls. Both directions must retain more than a 0.2% lead after their interval margins. These are conservative examples; close changes remain unresolved. <a href="findings.json">Exact conditions and margins</a>.</p><details><summary>Examples of equipment-sensitive choices</summary><ul>{reversal_examples or '<li>No reversal meets this strict rule at the available precision.</li>'}</ul></details></details>
 <p><label>Faction <select id="faction"><option value="horde">Horde</option><option value="alliance">Alliance</option></select></label> <label>Equipment pool <select id="pool"><option value="published-pre-raid">Published pre-raid</option><option value="developer-reference">Developer reference</option></select></label> <label>Comparison <select id="basis"><option value="across-gear">Across all actual gear</option><option value="selected-gear">Selected gear per race</option></select></label> <label>Support <select id="support"><option value="both">Full + self</option><option value="full">Full support</option><option value="self">Self only</option></select></label> <label>Find a spec <input id="search" placeholder="Mage, Rogue, Shadow…"></label></p>
 <p>Across-gear cells use every accepted set at {provenance["settings"]["validationIterations"]:,} independent iterations per case. Selected-gear cells use {provenance["settings"]["confirmationIterations"]:,} iterations, with fresh {provenance["settings"]["precisionIterations"]:,}-iteration samples near the practical-loss boundary. The support selector separates full support, self-only external support and their combined stress test. Each cell includes both the original developer rotation and explicit handling of unavailable aura/spell references. In the selected-gear view, selection is separate for every race, duration and condition using the same pool. This view describes a race with its selected equipment; it does not establish robustness across the other sets. Developer and pre-raid pools stay separate.</p>
 <div class="scroll"><table><thead><tr><th>Spec / build</th><th>60 seconds</th><th>180 seconds</th><th>300 seconds</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
@@ -350,7 +395,7 @@ def render(run):
 
 
 def page(title, body):
-    return f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><style>:root{{color-scheme:dark;font-family:Inter,Segoe UI,Arial,sans-serif;background:{BG};color:{INK}}}body{{max-width:1320px;margin:0 auto;padding:44px 28px 70px}}h1{{font-size:36px;letter-spacing:-.7px}}h2{{font-size:23px;margin-top:34px}}p,li{{line-height:1.7}}a{{color:#8acbff}}.intro{{font-size:19px;max-width:1100px}}.eyebrow{{color:{MUTED};letter-spacing:1.5px;font-size:12px;text-transform:uppercase}}.cards{{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:25px 0}}.cards div{{background:{PANEL};padding:20px;border:1px solid #31415b;border-radius:10px}}.cards b{{display:block;font-size:28px}}small{{display:block;color:{MUTED};font-size:12px;line-height:1.5;margin-top:5px}}.notice{{background:#1e293d;border-left:3px solid #d8b77e;padding:20px 24px;line-height:1.7}}table{{width:100%;border-collapse:collapse}}th,td{{padding:13px 12px;border-bottom:1px solid #2b3a50;text-align:left;vertical-align:top}}th{{font-size:14px}}td{{font-size:15px}}tbody tr:hover{{background:#141f31}}select,input{{padding:9px 12px;background:#172338;color:{INK};border:1px solid #475970;border-radius:6px;margin:8px 12px 8px 4px}}.scroll{{overflow-x:auto}}img{{width:100%;height:auto;margin:20px 0;border-radius:8px}}details{{background:#121e2f;padding:15px 20px;border:1px solid #2a3b52;border-radius:8px;margin:12px 0}}summary{{cursor:pointer}}code{{overflow-wrap:anywhere;font-size:12px}}footer{{border-top:1px solid #35435a;margin-top:35px;padding-top:22px;color:{MUTED};font-size:12px;line-height:1.8}}[hidden]{{display:none!important}}@media(max-width:800px){{body{{padding:22px 15px}}.cards{{grid-template-columns:repeat(2,1fr)}}table{{min-width:750px}}h1{{font-size:28px}}}}</style>{body}</html>'''
+    return f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><style>:root{{color-scheme:dark;font-family:Inter,Segoe UI,Arial,sans-serif;background:{BG};color:{INK}}}body{{max-width:1320px;margin:0 auto;padding:44px 28px 70px}}h1{{font-size:36px;letter-spacing:-.7px}}h2{{font-size:23px;margin-top:34px}}p,li{{line-height:1.7}}a{{color:#8acbff}}.intro{{font-size:19px;max-width:1100px}}.eyebrow{{color:{MUTED};letter-spacing:1.5px;font-size:12px;text-transform:uppercase}}.cards{{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:25px 0}}.cards div{{background:{PANEL};padding:20px;border:1px solid #31415b;border-radius:10px}}.cards b{{display:block;font-size:28px}}.gap-metric{{display:block;font-size:13px;line-height:1.65;margin-top:4px}}.gap-metric strong{{color:#edf3fc}}.gap-cell details{{padding:6px 9px;margin:8px 0 0;background:transparent}}.gap-cell summary{{font-size:12px;color:#aab9cd}}.gap-cell ul{{padding:0;list-style:none;margin:9px 0}}.gap-cell li{{display:flex;gap:12px;justify-content:space-between;font-size:12px;line-height:1.7}}small{{display:block;color:{MUTED};font-size:12px;line-height:1.5;margin-top:5px}}.notice{{background:#1e293d;border-left:3px solid #d8b77e;padding:20px 24px;line-height:1.7}}table{{width:100%;border-collapse:collapse}}th,td{{padding:13px 12px;border-bottom:1px solid #2b3a50;text-align:left;vertical-align:top}}th{{font-size:14px}}td{{font-size:15px}}tbody tr:hover{{background:#141f31}}select,input{{padding:9px 12px;background:#172338;color:{INK};border:1px solid #475970;border-radius:6px;margin:8px 12px 8px 4px}}.scroll{{overflow-x:auto}}img{{width:100%;height:auto;margin:20px 0;border-radius:8px}}details{{background:#121e2f;padding:15px 20px;border:1px solid #2a3b52;border-radius:8px;margin:12px 0}}summary{{cursor:pointer}}code{{overflow-wrap:anywhere;font-size:12px}}footer{{border-top:1px solid #35435a;margin-top:35px;padding-top:22px;color:{MUTED};font-size:12px;line-height:1.8}}[hidden]{{display:none!important}}@media(max-width:800px){{body{{padding:22px 15px}}.cards{{grid-template-columns:repeat(2,1fr)}}table{{min-width:750px}}h1{{font-size:28px}}}}</style>{body}</html>'''
 
 
 if __name__ == '__main__':

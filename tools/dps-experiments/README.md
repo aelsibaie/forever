@@ -200,3 +200,9 @@ node tools/dps-experiments/channel_probes.mjs tmp/mechanics/NEW tmp/channel-prob
 ```
 
 Refresh the catalogue whenever its native database or source mappings change. Unique-equipped conflicts fail equipment validation. A legal developer alternative can serve as the named reference when a default is rejected; an unsourced replacement cannot. The mana-racial policy adds no mana check to energy or rage users. Keep native timing evidence distinct from in-game logs and cross-engine agreement.
+
+### Refresh the overview without a simulation run
+
+`python tools/dps-experiments/refresh_race_overview.py saved-report-directory` reads the saved profiles, analysis, recommendations and provenance, including portable gzip JSON. It refreshes the overview table and both factions' developer/pre-raid charts, then exports per-race mean gaps in CSV and gzip JSON. It does not invoke either simulator or change existing input/result data. `node tools/dps-experiments/verify_gap_overview.mjs saved-report-directory` independently checks every gap range and the report filters.
+
+Runner-up gaps compare first and second within the same setup; full racial spread compares first and last. Percentages use that setup's highest mean DPS. Ranges retain differences across the chosen gear, support and reference treatments; separate setups are never pooled into a class ranking. Sampled leaders can change with setup or noise. The original confidence bounds remain available separately and do not measure the racial DPS spread.
