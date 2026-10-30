@@ -209,6 +209,8 @@ if (options.robustness) {
 	py('race-robustness-verification', ['tools/dps-experiments/verify_robustness.py', robust]);
 	py('race-robustness-report', ['tools/dps-experiments/robust_report.py', robust]);
 	node('race-report-controls', ['tools/dps-experiments/verify_robust_report.mjs', robust]);
+	py('race-gap-overview', ['tools/dps-experiments/refresh_race_overview.py', robust]);
+	node('race-gap-controls', ['tools/dps-experiments/verify_gap_overview.mjs', robust]);
 }
 state.completedAt = new Date().toISOString();
 state.state = 'passed';
