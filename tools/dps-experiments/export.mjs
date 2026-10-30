@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { GlobalRegistrator } from '@happy-dom/global-registrator';
 import { createServer } from 'vite';
+import { simlPlugin } from '../vite/siml.mts';
 
 export async function loadProfiles(root, config = JSON.parse(fs.readFileSync(path.join(root, 'tools/dps-experiments/baseline.json'), 'utf8'))) {
 	const nodeGlobals = Object.fromEntries(
@@ -40,6 +41,7 @@ export async function loadProfiles(root, config = JSON.parse(fs.readFileSync(pat
 		define: { 'process.env.NODE_ENV': '"production"' },
 		optimizeDeps: { noDiscovery: true },
 		plugins: [
+			simlPlugin(),
 			{
 				name: 'experiment-locales',
 				resolveId: id => (id === 'virtual:i18next-loader' ? '\0experiment-locales' : undefined),

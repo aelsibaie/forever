@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 
 export function changedPaths(before, after, prefix = '') {
 	if (Object.is(before, after)) return [];
@@ -50,9 +51,17 @@ export function auditProfiles(profiles, root, config) {
 			for (const folder of ['gear_sets', 'builds']) {
 				const dir = path.join(root, 'ui/specs', profile.specPath, folder);
 				if (!fs.existsSync(dir)) continue;
-				for (const file of fs.readdirSync(dir).filter(name => name.endsWith('.json'))) {
+				for (const file of fs.readdirSync(dir).filter(name => /\.(json|siml)$/.test(name))) {
 					const filename = path.join(dir, file);
-					const data = JSON.parse(fs.readFileSync(filename, 'utf8'));
+					const data = file.endsWith('.siml')
+						? JSON.parse(
+								execFileSync(
+									process.env.WOWSIMCLI ?? path.join(root, 'bin', process.platform === 'win32' ? 'wowsimcli.exe' : 'wowsimcli'),
+									['siml', 'parse', '-json', filename],
+									{ cwd: root, encoding: 'utf8' },
+								),
+							)
+						: JSON.parse(fs.readFileSync(filename, 'utf8'));
 					files.push({
 						path: path.relative(root, filename).replaceAll('\\', '/'),
 						identity: identity(data.player?.equipment ?? data),

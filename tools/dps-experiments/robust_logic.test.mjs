@@ -99,6 +99,9 @@ test('one enchant effect may have several legal slot records', () => {
 		],
 	};
 	assert.equal(validateEquipment(equipment, { database, className: 'Warrior', faction: 'alliance' }).length, 2);
+	database.items[0].reqLvl = 61;
+	assert.throws(() => validateEquipment(equipment, { database, className: 'Warrior', faction: 'alliance' }), /requires level/);
+	delete database.items[0].reqLvl;
 	assert.throws(
 		() => validateEquipment(equipment, { database: { ...database, enchants: [{ effectId: 904, type: 10 }] }, className: 'Warrior', faction: 'alliance' }),
 		/Enchant/,

@@ -108,6 +108,7 @@ const tracked = git(
 	'assets/db_inputs/spell_store_inputs.json',
 	'cmd',
 	'tools/database',
+	'tools/vite',
 	'go.mod',
 	'go.sum',
 	'package.json',

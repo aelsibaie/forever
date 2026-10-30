@@ -155,7 +155,7 @@ export function translateRequest(q, { allocation, resolved, source, revelationCh
 				giftOfTheWild: 'TristateEffectRegular',
 				strengthOfEarthTotem: 'TristateEffectRegular',
 				graceOfAirTotem: 'TristateEffectRegular',
-				battleShout: 'TristateEffectRegular',
+				battleShout: 25289,
 				trueshotAura: true,
 				leaderOfThePack: true,
 				moonkinAura: true,

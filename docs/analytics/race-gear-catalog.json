@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"collectedAt": "2026-10-28T16:50:51.961Z",
+	"collectedAt": "2026-10-30T15:12:49.994Z",
 	"policy": {
 		"source": "https://wowforeverbislist.com/",
 		"options": ["00000", "10000"],
@@ -52,7 +52,10 @@
 			"mage-dps-fire-fire": "mage/fire",
 			"mage-dps-frost-frost": "mage/frost",
 			"rogue-dps-default": "rogue/combat",
-			"warrior-dps-default": "warrior/fury"
+			"warrior-dps-default": "warrior/fury",
+			"druid-feralcat-cat": "druid/feral-dps",
+			"mage-dps-arcane-arcane": "mage/arcane",
+			"paladin-retribution-light-s-vigil": "paladin/retribution"
 		},
 		"additionalDeveloperSets": {
 			"druid-balance-moonkin": ["ui/specs/druid/balance/gear_sets/prebis.gear.json", "ui/specs/druid/balance/gear_sets/p1.gear.json"],
@@ -60,10 +63,11 @@
 			"druid-feralcat-hybrid": ["ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json"],
 			"druid-feralcat-bearweave-45s-fights": ["ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json"],
 			"warrior-dps-fury-pre-bis": ["ui/specs/warrior/dps/gear_sets/prebis_fury.gear.json", "ui/specs/warrior/dps/gear_sets/p1_fury.gear.json"],
-			"warrior-dps-arms-pre-bis": ["ui/specs/warrior/dps/gear_sets/prebis_arms.gear.json", "ui/specs/warrior/dps/gear_sets/p1_arms.gear.json"]
+			"warrior-dps-arms-pre-bis": ["ui/specs/warrior/dps/gear_sets/prebis_arms.gear.json", "ui/specs/warrior/dps/gear_sets/p1_arms.gear.json"],
+			"druid-feralcat-cat": ["ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json"]
 		}
 	},
-	"databaseSha256": "50b08d68e41e76a0279fad47a4dc6dbd5f5cd8836e914c9045e1013482feb276",
+	"databaseSha256": "9cdec22faf6214a7bb007eaaab78ccf52b3702a725674c56e888600705fa8d8e",
 	"interpretation": "Published equipment candidates, not independently proven BiS. Only item IDs and enchant IDs enter WoWSims; external EP values, item stats, damage estimates and talent builds do not. Missing or invalid sets remain explicit rejections. No PvP or raid options are imported.",
 	"sets": [
 		{

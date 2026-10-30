@@ -18,7 +18,7 @@
 		"strengthOfEarthTotem": true,
 		"graceOfAirTotem": true,
 		"windfuryTotem": true,
-		"battleShout": "TristateEffectRegular",
+		"battleShout": 25289,
 		"trueshotAura": true,
 		"leaderOfThePack": true,
 		"moonkinAura": true

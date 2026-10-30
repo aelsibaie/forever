@@ -55,7 +55,7 @@ export function equipmentCapabilities(root) {
 }
 
 function itemFits(item, slot, { className, faction, capabilities }) {
-	if (!item || item.type !== slotTypes[slot]) return false;
+	if (!item || item.type !== slotTypes[slot] || item.reqLvl > 60) return false;
 	if (item.classAllowlist?.length && !item.classAllowlist.includes(classes[className])) return false;
 	if (item.factionRestriction === (faction === 'alliance' ? 2 : 1)) return false;
 	const allowed = capabilities?.[className];
@@ -197,6 +197,7 @@ export function validateEquipment(equipment, { database, className, faction, dag
 		if (!entry.id) continue;
 		const item = items.get(entry.id);
 		if (!item) throw new Error(`Item ${entry.id} is absent from WoWSims.`);
+		if (item.reqLvl > 60) throw new Error(`Item ${entry.id} requires level ${item.reqLvl}; this study uses level 60.`);
 		if (item.type !== slotTypes[slot]) throw new Error(`Item ${entry.id} does not fit ${slots[slot]}.`);
 		if (item.classAllowlist?.length && !item.classAllowlist.includes(classes[className])) throw new Error(`Item ${entry.id} excludes ${className}.`);
 		if (item.factionRestriction === (faction === 'alliance' ? 2 : 1)) throw new Error(`Item ${entry.id} excludes ${faction}.`);

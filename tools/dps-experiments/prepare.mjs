@@ -39,3 +39,6 @@ fs.mkdirSync(path.join(root, 'binary_dist/forever'), { recursive: true });
 fs.copyFileSync(path.join(root, 'sim/web/dist.go.tmpl'), path.join(root, 'binary_dist/dist.go'));
 fs.writeFileSync(path.join(root, 'binary_dist/forever/embedded'), '');
 run(go, ['run', './tools/database/gen_db', '-gen=go-to-ts']);
+
+fs.mkdirSync(path.join(root, 'bin'), { recursive: true });
+run(go, ['build', '-tags=with_db', '-o', path.join(root, 'bin', process.platform === 'win32' ? 'wowsimcli.exe' : 'wowsimcli'), './cmd/wowsimcli']);

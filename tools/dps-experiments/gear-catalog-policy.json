@@ -49,7 +49,10 @@
 		"mage-dps-fire-fire": "mage/fire",
 		"mage-dps-frost-frost": "mage/frost",
 		"rogue-dps-default": "rogue/combat",
-		"warrior-dps-default": "warrior/fury"
+		"warrior-dps-default": "warrior/fury",
+		"druid-feralcat-cat": "druid/feral-dps",
+		"mage-dps-arcane-arcane": "mage/arcane",
+		"paladin-retribution-light-s-vigil": "paladin/retribution"
 	},
 	"additionalDeveloperSets": {
 		"druid-balance-moonkin": ["ui/specs/druid/balance/gear_sets/prebis.gear.json", "ui/specs/druid/balance/gear_sets/p1.gear.json"],
@@ -57,6 +60,7 @@
 		"druid-feralcat-hybrid": ["ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json"],
 		"druid-feralcat-bearweave-45s-fights": ["ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json"],
 		"warrior-dps-fury-pre-bis": ["ui/specs/warrior/dps/gear_sets/prebis_fury.gear.json", "ui/specs/warrior/dps/gear_sets/p1_fury.gear.json"],
-		"warrior-dps-arms-pre-bis": ["ui/specs/warrior/dps/gear_sets/prebis_arms.gear.json", "ui/specs/warrior/dps/gear_sets/p1_arms.gear.json"]
+		"warrior-dps-arms-pre-bis": ["ui/specs/warrior/dps/gear_sets/prebis_arms.gear.json", "ui/specs/warrior/dps/gear_sets/p1_arms.gear.json"],
+		"druid-feralcat-cat": ["ui/specs/druid/feralcat/gear_sets/pre_raid.gear.json"]
 	}
 }

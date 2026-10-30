@@ -56,6 +56,8 @@ const sourcePaths = git(
 	'sim',
 	'proto',
 	'ui',
+	'cmd',
+	'tools/vite',
 	'assets/database',
 	'assets/db_inputs/spell_store_inputs.json',
 	'go.mod',

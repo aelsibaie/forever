@@ -220,3 +220,19 @@ Create a separate derived study from the original, then run `rotation_revision.p
 Before rendering, run `rotation_audit.py DERIVED`, `verify_robustness.py DERIVED`, `robust_report.py DERIVED`, `refresh_race_overview.py DERIVED`, and the report/export verifiers. The main workflow includes the rotation audit automatically. Its runtime checks look for shared class cooldowns missing in one race and major shared damage actions that disappear. A passing audit does not establish optimal rotations or correct game mechanics; warnings and alternate-reference effects remain inspectable.
 
 Nonzero shared cooldowns whose use differs by at least half a cast across races are recorded as scheduling caveats, separately from complete suppression. This is an advisory screen; a deliberate racial-buff timing trade-off does not establish a simulator defect or an optimized race choice. The affected build rows are marked, and saved counts remain inspectable in `rotation-usage-review.json`.
+
+### October 30 upstream refresh
+
+The analytics branch includes upstream `a10f48301f7c17fe52845ffc137212fb2787b4a0` and game build 1.60.1.70685, hotfix 113511. Hunter presets use SIML. The exporter uses the upstream Vite plugin, and the equipment audit parses SIML through the native CLI while retaining file hashes. `prepare.mjs` builds that reader; omit `--prepared` after an upstream update. Full-support inputs name Battle Shout rank 25289 explicitly, as the updated schema requires.
+
+The current export contains 42 builds and 276 legal faction/race/build combinations. The source mappings include the new Cat, Deep Arcane and Light's Vigil presets. The equipment catalogue revalidates the archived October 28 community sources against the updated database; its source dates remain October 28. Equipment above level 60 is rejected. The default Balance set still violates a unique-equipped category; the existing developer P1 alternative is available and its use stays explicit.
+
+The rotation smoke archive is `tmp/upstream-rotation-smoke-2026-10-30`. It records the native binary hash, database hash, requests, results and probe source. Its 1,656 cases cover both support settings and 60/180/300 seconds at 250 iterations, seed 2026103001. All 504 condition groups passed the missing shared cooldown and major damage action checks. The nonzero scheduling signals remain confined to Alliance Combat SS, its default variant and Subtlety Hemorrhage. These samples do not establish updated race rankings.
+
+For the full new-engine study, use a new directory:
+
+```powershell
+node tools/dps-experiments/workflow.mjs --robustness --allow-partial-published --out tmp/analytics-runs/NEW-RUN
+```
+
+The workflow preserves earlier archives and runs the rotation audit before reports. Published pre-raid gaps remain explicit. The public rotation-correction release retains the verified October 28 engine and must not be described as a run of the newer engine. On Windows, the separate VS Code SIML extension tests require GNU make on PATH; the analytics preparation command does not install it.
