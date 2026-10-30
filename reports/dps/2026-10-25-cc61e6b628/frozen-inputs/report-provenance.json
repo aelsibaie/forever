@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-10-25T14:10:47.595067-04:00",
+  "matplotlib": "3.10.7",
+  "numpy": "2.5.4",
+  "python": "3.12.14",
+  "scriptSha256": "f8aa55a384912b3907a160712bc601043e2b4ab1870904dd7f23866ac3777dd9",
+  "tierGroupsSha256": "90941b5c20a5547642445c0507d0b9cb8b501ccd155c8e56b553d330d3965824",
+  "comparisonGroups": {
+    "Developer pre-raid": [
+      "druid-feralcat-cat-monocat",
+      "druid-feralcat-bearweave-45s-fights",
+      "druid-feralcat-hybrid",
+      "warlock-dps-demo-fire-brand",
+      "warlock-dps-demo-shadow-brand",
+      "warlock-dps-default",
+      "druid-balance-moonkin",
+      "warlock-dps-destro",
+      "warlock-dps-sm-ruin",
+      "warlock-dps-aff-wrack"
+    ],
+    "Developer P1": [
+      "hunter-dps-default",
+      "hunter-dps-sv-weave",
+      "hunter-dps-mm-weave",
+      "hunter-dps-bm-weave",
+      "hunter-dps-bm",
+      "hunter-dps-sv-melee",
+      "hunter-dps-mm",
+      "hunter-dps-sv"
+    ]
+  },
+  "artifacts": {
+    "report.html": "316a0992e4862a6c160580fbc5a60962111f0982e2e89c7f43e1d46be1d58f88",
+    "tier-comparison.csv": "ee1f6a5b37070f33ed3e0796816a8d7cb0b3545c2c0e39b352fa633eddb7d225",
+    "tier-comparison.json": "3e83b32e08ac2fd6b23a47196e7862569e518ac75d1b8e030d495038dfe96f27",
+    "charts\\all-builds.png": "02e350d9a5610cb406b09711fafe37b7fb4775caa6a87b2f3b3b24a390f7860e",
+    "charts\\all-builds.svg": "ab38b1a543813caa72c90108791a5d3c024b871c4fb2b340d044ce5db37665a7",
+    "charts\\duration-response.png": "0ddf8c0ffedb7563367105fce9a5db6df1f3ab880c0b273d84478f3d922d6853",
+    "charts\\duration-response.svg": "d4a62808c18ab1b0c6306b38ecc223158c3059cbab4d4b5bb898bf703833de76",
+    "charts\\overview.png": "cadb8fe8132943100745bc0be51913c46631c9a4d41c43fd21b476861cbd30da",
+    "charts\\overview.svg": "d812f010f080ed20c8064e9271b5bf96aad9cfacdb90f0bed86c13fcc8f86d6d",
+    "charts\\tier-developer-p1.png": "95f587882d1ed04408565f6eb1a0b9d49610b41ea69ed7ca9ca1a41391bd272c",
+    "charts\\tier-developer-p1.svg": "340bb6f7b764112f9d00a14b6037aeb47950bbe2d8d473fb9592001beac07495",
+    "charts\\tier-developer-pre-raid.png": "ab7d6d2f020d94eef9e1bdd6834745db938064a06e7fd71f687e7bab2f9935b4",
+    "charts\\tier-developer-pre-raid.svg": "d0277914df2eebeda79255a0fa71a8bf6b6b624f3efa3f7651c83edef816447e"
+  }
+}

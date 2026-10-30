@@ -1,0 +1,9 @@
+{
+  "verifiedAt": "2026-10-25T18:10:48.664Z",
+  "completedRuns": 72,
+  "simulationErrors": 0,
+  "iterations": 720000,
+  "allRequestAndResultHashesVerified": true,
+  "allReportArtifactHashesVerified": true,
+  "sourceUnchangedDuringRun": true
+}

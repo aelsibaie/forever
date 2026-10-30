@@ -15,7 +15,7 @@ character_stats_results: {
   final_stats: 0
   final_stats: 3
   final_stats: 238
-  final_stats: 732
+  final_stats: 708
   final_stats: 50
   final_stats: 140
   final_stats: 60
@@ -125,14 +125,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-AnkhofLife-1713"
- value: {
-  dps: 777.87461
-  tps: 555.42635
-  dtps: 4.71942
- }
-}
-dps_results: {
  key: "TestBalance-AllItems-ArenaGrandMaster-19024"
  value: {
   dps: 778.54067
@@ -165,14 +157,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-BlazingEmblem-2802"
- value: {
-  dps: 778.54067
-  tps: 555.99098
-  dtps: 4.8995
- }
-}
-dps_results: {
  key: "TestBalance-AllItems-BristleconeCloak-275833"
  value: {
   dps: 814.746
@@ -202,14 +186,6 @@ dps_results: {
   dps: 814.746
   tps: 581.54496
   dtps: 5.21647
- }
-}
-dps_results: {
- key: "TestBalance-AllItems-CloakofFlames-3475"
- value: {
-  dps: 823.34431
-  tps: 587.57133
-  dtps: 4.85733
  }
 }
 dps_results: {
@@ -478,14 +454,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-FeralheartRaiment"
- value: {
-  dps: 654.62486
-  tps: 471.18576
-  dtps: 4.50391
- }
-}
-dps_results: {
  key: "TestBalance-AllItems-FetishofChitinousSpikes-21488"
  value: {
   dps: 778.54067
@@ -590,14 +558,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-Graverobber'sShovel-273817"
- value: {
-  dps: 824.52494
-  tps: 588.17997
-  dtps: 4.8995
- }
-}
-dps_results: {
  key: "TestBalance-AllItems-GrovekeeperEclipse"
  value: {
   dps: 734.95895
@@ -614,27 +574,11 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-GutRipper-2164"
- value: {
-  dps: 824.52494
-  tps: 588.17997
-  dtps: 4.8995
- }
-}
-dps_results: {
  key: "TestBalance-AllItems-HammeroftheNorthernWind-810"
  value: {
   dps: 755.96657
   tps: 540.20432
   dtps: 4.94676
- }
-}
-dps_results: {
- key: "TestBalance-AllItems-HandofEdwardtheOdd-2243"
- value: {
-  dps: 824.52494
-  tps: 588.17997
-  dtps: 4.8995
  }
 }
 dps_results: {
@@ -702,18 +646,18 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-JomGabbar-23570"
+ key: "TestBalance-AllItems-IdoloftheUrsineTwins-279251"
  value: {
-  dps: 778.54067
-  tps: 555.99098
+  dps: 821.33778
+  tps: 585.94896
   dtps: 4.8995
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-Julie'sDagger-6660"
+ key: "TestBalance-AllItems-JomGabbar-23570"
  value: {
-  dps: 824.52494
-  tps: 588.17997
+  dps: 778.54067
+  tps: 555.99098
   dtps: 4.8995
  }
 }
@@ -723,14 +667,6 @@ dps_results: {
   dps: 793.88651
   tps: 566.86128
   dtps: 4.77195
- }
-}
-dps_results: {
- key: "TestBalance-AllItems-LapidisTankardofTidesippe-4696"
- value: {
-  dps: 803.9526
-  tps: 573.07618
-  dtps: 4.49836
  }
 }
 dps_results: {
@@ -766,14 +702,6 @@ dps_results: {
  }
 }
 dps_results: {
- key: "TestBalance-AllItems-LordSakrasis'Scepter-5028"
- value: {
-  dps: 841.8092
-  tps: 600.04399
-  dtps: 4.96019
- }
-}
-dps_results: {
  key: "TestBalance-AllItems-Magister'sRegalia"
  value: {
   dps: 711.54339
@@ -806,6 +734,14 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-MarkofUrs'endris-263435"
+ value: {
+  dps: 821.33778
+  tps: 585.94896
+  dtps: 4.8995
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-MarkoftheChampion-23206"
  value: {
   dps: 778.54067
@@ -815,14 +751,6 @@ dps_results: {
 }
 dps_results: {
  key: "TestBalance-AllItems-MarkoftheChampion-23207"
- value: {
-  dps: 778.54067
-  tps: 555.99098
-  dtps: 4.8995
- }
-}
-dps_results: {
- key: "TestBalance-AllItems-MarkoftheRedFlight-282778"
  value: {
   dps: 778.54067
   tps: 555.99098
@@ -875,14 +803,6 @@ dps_results: {
   dps: 807.60353
   tps: 576.27538
   dtps: 4.88367
- }
-}
-dps_results: {
- key: "TestBalance-AllItems-RingofSaviors-1447"
- value: {
-  dps: 791.90198
-  tps: 565.2379
-  dtps: 4.94705
  }
 }
 dps_results: {
@@ -1014,6 +934,22 @@ dps_results: {
  }
 }
 dps_results: {
+ key: "TestBalance-AllItems-TheDefiler'sPurpose"
+ value: {
+  dps: 778.56394
+  tps: 555.99327
+  dtps: 5.47336
+ }
+}
+dps_results: {
+ key: "TestBalance-AllItems-TheHighlander'sPurpose"
+ value: {
+  dps: 778.56394
+  tps: 555.99327
+  dtps: 5.47336
+ }
+}
+dps_results: {
  key: "TestBalance-AllItems-TheLobotomizer-19324"
  value: {
   dps: 824.52494
@@ -1034,14 +970,6 @@ dps_results: {
  value: {
   dps: 778.54067
   tps: 555.99098
-  dtps: 4.8995
- }
-}
-dps_results: {
- key: "TestBalance-AllItems-Uther'sStrength-11302"
- value: {
-  dps: 782.63703
-  tps: 558.85843
   dtps: 4.8995
  }
 }
@@ -1203,130 +1131,130 @@ dps_results: {
 dps_results: {
  key: "TestBalance-Settings-NightElf-prebis-Standard-default-FullBuffs-20.0yards-LongMultiTarget"
  value: {
-  dps: 4438.85985
-  tps: 3132.03448
+  dps: 4380.2783
+  tps: 3090.93538
  }
 }
 dps_results: {
  key: "TestBalance-Settings-NightElf-prebis-Standard-default-FullBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 733.57655
-  tps: 524.19801
-  dtps: 4.79202
+  dps: 709.77796
+  tps: 507.4834
+  dtps: 5.36632
  }
 }
 dps_results: {
  key: "TestBalance-Settings-NightElf-prebis-Standard-default-FullBuffs-20.0yards-ShortSingleTarget"
  value: {
-  dps: 723.67948
-  tps: 513.27649
+  dps: 698.01346
+  tps: 495.27776
  }
 }
 dps_results: {
  key: "TestBalance-Settings-NightElf-prebis-Standard-default-NoBuffs-20.0yards-LongMultiTarget"
  value: {
-  dps: 2345.87574
-  tps: 2345.87574
+  dps: 2454.34891
+  tps: 2454.34891
  }
 }
 dps_results: {
  key: "TestBalance-Settings-NightElf-prebis-Standard-default-NoBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 287.43268
-  tps: 287.43268
+  dps: 293.35359
+  tps: 293.35359
  }
 }
 dps_results: {
  key: "TestBalance-Settings-NightElf-prebis-Standard-default-NoBuffs-20.0yards-ShortSingleTarget"
  value: {
-  dps: 438.27559
-  tps: 438.27559
+  dps: 421.60377
+  tps: 421.60377
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-p1-Standard-default-FullBuffs-20.0yards-LongMultiTarget"
  value: {
-  dps: 4833.35555
-  tps: 3407.17833
+  dps: 4780.23302
+  tps: 3369.99256
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-p1-Standard-default-FullBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 826.62583
-  tps: 589.68768
-  dtps: 5.13663
+  dps: 817.19371
+  tps: 583.08519
+  dtps: 5.10561
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-p1-Standard-default-FullBuffs-20.0yards-ShortSingleTarget"
  value: {
-  dps: 842.15865
-  tps: 596.57305
+  dps: 832.33258
+  tps: 589.6948
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-p1-Standard-default-NoBuffs-20.0yards-LongMultiTarget"
  value: {
-  dps: 3634.5147
-  tps: 3634.5147
+  dps: 3603.966
+  tps: 3603.966
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-p1-Standard-default-NoBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 407.9004
-  tps: 407.9004
+  dps: 404.56016
+  tps: 404.56016
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-p1-Standard-default-NoBuffs-20.0yards-ShortSingleTarget"
  value: {
-  dps: 520.39652
-  tps: 520.39652
+  dps: 515.73719
+  tps: 515.73719
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-prebis-Standard-default-FullBuffs-20.0yards-LongMultiTarget"
  value: {
-  dps: 4455.97651
-  tps: 3143.96085
+  dps: 4342.04595
+  tps: 3064.20911
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-prebis-Standard-default-FullBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 734.43037
-  tps: 524.35065
-  dtps: 4.58063
+  dps: 703.68505
+  tps: 503.24732
+  dtps: 5.35931
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-prebis-Standard-default-FullBuffs-20.0yards-ShortSingleTarget"
  value: {
-  dps: 715.26842
-  tps: 507.35595
+  dps: 689.31355
+  tps: 489.18772
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-prebis-Standard-default-NoBuffs-20.0yards-LongMultiTarget"
  value: {
-  dps: 2284.91601
-  tps: 2284.91601
+  dps: 2270.8353
+  tps: 2270.8353
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-prebis-Standard-default-NoBuffs-20.0yards-LongSingleTarget"
  value: {
-  dps: 287.7453
-  tps: 287.7453
+  dps: 289.18879
+  tps: 289.18879
  }
 }
 dps_results: {
  key: "TestBalance-Settings-Tauren-prebis-Standard-default-NoBuffs-20.0yards-ShortSingleTarget"
  value: {
-  dps: 428.82892
-  tps: 428.82892
+  dps: 410.52611
+  tps: 410.52611
  }
 }
 dps_results: {

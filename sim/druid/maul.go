@@ -70,14 +70,17 @@ func (druid *Druid) makeMaulQueueSpellAndAura(maulSpell *DruidSpell) *DruidSpell
 				druid.maulRealismICD.IsReady(sim)
 		},
 
-		ApplyEffects: func(sim *core.Simulation, _ *core.Unit, _ *core.Spell) {
+		ApplyEffects: func(sim *core.Simulation, target *core.Unit, _ *core.Spell) {
+			maulSpell.CountManualCast(target)
 			if druid.maulRealismICD.IsReady(sim) {
 				isMaulQueued = true
 				druid.maulRealismICD.Use(sim)
 				sim.AddPendingAction(&core.PendingAction{
 					NextActionAt: sim.CurrentTime + druid.maulRealismICD.Duration,
 					OnAction: func(sim *core.Simulation) {
-						druid.maulQueueAura.Activate(sim)
+						if druid.InForm(Bear) {
+							druid.maulQueueAura.Activate(sim)
+						}
 						isMaulQueued = false
 					},
 				})

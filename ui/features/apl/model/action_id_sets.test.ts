@@ -53,6 +53,14 @@ describe('aura sets', () => {
 	it('categorises the filtered sets the same way', async () => {
 		expect(menu(await actionIdSets.stackable_auras.getActionIDs(metadata(auras)))).toEqual(['Flurry > talents']);
 	});
+
+	it("lists an internal cooldown trigger that shares its aura's id once", async () => {
+		const clearcasting = aura(named(8, 'Clearcasting'), ActionCategory.ActionCategoryUnknown, { hasIcd: true });
+		const trigger = aura(named(8, 'Clearcasting'), ActionCategory.ActionCategoryUnknown, { hasIcd: true });
+		const omen = aura(named(9, 'Omen of Clarity'), ActionCategory.ActionCategoryUnknown, { hasIcd: true });
+		const withTriggers = { ...metadata([clearcasting]), getIcdAuras: () => [trigger, omen] } as unknown as UnitMetadata;
+		expect(menu(await actionIdSets.icd_auras.getActionIDs(withTriggers))).toEqual(['Clearcasting', 'Omen of Clarity']);
+	});
 });
 
 describe('castable_spells', () => {
@@ -81,6 +89,56 @@ describe('castable_spells', () => {
 			'Fireball (Rank 1) > spell > Fireball (Rank 3)',
 			'Fireball (Rank 3) > spell',
 			'Fireball (Rank 2) > spell > Fireball (Rank 3)',
+		]);
+	});
+});
+
+describe('menu groups', () => {
+	it('lists the groups, then Spell and the categories', async () => {
+		const warrior = [
+			spell(named(2457, 'Battle Stance'), ActionCategory.ActionCategoryUnknown, { menuGroup: 'stances' }),
+			spell(named(30, 'Bloodthirst')),
+			spell(named(2458, 'Berserker Stance'), ActionCategory.ActionCategoryUnknown, { menuGroup: 'stances' }),
+			spell(named(34, 'Recklessness'), ActionCategory.ActionCategoryCooldown),
+		];
+		expect(menu(await actionIdSets.castable_spells.getActionIDs(metadata([], warrior))).slice(0, 4)).toEqual([
+			'Battle Stance > stances',
+			'Berserker Stance > stances',
+			'Bloodthirst > spell',
+			'Recklessness > cooldowns',
+		]);
+	});
+
+	it('lists the groups, then the categories and the rest of the auras', async () => {
+		const auras = [
+			aura(named(60, 'Battle Shout')),
+			aura(named(2457, 'Battle Stance'), ActionCategory.ActionCategoryUnknown, { menuGroup: 'stances' }),
+			aura(named(63, 'Flurry'), ActionCategory.ActionCategoryTalent),
+			aura(named(64, 'Recklessness'), ActionCategory.ActionCategoryCooldown),
+		];
+		expect(menu(await actionIdSets.auras.getActionIDs(metadata(auras)))).toEqual([
+			'Battle Stance > stances',
+			'Recklessness > cooldowns',
+			'Flurry > talents',
+			'Battle Shout',
+		]);
+	});
+
+	it('files a cooldown with a group under the group, not cooldowns', async () => {
+		const grouped = [spell(named(72, 'Recklessness'), ActionCategory.ActionCategoryCooldown, { menuGroup: 'my_group' })];
+		expect(menu(await actionIdSets.castable_spells.getActionIDs(metadata([], grouped)))[0]).toBe('Recklessness > my_group');
+	});
+
+	it('files every rank of a grouped spell in the group, behind its highest rank', async () => {
+		const ranked = [
+			spell(named(74, 'Cat Form (Rank 1)', 1), ActionCategory.ActionCategoryUnknown, { menuGroup: 'forms' }),
+			spell(named(75, 'Cat Form (Rank 2)', 2), ActionCategory.ActionCategoryUnknown, { menuGroup: 'forms' }),
+			spell(named(76, 'Claw')),
+		];
+		expect(menu(await actionIdSets.castable_spells.getActionIDs(metadata([], ranked))).slice(0, 3)).toEqual([
+			'Cat Form (Rank 1) > forms > Cat Form (Rank 2)',
+			'Cat Form (Rank 2) > forms',
+			'Claw > spell',
 		]);
 	});
 });

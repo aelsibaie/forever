@@ -1,5 +1,6 @@
 import {
 	AuraStats as AuraStatsProto,
+	type MeleeCritCapInfo,
 	Player as PlayerProto,
 	PlayerStats,
 	SpellStats as SpellStatsProto,
@@ -28,7 +29,15 @@ import {
 	WeaponSkillValue,
 } from '@generated/proto/common';
 import { SimDatabase } from '@generated/proto/db';
-import { DungeonDifficulty, RaidFilterOption, SourceFilterOption, UIEnchant as Enchant, UIItem as Item, UIItem_FactionRestriction } from '@generated/proto/ui';
+import {
+	DungeonDifficulty,
+	FactionFilter,
+	RaidFilterOption,
+	SourceFilterOption,
+	UIEnchant as Enchant,
+	UIItem as Item,
+	UIItem_FactionRestriction,
+} from '@generated/proto/ui';
 
 import * as Mechanics from '../constants/mechanics';
 import { CURRENT_API_VERSION } from '../constants/other';
@@ -92,12 +101,15 @@ const dropLoneRanks = <T extends { id: ActionId }>(entries: Array<T>): Array<T> 
 export class UnitMetadata {
 	private name: string;
 	private auras: Array<AuraStats>;
+	// Internal cooldown triggers with no aura of their own; only icd_is_ready finds them.
+	private icdAuras: Array<AuraStats>;
 	private spells: Array<SpellStats>;
 	private talents: Array<ActionId>;
 
 	constructor() {
 		this.name = '';
 		this.auras = [];
+		this.icdAuras = [];
 		this.spells = [];
 		this.talents = [];
 	}
@@ -108,6 +120,10 @@ export class UnitMetadata {
 
 	getAuras(): Array<AuraStats> {
 		return this.auras.slice();
+	}
+
+	getIcdAuras(): Array<AuraStats> {
+		return this.icdAuras.slice();
 	}
 
 	getSpells(): Array<SpellStats> {
@@ -135,11 +151,14 @@ export class UnitMetadata {
 		});
 
 		const talentsFill = Promise.all(metadata.talents.map(talent => ActionId.fromProto(talent).fill()));
-		await Promise.all([...newSpells, ...newAuras].map(newSpell => newSpell.id.fill().then(newId => (newSpell.id = newId))));
+		let newIcdAuras = metadata!.icdAuras.map(aura => ({ data: aura, id: ActionId.fromProto(aura.id!) }));
+
+		await Promise.all([...newSpells, ...newAuras, ...newIcdAuras].map(newSpell => newSpell.id.fill().then(newId => (newSpell.id = newId))));
 		const newTalents = (await talentsFill).sort((a, b) => stringComparator(a.name, b.name));
 
 		newSpells = dropLoneRanks(newSpells).sort((a, b) => stringComparator(a.id.name, b.id.name));
 		newAuras = dropLoneRanks(newAuras).sort((a, b) => stringComparator(a.id.name, b.id.name));
+		newIcdAuras = dropLoneRanks(newIcdAuras).sort((a, b) => stringComparator(a.id.name, b.id.name));
 
 		let anyUpdates = false;
 		if (metadata.name != this.name) {
@@ -152,6 +171,10 @@ export class UnitMetadata {
 		}
 		if (newAuras.length != this.auras.length || newAuras.some((newAura, i) => !newAura.id.equals(this.auras[i].id))) {
 			this.auras = newAuras;
+			anyUpdates = true;
+		}
+		if (newIcdAuras.length != this.icdAuras.length || newIcdAuras.some((newAura, i) => !newAura.id.equals(this.icdAuras[i].id))) {
+			this.icdAuras = newIcdAuras;
 			anyUpdates = true;
 		}
 		if (newTalents.length != this.talents.length || newTalents.some((talent, i) => !talent.equalsAtRank(this.talents[i]))) {
@@ -189,23 +212,6 @@ export class UnitMetadataList {
 	asList(): Array<UnitMetadata> {
 		return this.metadatas.slice();
 	}
-}
-
-export interface MeleeCritCapInfo {
-	meleeCrit: number;
-	meleeHit: number;
-	expertise: number;
-	suppression: number;
-	glancing: number;
-	debuffCrit: number;
-	hasOffhandWeapon: boolean;
-	meleeHitCap: number;
-	expertiseCap: number;
-	remainingMeleeHitCap: number;
-	remainingExpertiseCap: number;
-	baseCritCap: number;
-	specSpecificOffset: number;
-	playerCritCapDelta: number;
 }
 
 export type AutoRotationGenerator<SpecType extends Spec> = (player: Player<SpecType>) => APLRotation;
@@ -458,6 +464,11 @@ export class Player<SpecType extends Spec> {
 
 	shouldEnableTargetDummies(): boolean {
 		if (this.getPlayerSpec().isHealingSpec) {
+			return true;
+		}
+
+		// Balance keeps one ally so Innervate and other helpful spells can land on another unit.
+		if (this.getSpec() === Spec.SpecBalanceDruid) {
 			return true;
 		}
 
@@ -729,6 +740,7 @@ export class Player<SpecType extends Spec> {
 		return ConsumesSpec.clone(this.slice().consumables);
 	}
 
+	/** Matches each hand's imbue to the weapon already in that hand, so the gear and the swap gear go in before the consumes. */
 	setConsumes(newConsumes: ConsumesSpec) {
 		const adjustedConsumes = this.itemSwapSettings.getGear().adjustSwapImbues(this.getGear().adjustImbues(newConsumes));
 		if (ConsumesSpec.equals(this.slice().consumables, adjustedConsumes)) return;
@@ -803,7 +815,7 @@ export class Player<SpecType extends Spec> {
 		// the sheet repeats the number and this is the second place to change;
 		// TestHuntersMarkOnTheCharacterSheetMatchesTheSim holds the two together.
 		if (debuffs.huntersMark) {
-			debuffStats = debuffStats.addStat(Stat.StatRangedAttackPower, 71);
+			debuffStats = debuffStats.addStat(Stat.StatRangedAttackPower, 143);
 		}
 
 		return debuffStats;
@@ -878,63 +890,8 @@ export class Player<SpecType extends Spec> {
 		return (this.getGear().getEquippedItem(ItemSlot.ItemSlotOffHand)?.item.weaponSpeed ?? 0) > 0;
 	}
 
-	getMeleeCritCapInfo(): MeleeCritCapInfo {
-		const currentStats = this.slice().currentStats;
-		const debuffStats = this.getDebuffStats();
-		const debuffHit = debuffStats.getPseudoStat(PseudoStat.PseudoStatMeleeHitPercent) || 0;
-		const debuffCrit = debuffStats.getPseudoStat(PseudoStat.PseudoStatMeleeCritPercent) || 0;
-
-		const meleeCrit = (currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatMeleeCritPercent] || 0) + debuffCrit;
-		const meleeHit = (currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatMeleeHitPercent] || 0) + debuffHit;
-		const expertise = currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatExpertisePercent] || 0;
-		const critSuppression = currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatMeleeCritSuppressionPercent] || 0;
-		const glancing = currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatMainHandGlancePercent] || 0;
-
-		const oneHandHitCap = currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatMainHandMissPercent] || 0;
-		// DW Penalty is a fixed 19%
-		const dualWieldHitCap = oneHandHitCap + 19;
-		const hasOffhandWeapon = this.isDualWielding();
-		const meleeHitCap = hasOffhandWeapon ? dualWieldHitCap : oneHandHitCap;
-		const dodgeCap = currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatMainHandDodgePercent] || 0;
-		const parryCap = this.getInFrontOfTarget() ? currentStats.finalStats?.pseudoStats[PseudoStat.PseudoStatMainHandParryPercent] || 0 : 0;
-		const expertiseCap = dodgeCap + parryCap;
-
-		const remainingMeleeHitCap = Math.max(meleeHitCap - meleeHit, 0.0);
-		const remainingDodgeCap = Math.max(dodgeCap - expertise, 0.0);
-		const remainingParryCap = Math.max(parryCap - expertise, 0.0);
-		const remainingExpertiseCap = remainingDodgeCap + remainingParryCap;
-
-		let specSpecificOffset = 0.0;
-		if (this.getSpec() === Spec.SpecEnhancementShaman) {
-			const player = this as unknown as Player<Spec.SpecEnhancementShaman>;
-			// Elemental Devastation uptime is near 100%
-			const ranks = player.getTalents().elementalDevastation;
-			specSpecificOffset = 3.0 * ranks;
-		}
-
-		const baseCritCap = 100.0 - glancing + critSuppression - remainingMeleeHitCap - remainingExpertiseCap - specSpecificOffset;
-		const playerCritCapDelta = meleeCrit - baseCritCap;
-
-		return {
-			meleeCrit,
-			meleeHit,
-			expertise,
-			suppression: critSuppression,
-			glancing,
-			debuffCrit,
-			hasOffhandWeapon,
-			meleeHitCap,
-			expertiseCap,
-			remainingMeleeHitCap,
-			remainingExpertiseCap,
-			baseCritCap,
-			specSpecificOffset,
-			playerCritCapDelta,
-		};
-	}
-
-	getMeleeCritCap() {
-		return this.getMeleeCritCapInfo().playerCritCapDelta;
+	getMeleeCritCapInfo(): MeleeCritCapInfo | undefined {
+		return this.slice().currentStats.meleeCritCap;
 	}
 
 	// In-place rotation mutation with a single change event — the write path for
@@ -1283,6 +1240,14 @@ export class Player<SpecType extends Spec> {
 		[RaidFilterOption.RaidNaxx]: 3456,
 	};
 
+	// The game files give a quest reward no required level, since the quest carries it. Such an item is placed
+	// by its item level, which tracks the level that equips it: 60 from item level 60, 5 below it otherwise.
+	static requiredLevelOf(item: Item): number {
+		if (item.reqLvl != 0) return item.reqLvl;
+		const ilvl = item.scalingOptions?.[0].ilvl || item.ilvl;
+		return ilvl >= Mechanics.CHARACTER_LEVEL ? Mechanics.CHARACTER_LEVEL : Math.max(1, ilvl - 5);
+	}
+
 	filterItemData<T>(itemData: Array<T>, getItemFunc: (val: T) => Item, slot: ItemSlot): Array<T> {
 		const filters = this.sim.getFilters();
 
@@ -1290,6 +1255,9 @@ export class Player<SpecType extends Spec> {
 			return itemData.filter(itemElem => filterFunc(getItemFunc(itemElem)));
 		};
 
+		if (filters.maxRequiredLevel != 0) {
+			itemData = filterItems(itemData, item => Player.requiredLevelOf(item) <= filters.maxRequiredLevel);
+		}
 		if (filters.minIlvl != 0) {
 			itemData = filterItems(itemData, item => (item.scalingOptions?.[0].ilvl || item.ilvl) >= filters.minIlvl);
 		}
@@ -1297,11 +1265,11 @@ export class Player<SpecType extends Spec> {
 			itemData = filterItems(itemData, item => (item.scalingOptions?.[0].ilvl || item.ilvl) <= filters.maxIlvl);
 		}
 
-		if (filters.factionRestriction != UIItem_FactionRestriction.UNSPECIFIED) {
-			itemData = filterItems(
-				itemData,
-				item => item.factionRestriction == filters.factionRestriction || item.factionRestriction == UIItem_FactionRestriction.UNSPECIFIED,
-			);
+		// Any filters nothing, and so does a value the enum does not list, which a binary link can carry.
+		const faction = filters.factionFilter == FactionFilter.FactionFilterRace ? this.getFaction() : Faction.Unknown;
+		if (faction != Faction.Unknown) {
+			const kept = faction == Faction.Horde ? UIItem_FactionRestriction.HORDE_ONLY : UIItem_FactionRestriction.ALLIANCE_ONLY;
+			itemData = filterItems(itemData, item => item.factionRestriction == kept || item.factionRestriction == UIItem_FactionRestriction.UNSPECIFIED);
 		}
 
 		if (!filters.sources.includes(SourceFilterOption.SourceSoldBy)) {

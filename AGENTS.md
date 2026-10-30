@@ -3,6 +3,39 @@
 WoWSims Forever: a Go simulator (`sim/`) with a React frontend (`ui/`), built on data extracted from the game
 files (`tools/database`, `sim/core/spelldata`).
 
+## Local theorycraft research
+
+For gear, talent, rotation, class/spec comparison and raid-composition questions,
+consult this simulator and the local source library at
+`C:\Users\aelsi\Documents\GitHub\wowkb`. Read that project's `AGENTS.md`; its
+`README.md`, `data/library/INDEX.md` and `wowkb.py search` are the research entry
+points. Its Python interpreter is `.venv\Scripts\python.exe` in that repository.
+Use source IDs and paragraph or timestamp citations for developer statements,
+design intentions and reporting. Keep those distinct from simulation findings and
+community claims, and explain discrepancies between publications and the model.
+If the library is unavailable, state that limitation.
+
+The DPS comparison tools live in `tools/dps-experiments/` on `codex/analytics`,
+currently checked out at
+`C:\Users\aelsi\.codex\worktrees\wow-analytics\wowsims-forever`. Confirm the active
+worktree with `git worktree list` before using its tools or saved reports. For
+numerical comparisons, identify the simulator commit and relevant working-tree
+changes, game build, exact inputs, gear policy, encounter, buffs, rotation and
+iterations/seed. Report uncertainty and unsupported mechanics. Check healing,
+survival, roster buffs and party constraints before using DPS experiments to draw
+conclusions about raid composition.
+
+Keep the repositories and their histories separate. Source archives stay in
+`wowkb`; simulation tooling and results follow this repository's rules. The
+library's Discord collection is on hold; this cross-reference authorizes no live
+Discord access or collection.
+
+The hunter's rotations, gear sets and sim setups are SIML files (`*.siml`); the other specs keep theirs as JSON
+until each moves, and the Go suites and the site read either. `sim/siml/SPEC.md` is the language, and the
+`wowsims-siml` skill a short guide to it with every action and value, where its tools are and how to start its
+language server. A change to a proto, `proto/apl.proto` most of all, reaches SIML on its own; run `make siml` after
+one, and fix the `.siml` files the check names when a kind or field is taken out or renamed.
+
 **Rule: tests and stories never add code to the sim or the UI.** No export, prop, parameter, branch, flag or
 hook goes into `sim/` or `ui/` only so a unit test or a Storybook story can reach or cover something. A test
 or story works through the code's real surface, and a fixture or stub it needs lives with the tests. The
@@ -31,6 +64,7 @@ copy, and the lockfile records each skill's hash.
 | `wowsims-spec-implementation` | Picking up a `[Spec]` tracking issue and porting a class                                       |
 | `wowsims-review`              | Reviewing a spell change, your own before committing or a pull request, against the rows       |
 | `wowsims-ui`                  | The frontend under `ui/`                                                                       |
+| `wowsims-siml`                | SIML rotations, gear sets and setups: syntax, every action and value, CLI, language server     |
 | `wowsims-bulk-sim`            | Bulk sim, locally, on the server and in the browser                                            |
 | `wowsims-reforge-optimizer`   | The gear optimizer (EP, stat caps, HiGHS)                                                      |
 

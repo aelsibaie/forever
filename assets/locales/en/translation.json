@@ -27,8 +27,11 @@
 			"addon": "Get the Exporter addon"
 		},
 		"footer": {
-			"copyright": "© 2021-{{year}} WoWSims team",
-			"disclaimer": "A fan-made project, not affiliated with Blizzard Entertainment."
+			"copyright": "© {{startYear}}-{{year}} {{holder}}",
+			"disclaimer": "A fan-made project, not affiliated with Blizzard Entertainment.",
+			"sims": "Sims",
+			"addon": "Addon",
+			"patreon": "Patreon"
 		}
 	},
 	"common": {
@@ -268,12 +271,7 @@
 			"off_hand_crit_rating": "Off Hand Crit Rating",
 			"ranged_hit_rating": "Ranged Hit Rating",
 			"ranged_crit_rating": "Ranged Crit Rating",
-			"melee_crit_suppression": "Melee Crit Suppression",
 			"ranged_crit_suppression": "Ranged Crit Suppression",
-			"main_hand_miss": "Main Hand Miss",
-			"main_hand_dodge": "Main Hand Dodge",
-			"main_hand_parry": "Main Hand Parry",
-			"main_hand_glance": "Main Hand Glance",
 			"healing_power": "Healing Power",
 			"spell_damage": "Spell Damage",
 			"arcane_damage": "Arcane Spell Damage",
@@ -306,12 +304,14 @@
 		},
 		"copy_button": {
 			"default_text": "Copy to Clipboard",
-			"copied": "Copied"
+			"copied": "Copied",
+			"manual_copy": "The browser blocked the clipboard. Copy the text below by hand."
 		},
 		"list_picker": {
 			"new_item": "New {{itemLabel}}",
 			"delete_item": "Delete {{itemLabel}}",
 			"copy_to_new": "Copy to New {{itemLabel}}",
+			"copy_to_clipboard": "Copy {{itemLabel}} to Clipboard",
 			"move_drag_drop": "Move (Drag+Drop)",
 			"item_actions": "{{itemLabel}} menu",
 			"warnings": "Warnings",
@@ -387,6 +387,7 @@
 			"shoot": "Shoot",
 			"refund": "Refund",
 			"moving": "Moving",
+			"moving_from_spell": "Moving (from a spell)",
 			"prepull": "Prepull",
 			"encounter_start": "Encounter Start",
 			"minor_run_speed": "Minor Run Speed (8%)",
@@ -417,6 +418,8 @@
 			"crit": "Crit",
 			"agi": "Agi",
 			"damage": "Damage",
+			"attuned": "Attuned",
+			"charged": "Charged",
 			"wasted": "Wasted",
 			"raid": "raid",
 			"queue": "Queue",
@@ -432,6 +435,8 @@
 			"hit": "Hit",
 			"external": "External",
 			"self": "self",
+			"shield": "Shield",
+			"amplified": "Amplified",
 			"custom_boss": "Custom Boss",
 			"thrash": "Thrash",
 			"stacks": "{{stacks}} Stacks",
@@ -524,13 +529,14 @@
 			"filters": {
 				"title": "Filters",
 				"general": "General",
-				"min_ilvl": "Min ILvl",
-				"max_ilvl": "Max ILvl",
+				"required_level": "Required Level",
+				"min_ilvl": "Min Item Level",
+				"max_ilvl": "Max Item Level",
 				"faction_restrictions": "Faction Restrictions",
 				"source": "Source",
 				"raids": "Raids",
 				"faction_labels": {
-					"none": "None",
+					"none": "Any",
 					"alliance_only": "Alliance only",
 					"horde_only": "Horde only"
 				}
@@ -642,6 +648,7 @@
 			},
 			"stats": "Stats",
 			"attack_power": "Attack Power",
+			"attack_power_tooltip": "Battle Shout: click to cycle Rank 6 (trainer), Rank 7 (Manual of Battle Shout VII), Rank 7 with three pieces of Battlegear of Wrath. Furious Howl shares its category; the stronger applies.",
 			"attack_speed": "Attack Speed",
 			"spell_power": "Spell Power",
 			"spell_haste": "Spell Haste",
@@ -744,7 +751,11 @@
 			},
 			"retribution_aura_spell_power": {
 				"label": "Retribution Aura Spell Power",
-				"tooltip": "The Holy spell power of the paladin providing Retribution Aura. Each hit you take deals the aura's base damage plus about 13.6% of this."
+				"tooltip": "The Holy spell power of the paladin providing Retribution Aura. Each hit you take deals the aura's base damage plus 6% of this."
+			},
+			"thorns_spell_power": {
+				"label": "Thorns Spell Power",
+				"tooltip": "The Nature spell power of the druid providing Thorns. Each hit you take deals Thorns' base damage plus 6% of this."
 			},
 			"pet_uptime": {
 				"label": "Pet Uptime (%)",
@@ -815,6 +826,10 @@
 				"label": "Battle Shout: Battlegear of Wrath",
 				"tooltip": "Three pieces of Battlegear of Wrath add 30 attack power to Battle Shout. Set this when the pieces arrive through an item swap rather than the worn set."
 			},
+			"has_battle_shout_rank_7": {
+				"label": "Battle Shout: Rank 7",
+				"tooltip": "Sets the character sheet's Battle Shout to Rank 7 (Manual of Battle Shout VII) instead of Rank 6. The rotation picks the rank that is cast: the simple rotation's Battle Shout VII toggle, or the rank chosen for the spell in the rotation editor."
+			},
 			"queue_delay": {
 				"label": "HS/Cleave Queue Delay (ms)",
 				"tooltip": "How long (in milliseconds) to delay re-queueing Heroic Strike/Cleave in order to simulate real reaction time and game delay."
@@ -830,6 +845,12 @@
 			"cannot_shred_target": {
 				"label": "Cannot Shred Target",
 				"tooltip": "Alternative to \"In Front of Target\" for modeling bosses that do not Parry or Block, but which you still cannot Shred."
+			},
+			"innervate_assignment": {
+				"label": "Innervate",
+				"tooltip": "Self keeps the mana. Someone else still casts Innervate on your rotation, and the mana stays off you.",
+				"self": "Self",
+				"other": "Someone else"
 			},
 			"show_1h_weapons": {
 				"label": "1H",
@@ -1330,8 +1351,21 @@
 					"overview": "Groups of actions that can be referenced in the Action Priority List (APL). Useful for organizing your APL and reusing common action sequences. Actions are performed in order from top to bottom within a group."
 				}
 			},
+			"clipboard": {
+				"copied": "{{itemName}} copied to the clipboard.",
+				"empty": "The clipboard holds no copied {{itemName}}.",
+				"paste_dialog": {
+					"label": "Copied text",
+					"description": "This page cannot read the clipboard. Paste the copied text here with Ctrl+V."
+				},
+				"places": {
+					"action": "the Priority List or a group's actions"
+				},
+				"wrong_kind": "The clipboard holds a copied {{held}}. Paste it under {{places}}."
+			},
 			"floatingActionBar": {
 				"new": "New {{itemName}}",
+				"paste": "Paste {{itemName}}",
 				"reset": "Reset APL"
 			},
 			"nameModal": {
@@ -1504,7 +1538,7 @@
 				},
 				"change_target": {
 					"label": "Change Target",
-					"tooltip": "Sets the current target, which is the target of auto attacks and most casts by default."
+					"tooltip": "Sets the current target, which is the target of auto attacks and most casts by default. Not ready while that unit is already the current target, except as a step of a sequence."
 				},
 				"activate_aura": {
 					"label": "Activate Aura",
@@ -1810,7 +1844,7 @@
 				"is_expertise_capped": {
 					"label": "Is Expertise Capped",
 					"tooltip": "<b>True</b> if the current target can neither dodge nor parry the spell, otherwise <b>False</b>.",
-					"full_description": "<p>Parry counts only when you are in front of the target. Spells and ranged attacks cannot be dodged or parried and always return <b>True</b>.</p><p>The check reads only the spell's defense type, so it still counts dodge and parry for specials that never roll them, such as Backstab, Ambush and Overpower.</p>"
+					"full_description": "<p>Parry counts only when you are in front of the target. Spells and ranged attacks cannot be dodged or parried and always return <b>True</b>.</p><p>Specials that cannot be dodged, parried or blocked, such as Ambush, Garrote, Overpower and the seal judgements, also return <b>True</b>.</p>"
 				},
 				"is_ready": {
 					"label": "Is Ready",
@@ -2059,7 +2093,7 @@
 				},
 				"selected_potion": {
 					"label": "Selected Potion",
-					"tooltip": "Returns <b>True</b> if the potion is picked in any of the potion slots: offensive, defensive or resource."
+					"tooltip": "Returns <b>True</b> if the potion is picked in the chosen potion slot, or with <b>Any</b> in any of them: offensive, defensive or resource."
 				},
 				"selected_conjured": {
 					"label": "Selected Conjured",
@@ -2172,7 +2206,8 @@
 				"external_cooldowns": "External Cooldowns",
 				"external_debuffs": "External Debuffs",
 				"variables": "Variables",
-				"groups": "Groups"
+				"groups": "Groups",
+				"stances": "Stances"
 			},
 			"item_swap_sets": {
 				"main": "Main",
@@ -2261,6 +2296,12 @@
 				"name_exists": "Rotation with name {{name}} already exists."
 			}
 		},
+		"siml": {
+			"title": "SIML",
+			"tooltip": "SIML is the sim's text format. Export the rotation to read or edit it as text, and import it back.",
+			"export_button": "Export SIML",
+			"import_button": "Import SIML"
+		},
 		"options": {
 			"rogue": {
 				"use_backstab": {
@@ -2287,6 +2328,26 @@
 						"label": "Soul Swap Exhale Window",
 						"tooltip": "How long, in milliseconds, before inhaled dots expire to exhale during multitarget encounters."
 					}
+				},
+				"rotation": {
+					"label": "Rotation",
+					"demo_fire_brand": "Demo (Fire Brand)",
+					"demo_shadow_brand": "Demo (Shadow Brand)",
+					"destro": "Destro",
+					"sm_ruin": "SM/Ruin",
+					"aff_wrack": "Aff (Wrack)"
+				},
+				"use_shadow_bolt_rank_10": {
+					"label": "Use Shadow Bolt Rank 10",
+					"tooltip": "Casts Shadow Bolt Rank 10, taught by the Grimoire of Shadow Bolt X, in place of Rank 9 from the trainer."
+				},
+				"use_immolate_rank_8": {
+					"label": "Use Immolate Rank 8",
+					"tooltip": "Casts Immolate Rank 8, taught by the Grimoire of Immolate VIII, in place of Rank 7 from the trainer."
+				},
+				"use_corruption_rank_7": {
+					"label": "Use Corruption Rank 7",
+					"tooltip": "Casts Corruption Rank 7, taught by the Grimoire of Corruption VII, in place of Rank 6 from the trainer."
 				}
 			},
 			"hunter": {
@@ -2301,7 +2362,7 @@
 				},
 				"pull_range": {
 					"label": "Pull range (yd)",
-					"tooltip": "Where you stand when the pull starts. From there you walk to your spot (12 yd at range, melee range in melee), stopping for each Auto Shot you can fire on the way."
+					"tooltip": "Where you stand when the pull starts. From there you walk to your spot (12 yd at range, 13.2 yd when weaving, melee range in melee), stopping for each Auto Shot you can fire on the way."
 				},
 				"time_to_weave": {
 					"label": "Time to weave (ms)",
@@ -2380,6 +2441,14 @@
 					},
 					"use_hamstring": {
 						"label": "Hamstring weave"
+					},
+					"use_heroic_strike_rank_9": {
+						"label": "Heroic Strike IX (Manual)",
+						"tooltip": "Casts Heroic Strike IX, taught by the Manual of Heroic Strike IX from Ruins of Ahn'Qiraj, in place of Heroic Strike VIII from the trainer."
+					},
+					"use_battle_shout_rank_7": {
+						"label": "Battle Shout VII (Manual)",
+						"tooltip": "Casts Battle Shout VII, taught by the Manual of Battle Shout VII from Ruins of Ahn'Qiraj, in place of Battle Shout VI from the trainer."
 					}
 				}
 			}
@@ -2395,6 +2464,8 @@
 			"all_targets": "All Targets",
 			"target_number": "Target {{number}}",
 			"group_ranks": "Group ranks",
+			"show_apm_breakdown": "Show APM breakdown",
+			"pets": "Pets",
 			"damage": {
 				"dps_histogram": "DPS Histogram"
 			},
@@ -2451,7 +2522,15 @@
 					"travel_time": "+ {{time}}s travel time",
 					"stack_at": "{{casts}} casts at {{time}}s",
 					"stack_range": "{{casts}} casts from {{start}}s to {{end}}s",
-					"total": "Total: {{total}} ({{dpet}} DPET)"
+					"total": "Total: {{total}} ({{dpet}} DPET)",
+					"apl_entry": {
+						"prepull": "Prepull #{{position}}",
+						"priority": "Priority list #{{position}}",
+						"group": "Group {{group}} › #{{position}}",
+						"step": "Step {{position}}",
+						"open_hint": "Click to open this line in Rotation",
+						"changed_hint": "The rotation has changed since this run"
+					}
 				},
 				"delay_tooltip": "Auto delayed by {{delay}}, was ready at {{readyAt}}",
 				"gcd_tooltip": "{{spell}} — {{gcd}}s GCD ({{start}}s → {{end}}s)"
@@ -2679,13 +2758,31 @@
 			"title": "Addon Import",
 			"description": "Import settings from the",
 			"addon_link": "WoWSims Exporter In-Game Addon",
-			"feature_description": "This feature imports gear, race, talents, and professions. It does NOT import buffs, debuffs, consumes, rotation, or custom stats.",
+			"feature_description": "This feature imports gear, race, professions and rotation. The class is required, and anything missing from the pasted text keeps its current value. It does NOT import buffs, debuffs, consumes, or custom stats.",
 			"instructions": "To import, paste the output from the addon below and click, 'Import'.",
 			"upload_button": "Upload File",
 			"import_button": "Import",
 			"error_invalid_export": "Please use a valid Addon export.",
+			"error_nothing_to_import": "The pasted text has no gear, race, professions or rotation to import.",
+			"error_invalid_rotation": "The rotation in the pasted text is not a valid rotation.",
 			"outdated": "Addon is not up to date. Addon version : '{{version}}', Latest version : '{{latest}}'",
 			"below_max_level": "The character you imported is level {{level}}. The Sim is intended to be used for max level only, so you might be missing certain items."
+		},
+		"siml": {
+			"title": "SIML Import",
+			"description": "Import settings from SIML, the sim's text format, as the SIML Export writes it.",
+			"instructions": "To import, upload a .siml file or paste its text below, then click, 'Import'. Only what the text holds is loaded: a rotation alone leaves the gear and talents as they are.",
+			"error_problems": "The SIML does not read:",
+			"error_empty": "The SIML holds nothing to import: no section and no talents line.",
+			"error_unknown_type": "The rotation's type is unknown: write type apl, simple or auto, or leave the type line out.",
+			"error_nothing_here": "The SIML holds only the encounter, which this page does not import.",
+			"warning_spec": "This SIML is written for spec {{file}}, and this page is for spec {{page}}. It was imported anyway.",
+			"warnings": "The SIML was imported, with warnings:"
+		},
+		"siml_rotation": {
+			"title": "SIML Rotation Import",
+			"description": "Import a rotation written in SIML, as the Rotation tab's Export SIML writes it.",
+			"instructions": "To import, upload a .apl.siml file or paste its text below, then click, 'Import'. Only the rotation is replaced."
 		},
 		"error": "Import error:",
 		"success": "Import successful!",
@@ -2716,6 +2813,7 @@
 	},
 	"export": {
 		"title": "Export",
+		"error": "Export error: {{message}}",
 		"link": {
 			"title": "Link Export",
 			"description": "Export settings as a shareable link.",
@@ -2751,6 +2849,13 @@
 			"instructions": "Copy the command below to run simulations from the command line.",
 			"copy_button": "Copy",
 			"copy_tooltip": "Copy to clipboard"
+		},
+		"siml": {
+			"title": "SIML Export",
+			"error_unreadable": "The SIML printed here does not read back, so it is not given out: {{problems}}"
+		},
+		"siml_rotation": {
+			"title": "SIML Rotation Export"
 		},
 		"categories": {
 			"gear": {
@@ -3245,6 +3350,10 @@
 					"label": "TPS",
 					"tooltip": "Threat Per Second"
 				},
+				"apm": {
+					"label": "APM",
+					"tooltip": "Actions Per Minute: the spells, abilities and items the rotation uses by hand per minute, plus the walks the rotation or the encounter starts. Abilities that queue for the next swing, such as Heroic Strike, count once when pressed. Procs, auto attacks, walks a spell such as Charge starts, and pets are not counted."
+				},
 				"dtps": {
 					"label": "DTPS",
 					"tooltip": "Damage Taken Per Second"
@@ -3317,6 +3426,7 @@
 				"suppression": "Suppression:",
 				"to_hit_cap": "To Hit Cap:",
 				"to_exp_cap": "To Exp Cap:",
+				"block": "Block:",
 				"spec_offsets": "Spec Offsets:",
 				"final_crit_cap": "Final Crit Cap:",
 				"can_raise_by": "Can Raise By:"
@@ -3362,7 +3472,7 @@
 			"other": "Other"
 		},
 		"group_count": "{{group}} ({{shown}}/{{total}})",
-		"kept_tooltip": "This item is showing because you have it selected. Use the stat filters to permanently show it.",
+		"kept_tooltip": "This item is showing because you have it selected. Use the filters to permanently show it.",
 		"rating_label": "{{stat}} Rating",
 		"percent_label": "{{stat}} %"
 	}

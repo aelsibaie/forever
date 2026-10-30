@@ -69,9 +69,9 @@ const ARMS_PRESET_OPTIONS = {
 // the second ring have no known source.
 export const PreBiSFuryGear = PresetUtils.makePresetGear('Pre-BiS', PreBiSFuryGearJson, { ...FURY_PRESET_OPTIONS, devOnly: true });
 
-// The best build with Enrage at 5/5 on the Pre-BiS Fury gear over a three minute fight. Enrage stays at 5/5 for
-// the damage a raid takes; with no tank assigned the boss attacks no one, so the sim gives it no value.
-export const FuryTalents = PresetUtils.makePresetTalents('Fury', SavedTalents.create({ talentsString: '20305213002-25053005051010501' }));
+// The best build on the Pre-BiS Fury gear over fights of 60 to 240 s. Enrage takes no points: with no tank
+// assigned the boss attacks no one, so the sim gives it no value.
+export const FuryTalents = PresetUtils.makePresetTalents('Fury', SavedTalents.create({ talentsString: '30305213002-15053105102210501' }));
 
 // Measured on the Pre-BiS Fury gear with the Fury talents.
 export const PreBiSFuryEpWeights = PresetUtils.makePresetEpWeights(
@@ -134,6 +134,8 @@ export const SIMPLE_ROTATION = DpsWarrior_Rotation.create({
 	useRecklessness: false,
 	useStanceDance: false,
 	useHamstring: true,
+	useHeroicStrikeRank9: false,
+	useBattleShoutRank7: false,
 });
 export const SIMPLE_DEFAULT_ROTATION = PresetUtils.makePresetSimpleRotation('Simple', Spec.SpecDpsWarrior, SIMPLE_ROTATION);
 export const SIMPLE_ARMS_DEFAULT_ROTATION = PresetUtils.makePresetSimpleRotation('Simple', Spec.SpecDpsWarrior, {
@@ -147,7 +149,7 @@ export const DefaultOptions = WarriorOptions.create({
 		startingRage: 50,
 		useBattleShout: true,
 		defaultStance: WarriorStance.WarriorStanceBerserker,
-		hasBsT2: true,
+		hasBsT2: false,
 		stanceSnapshot: true,
 	},
 });

@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/wowsims/classic/sim"
+	"github.com/wowsims/classic/sim/core"
+	"github.com/wowsims/classic/sim/core/proto"
+	"google.golang.org/protobuf/encoding/protojson"
+)
+
+func main() {
+	if len(os.Args) != 4 {
+		panic("usage: gunba-driver sim|stats input.json output.json")
+	}
+	data, err := os.ReadFile(os.Args[2])
+	if err != nil {
+		panic(err)
+	}
+	request := &proto.RaidSimRequest{}
+	if err = protojson.Unmarshal(data, request); err != nil {
+		panic(err)
+	}
+	sim.RegisterAll()
+	var output []byte
+	if os.Args[1] == "stats" {
+		result := core.ComputeStats(&proto.ComputeStatsRequest{Raid: request.Raid, Encounter: request.Encounter, Ruleset: request.SimOptions.Ruleset})
+		if result.ErrorResult != "" {
+			panic(result.ErrorResult)
+		}
+		output, err = (protojson.MarshalOptions{EmitUnpopulated: true}).Marshal(result)
+	} else if os.Args[1] == "sim" {
+		result := core.RunRaidSim(request)
+		output, err = (protojson.MarshalOptions{EmitUnpopulated: true}).Marshal(result)
+	} else {
+		panic(fmt.Sprintf("unknown operation: %s", os.Args[1]))
+	}
+	if err != nil {
+		panic(err)
+	}
+	if err = os.WriteFile(os.Args[3], output, 0644); err != nil {
+		panic(err)
+	}
+}

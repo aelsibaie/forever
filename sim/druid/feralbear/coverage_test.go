@@ -32,7 +32,7 @@ func bearCoverageRequest() *proto.RaidSimRequest {
 	for i := range items {
 		items[i] = &proto.ItemSpec{}
 	}
-	items[proto.ItemSlot_ItemSlotMainHand].Id = 866
+	items[proto.ItemSlot_ItemSlotMainHand].Id = 1613
 	return &proto.RaidSimRequest{
 		SimOptions: &proto.SimOptions{RandomSeed: 1, Iterations: 1},
 		Raid: &proto.Raid{Parties: []*proto.Party{{
@@ -54,7 +54,7 @@ func bearCoverageRequest() *proto.RaidSimRequest {
 						cast(5229),
 						cast(22842),
 						cast(6795),
-						cast(1238122),
+						cast(16979),
 						cast(22812),
 						castUnlessOnTarget(9907),
 						cast(417141),

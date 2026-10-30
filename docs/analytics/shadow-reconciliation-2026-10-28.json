@@ -1,0 +1,1725 @@
+{
+	"upstream": "20277619eb440205122d174e749080c280075edd",
+	"previousUpstream": "5a407cfbb7924f8e03ce732437b6d61ac1ded8bb",
+	"source": {
+		"url": "https://finsembleforever.com/lab/data/shadow-priest.json",
+		"sha256": "3984c511429a030d7d2eae20e14dc06d61c807d05ce68039f149e79006d87257",
+		"capturedAt": "2026-10-28T15:37:59.932Z",
+		"measure": "share of the 10,000 simulated raid boss fights in which each race did the most damage; shares rounded to whole percents adding up to 100; racial worth = % damage gained over a priest with no racial",
+		"ranking": [
+			{
+				"place": 1,
+				"race": "Dwarf",
+				"share_pct": 51,
+				"share_exact_pct": 50.66,
+				"ci95_pct": [49.73, 51.61],
+				"range_over_deciding_question_pct": [49, 73],
+				"racial_worth_pct": {
+					"median": 1.04,
+					"p10": 0.14,
+					"p90": 1.09
+				}
+			},
+			{
+				"place": 2,
+				"race": "Night elf",
+				"share_pct": 40,
+				"share_exact_pct": 40.1,
+				"ci95_pct": [39.18, 41.08],
+				"range_over_deciding_question_pct": [15, 42],
+				"racial_worth_pct": {
+					"median": 0.94,
+					"p10": 0.69,
+					"p90": 1.4
+				}
+			},
+			{
+				"place": 3,
+				"race": "Human",
+				"share_pct": 8,
+				"share_exact_pct": 8.46,
+				"ci95_pct": [7.94, 8.97],
+				"range_over_deciding_question_pct": [2, 9],
+				"racial_worth_pct": {
+					"median": 0.87,
+					"p10": 0.83,
+					"p90": 0.91
+				}
+			},
+			{
+				"place": 4,
+				"race": "Gnome",
+				"share_pct": 1,
+				"share_exact_pct": 0.78,
+				"ci95_pct": [0.61, 0.95],
+				"range_over_deciding_question_pct": [0, 10],
+				"racial_worth_pct": {
+					"median": 0.51,
+					"p10": 0.4,
+					"p90": 0.72
+				}
+			}
+		]
+	},
+	"runs": [
+		{
+			"name": "hit-recovery-confirmed",
+			"provenance": {
+				"createdAt": "2026-10-28T15:52:22.437Z",
+				"head": "b92931a00ab474d99f85af0947eff303a53fb18c",
+				"upstream": "20277619eb440205122d174e749080c280075edd",
+				"diffSha256": "b5f1e84668556a7acf6ef5e2a8399ac9af12157dc3e9c7c31a44c161d13a1bef",
+				"gameInputsSha256": "568afd8e3a829800b8cbd21c2b422ab42e84d7749e30bd7272d14e690f83c434",
+				"nativeSourceSha256": "35a9180816762a471ade60668e56d35f5ee2b83913d159e31a9a5b84e0248ac0",
+				"controlSourceSha256": "8e30456c54dff2504f8f683c992fd55962fadab466d48afcd7992d0c2142fd37",
+				"binaries": {
+					"upstream": "3f7cab644016392d2422143d5044aaf2e34127f087e5fc94db22d22f8a4fa56b",
+					"fixed-channel-occupancy": "19324724561193e7f48d46cf8d752f51f411b8701d2b584912f4f03429982c74"
+				},
+				"inputSourceSha256": "c36875324889f0178ba9b15056dcc501587a942dd50a6da93135149986d998f9",
+				"developerGearSha256": "2a86b43a9cf121734bce28594c4cb1a5a6cb3201a790c97d8fa9feca31eaff86",
+				"iterations": 20000,
+				"seed": 3026102801,
+				"duration": 180,
+				"scope": "Focused mechanism diagnostic, not a race recommendation. Full-support saved encounter and rotation with current developer equipment. The isolated channel uses extra MP5 to exclude OOM. The counterfactual reserves a full channel duration even on a missed application; it is not a correction to the primary simulator or a claim about Finsemble source."
+			},
+			"rows": [
+				{
+					"key": "upstream--developer--human",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "human",
+					"requestSha256": "408cf87018b65f9584a57fe62e7f580212bd7ddd567cda6554665364e83c3375",
+					"resultSha256": "cbac0d999efb817299e9187f43909cc49d7ca67a98f69260760bb7778872d22e",
+					"statsSha256": "56fc38397890b4348322b98a93db8e50a0630f1b60e0634177559633d5793de3",
+					"meanDps": 788.310349186989,
+					"secondsOom": 0,
+					"shadowHit": 6,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 37.7197,
+						"misses": 4.1512,
+						"castTimeMs": 99490.05
+					}
+				},
+				{
+					"key": "upstream--developer--dwarf",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "dwarf",
+					"requestSha256": "04b7134f0c5ee4ea2f3b432100a22f88235f2028a2f71478ae957989e9becef3",
+					"resultSha256": "68f581da9f3104f3292a1852d8b1123bcc179b47c8878be86d4997f8e083883b",
+					"statsSha256": "b7dc57b6d80d9dc4215658bb1f8cde2c78ffdc3b5de2e3f6398ffc28f1bcf6f7",
+					"meanDps": 787.9092818775672,
+					"secondsOom": 0,
+					"shadowHit": 7,
+					"spellCrit": 15.4072,
+					"flay": {
+						"casts": 37.5584,
+						"misses": 3.7597,
+						"castTimeMs": 100107.6
+					}
+				},
+				{
+					"key": "upstream--developer--human-plus-hit",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "human-plus-hit",
+					"requestSha256": "199eff6852cbb374babf4bf6ee06145193e42a375c055026bbfffbd5b48da892",
+					"resultSha256": "d64b533b8c6a13d8981bb0f9e1bf60df0bf5e47f48c5b5c05b33ce8dd251afbd",
+					"statsSha256": "528723f47a6cdd63cb89a993e86d6a61029a37f786e370e8b4f16948e4e2688c",
+					"meanDps": 794.3143659934258,
+					"secondsOom": 0,
+					"shadowHit": 7,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 37.5584,
+						"misses": 3.7597,
+						"castTimeMs": 100107.6
+					}
+				},
+				{
+					"key": "upstream--developer--human-plus-crit",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "human-plus-crit",
+					"requestSha256": "d8ad7b754b82a0b17d2b6871a15ce80180812f28a40aa701b9b9546ebca51a4c",
+					"resultSha256": "f333763e1532df2316c4f9a1dc2027a6d8d073c2a5c6665652cd1a1df2d2d342",
+					"statsSha256": "42ea16d0615611e474fc927f5dea870d82dbf484a7a2917b742d15d49b74f110",
+					"meanDps": 794.5425212255989,
+					"secondsOom": 0,
+					"shadowHit": 6,
+					"spellCrit": 17.424,
+					"flay": {
+						"casts": 37.7197,
+						"misses": 4.1512,
+						"castTimeMs": 99490.05
+					}
+				},
+				{
+					"key": "upstream--developer--human-hit-capped",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "human-hit-capped",
+					"requestSha256": "0c88f071e7fffd8c910f6f1c859d5540b45862e8f9cf410d68e440ba7b334f1f",
+					"resultSha256": "8ed51ee6289917de81a5aae482905a4e8a912bb348851930ab217aa397eb237c",
+					"statsSha256": "3a12d0a52e622d01d668af59ce5222ebfd8295cd0743eb6f6c366f76b94a0fcf",
+					"meanDps": 850.5051565164059,
+					"secondsOom": 0,
+					"shadowHit": 56,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 36,
+						"misses": 0,
+						"castTimeMs": 108000
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--human",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "human",
+					"requestSha256": "5527ecd463961500f47318938b7b9da9eac941a3b58a8424baa2c4467bec29a0",
+					"resultSha256": "cd13fbd8abe5084a7ec0378f71958f1e3e51c409cf8b77c49bb7e97a69e61b6d",
+					"statsSha256": "ecaa7517c648400ea1debd020f396c5632153f48af82d1e8c7773bc559e69713",
+					"meanDps": 499.868933116809,
+					"secondsOom": 0,
+					"shadowHit": 6,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 62.15775,
+						"misses": 6.84245,
+						"castTimeMs": 163124.1
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--dwarf",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "dwarf",
+					"requestSha256": "8dd9226245de1ee85307f4de31052975f23a70f6d6a2648f9a82752dfda48b0c",
+					"resultSha256": "5503fcc7de73bdeca748a44c9a361301563a9fe88c5ccbc683ac458eb994f5b4",
+					"statsSha256": "4885700aa5ad164a42f3cda5dd43bb5d6f0b507261e9a888835ef22a95719475",
+					"meanDps": 498.35325186998665,
+					"secondsOom": 0,
+					"shadowHit": 7,
+					"spellCrit": 15.4072,
+					"flay": {
+						"casts": 61.8298,
+						"misses": 6.18825,
+						"castTimeMs": 164079.3
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--human-plus-hit",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "human-plus-hit",
+					"requestSha256": "c342e79dd285706ef2f5b5143a24d90ca1f5ce4c564d423781276882b21361fa",
+					"resultSha256": "9d159490d96d1767d029b133ee32399f5d30240f640d4c62c03ca6138c9b9c6d",
+					"statsSha256": "69f97831ee519af3b60fa801664767bab26003310956881ad3de55c1e0270cff",
+					"meanDps": 502.75539752873334,
+					"secondsOom": 0,
+					"shadowHit": 7,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 61.8298,
+						"misses": 6.18825,
+						"castTimeMs": 164079.3
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--human-plus-crit",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "human-plus-crit",
+					"requestSha256": "f3cf89ddf48fe2fd61cc4eb0dc88a09b6beda890b8ecdedfd516db8e7e7cf005",
+					"resultSha256": "5698615d99ae42e56799e2d2d3b469b822eea6fc1d1a1b56633bc83ce0f7aa3a",
+					"statsSha256": "e7adebbbd9a710455de36d7b18f2c190e369a0e4129a22f0986c665d9dbb0718",
+					"meanDps": 504.1422098650615,
+					"secondsOom": 0,
+					"shadowHit": 6,
+					"spellCrit": 17.424,
+					"flay": {
+						"casts": 62.15775,
+						"misses": 6.84245,
+						"castTimeMs": 163124.1
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--human-hit-capped",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "human-hit-capped",
+					"requestSha256": "f7343f4ebe3830c86ac3b8997afb06a9d3001c4f2ba337210f3c7ba1a357bd90",
+					"resultSha256": "c7e1a8d4a3efd348d9c5a9a249426f022a9ccc23022534ad94dbe6e3c22a7b9f",
+					"statsSha256": "1ed0ab975de126f87b8fddf1955d58f67742952163fcbbb82b6629e91bc9e1de",
+					"meanDps": 530.7602113904616,
+					"secondsOom": 0,
+					"shadowHit": 56,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 59,
+						"misses": 0,
+						"castTimeMs": 174000
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--human",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "human",
+					"requestSha256": "408cf87018b65f9584a57fe62e7f580212bd7ddd567cda6554665364e83c3375",
+					"resultSha256": "08feb194e6625ceb796103448a87ce511eabf52f09de80f174e9b699092baf19",
+					"statsSha256": "56fc38397890b4348322b98a93db8e50a0630f1b60e0634177559633d5793de3",
+					"meanDps": 772.6709716983872,
+					"secondsOom": 0,
+					"shadowHit": 6,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 35.72465,
+						"misses": 3.93535,
+						"castTimeMs": 94490.55
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--dwarf",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "dwarf",
+					"requestSha256": "04b7134f0c5ee4ea2f3b432100a22f88235f2028a2f71478ae957989e9becef3",
+					"resultSha256": "ba39017c9bdd9d0cb798428ffa17e18409eda9dda1baf87179cb107654437f0b",
+					"statsSha256": "b7dc57b6d80d9dc4215658bb1f8cde2c78ffdc3b5de2e3f6398ffc28f1bcf6f7",
+					"meanDps": 773.4293816618854,
+					"secondsOom": 0,
+					"shadowHit": 7,
+					"spellCrit": 15.4072,
+					"flay": {
+						"casts": 35.73195,
+						"misses": 3.59185,
+						"castTimeMs": 95617.05
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--human-plus-hit",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "human-plus-hit",
+					"requestSha256": "199eff6852cbb374babf4bf6ee06145193e42a375c055026bbfffbd5b48da892",
+					"resultSha256": "766256dd6b7dd72906c5d591df5c35522b92042e93d6bc300efa1d858ca6ff1a",
+					"statsSha256": "528723f47a6cdd63cb89a993e86d6a61029a37f786e370e8b4f16948e4e2688c",
+					"meanDps": 779.6653028241614,
+					"secondsOom": 0,
+					"shadowHit": 7,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 35.73195,
+						"misses": 3.59185,
+						"castTimeMs": 95617.05
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--human-plus-crit",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "human-plus-crit",
+					"requestSha256": "d8ad7b754b82a0b17d2b6871a15ce80180812f28a40aa701b9b9546ebca51a4c",
+					"resultSha256": "713132f0e009763a1f261382d672f76a292d9f1d274b99818cc5427349cb2688",
+					"statsSha256": "42ea16d0615611e474fc927f5dea870d82dbf484a7a2917b742d15d49b74f110",
+					"meanDps": 778.7611423131747,
+					"secondsOom": 0,
+					"shadowHit": 6,
+					"spellCrit": 17.424,
+					"flay": {
+						"casts": 35.72465,
+						"misses": 3.93535,
+						"castTimeMs": 94490.55
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--human-hit-capped",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "human-hit-capped",
+					"requestSha256": "0c88f071e7fffd8c910f6f1c859d5540b45862e8f9cf410d68e440ba7b334f1f",
+					"resultSha256": "fd27f976bb90c9463110b1269f145f7b5e9c59c753264ba3b93e9751d99eb5bd",
+					"statsSha256": "3a12d0a52e622d01d668af59ce5222ebfd8295cd0743eb6f6c366f76b94a0fcf",
+					"meanDps": 850.5051565164059,
+					"secondsOom": 0,
+					"shadowHit": 56,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 36,
+						"misses": 0,
+						"castTimeMs": 108000
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--human",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "human",
+					"requestSha256": "5527ecd463961500f47318938b7b9da9eac941a3b58a8424baa2c4467bec29a0",
+					"resultSha256": "44728c7f145a8ed5780a3f39a3a29ca31ec0fc490eeada4c28b356af303fd9b2",
+					"statsSha256": "ecaa7517c648400ea1debd020f396c5632153f48af82d1e8c7773bc559e69713",
+					"meanDps": 472.82161880875395,
+					"secondsOom": 0,
+					"shadowHit": 6,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 59,
+						"misses": 6.4979,
+						"castTimeMs": 154853.4
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--dwarf",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "dwarf",
+					"requestSha256": "8dd9226245de1ee85307f4de31052975f23a70f6d6a2648f9a82752dfda48b0c",
+					"resultSha256": "8803dd20c9989d13bcaa83d62c68299394f568afd8b5237f92ae7c48549c298d",
+					"statsSha256": "4885700aa5ad164a42f3cda5dd43bb5d6f0b507261e9a888835ef22a95719475",
+					"meanDps": 473.7612771520474,
+					"secondsOom": 0,
+					"shadowHit": 7,
+					"spellCrit": 15.4072,
+					"flay": {
+						"casts": 59,
+						"misses": 5.9086,
+						"castTimeMs": 156587.1
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--human-plus-hit",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "human-plus-hit",
+					"requestSha256": "c342e79dd285706ef2f5b5143a24d90ca1f5ce4c564d423781276882b21361fa",
+					"resultSha256": "ebed8c17df15cdbb2c9acde6c283fd818a4da0101c58df470f9711d88dfd04f6",
+					"statsSha256": "69f97831ee519af3b60fa801664767bab26003310956881ad3de55c1e0270cff",
+					"meanDps": 477.94608561114154,
+					"secondsOom": 0,
+					"shadowHit": 7,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 59,
+						"misses": 5.9086,
+						"castTimeMs": 156587.1
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--human-plus-crit",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "human-plus-crit",
+					"requestSha256": "f3cf89ddf48fe2fd61cc4eb0dc88a09b6beda890b8ecdedfd516db8e7e7cf005",
+					"resultSha256": "014cfb28a7d270e745a5000cc0ff04ea469318f5901f708785a1a7a7148feeba",
+					"statsSha256": "e7adebbbd9a710455de36d7b18f2c190e369a0e4129a22f0986c665d9dbb0718",
+					"meanDps": 476.8535739806463,
+					"secondsOom": 0,
+					"shadowHit": 6,
+					"spellCrit": 17.424,
+					"flay": {
+						"casts": 59,
+						"misses": 6.4979,
+						"castTimeMs": 154853.4
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--human-hit-capped",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "human-hit-capped",
+					"requestSha256": "f7343f4ebe3830c86ac3b8997afb06a9d3001c4f2ba337210f3c7ba1a357bd90",
+					"resultSha256": "e713353012a7d8c7a3ea48bfeabb18fe5d41528cd00afe0d80b9b9e6df7513ea",
+					"statsSha256": "1ed0ab975de126f87b8fddf1955d58f67742952163fcbbb82b6629e91bc9e1de",
+					"meanDps": 530.7602113904616,
+					"secondsOom": 0,
+					"shadowHit": 56,
+					"spellCrit": 16.424,
+					"flay": {
+						"casts": 59,
+						"misses": 0,
+						"castTimeMs": 174000
+					}
+				}
+			],
+			"comparisons": [
+				{
+					"mode": "upstream",
+					"rotation": "developer",
+					"comparison": "dwarf versus human",
+					"differenceDps": -0.4010673094218191,
+					"percent": -0.050876829136581314,
+					"ci95HalfWidthPercent": 0.021009018778260034,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "developer",
+					"comparison": "human-plus-hit versus human",
+					"differenceDps": 6.004016806436766,
+					"percent": 0.7616311028554756,
+					"ci95HalfWidthPercent": 0.01914942688306767,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "developer",
+					"comparison": "human-plus-crit versus human",
+					"differenceDps": 6.2321720386098605,
+					"percent": 0.7905734137624076,
+					"ci95HalfWidthPercent": 0.00842721380546601,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"comparison": "dwarf versus human",
+					"differenceDps": -1.5156812468223393,
+					"percent": -0.30321573244643796,
+					"ci95HalfWidthPercent": 0.01442387350919302,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"comparison": "human-plus-hit versus human",
+					"differenceDps": 2.8864644119243508,
+					"percent": 0.5774442500209975,
+					"ci95HalfWidthPercent": 0.011089696007052492,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"comparison": "human-plus-crit versus human",
+					"differenceDps": 4.273276748252499,
+					"percent": 0.8548794424185546,
+					"ci95HalfWidthPercent": 0.009301390251215617,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"comparison": "dwarf versus human",
+					"differenceDps": 0.7584099634981385,
+					"percent": 0.09815432328603713,
+					"ci95HalfWidthPercent": 0.021640913799248325,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"comparison": "human-plus-hit versus human",
+					"differenceDps": 6.994331125774124,
+					"percent": 0.9052146880062173,
+					"ci95HalfWidthPercent": 0.019703282249192728,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"comparison": "human-plus-crit versus human",
+					"differenceDps": 6.090170614787439,
+					"percent": 0.7881971547864408,
+					"ci95HalfWidthPercent": 0.00846372382853137,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"comparison": "dwarf versus human",
+					"differenceDps": 0.9396583432934449,
+					"percent": 0.1987342172849127,
+					"ci95HalfWidthPercent": 0.022302274407859087,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"comparison": "human-plus-hit versus human",
+					"differenceDps": 5.1244668023875874,
+					"percent": 1.0838055195738328,
+					"ci95HalfWidthPercent": 0.020335795080614654,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"comparison": "human-plus-crit versus human",
+					"differenceDps": 4.031955171892321,
+					"percent": 0.8527434050182858,
+					"ci95HalfWidthPercent": 0.00955805658490666,
+					"distinguishable": true
+				}
+			],
+			"controls": {
+				"noMissSamplesIdentical": true,
+				"bonusHitPercent": 1,
+				"bonusCritPercent": 1
+			}
+		},
+		{
+			"name": "published-hit-recovery-verified",
+			"provenance": {
+				"createdAt": "2026-10-28T15:59:58.616Z",
+				"head": "b92931a00ab474d99f85af0947eff303a53fb18c",
+				"upstream": "20277619eb440205122d174e749080c280075edd",
+				"diffSha256": "b5f1e84668556a7acf6ef5e2a8399ac9af12157dc3e9c7c31a44c161d13a1bef",
+				"gameInputsSha256": "568afd8e3a829800b8cbd21c2b422ab42e84d7749e30bd7272d14e690f83c434",
+				"nativeSourceSha256": "35a9180816762a471ade60668e56d35f5ee2b83913d159e31a9a5b84e0248ac0",
+				"controlSourceSha256": "8e30456c54dff2504f8f683c992fd55962fadab466d48afcd7992d0c2142fd37",
+				"binaries": {
+					"upstream": "3f7cab644016392d2422143d5044aaf2e34127f087e5fc94db22d22f8a4fa56b",
+					"fixed-channel-occupancy": "19324724561193e7f48d46cf8d752f51f411b8701d2b584912f4f03429982c74"
+				},
+				"inputSourceSha256": "c36875324889f0178ba9b15056dcc501587a942dd50a6da93135149986d998f9",
+				"developerGearSha256": "2a86b43a9cf121734bce28594c4cb1a5a6cb3201a790c97d8fa9feca31eaff86",
+				"equipmentSha256": "bb388a744b144204841afbabd6cc8e7e031f76a106b4ba06c98b24bdd30e95fd",
+				"iterations": 20000,
+				"seed": 5026102801,
+				"duration": 180,
+				"scope": "Focused mechanism diagnostic, not a race recommendation. Full-support saved encounter and rotation with the explicitly selected equipment. The isolated channel uses extra MP5 to exclude OOM. The counterfactual reserves a full channel duration even on a missed application; it is not a correction to the primary simulator or a claim about Finsemble source."
+			},
+			"rows": [
+				{
+					"key": "upstream--developer--human",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "human",
+					"requestSha256": "9334def12c057d623dc3cd62eeffa2c480808c39977cc760dc27842062e0f3ff",
+					"resultSha256": "853330696a2f3825b58ca5ccec4b5edd8ea1f0a06eda38d6058d8d583a8fab73",
+					"statsSha256": "5ffe16fc673b8c3e1a08899490acd9338866c0c258aec12335999a2de78eb625",
+					"meanDps": 750.9602474532015,
+					"secondsOom": 0,
+					"shadowHit": 7.9,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 37.83005,
+						"misses": 3.43935,
+						"castTimeMs": 101172.75
+					}
+				},
+				{
+					"key": "upstream--developer--dwarf",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "dwarf",
+					"requestSha256": "320ba65095a7c30e0a06138d405e653486df58094b891899e9a9c6bb6260b79b",
+					"resultSha256": "81422721d34808dfa52089566a7a49b41117b42ba19498f9174d6ec888538389",
+					"statsSha256": "36b232e4dcc6de25a0ef52b54a977929f41d0026b5d3ee10666e29a989232eaf",
+					"meanDps": 750.3148382752072,
+					"secondsOom": 0,
+					"shadowHit": 8.9,
+					"spellCrit": 18.024,
+					"flay": {
+						"casts": 37.694,
+						"misses": 3.05755,
+						"castTimeMs": 101816.85
+					}
+				},
+				{
+					"key": "upstream--developer--human-plus-hit",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "human-plus-hit",
+					"requestSha256": "38edd82fd5acea08ea43554e0fb7170468d073b550f65ebaefe85b3e27ee892d",
+					"resultSha256": "2581f0af7d31eb59cf00ef3f63bc4077b567a2eacf65681278319925933c8617",
+					"statsSha256": "5f015f3fa11e098a32bf62d4d0ffdfe9dd66d48c010fcb107be2d2709d69aca5",
+					"meanDps": 756.6602150379202,
+					"secondsOom": 0,
+					"shadowHit": 8.9,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 37.694,
+						"misses": 3.05755,
+						"castTimeMs": 101816.85
+					}
+				},
+				{
+					"key": "upstream--developer--human-plus-crit",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "human-plus-crit",
+					"requestSha256": "5a20a472730148aa02225283ff1e1975317f219a283622e96fc59a4cccea6bd1",
+					"resultSha256": "471763a4f00affc033e7d44ff510017bf7d65bb926534eb1fdc3f1d1d2216b1d",
+					"statsSha256": "91f5f6e1e3809430e79b9bc9f213994c6d1c327dde647e46a416b5aeb2550ca0",
+					"meanDps": 757.1653196883207,
+					"secondsOom": 0,
+					"shadowHit": 7.9,
+					"spellCrit": 20.040799999999997,
+					"flay": {
+						"casts": 37.83005,
+						"misses": 3.43935,
+						"castTimeMs": 101172.75
+					}
+				},
+				{
+					"key": "upstream--developer--human-hit-capped",
+					"mode": "upstream",
+					"rotation": "developer",
+					"variant": "human-hit-capped",
+					"requestSha256": "d407b0f8c7613e1e9a50de60a8eee0051fb1527d940eca564446f1ff7e6a1ba0",
+					"resultSha256": "0f7be3fc54f65e66e71e75fd3ae3f81f390e958a2c9d5ec9b48371ebbdc12406",
+					"statsSha256": "133e5e133332fbcb77bef0195e7e83cce818f5414c31b547609ddb8479e2e18a",
+					"meanDps": 803.0602583264603,
+					"secondsOom": 0,
+					"shadowHit": 57.900000000000006,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 37,
+						"misses": 0,
+						"castTimeMs": 108000
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--human",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "human",
+					"requestSha256": "9a427b18a3e441a8ce23bd2cb81a6ca70732b8b686e1e79e088555198d0bb5d0",
+					"resultSha256": "e68443b7f2a8edc71d11878167949f9f0b3fd03407bc221e203170e009066df6",
+					"statsSha256": "8de3c2dd9457b850b9bc1efde1a90d554707c678d95095e34c882a8bcd4a3c37",
+					"meanDps": 480.18640119678753,
+					"secondsOom": 0,
+					"shadowHit": 7.9,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 61.5465,
+						"misses": 5.62275,
+						"castTimeMs": 164919.3
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--dwarf",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "dwarf",
+					"requestSha256": "472f3f5280f674b28b230a72b548aa35ae9c9a60dd794f7342db40c72492b519",
+					"resultSha256": "b73f97c56785692bc12c069413118744639bc8f71c016cfb76566c83eced475c",
+					"statsSha256": "c6e59887a45aab82aa00cedd9cc4a38a155e32d9494024715afa84c901d005ac",
+					"meanDps": 478.6997379020761,
+					"secondsOom": 0,
+					"shadowHit": 8.9,
+					"spellCrit": 18.024,
+					"flay": {
+						"casts": 61.22825,
+						"misses": 4.978,
+						"castTimeMs": 165877.35
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--human-plus-hit",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "human-plus-hit",
+					"requestSha256": "f6640a4fa5d129362e88eba52e3fd11b31c405d83f9649543abbb7125ad0e05d",
+					"resultSha256": "f78dd82b731c452ac06c7f454fba08f051b18749ac4864cfb2ceace677655cb0",
+					"statsSha256": "a5427643de7e332ad6cd9067cc426f58513d1c8c11f7b4cbc48294485024280c",
+					"meanDps": 482.8171043966237,
+					"secondsOom": 0,
+					"shadowHit": 8.9,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 61.22825,
+						"misses": 4.978,
+						"castTimeMs": 165877.35
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--human-plus-crit",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "human-plus-crit",
+					"requestSha256": "87b49abe7deda48394c0fece3faa9682bfadea92160e5b1407cce90393bb477a",
+					"resultSha256": "5e826bb0ef3e1d1300fabae9d86bd50ed79121739538273b909d4fee930889fd",
+					"statsSha256": "d8944e2728547dcd8f484312b8f8de6bf1a1f83ac3a79935b509cbc9271b0f52",
+					"meanDps": 484.20461187729967,
+					"secondsOom": 0,
+					"shadowHit": 7.9,
+					"spellCrit": 20.040799999999997,
+					"flay": {
+						"casts": 61.5465,
+						"misses": 5.62275,
+						"castTimeMs": 164919.3
+					}
+				},
+				{
+					"key": "upstream--mind-flay-only--human-hit-capped",
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"variant": "human-hit-capped",
+					"requestSha256": "fbfe28ffbabb80e8e026835b2326aaf4c8a1e49cc28add0bee7b6d0c07fb3346",
+					"resultSha256": "4ddb1cb01c4a2377dea90cbe4958a2068111956ff2fd8fbbfa2172a4afb3ef29",
+					"statsSha256": "9e3e360fba6b3c25d496ba7845ecb89c57669ba4520fdaf195fcb8886d411f18",
+					"meanDps": 504.41649210694396,
+					"secondsOom": 0,
+					"shadowHit": 57.900000000000006,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 59,
+						"misses": 0,
+						"castTimeMs": 174000
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--human",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "human",
+					"requestSha256": "9334def12c057d623dc3cd62eeffa2c480808c39977cc760dc27842062e0f3ff",
+					"resultSha256": "8aadd77e06a253c9a3b8bbd0297f1ee4f1dbd8add3f742f93d445ce444c7c238",
+					"statsSha256": "5ffe16fc673b8c3e1a08899490acd9338866c0c258aec12335999a2de78eb625",
+					"meanDps": 739.1778701814101,
+					"secondsOom": 0,
+					"shadowHit": 7.9,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 36.31135,
+						"misses": 3.30545,
+						"castTimeMs": 96714.75
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--dwarf",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "dwarf",
+					"requestSha256": "320ba65095a7c30e0a06138d405e653486df58094b891899e9a9c6bb6260b79b",
+					"resultSha256": "587d26ba8d2a5ca846de5cb7d9b2458674a1c7263d1ae5632760a90fd8e173cc",
+					"statsSha256": "36b232e4dcc6de25a0ef52b54a977929f41d0026b5d3ee10666e29a989232eaf",
+					"meanDps": 739.9298981244505,
+					"secondsOom": 0,
+					"shadowHit": 8.9,
+					"spellCrit": 18.024,
+					"flay": {
+						"casts": 36.37955,
+						"misses": 2.9472,
+						"castTimeMs": 97895.1
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--human-plus-hit",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "human-plus-hit",
+					"requestSha256": "38edd82fd5acea08ea43554e0fb7170468d073b550f65ebaefe85b3e27ee892d",
+					"resultSha256": "5c1c9c847b35d917e0308355517261d8cd5cd281a9891c7b84200e9ff1c36244",
+					"statsSha256": "5f015f3fa11e098a32bf62d4d0ffdfe9dd66d48c010fcb107be2d2709d69aca5",
+					"meanDps": 746.1822297759016,
+					"secondsOom": 0,
+					"shadowHit": 8.9,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 36.37955,
+						"misses": 2.9472,
+						"castTimeMs": 97895.1
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--human-plus-crit",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "human-plus-crit",
+					"requestSha256": "5a20a472730148aa02225283ff1e1975317f219a283622e96fc59a4cccea6bd1",
+					"resultSha256": "f22cdf6cfe32b53f48f1d68738d0696e0ef907ed27acaf26da3d1b7be82b89a6",
+					"statsSha256": "91f5f6e1e3809430e79b9bc9f213994c6d1c327dde647e46a416b5aeb2550ca0",
+					"meanDps": 745.2773742662737,
+					"secondsOom": 0,
+					"shadowHit": 7.9,
+					"spellCrit": 20.040799999999997,
+					"flay": {
+						"casts": 36.31135,
+						"misses": 3.30545,
+						"castTimeMs": 96714.75
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--developer--human-hit-capped",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"variant": "human-hit-capped",
+					"requestSha256": "d407b0f8c7613e1e9a50de60a8eee0051fb1527d940eca564446f1ff7e6a1ba0",
+					"resultSha256": "b5d8c884c3ac0feed7a0e0cce5c702f6a9e8547e33a38ef7818d4e4c0e4ed917",
+					"statsSha256": "133e5e133332fbcb77bef0195e7e83cce818f5414c31b547609ddb8479e2e18a",
+					"meanDps": 803.0602583264603,
+					"secondsOom": 0,
+					"shadowHit": 57.900000000000006,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 37,
+						"misses": 0,
+						"castTimeMs": 108000
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--human",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "human",
+					"requestSha256": "9a427b18a3e441a8ce23bd2cb81a6ca70732b8b686e1e79e088555198d0bb5d0",
+					"resultSha256": "7e87f27a067f70f96fbc9c0570e08ec0c4679fcd65cb1b4352f9d3717ccd5e0e",
+					"statsSha256": "8de3c2dd9457b850b9bc1efde1a90d554707c678d95095e34c882a8bcd4a3c37",
+					"meanDps": 458.7798278617565,
+					"secondsOom": 0,
+					"shadowHit": 7.9,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 59,
+						"misses": 5.39255,
+						"castTimeMs": 158098.05
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--dwarf",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "dwarf",
+					"requestSha256": "472f3f5280f674b28b230a72b548aa35ae9c9a60dd794f7342db40c72492b519",
+					"resultSha256": "a5c3c8f9da7746297da563d92e806fe211de35c2c5d2d4006d851f21c8f64ea2",
+					"statsSha256": "c6e59887a45aab82aa00cedd9cc4a38a155e32d9494024715afa84c901d005ac",
+					"meanDps": 459.74707444835764,
+					"secondsOom": 0,
+					"shadowHit": 8.9,
+					"spellCrit": 18.024,
+					"flay": {
+						"casts": 59,
+						"misses": 4.79825,
+						"castTimeMs": 159850.05
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--human-plus-hit",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "human-plus-hit",
+					"requestSha256": "f6640a4fa5d129362e88eba52e3fd11b31c405d83f9649543abbb7125ad0e05d",
+					"resultSha256": "9ff6a499a45b5a72d5e66e257132722a52d0f7237fd5b17d1adee51e3c1287fc",
+					"statsSha256": "a5427643de7e332ad6cd9067cc426f58513d1c8c11f7b4cbc48294485024280c",
+					"meanDps": 463.69734883525075,
+					"secondsOom": 0,
+					"shadowHit": 8.9,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 59,
+						"misses": 4.79825,
+						"castTimeMs": 159850.05
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--human-plus-crit",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "human-plus-crit",
+					"requestSha256": "87b49abe7deda48394c0fece3faa9682bfadea92160e5b1407cce90393bb477a",
+					"resultSha256": "63d50ae509cfac07f31e4dc877a5e1fec0887a93ae367a983260be305b96658d",
+					"statsSha256": "d8944e2728547dcd8f484312b8f8de6bf1a1f83ac3a79935b509cbc9271b0f52",
+					"meanDps": 462.6194395012014,
+					"secondsOom": 0,
+					"shadowHit": 7.9,
+					"spellCrit": 20.040799999999997,
+					"flay": {
+						"casts": 59,
+						"misses": 5.39255,
+						"castTimeMs": 158098.05
+					}
+				},
+				{
+					"key": "fixed-channel-occupancy--mind-flay-only--human-hit-capped",
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"variant": "human-hit-capped",
+					"requestSha256": "fbfe28ffbabb80e8e026835b2326aaf4c8a1e49cc28add0bee7b6d0c07fb3346",
+					"resultSha256": "874a985967a554ae62b58f15178f858519162ab48ff89d29bcf69168c3ad1896",
+					"statsSha256": "9e3e360fba6b3c25d496ba7845ecb89c57669ba4520fdaf195fcb8886d411f18",
+					"meanDps": 504.41649210694396,
+					"secondsOom": 0,
+					"shadowHit": 57.900000000000006,
+					"spellCrit": 19.040799999999997,
+					"flay": {
+						"casts": 59,
+						"misses": 0,
+						"castTimeMs": 174000
+					}
+				}
+			],
+			"comparisons": [
+				{
+					"mode": "upstream",
+					"rotation": "developer",
+					"comparison": "dwarf versus human",
+					"differenceDps": -0.6454091779943383,
+					"percent": -0.0859445197243347,
+					"ci95HalfWidthPercent": 0.0216130219498865,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "developer",
+					"comparison": "human-plus-hit versus human",
+					"differenceDps": 5.699967584718706,
+					"percent": 0.7590238769694446,
+					"ci95HalfWidthPercent": 0.019877166326107767,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "developer",
+					"comparison": "human-plus-crit versus human",
+					"differenceDps": 6.2050722351191325,
+					"percent": 0.8262850471996375,
+					"ci95HalfWidthPercent": 0.008328779241516055,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"comparison": "dwarf versus human",
+					"differenceDps": -1.486663294711434,
+					"percent": -0.3096012904584944,
+					"ci95HalfWidthPercent": 0.013899240530190878,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"comparison": "human-plus-hit versus human",
+					"differenceDps": 2.630703199836148,
+					"percent": 0.5478504166881004,
+					"ci95HalfWidthPercent": 0.010699659043702249,
+					"distinguishable": true
+				},
+				{
+					"mode": "upstream",
+					"rotation": "mind-flay-only",
+					"comparison": "human-plus-crit versus human",
+					"differenceDps": 4.018210680512141,
+					"percent": 0.836802264807468,
+					"ci95HalfWidthPercent": 0.009000697370024208,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"comparison": "dwarf versus human",
+					"differenceDps": 0.7520279430403889,
+					"percent": 0.10173842770155872,
+					"ci95HalfWidthPercent": 0.022181271185586687,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"comparison": "human-plus-hit versus human",
+					"differenceDps": 7.004359594491575,
+					"percent": 0.9475878373864877,
+					"ci95HalfWidthPercent": 0.0205101759790915,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "developer",
+					"comparison": "human-plus-crit versus human",
+					"differenceDps": 6.099504084863611,
+					"percent": 0.8251740657991613,
+					"ci95HalfWidthPercent": 0.00840357482187483,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"comparison": "dwarf versus human",
+					"differenceDps": 0.9672465866011635,
+					"percent": 0.21083023443058124,
+					"ci95HalfWidthPercent": 0.021930903176102332,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"comparison": "human-plus-hit versus human",
+					"differenceDps": 4.917520973494277,
+					"percent": 1.0718694839774168,
+					"ci95HalfWidthPercent": 0.02012419437345483,
+					"distinguishable": true
+				},
+				{
+					"mode": "fixed-channel-occupancy",
+					"rotation": "mind-flay-only",
+					"comparison": "human-plus-crit versus human",
+					"differenceDps": 3.839611639444911,
+					"percent": 0.8369181481540311,
+					"ci95HalfWidthPercent": 0.009220822225504965,
+					"distinguishable": true
+				}
+			],
+			"controls": {
+				"noMissSamplesIdentical": true,
+				"bonusHitPercent": 1,
+				"bonusCritPercent": 1
+			}
+		}
+	],
+	"publishedGear": {
+		"id": "published-priest-shadow-alliance-606f98eca554d990",
+		"spec": "priest/shadow",
+		"faction": "alliance",
+		"tier": "Published pre-raid",
+		"origin": "Published ranked alternatives",
+		"optionKeys": ["10000"],
+		"sourceUrl": "https://wowforeverbislist.com/preraid/priest/shadow/",
+		"dataUrl": "https://wowforeverbislist.com/data/lists/606f98eca554d990.json",
+		"sourceSha256": "4a22bd5c877fe84b1476a2cd672a30373544ba5b1527d949a4baa0236798d603",
+		"sourceGeneratedAt": "2026-10-27T00:27:14Z",
+		"suppliedStatsUsed": false,
+		"substitutions": [
+			{
+				"slot": "shoulder",
+				"from": 227808,
+				"to": 19050,
+				"publishedAlternativeRank": 1,
+				"publishedEpDelta": -10.5,
+				"reason": "First published alternative compatible with the current WoWSims database, class, faction and occupied slots."
+			},
+			{
+				"slot": "back",
+				"from": 272411,
+				"to": 18510,
+				"publishedAlternativeRank": 1,
+				"publishedEpDelta": -12.1,
+				"reason": "First published alternative compatible with the current WoWSims database, class, faction and occupied slots."
+			},
+			{
+				"slot": "waist",
+				"from": 228190,
+				"to": 18405,
+				"publishedAlternativeRank": 1,
+				"publishedEpDelta": -5.1,
+				"reason": "First published alternative compatible with the current WoWSims database, class, faction and occupied slots."
+			},
+			{
+				"slot": "feet",
+				"from": 11822,
+				"to": 254113,
+				"publishedAlternativeRank": 1,
+				"publishedEpDelta": -0.2,
+				"reason": "First published alternative compatible with the current WoWSims database, class, faction and occupied slots."
+			},
+			{
+				"slot": "finger2",
+				"from": 13001,
+				"to": 272406,
+				"publishedAlternativeRank": 2,
+				"publishedEpDelta": -4.9,
+				"reason": "First published alternative compatible with the current WoWSims database, class, faction and occupied slots."
+			},
+			{
+				"slot": "mainhand",
+				"from": 2243,
+				"to": 271804,
+				"publishedAlternativeRank": 2,
+				"publishedEpDelta": -43.5,
+				"reason": "First published alternative compatible with the current WoWSims database, class, faction and occupied slots."
+			},
+			{
+				"slot": "offhand",
+				"from": 11904,
+				"to": 249455,
+				"publishedAlternativeRank": 4,
+				"publishedEpDelta": -8.3,
+				"reason": "First published alternative compatible with the current WoWSims database, class, faction and occupied slots."
+			}
+		],
+		"equipment": {
+			"items": [
+				{
+					"id": 14111,
+					"enchant": 2544
+				},
+				{
+					"id": 15856,
+					"enchant": 8218
+				},
+				{
+					"id": 19050
+				},
+				{
+					"id": 18510
+				},
+				{
+					"id": 14136,
+					"enchant": 8492
+				},
+				{
+					"id": 254067,
+					"enchant": 7665
+				},
+				{
+					"id": 14146,
+					"enchant": 931
+				},
+				{
+					"id": 18405
+				},
+				{
+					"id": 14107,
+					"enchant": 2544
+				},
+				{
+					"id": 254113,
+					"enchant": 8492
+				},
+				{
+					"id": 272407
+				},
+				{
+					"id": 272406
+				},
+				{
+					"id": 272438
+				},
+				{
+					"id": 249469
+				},
+				{
+					"id": 271804
+				},
+				{
+					"id": 249455,
+					"enchant": 7659
+				},
+				{
+					"id": 249385
+				}
+			]
+		},
+		"requiredProfessions": [],
+		"externalAmmoAndQuiver": [],
+		"itemSources": [
+			{
+				"slot": "head",
+				"id": 14111,
+				"name": "Felcloth Hood",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Tailoring",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "neck",
+				"id": 15856,
+				"name": "Archlight Talisman",
+				"sources": [
+					{
+						"type": "Quest",
+						"name": "Hidden Treasures",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "shoulder",
+				"id": 19050,
+				"name": "Mantle of the Timbermaw",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Tailoring",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "back",
+				"id": 18510,
+				"name": "Hide of the Wild",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Leatherworking",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "chest",
+				"id": 14136,
+				"name": "Robe of Winter Night",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Tailoring",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "wrist",
+				"id": 254067,
+				"name": "Netherpearl Cuffs",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Tailoring",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "hands",
+				"id": 14146,
+				"name": "Gloves of Spell Mastery",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Tailoring",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "waist",
+				"id": 18405,
+				"name": "Belt of the Archmage",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Tailoring",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "legs",
+				"id": 14107,
+				"name": "Felcloth Pants",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Tailoring",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "feet",
+				"id": 254113,
+				"name": "Black Sandals",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Tailoring",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "finger1",
+				"id": 272407,
+				"name": "Blessed Band of Light",
+				"sources": [
+					{
+						"type": "Vendor",
+						"name": "Pix Xizzix",
+						"zone": "Stranglethorn Vale"
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "finger2",
+				"id": 272406,
+				"name": "Channeler's Ring",
+				"sources": [
+					{
+						"type": "Vendor",
+						"name": "Pix Xizzix",
+						"zone": "Stranglethorn Vale"
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "trinket1",
+				"id": 272438,
+				"name": "Weakness Analyzer",
+				"sources": [
+					{
+						"type": "Vendor",
+						"name": "Pix Xizzix",
+						"zone": "Stranglethorn Vale"
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "trinket2",
+				"id": 249469,
+				"name": "Frozen Heart of the Mountain",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Enchanting",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "mainhand",
+				"id": 271804,
+				"name": "Soulsplatter Mace",
+				"sources": [
+					{
+						"type": "Quest",
+						"name": "Khan Jehn",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "offhand",
+				"id": 249455,
+				"name": "Truesilver Conduit",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Enchanting",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			},
+			{
+				"slot": "ranged",
+				"id": 249385,
+				"name": "Brilliant Wand",
+				"sources": [
+					{
+						"type": "Crafted",
+						"name": "Enchanting",
+						"zone": null
+					}
+				],
+				"requiredSkill": null,
+				"requiredReputation": null
+			}
+		]
+	},
+	"readiness": {
+		"profiles": 42,
+		"nativeMetadataCases": 277,
+		"readyForDeveloperRun": true,
+		"readyForCompletePublishedPool": false,
+		"missingPublished": [
+			{
+				"profile": "druid-feralcat-bearweave-45s-fights",
+				"faction": "horde",
+				"spec": "druid/feral-dps"
+			},
+			{
+				"profile": "druid-feralcat-bearweave-45s-fights",
+				"faction": "alliance",
+				"spec": "druid/feral-dps"
+			},
+			{
+				"profile": "druid-feralcat-hybrid",
+				"faction": "horde",
+				"spec": "druid/feral-dps"
+			},
+			{
+				"profile": "druid-feralcat-hybrid",
+				"faction": "alliance",
+				"spec": "druid/feral-dps"
+			},
+			{
+				"profile": "druid-feralcat-cat-monocat",
+				"faction": "horde",
+				"spec": "druid/feral-dps"
+			},
+			{
+				"profile": "druid-feralcat-cat-monocat",
+				"faction": "alliance",
+				"spec": "druid/feral-dps"
+			},
+			{
+				"profile": "hunter-dps-sv-weave",
+				"faction": "horde",
+				"spec": "hunter/sv-weave"
+			},
+			{
+				"profile": "hunter-dps-mm-weave",
+				"faction": "horde",
+				"spec": "hunter/mm-weave"
+			},
+			{
+				"profile": "hunter-dps-mm",
+				"faction": "horde",
+				"spec": "hunter/marksmanship"
+			},
+			{
+				"profile": "hunter-dps-mm",
+				"faction": "alliance",
+				"spec": "hunter/marksmanship"
+			},
+			{
+				"profile": "hunter-dps-bm",
+				"faction": "horde",
+				"spec": "hunter/beast-mastery"
+			},
+			{
+				"profile": "hunter-dps-bm",
+				"faction": "alliance",
+				"spec": "hunter/beast-mastery"
+			},
+			{
+				"profile": "hunter-dps-sv",
+				"faction": "horde",
+				"spec": "hunter/survival"
+			},
+			{
+				"profile": "hunter-dps-sv",
+				"faction": "alliance",
+				"spec": "hunter/survival"
+			},
+			{
+				"profile": "hunter-dps-sv-melee",
+				"faction": "horde",
+				"spec": "hunter/survival-melee"
+			},
+			{
+				"profile": "hunter-dps-sv-melee",
+				"faction": "alliance",
+				"spec": "hunter/survival-melee"
+			},
+			{
+				"profile": "hunter-dps-default",
+				"faction": "horde",
+				"spec": "hunter/sv-weave"
+			},
+			{
+				"profile": "mage-dps-arcane-arcane-frost",
+				"faction": "horde"
+			},
+			{
+				"profile": "mage-dps-arcane-arcane-frost",
+				"faction": "alliance"
+			},
+			{
+				"profile": "mage-dps-arcane-arcane-fire",
+				"faction": "horde"
+			},
+			{
+				"profile": "mage-dps-arcane-arcane-fire",
+				"faction": "alliance"
+			},
+			{
+				"profile": "mage-dps-ffb-ffb",
+				"faction": "horde"
+			},
+			{
+				"profile": "mage-dps-ffb-ffb",
+				"faction": "alliance"
+			},
+			{
+				"profile": "mage-dps-fire-fire",
+				"faction": "horde"
+			},
+			{
+				"profile": "mage-dps-fire-fire",
+				"faction": "alliance"
+			},
+			{
+				"profile": "mage-dps-frost-frost",
+				"faction": "horde"
+			},
+			{
+				"profile": "mage-dps-frost-frost",
+				"faction": "alliance"
+			},
+			{
+				"profile": "rogue-dps-asn-muti",
+				"faction": "horde",
+				"spec": "rogue/assassination"
+			},
+			{
+				"profile": "rogue-dps-asn-muti",
+				"faction": "alliance",
+				"spec": "rogue/assassination"
+			},
+			{
+				"profile": "rogue-dps-combat-muti",
+				"faction": "horde",
+				"spec": "rogue/combat-mutilate"
+			},
+			{
+				"profile": "rogue-dps-combat-muti",
+				"faction": "alliance",
+				"spec": "rogue/combat-mutilate"
+			},
+			{
+				"profile": "rogue-dps-combat-ss",
+				"faction": "horde",
+				"spec": "rogue/combat"
+			},
+			{
+				"profile": "rogue-dps-combat-ss",
+				"faction": "alliance",
+				"spec": "rogue/combat"
+			},
+			{
+				"profile": "rogue-dps-combat-bs",
+				"faction": "horde",
+				"spec": "rogue/combat-daggers"
+			},
+			{
+				"profile": "rogue-dps-combat-bs",
+				"faction": "alliance",
+				"spec": "rogue/combat-daggers"
+			},
+			{
+				"profile": "rogue-dps-subtlety-hemo",
+				"faction": "horde",
+				"spec": "rogue/subtlety"
+			},
+			{
+				"profile": "rogue-dps-subtlety-hemo",
+				"faction": "alliance",
+				"spec": "rogue/subtlety"
+			},
+			{
+				"profile": "rogue-dps-subtlety-bs",
+				"faction": "horde",
+				"spec": "rogue/subtlety-backstab"
+			},
+			{
+				"profile": "rogue-dps-subtlety-bs",
+				"faction": "alliance",
+				"spec": "rogue/subtlety-backstab"
+			},
+			{
+				"profile": "rogue-dps-default",
+				"faction": "horde"
+			},
+			{
+				"profile": "rogue-dps-default",
+				"faction": "alliance"
+			},
+			{
+				"profile": "shaman-enhancement-testing",
+				"faction": "horde",
+				"spec": "shaman/enhancement"
+			},
+			{
+				"profile": "shaman-enhancement-testing",
+				"faction": "alliance",
+				"spec": "shaman/enhancement"
+			},
+			{
+				"profile": "shaman-enhancement-default",
+				"faction": "horde",
+				"spec": "shaman/enhancement"
+			},
+			{
+				"profile": "shaman-enhancement-default",
+				"faction": "alliance",
+				"spec": "shaman/enhancement"
+			},
+			{
+				"profile": "warrior-dps-fury-pre-bis",
+				"faction": "horde",
+				"spec": "warrior/fury"
+			},
+			{
+				"profile": "warrior-dps-fury-pre-bis",
+				"faction": "alliance",
+				"spec": "warrior/fury"
+			},
+			{
+				"profile": "warrior-dps-arms-pre-bis",
+				"faction": "horde",
+				"spec": "warrior/arms"
+			},
+			{
+				"profile": "warrior-dps-arms-pre-bis",
+				"faction": "alliance",
+				"spec": "warrior/arms"
+			},
+			{
+				"profile": "warrior-dps-default",
+				"faction": "horde"
+			},
+			{
+				"profile": "warrior-dps-default",
+				"faction": "alliance"
+			}
+		],
+		"errors": [],
+		"databaseSha256": "50b08d68e41e76a0279fad47a4dc6dbd5f5cd8836e914c9045e1013482feb276"
+	},
+	"conclusion": "Reserving the full channel duration only after a missed Mind Flay reverses the Human/Dwarf ordering on both tested actual gear sets. This establishes a sufficient scheduling mechanism. Attribution to Finsemble code remains an inference from its expected-hit description; the public JSON has aggregate results only.",
+	"eventTraces": [
+		{
+			"mode": "upstream",
+			"miss": "[16.80] [priest-dps-shadow-testing (#1)] [Target 1] {SpellID: 18807} Miss (SpellSchool: 32). (Threat: 0.000)",
+			"nextCast": "[18.30] [priest-dps-shadow-testing (#1)] Casting {SpellID: 18807} (Cost = 102.500, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)"
+		},
+		{
+			"mode": "fixed-channel-occupancy",
+			"miss": "[16.80] [priest-dps-shadow-testing (#1)] [Target 1] {SpellID: 18807} Miss (SpellSchool: 32). (Threat: 0.000)",
+			"nextCast": "[19.80] [priest-dps-shadow-testing (#1)] Casting {SpellID: 18807} (Cost = 102.500, Cast Time = 0s, GCD = 1.5s, Effective Time = 1.5s)"
+		}
+	],
+	"validation": {
+		"nativeGoSuites": "passed",
+		"goVet": "passed",
+		"uiTests": 4186,
+		"uiTestFiles": 432,
+		"analyticsNodeTests": 38,
+		"analyticsPythonTests": 10,
+		"format": "passed",
+		"skills": 15,
+		"typescript": "passed via direct Node invocation on Windows",
+		"locales": "passed",
+		"lint": "passed",
+		"storybook": "passed",
+		"uiBuild": "passed",
+		"workers": "passed",
+		"wasm": "passed",
+		"fullWorkflowBlockedBeforeDps": true,
+		"extraSpellHoverTool": "three unchanged upstream Windows path/buffer failures",
+		"sqlRegenerationCheck": "unavailable: no local wowsims.db; committed-input regeneration test passed"
+	}
+}

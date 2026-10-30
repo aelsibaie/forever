@@ -1,0 +1,88 @@
+gearTier,duration,withinTierOrder,profileId,spec,build,meanDps,ci95HalfWidth
+Developer pre-raid,60,1,warrior-dps-fury-pre-bis,Fury Warrior,Fury / Pre-BiS,904.569021032677,1.7477601210379492
+Developer pre-raid,60,2,druid-feralcat-bearweave-45s-fights,Feral Cat,Bearweave (45s fights),879.2904866834523,0.7889833962870534
+Developer pre-raid,60,3,druid-feralcat-cat-monocat,Feral Cat,Cat / Monocat,876.0315453316581,0.7443805318996912
+Developer pre-raid,60,4,druid-feralcat-hybrid,Feral Cat,Hybrid,862.2998597176884,0.735160443300236
+Developer pre-raid,60,5,warrior-dps-arms-pre-bis,Arms Warrior,Arms / Pre-BiS,777.0067920425181,1.7285643418152679
+Developer pre-raid,60,6,warlock-dps-demo-fire-brand,Demonology Warlock,Demo (Fire Brand),758.4951721934298,0.9339874982689299
+Developer pre-raid,60,7,warlock-dps-demo-shadow-brand,Demonology Warlock,Demo (Shadow Brand),751.816489675744,1.3071484646830436
+Developer pre-raid,60,8,warlock-dps-default,Demonology Warlock,Default,734.0185968013413,0.8617450363504827
+Developer pre-raid,60,9,druid-balance-moonkin,Balance Druid,Moonkin,709.3347282335956,1.138585291817123
+Developer pre-raid,60,10,warlock-dps-destro,Destruction Warlock,Destro,698.0088114524834,0.9176027118105234
+Developer pre-raid,60,11,warlock-dps-sm-ruin,Affliction Warlock,SM/Ruin,667.682708260593,1.1941221253521201
+Developer pre-raid,60,12,warlock-dps-aff-wrack,Affliction Warlock,Aff (Wrack),589.8785270786715,0.8510537927770021
+Developer pre-raid,180,1,warrior-dps-fury-pre-bis,Fury Warrior,Fury / Pre-BiS,849.7411212117124,0.9867333683634417
+Developer pre-raid,180,2,druid-feralcat-cat-monocat,Feral Cat,Cat / Monocat,805.5827354418026,0.4291352643296987
+Developer pre-raid,180,3,druid-feralcat-bearweave-45s-fights,Feral Cat,Bearweave (45s fights),805.3170577105107,0.4340267674274271
+Developer pre-raid,180,4,druid-feralcat-hybrid,Feral Cat,Hybrid,794.1536111507801,0.43077418876099954
+Developer pre-raid,180,5,warlock-dps-demo-fire-brand,Demonology Warlock,Demo (Fire Brand),756.354601438788,0.5717267789555825
+Developer pre-raid,180,6,warrior-dps-arms-pre-bis,Arms Warrior,Arms / Pre-BiS,753.6501125762516,0.9822544801583705
+Developer pre-raid,180,7,warlock-dps-demo-shadow-brand,Demonology Warlock,Demo (Shadow Brand),738.4094260254186,0.7708324231876925
+Developer pre-raid,180,8,warlock-dps-default,Demonology Warlock,Default,706.8478045518985,0.5319948335028188
+Developer pre-raid,180,9,druid-balance-moonkin,Balance Druid,Moonkin,703.7938019355158,0.6405126062678321
+Developer pre-raid,180,10,warlock-dps-destro,Destruction Warlock,Destro,670.4764762332914,0.5683939929635106
+Developer pre-raid,180,11,warlock-dps-sm-ruin,Affliction Warlock,SM/Ruin,657.2488338269585,0.7374048175630362
+Developer pre-raid,180,12,warlock-dps-aff-wrack,Affliction Warlock,Aff (Wrack),534.1507251036381,0.45455782811348777
+Developer pre-raid,300,1,warrior-dps-fury-pre-bis,Fury Warrior,Fury / Pre-BiS,848.0617595380373,0.7672654363304409
+Developer pre-raid,300,2,druid-feralcat-cat-monocat,Feral Cat,Cat / Monocat,803.4004087362916,0.3281417597635923
+Developer pre-raid,300,3,druid-feralcat-bearweave-45s-fights,Feral Cat,Bearweave (45s fights),803.2452519996647,0.32902740166617994
+Developer pre-raid,300,4,druid-feralcat-hybrid,Feral Cat,Hybrid,788.9754921573473,0.31872634852368703
+Developer pre-raid,300,5,warlock-dps-demo-fire-brand,Demonology Warlock,Demo (Fire Brand),748.5266931717382,0.4507841153108694
+Developer pre-raid,300,6,warrior-dps-arms-pre-bis,Arms Warrior,Arms / Pre-BiS,746.7634638645483,0.7612595893009925
+Developer pre-raid,300,7,warlock-dps-demo-shadow-brand,Demonology Warlock,Demo (Shadow Brand),730.2615791845108,0.5868300341798598
+Developer pre-raid,300,8,druid-balance-moonkin,Balance Druid,Moonkin,706.1101707415994,0.5075355360813928
+Developer pre-raid,300,9,warlock-dps-default,Demonology Warlock,Default,701.6772861284744,0.4159423089021443
+Developer pre-raid,300,10,warlock-dps-destro,Destruction Warlock,Destro,668.8933943569295,0.4493174529149757
+Developer pre-raid,300,11,warlock-dps-sm-ruin,Affliction Warlock,SM/Ruin,653.2464697465292,0.5805634440527939
+Developer pre-raid,300,12,warlock-dps-aff-wrack,Affliction Warlock,Aff (Wrack),530.469579507274,0.35092833134272333
+Developer P1,60,1,hunter-dps-default,Survival Hunter,Default,1065.9388567137198,1.2016397254080344
+Developer P1,60,2,hunter-dps-sv-weave,Survival Hunter,SV Weave,1063.8746849580493,1.1938462399407497
+Developer P1,60,3,hunter-dps-mm-weave,Marksmanship Hunter,MM Weave,1015.3898311945123,1.101407664942251
+Developer P1,60,4,hunter-dps-bm-weave,Beast Mastery Hunter,BM Weave,1014.3400902369673,0.7995995230634935
+Developer P1,60,5,mage-dps-arcane-fire,Arcane Mage,Arcane Fire,879.3700298408742,1.5951109183830154
+Developer P1,60,6,mage-dps-fire,Fire Mage,Fire,855.1704729360337,1.6269248098591786
+Developer P1,60,7,hunter-dps-bm,Beast Mastery Hunter,BM,854.4777522218282,0.7003655723995799
+Developer P1,60,8,hunter-dps-sv-melee,Survival Hunter,SV Melee,827.4359994062296,0.9121605317263317
+Developer P1,60,9,rogue-dps-combat-ss,Combat Rogue,Combat SS,809.3904933393371,1.1574012928334032
+Developer P1,60,10,rogue-dps-combat-bs,Combat Rogue,Combat BS,806.9203741514414,1.0222762236296643
+Developer P1,60,11,mage-dps-arcane-frost,Arcane Mage,Arcane Frost,803.2917345370012,1.4509671116981036
+Developer P1,60,12,mage-dps-ffb,Fire / Frost Mage,FFB,797.7494642073448,1.880548759815718
+Developer P1,60,13,hunter-dps-mm,Marksmanship Hunter,MM,762.043353946962,0.9212110481513329
+Developer P1,60,14,rogue-dps-subtlety-hemo,Subtlety Rogue,Subtlety Hemo,752.3994286848033,1.0347166404088979
+Developer P1,60,15,rogue-dps-subtlety-bs,Subtlety Rogue,Subtlety BS,725.9755222592954,0.9548747105976687
+Developer P1,60,16,hunter-dps-sv,Survival Hunter,SV,682.0685959634192,0.7517993825448486
+Developer P1,60,17,mage-dps-frost,Frost Mage,Frost,637.2582821142834,1.145087586600795
+Developer P1,180,1,hunter-dps-default,Survival Hunter,Default,1039.467923952193,0.699591192942599
+Developer P1,180,2,hunter-dps-sv-weave,Survival Hunter,SV Weave,1039.4114855412506,0.7092331256126144
+Developer P1,180,3,hunter-dps-mm-weave,Marksmanship Hunter,MM Weave,978.7525713599414,0.6286224534085284
+Developer P1,180,4,hunter-dps-bm-weave,Beast Mastery Hunter,BM Weave,971.8652695989706,0.4646465411008561
+Developer P1,180,5,mage-dps-fire,Fire Mage,Fire,826.8240764007573,1.0077889588944478
+Developer P1,180,6,hunter-dps-bm,Beast Mastery Hunter,BM,816.4904956491531,0.3968234119128041
+Developer P1,180,7,mage-dps-ffb,Fire / Frost Mage,FFB,779.1434038973623,1.1235534067758177
+Developer P1,180,8,hunter-dps-sv-melee,Survival Hunter,SV Melee,777.747421847637,0.5120365086700105
+Developer P1,180,9,mage-dps-arcane-fire,Arcane Mage,Arcane Fire,762.332917098381,0.8650297601411674
+Developer P1,180,10,hunter-dps-mm,Marksmanship Hunter,MM,732.6096280529933,0.5029211653198956
+Developer P1,180,11,rogue-dps-combat-ss,Combat Rogue,Combat SS,705.9030597285101,0.6269486695552853
+Developer P1,180,12,rogue-dps-combat-bs,Combat Rogue,Combat BS,702.5534690849267,0.5599676766074159
+Developer P1,180,13,mage-dps-arcane-frost,Arcane Mage,Arcane Frost,697.9997340205899,0.7935568082810941
+Developer P1,180,14,rogue-dps-subtlety-hemo,Subtlety Rogue,Subtlety Hemo,672.2783750608186,0.5787144278672275
+Developer P1,180,15,rogue-dps-subtlety-bs,Subtlety Rogue,Subtlety BS,651.7055853741543,0.5494570285295155
+Developer P1,180,16,hunter-dps-sv,Survival Hunter,SV,646.9834770681051,0.42846636849099345
+Developer P1,180,17,mage-dps-frost,Frost Mage,Frost,616.8463978231952,0.6379793007433614
+Developer P1,300,1,hunter-dps-sv-weave,Survival Hunter,SV Weave,1038.9380591067259,0.5560355144107121
+Developer P1,300,2,hunter-dps-default,Survival Hunter,Default,1037.6251007903381,0.5535358208587912
+Developer P1,300,3,hunter-dps-mm-weave,Marksmanship Hunter,MM Weave,981.5711934895921,0.4910676797643385
+Developer P1,300,4,hunter-dps-bm-weave,Beast Mastery Hunter,BM Weave,950.4603118251782,0.3948069868321938
+Developer P1,300,5,mage-dps-fire,Fire Mage,Fire,820.1094805070742,0.8270842548090483
+Developer P1,300,6,hunter-dps-bm,Beast Mastery Hunter,BM,809.4051684319666,0.3083553274296939
+Developer P1,300,7,hunter-dps-sv-melee,Survival Hunter,SV Melee,769.8387842405168,0.39804558580371086
+Developer P1,300,8,mage-dps-arcane-fire,Arcane Mage,Arcane Fire,765.0473208805274,0.7355058934385005
+Developer P1,300,9,hunter-dps-mm,Marksmanship Hunter,MM,736.1813873976807,0.4080758441095277
+Developer P1,300,10,mage-dps-ffb,Fire / Frost Mage,FFB,696.1311840618524,0.8746656180056395
+Developer P1,300,11,mage-dps-arcane-frost,Arcane Mage,Arcane Frost,692.8422157031799,0.6202122262588469
+Developer P1,300,12,rogue-dps-combat-ss,Combat Rogue,Combat SS,688.041685144895,0.487728358701378
+Developer P1,300,13,rogue-dps-combat-bs,Combat Rogue,Combat BS,683.645429241015,0.4264834262284408
+Developer P1,300,14,rogue-dps-subtlety-hemo,Subtlety Rogue,Subtlety Hemo,660.469201946484,0.44195175183968016
+Developer P1,300,15,hunter-dps-sv,Survival Hunter,SV,642.8712445250077,0.3303458603807728
+Developer P1,300,16,rogue-dps-subtlety-bs,Subtlety Rogue,Subtlety BS,639.3556925176737,0.41955691029980785
+Developer P1,300,17,mage-dps-frost,Frost Mage,Frost,615.8481788464937,0.4973515430186465

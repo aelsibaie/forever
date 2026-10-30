@@ -1,0 +1,273 @@
+{
+  "generatedAt": "2026-10-25T14:08:39.174868-04:00",
+  "identicalFrozenRequests": 72,
+  "unavailableProfiles": [
+    {
+      "id": "mage-dps-arcane-frost",
+      "name": "Arcane Frost",
+      "missingItems": [
+        22068
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "mage-dps-arcane-fire",
+      "name": "Arcane Fire",
+      "missingItems": [
+        22068
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "mage-dps-ffb",
+      "name": "FFB",
+      "missingItems": [
+        22068
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "mage-dps-fire",
+      "name": "Fire",
+      "missingItems": [
+        22068
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "mage-dps-frost",
+      "name": "Frost",
+      "missingItems": [
+        22068
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "paladin-retribution-twist-of-light",
+      "name": "Twist of Light",
+      "missingItems": [
+        22093,
+        22089,
+        22088,
+        22090,
+        22086,
+        22087
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "rogue-dps-asn-muti",
+      "name": "Asn Muti",
+      "missingItems": [
+        22005,
+        22009,
+        22004,
+        22006,
+        22007,
+        22003
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "rogue-dps-combat-muti",
+      "name": "Combat Muti",
+      "missingItems": [
+        22005,
+        22009,
+        22004,
+        22006,
+        22007,
+        22003
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "rogue-dps-combat-ss",
+      "name": "Combat SS",
+      "missingItems": [
+        22005,
+        22009,
+        22004,
+        22006,
+        22007,
+        22003
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "rogue-dps-combat-bs",
+      "name": "Combat BS",
+      "missingItems": [
+        22005,
+        22009,
+        22004,
+        22006,
+        22007,
+        22003
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "rogue-dps-subtlety-hemo",
+      "name": "Subtlety Hemo",
+      "missingItems": [
+        22005,
+        22009,
+        22004,
+        22006,
+        22007,
+        22003
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "rogue-dps-subtlety-bs",
+      "name": "Subtlety BS",
+      "missingItems": [
+        22005,
+        22009,
+        22004,
+        22006,
+        22007,
+        22003
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "shaman-enhancement-testing",
+      "name": "Testing",
+      "missingItems": [
+        22096
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "shaman-enhancement-default",
+      "name": "Default",
+      "missingItems": [
+        22096
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "warrior-dps-fury-pre-bis",
+      "name": "Fury / Pre-BiS",
+      "missingItems": [
+        21998,
+        21995
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    },
+    {
+      "id": "warrior-dps-arms-pre-bis",
+      "name": "Arms / Pre-BiS",
+      "missingItems": [
+        21998,
+        21995
+      ],
+      "reason": "Saved equipment IDs are absent from the current simulator database. No replacement gear was selected."
+    }
+  ],
+  "outsideTierComparisons": [
+    {
+      "profileId": "paladin-retribution-holy-shock",
+      "duration": 60,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "paladin-retribution-holy-shock",
+      "duration": 180,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "paladin-retribution-holy-shock",
+      "duration": 300,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-shadow-testing",
+      "duration": 60,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-shadow-testing",
+      "duration": 180,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-shadow-testing",
+      "duration": 300,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-smite-testing",
+      "duration": 60,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-smite-testing",
+      "duration": 180,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-smite-testing",
+      "duration": 300,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-default",
+      "duration": 60,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-default",
+      "duration": 180,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "priest-dps-default",
+      "duration": 300,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "shaman-elemental-testing",
+      "duration": 60,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "shaman-elemental-testing",
+      "duration": 180,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "shaman-elemental-testing",
+      "duration": 300,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "shaman-elemental-default",
+      "duration": 60,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "shaman-elemental-default",
+      "duration": 180,
+      "reason": "No matching documented developer gear tier"
+    },
+    {
+      "profileId": "shaman-elemental-default",
+      "duration": 300,
+      "reason": "No matching documented developer gear tier"
+    }
+  ],
+  "tierGroupsSha256": "90941b5c20a5547642445c0507d0b9cb8b501ccd155c8e56b553d330d3965824",
+  "source": "cc61e6b628871949c33997088ac98a5f7985c2d1",
+  "scriptSha256": "cf3e421152affd432e30cc89e9307475948a62245a0c4aecd31fe58214a00f65",
+  "artifacts": {
+    "report.html": "1db0d116ed15f917ea8816ce72bfe2a82cc91a5975422a84f765f358ca8c0da5",
+    "update-comparison.json": "a88464760f0803cbe438cf1340a9785db8ecaff41e9cd2f3114de6cd7baf04f3",
+    "update-comparison.csv": "59d6a07f17a0f97751ec83a353b0d581ea751fdfa6afbded64ddcc350eef9ad7",
+    "update-impact.png": "eb36557085e0acd67da5e79c66601a3c63e4272cfd94d0dd65c252d2613d0979",
+    "update-impact.svg": "5c4b265c63d01d325a5a71e387d5e2a130774a1f6202751b8b85c68aa03f1722"
+  }
+}

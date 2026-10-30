@@ -10,7 +10,7 @@ import (
 	"github.com/wowsims/forever/sim/core/stats"
 )
 
-var TalentTreeSizes = [3]int{19, 17, 19}
+var TalentTreeSizes = [3]int{18, 17, 18}
 
 type Mage struct {
 	core.Character
@@ -77,10 +77,10 @@ func (mage *Mage) registerSpells() {
 	mage.registerArcaneExplosionSpell()
 	mage.registerArcaneMissilesSpell()
 	mage.registerArmorSpells()
+	mage.registerBlinkSpell()
 	mage.registerBlizzardSpell()
 	mage.registerConeOfColdSpell()
 	mage.registerFrostboltSpell()
-	mage.registerFrostBlastSpell()
 	mage.registerEvocation()
 	mage.registerFireballSpell()
 	mage.registerFireBlastSpell()
@@ -164,7 +164,6 @@ const (
 	MageSpellFrostArmor
 	MageSpellIceArmor
 	MageSpellFrostbolt
-	MageSpellFrostBlast
 	MageSpellFrostNova
 	MageSpellIceBarrier
 	MageSpellIceBlock
@@ -184,12 +183,12 @@ const (
 
 	MageSpellLast
 	MageSpellsAll  = MageSpellLast<<1 - 1
-	MageSpellFrost = MageSpellFrostbolt | MageSpellFrostBlast | MageSpellBlizzard | MageSpellFrostNova | MageSpellConeOfCold | MageSpellIceLance
+	MageSpellFrost = MageSpellFrostbolt | MageSpellBlizzard | MageSpellFrostNova | MageSpellConeOfCold | MageSpellIceLance
 	MageSpellFire  = MageSpellFireball | MageSpellCombustion |
 		MageSpellFireBlast | MageSpellFlamestrike | MageSpellIgnite | MageSpellPyroblast | MageSpellScorch
 	MageSpellsAllDamaging = MageSpellArcaneBlast | MageSpellArcaneExplosion | MageSpellArcaneMissilesTick | MageSpellArcaneWrath | MageSpellBlizzard |
 		MageSpellBlastWave | MageSpellConeOfCold | MageSpellFireBlast | MageSpellFireball | MageSpellFireballDot |
-		MageSpellFlamestrike | MageSpellFlamestrikeDot | MageSpellFrostbolt | MageSpellFrostBlast | MageSpellFrostfireBolt | MageSpellFrostfireBoltDot | MageSpellFrostNova |
+		MageSpellFlamestrike | MageSpellFlamestrikeDot | MageSpellFrostbolt | MageSpellFrostfireBolt | MageSpellFrostfireBoltDot | MageSpellFrostNova |
 		MageSpellIceLance | MageSpellPyroblast | MageSpellPyroblastDot | MageSpellScorch
 	MageSpellInstantCast = MageSpellArcaneMissilesCast | MageSpellArcaneMissilesTick | MageSpellFireBlast | MageSpellArcaneExplosion | MageSpellPyroblastDot | MageSpellFireballDot |
 		MageSpellCombustion | MageSpellConeOfCold | MageSpellIceLance | MageSpellManaGems | MageSpellPresenceOfMind

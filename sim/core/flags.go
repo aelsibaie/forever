@@ -180,7 +180,7 @@ const (
 	SpellFlagIgnoreTargetModifiers                          // skip target damage modifiers
 	SpellFlagIgnoreAttackerModifiers                        // skip attacker damage modifiers
 	SpellFlagApplyArmorReduction                            // Forces damage reduction from armor to apply, even if it otherwise wouldn't.
-	SpellFlagCannotBeDodged                                 // Ignores dodge in physical hit rolls
+	SpellFlagNoActiveDefense                                // The physical hit roll skips dodge, parry and block.
 	SpellFlagIncludeTargetBonusDamage                       // Spell benefits from Gift of Arthas and Hemorrhage.
 	SpellFlagBinary                                         // The hit roll resists it in full at the target's average resist; a physical one is blocked whole.
 	SpellFlagChanneled                                      // Spell is channeled
@@ -213,7 +213,7 @@ const (
 	SpellFlagPushback                                       // Damage taken while hardcasting pushes the cast back: SpellInterrupts.InterruptFlags 0x2.
 	SpellFlagNoPartialResist                                // The spell's hits never lose damage to a partial resist, e.g. a wand's shots.
 	SpellFlagKeepsSwingTimer                                // Completing a cast of the spell leaves the melee swing timer running: Do Not Reset Combat Timers (Attributes[2] 0x20000).
-	SpellFlagMovesToTarget                                  // The cast moves the caster to its target, e.g. Charge. Not enforced, just a signal for the APL validation.
+	SpellFlagMovesToTarget                                  // The cast moves the caster toward its target, e.g. Charge or Blink. Not enforced, just a signal for the APL validation.
 
 	// Used to let agents categorize their spells.
 	SpellFlagAgentReserved1

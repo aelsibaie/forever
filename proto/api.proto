@@ -282,6 +282,10 @@ message TargetedActionMetrics {
 
 	// Values a class or spec records on this action, one entry per key.
 	repeated CustomActionMetric custom_metrics = 38;
+
+	// # of times the rotation or a major cooldown pressed this action on this target, so procs, swings and
+	// spells cast by other spells never count. A cleave counts once, on the target it was pressed on.
+	int32 manual_casts = 40;
 }
 
 // The outcome a range in TargetedActionMetrics.ranges covers. The resisted kinds are partial resists.
@@ -619,6 +623,7 @@ message AuraStats {
 	bool has_icd = 3;
 	bool has_exclusive_effect = 4;
 	ActionCategory category = 5;
+	string menu_group = 6; // A manual APL menu group, a rotation_tab.apl.submenus key; empty for none.
 }
 message SpellStats {
 	ActionID id = 1;
@@ -639,6 +644,7 @@ message SpellStats {
 	bool is_potion = 14; // Whether this spell is a potion
 	bool is_conjured = 15; // Whether this spell is a conjured item
 	ActionCategory category = 16;
+	string menu_group = 18; // A manual APL menu group, a rotation_tab.apl.submenus key; empty for none.
 }
 message APLValidation {
 	LogLevel log_level = 1;
@@ -666,9 +672,24 @@ message UnitMetadata {
 	repeated AuraStats auras = 2;
 	// The talents the unit has points in, each at the rank it holds.
 	repeated ActionID talents = 4;
+	// Proc triggers with an internal cooldown and no action of their own, by the action they proc from:
+	// the id icd_is_ready finds them by, which no other aura value does.
+	repeated AuraStats icd_auras = 5;
 }
 message PetStats {
 	UnitMetadata metadata = 1;
+}
+// The most crit the main-hand auto attack can land against the current target, all in percent: what the
+// white-hit table leaves after miss, dodge, parry, glancing and block.
+message MeleeCritCapInfo {
+	double glancing = 1;
+	double suppression = 2; // The crit the target takes off the sheet's crit, spec_offset counted; below 0 when a debuff adds crit.
+	double remaining_hit = 3; // The miss left after hit, the dual-wield penalty included.
+	double remaining_expertise = 4; // The dodge and parry left after expertise; parry only from the front.
+	double block = 5; // Only from the front.
+	double spec_offset = 6; // Crit a spec counts as taken that the sheet does not show.
+	double crit_cap = 7;
+	double delta = 8; // The sheet's melee crit less crit_cap.
 }
 message PlayerStats {
 	// Stats
@@ -689,6 +710,8 @@ message PlayerStats {
 
 	// The full skill per weapon skill, with every bonus the gear, talents and buffs add.
 	repeated WeaponSkillValue weapon_skills = 13;
+
+	MeleeCritCapInfo melee_crit_cap = 14; // Unset before the attack tables exist and without a main-hand auto attack.
 }
 message PartyStats {
 	repeated PlayerStats players = 1;

@@ -22,6 +22,15 @@ Then unzip the downloaded file, then open the unzipped file to open the sim in y
 
 Alternatively, you can choose from a specific relase on the [Releases](https://github.com/wowsims/forever/releases) page and click the suitable link under "Assets"
 
+## Local theorycraft research
+
+This checkout is used alongside the local WoW Forever source library at
+`C:\Users\aelsi\Documents\GitHub\wowkb`. For gear, builds, rotations, class
+comparisons and raid composition, consult both projects using the
+[theorycraft instructions](AGENTS.md#local-theorycraft-research). Cite the saved
+developer evidence and identify the simulator revision, inputs and limitations
+behind numerical answers. The repositories stay separate.
+
 ## Documentation
 
 - [Installation Guide](docs/installation.md)

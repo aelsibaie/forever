@@ -58,7 +58,7 @@ func catCoverageRequest(opener int32) *proto.RaidSimRequest {
 			castWhen(9850, and(not(prowling), or(timeBelow("0.2"), timeAtLeast("0.6")))),
 			// A late shift into dire bear spends the mana needed to shift back, so the form
 			// spells only run while claw still owns the fight.
-			castWhen(9634, and(not(prowling), timeBelow("0.2"))),
+			castWhen(9634, and(not(prowling), not(auraUp(9634)), timeBelow("0.2"))),
 			castWhen(768, and(not(prowling), timeBelow("0.2"))),
 			castWhen(9892, not(prowling)),
 			castWhen(9821, not(prowling)),
@@ -72,7 +72,7 @@ func coverageRequest(bear bool, rotation *proto.APLRotation) *proto.RaidSimReque
 	for i := range items {
 		items[i] = &proto.ItemSpec{}
 	}
-	items[proto.ItemSlot_ItemSlotMainHand].Id = 866
+	items[proto.ItemSlot_ItemSlotMainHand].Id = 1613
 	player := &proto.Player{
 		Name: "Feral", Class: proto.Class_ClassDruid, Race: proto.Race_RaceNightElf,
 		TalentsString: coverageTalents,

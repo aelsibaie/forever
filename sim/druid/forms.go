@@ -1,6 +1,8 @@
 package druid
 
 import (
+	"math"
+
 	"github.com/wowsims/forever/sim/core"
 	"github.com/wowsims/forever/sim/core/dbcenums"
 	"github.com/wowsims/forever/sim/core/spelldata"
@@ -77,20 +79,27 @@ func (druid *Druid) GetCatWeapon() core.Weapon {
 	return druid.feralWeapon(1)
 }
 
-// The paw swings the equipped weapon's damage per second at the form's speed. Enchant and stone damage
-// is added whole, after the scaling.
+// SpellShapeshiftForm.DamageVariance is 0.4 for Cat, Bear, and Dire Bear.
+const feralPawVariance = 0.4
+
+// The paw uses the weapon's table DPS and form variance, with single-precision endpoints
+// rounded before AP and flat enchant or stone damage.
 func (druid *Druid) feralWeapon(swingSpeed float64) core.Weapon {
 	paw := core.Weapon{
+		BaseDamageMin:        1,
+		BaseDamageMax:        1,
 		SwingSpeed:           swingSpeed,
 		NormalizedSwingSpeed: swingSpeed,
 		AttackPowerPerDPS:    core.DefaultAttackPowerPerDPS,
 		MaxRange:             core.MaxMeleeRange,
 	}
 	if item := druid.GetMHWeapon(); item != nil {
-		flat := item.Enchant.WeaponDamage + item.TempEnchantWeaponDamage
-		bonusDps := druid.PseudoStats.BonusMHDps
-		paw.BaseDamageMin = (item.WeaponDamageMin/item.SwingSpeed+bonusDps)*swingSpeed + flat
-		paw.BaseDamageMax = (item.WeaponDamageMax/item.SwingSpeed+bonusDps)*swingSpeed + flat
+		mean := float32(item.UnroundedDPS * float32(swingSpeed*1000))
+		mean = float32(mean * 0.001)
+		half := float32(float32(feralPawVariance) / 2)
+		flat := item.Enchant.WeaponDamage + item.TempEnchantWeaponDamage + druid.PseudoStats.BonusMHDps*swingSpeed
+		paw.BaseDamageMin = max(1, math.Floor(float64(float32(mean*float32(1-half))))) + flat
+		paw.BaseDamageMax = max(1, math.Round(float64(float32(mean*float32(1+half))))) + flat
 	}
 	return paw
 }
@@ -162,12 +171,18 @@ func (druid *Druid) registerBearAura(form *spelldata.Spell, passive *spelldata.S
 		druid.SetCurrentPowerBar(core.RageBar)
 		if !druid.Env.MeasuringStats {
 			druid.AutoAttacks.SetMH(druid.GetBearWeapon())
+			// A swing replacement also asks the rotation to queue an attack before the swing.
+			// Only Bear forms can queue Maul.
+			druid.AutoAttacks.SetReplaceMHSwing(druid.TryMaul)
 		}
-		druid.furorRageOnEnterBear(sim)
 		druid.PseudoStats.ThreatMultiplier *= bearFormThreatMultiplier
 	})
 	aura.ApplyOnExpire(func(_ *core.Aura, sim *core.Simulation) {
 		druid.PseudoStats.ThreatMultiplier /= bearFormThreatMultiplier
+		druid.AutoAttacks.SetReplaceMHSwing(nil)
+		if druid.maulQueueAura != nil {
+			druid.maulQueueAura.Deactivate(sim)
+		}
 		if druid.HasEnergyBar() && !druid.Env.MeasuringStats {
 			druid.EnergyPerTick = druid.furorEnergyPerTick
 			druid.rememberCatEnergy(sim, druid.furorStoredEnergy)
@@ -236,7 +251,7 @@ func (druid *Druid) registerShapeshiftSpell(rank *spelldata.Spell, aura *core.Au
 	config := spelldata.SpellConfig(&druid.Unit, rank)
 	config.Flags |= core.SpellFlagAPL
 	config.ExtraCastCondition = func(_ *core.Simulation, _ *core.Unit) bool {
-		return aura != nil && !aura.IsActive()
+		return aura != nil && (aura == druid.BearFormAura || aura == druid.DireBearFormAura || !aura.IsActive())
 	}
 	// A shift into Bear or Dire Bear Form starts the rage bar at 0, and Furor's rage comes on top. The
 	// starting form is not cast, so the pull keeps the starting rage.
@@ -250,6 +265,9 @@ func (druid *Druid) registerShapeshiftSpell(rank *spelldata.Spell, aura *core.Au
 			druid.SpendRage(sim, druid.CurrentRage(), rageMetrics)
 		}
 		aura.Activate(sim)
+		if rageMetrics != nil {
+			druid.furorRageOnEnterBear(sim)
+		}
 	}
 	return druid.RegisterSpell(config)
 }
